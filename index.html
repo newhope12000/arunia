@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>어른이아 — 라이프 디자인 · 커리어 탐색 플랫폼</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="photo_2026-06-20 00.57.11.jpeg" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html">가치</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html">문의</a>
+      </nav>
+      <a href="pricing.html" class="btn btn--nav">시작해보기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">라이프 디자인 · 커리어 탐색 플랫폼</div>
+        <h1 class="hero__headline">
+          어른이 됐다는 이유로<br />
+          <em>연습 없이 던져지는<br />사회</em>를 끝낸다.
+        </h1>
+        <p class="hero__sub">
+          청년이 어른이 된 이후 마주하는 선택 앞에서<br />
+          바로 결정하지 않고, 충분히 경험해볼 수 있도록 돕습니다.
+        </p>
+        <div class="hero__cta">
+          <a href="programs.html" class="btn btn--primary">프로그램 보기</a>
+          <a href="vision.html" class="btn btn--ghost">비전 읽기</a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__num">0200</span>
+            <span class="stat__label">오늘의 연습</span>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat__num">DAY 1</span>
+            <span class="stat__label">시작의 권리</span>
+          </div>
+          <div class="stat__divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat__num">365</span>
+            <span class="stat__label">함께하는 날들</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__img-frame">
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&fit=crop&crop=center"
+            alt="함께하는 한국 청년들"
+            loading="eager"
+            class="hero__img"
+          />
+          <div class="hero__img-chip">
+            <img src="photo_2026-06-20 00.57.11.jpeg" alt="" class="chip__logo" />
+            <span>어른이아와 함께</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="container">
+      <div class="problem__quote">
+        <span class="problem__tag">20대가 제일 싫어하는 말</span>
+        <blockquote class="problem__blockquote">"이제 어른이니까<br />알아서 해"</blockquote>
+        <p class="problem__answer">
+          어른이아는 그 문장에 대한 <strong>반격</strong>입니다.
+        </p>
+        <a href="vision.html" class="btn btn--outline btn--problem-more">우리의 비전 보기</a>
+      </div>
+      <div class="problem__right">
+        <div class="problem__img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=700&q=80&fit=crop&crop=faces,center"
+            alt="진로를 고민하는 청년"
+            loading="lazy"
+            class="problem__img"
+          />
+        </div>
+        <div class="problem__cards">
+          <div class="problem__card">
+            <div class="problem__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p>준비되지 않은 채로 결정을 강요받고 있다</p>
+          </div>
+          <div class="problem__card">
+            <div class="problem__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <p>실수하면 "이미 어른이잖아" 라는 말을 듣는다</p>
+          </div>
+          <div class="problem__card">
+            <div class="problem__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </div>
+            <p>혼자 반복해서 같은 고민을 되풀이한다</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Preview -->
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="section-label">PROGRAMS</div>
+      <h2 class="section-title">경험해볼 수 있는 것들</h2>
+      <p class="section-sub">무료로 '시작해볼 용기'를 주고 → 구독으로 '계속 연습할 권리'를 판다</p>
+      <div class="programs__grid">
+        <div class="program-card program-card--featured">
+          <div class="program-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80&fit=crop&crop=center" alt="노트 필기와 사고 정리" loading="lazy" class="program-card__img"/>
+            <div class="program-card__badge">CORE</div>
+          </div>
+          <div class="program-card__body">
+            <div class="program-card__label">B — 핵심</div>
+            <h3 class="program-card__title">전문가 콘텐츠 아카이브</h3>
+            <p class="program-card__desc">다른 사람들의 1일차를 계속 볼 수 있는 권리. 당장 결정 안 해도 됩니다.</p>
+            <div class="program-card__price">월 구독 <strong>9,900원~</strong></div>
+            <a href="programs.html" class="btn btn--primary btn--full">자세히 보기</a>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&fit=crop&crop=center" alt="소수 정예 라운드테이블" loading="lazy" class="program-card__img"/>
+            <div class="program-card__badge program-card__badge--premium">PREMIUM</div>
+          </div>
+          <div class="program-card__body">
+            <div class="program-card__label">C — 프리미엄</div>
+            <h3 class="program-card__title">프리미엄 라운드테이블</h3>
+            <p class="program-card__desc">소수 정예 8~15명. 지금 내 상태랑 비슷한 사람을 계속 만날 수 있음.</p>
+            <div class="program-card__price">프리미엄 구독 <strong>29,000원~</strong></div>
+            <a href="programs.html" class="btn btn--outline btn--full">자세히 보기</a>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-card__img-wrap">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80&fit=crop&crop=center" alt="DAY ONE 클래스 현장" loading="lazy" class="program-card__img"/>
+            <div class="program-card__badge program-card__badge--exp">EXPERIENCE</div>
+          </div>
+          <div class="program-card__body">
+            <div class="program-card__label">A — 경험</div>
+            <h3 class="program-card__title">DAY ONE 클래스</h3>
+            <p class="program-card__desc">한 번쯤은 해보고 싶은 경험. 오프라인 / 온라인 선택 가능.</p>
+            <div class="program-card__price">원데이 클래스 <strong>5만원~</strong></div>
+            <a href="programs.html" class="btn btn--outline btn--full">자세히 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-label">VOICES</div>
+      <h2 class="section-title">같이 연습 중인 사람들</h2>
+      <div class="testimonials__grid">
+        <div class="testi-card">
+          <p class="testi-card__text">취업 준비하면서 진짜 내가 뭘 원하는지 모르겠던 시기에, 여기서 비슷한 사람들을 보면서 '아, 이게 정상이구나' 싶었어요.</p>
+          <div class="testi-card__author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&fit=crop&crop=faces" alt="" loading="lazy" class="testi-card__avatar"/>
+            <div><strong>J씨</strong><span>대학교 4학년, 23세</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-card__text">결정을 강요하지 않는다는 게 처음엔 어색했는데, 지금은 그게 제일 편해요. 그냥 여러 번 와서 볼 수 있다는 게요.</p>
+          <div class="testi-card__author">
+            <img src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=100&q=80&fit=crop&crop=faces" alt="" loading="lazy" class="testi-card__avatar"/>
+            <div><strong>M씨</strong><span>대학원 졸업 후, 26세</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-card__text">라운드테이블에서 처음 만난 사람들인데 '요즘 나랑 비슷하다'는 느낌이 들었어요. 혼자 고민하는 것보다 훨씬 나았어요.</p>
+          <div class="testi-card__author">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&q=80&fit=crop&crop=faces" alt="" loading="lazy" class="testi-card__avatar"/>
+            <div><strong>S씨</strong><span>직장 3개월차, 24세</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?w=1400&q=70&fit=crop&crop=center" alt="" loading="lazy"/>
+    </div>
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2>오늘, 첫 번째 연습을<br />시작해보세요.</h2>
+        <p>준비가 안 됐어도 괜찮습니다. 그게 시작입니다.</p>
+      </div>
+      <div class="cta-banner__action">
+        <a href="pricing.html" class="btn btn--white">무료로 시작하기</a>
+        <small>신용카드 없이 시작 가능 · 언제든 해지 가능</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <img src="photo_2026-06-20 00.57.11.jpeg" alt="0200" class="footer__logo-img" />
+          <span class="footer__name">어른이아</span>
+        </div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br />바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h4>프로그램</h4>
+          <a href="programs.html">콘텐츠 아카이브</a>
+          <a href="programs.html">프리미엄 라운드</a>
+          <a href="programs.html">DAY ONE 클래스</a>
+        </div>
+        <div class="footer__col">
+          <h4>어른이아</h4>
+          <a href="vision.html">비전</a>
+          <a href="values.html">가치</a>
+          <a href="contact.html">문의하기</a>
+        </div>
+        <div class="footer__col">
+          <h4>구독</h4>
+          <a href="pricing.html">무료 플랜</a>
+          <a href="pricing.html">베이직 플랜</a>
+          <a href="pricing.html">프리미엄 플랜</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 어른이아. All rights reserved.</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 406 100">
+  <defs>
+
+    <!-- 0 첫번째 (center 50) -->
+    <mask id="m0a">
+      <ellipse cx="50" cy="50" rx="46" ry="47" fill="white"/>
+      <ellipse cx="50" cy="50" rx="20" ry="21" fill="black"/>
+      <rect x="67" y="-18" width="11" height="80" rx="3"
+            transform="rotate(-30 72 22)" fill="black"/>
+    </mask>
+
+    <!-- 2 (x 103~199) -->
+    <mask id="m2">
+      <!-- 상단 호 -->
+      <path d="M 112 55 A 36 36 0 0 1 188 55"
+            stroke="white" stroke-width="22" fill="none" stroke-linecap="round"/>
+      <!-- 대각선 몸체 -->
+      <line x1="188" y1="51" x2="110" y2="89"
+            stroke="white" stroke-width="22" stroke-linecap="round"/>
+      <!-- 하단 바 -->
+      <line x1="103" y1="91" x2="197" y2="91"
+            stroke="white" stroke-width="18" stroke-linecap="round"/>
+      <!-- 대각선 컷 -->
+      <rect x="167" y="-18" width="11" height="80" rx="3"
+            transform="rotate(-30 172 22)" fill="black"/>
+    </mask>
+
+    <!-- 0 두번째 (center 254) -->
+    <mask id="m0b">
+      <ellipse cx="254" cy="50" rx="46" ry="47" fill="white"/>
+      <ellipse cx="254" cy="50" rx="20" ry="21" fill="black"/>
+      <rect x="271" y="-18" width="11" height="80" rx="3"
+            transform="rotate(-30 276 22)" fill="black"/>
+    </mask>
+
+    <!-- 0 세번째 (center 356) -->
+    <mask id="m0c">
+      <ellipse cx="356" cy="50" rx="46" ry="47" fill="white"/>
+      <ellipse cx="356" cy="50" rx="20" ry="21" fill="black"/>
+      <rect x="373" y="-18" width="11" height="80" rx="3"
+            transform="rotate(-30 378 22)" fill="black"/>
+    </mask>
+
+  </defs>
+
+  <!-- 실제 렌더링: 각 문자 영역에 마스크 적용 -->
+  <rect x="2"   y="2" width="96" height="96" fill="#111111" mask="url(#m0a)"/>
+  <rect x="103" y="2" width="96" height="96" fill="#111111" mask="url(#m2)"/>
+  <rect x="206" y="2" width="96" height="96" fill="#111111" mask="url(#m0b)"/>
+  <rect x="308" y="2" width="96" height="96" fill="#111111" mask="url(#m0c)"/>
+</svg>

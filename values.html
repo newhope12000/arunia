@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>가치 — 어른이아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="photo_2026-06-20 00.57.11.jpeg" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html" class="active">가치</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html">문의</a>
+      </nav>
+      <a href="pricing.html" class="btn btn--nav">시작해보기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__label">CORE VALUES</div>
+      <h1 class="page-hero__title">가치</h1>
+      <p class="page-hero__sub">어른이아가 절대 타협하지 않는 네 가지.</p>
+    </div>
+  </section>
+
+  <!-- Values intro -->
+  <section style="padding: 80px 0 40px; background: var(--bg);">
+    <div class="container">
+      <div style="max-width:640px;">
+        <p style="font-size:1.125rem; color:var(--text-muted); line-height:1.9;">
+          어른이아 Core Values는 단순한 슬로건이 아닙니다.<br />
+          우리가 콘텐츠를 만들고, 커뮤니티를 운영하고, 참여자를 대하는 방식 전체를 결정하는 기준입니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Grid -->
+  <section class="values" style="padding-top:40px;">
+    <div class="container">
+      <div class="values__grid">
+
+        <div class="value-card" data-num="01">
+          <div class="value-card__num">01</div>
+          <h3 class="value-card__title">연습할 권리</h3>
+          <p class="value-card__body">어른도 연습할 수 있어야 합니다. 서툰 건 결함이 아니라 과정입니다.</p>
+          <ul class="value-card__list">
+            <li>"이미 다 알겠지"라고 가정하지 않는다</li>
+            <li>서툼은 결함이 아니라 과정이다</li>
+            <li>준비 없이 던져지는 걸 당연하게 여기지 않는다</li>
+            <li>어른에게도 연습할 권리가 있다</li>
+          </ul>
+        </div>
+
+        <div class="value-card" data-num="02">
+          <div class="value-card__num">02</div>
+          <h3 class="value-card__title">자유와 기준의 공존</h3>
+          <p class="value-card__body">자유는 방임이 아닙니다. 선택은 자유롭되, 기준은 숨기지 않습니다.</p>
+          <ul class="value-card__list">
+            <li>선택은 자유롭다</li>
+            <li>기준은 숨기지 않는다</li>
+            <li>책임은 경험 안에서 배운다</li>
+            <li>마음대로가 아니라, 의미 있게</li>
+          </ul>
+        </div>
+
+        <div class="value-card" data-num="03">
+          <div class="value-card__num">03</div>
+          <h3 class="value-card__title">결정의 주체성</h3>
+          <p class="value-card__body">우리는 대신 결정하지 않습니다. 스스로 판단하도록 돕습니다.</p>
+          <ul class="value-card__list">
+            <li>추천하지 않는다</li>
+            <li>강요하지 않는다</li>
+            <li>스스로 판단하도록 돕는다</li>
+            <li>선택의 결과까지 내 것이 되도록</li>
+          </ul>
+        </div>
+
+        <div class="value-card" data-num="04">
+          <div class="value-card__num">04</div>
+          <h3 class="value-card__title">존중</h3>
+          <p class="value-card__body">참여자를 '미완성 어른'으로 보지 않습니다. 어른을 어른으로 대합니다.</p>
+          <ul class="value-card__list">
+            <li>가르치려 들지 않는다</li>
+            <li>내려다보지 않는다</li>
+            <li>동등한 위치에서 함께 설계한다</li>
+            <li>어른을 어른으로 대한다</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Values in practice -->
+  <section style="padding: 100px 0; background: var(--bg-dark); color: var(--white);">
+    <div class="container">
+      <div class="section-label" style="color:var(--accent);">IN PRACTICE</div>
+      <h2 class="section-title" style="color:var(--white);">가치는 이렇게 적용됩니다</h2>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:24px; margin-top:48px;">
+        <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.09); border-radius:var(--r-lg); padding:32px;">
+          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--accent); margin-bottom:14px;">콘텐츠 제작</div>
+          <p style="font-size:0.9375rem; color:rgba(255,255,255,0.7); line-height:1.85;">전문가에게 "성공 비결"이 아닌, "처음엔 어땠냐"를 묻습니다. 정답이 아닌 과정을 담습니다.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.09); border-radius:var(--r-lg); padding:32px;">
+          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--accent); margin-bottom:14px;">커뮤니티 운영</div>
+          <p style="font-size:0.9375rem; color:rgba(255,255,255,0.7); line-height:1.85;">라운드테이블에서 진행자는 방향을 강요하지 않습니다. 서로의 이야기를 듣고 스스로 발견합니다.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.09); border-radius:var(--r-lg); padding:32px;">
+          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--accent); margin-bottom:14px;">멤버 관계</div>
+          <p style="font-size:0.9375rem; color:rgba(255,255,255,0.7); line-height:1.85;">어른이아는 "이렇게 해야 해"라고 말하지 않습니다. "이런 선택지가 있어"라고 보여줄 뿐입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?w=1400&q=70&fit=crop" alt="" loading="lazy"/>
+    </div>
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2>이 가치들과 함께<br />연습을 시작하세요.</h2>
+        <p>판단 없이, 강요 없이. 당신의 속도대로.</p>
+      </div>
+      <div class="cta-banner__action">
+        <a href="programs.html" class="btn btn--white">프로그램 보기</a>
+        <small>무료로 시작 가능 · 언제든 해지 가능</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo"><img src="photo_2026-06-20 00.57.11.jpeg" alt="0200" class="footer__logo-img" /><span class="footer__name">어른이아</span></div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br />바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col"><h4>프로그램</h4><a href="programs.html">콘텐츠 아카이브</a><a href="programs.html">프리미엄 라운드</a><a href="programs.html">DAY ONE 클래스</a></div>
+        <div class="footer__col"><h4>어른이아</h4><a href="vision.html">비전</a><a href="values.html">가치</a><a href="contact.html">문의하기</a></div>
+        <div class="footer__col"><h4>구독</h4><a href="pricing.html">무료 플랜</a><a href="pricing.html">베이직 플랜</a><a href="pricing.html">프리미엄 플랜</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 어른이아. All rights reserved.</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

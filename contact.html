@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문의 — 어른이아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="photo_2026-06-20 00.57.11.jpeg" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html">가치</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html" class="active">문의</a>
+      </nav>
+      <a href="pricing.html" class="btn btn--nav">시작해보기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__label">CONTACT</div>
+      <h1 class="page-hero__title">문의</h1>
+      <p class="page-hero__sub">먼저 소식부터 받아보세요. 결정은 나중에 해도 됩니다.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" style="padding-top:80px;">
+    <div class="container contact__wrap">
+      <div class="contact__info">
+        <div class="section-label">GET IN TOUCH</div>
+        <h2 class="section-title">어른이아와<br />연결되기</h2>
+        <p class="contact__desc">
+          아직 구독할 준비가 안 됐어도 괜찮습니다.<br />
+          먼저 소식을 받아보는 것부터 시작하세요.
+        </p>
+        <div class="contact__detail">
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">이메일</span>
+            <span class="contact__detail-val">hello@eoreunea.com</span>
+          </div>
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">인스타그램</span>
+            <span class="contact__detail-val">@eoreunea</span>
+          </div>
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">운영 시간</span>
+            <span class="contact__detail-val">평일 10:00 ~ 18:00</span>
+          </div>
+        </div>
+
+        <div style="margin-top:40px; padding:28px; background:var(--bg-warm); border-radius:var(--r-lg); border:1.5px solid var(--border);">
+          <p style="font-size:0.875rem; font-weight:700; margin-bottom:8px; color:var(--text);">연락 전 참고하세요</p>
+          <ul style="display:flex; flex-direction:column; gap:8px;">
+            <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
+              <span style="position:absolute; left:0; color:var(--accent);">—</span>
+              당장 결정하지 않아도 됩니다. 궁금한 것만 물어보셔도 됩니다.
+            </li>
+            <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
+              <span style="position:absolute; left:0; color:var(--accent);">—</span>
+              구독 문의는 물론 콘텐츠 제안, 협업 문의도 환영합니다.
+            </li>
+            <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
+              <span style="position:absolute; left:0; color:var(--accent);">—</span>
+              DAY ONE 클래스 일정은 인스타그램에서 먼저 공지됩니다.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="contact__form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="fname">이름</label>
+          <input type="text" id="fname" placeholder="이름을 입력해주세요" name="name" required autocomplete="name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="femail">이메일</label>
+          <input type="email" id="femail" placeholder="이메일 주소를 입력해주세요" name="email" required autocomplete="email"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="finterest">관심 프로그램</label>
+          <select id="finterest" name="interest">
+            <option value="" disabled selected>관심 있는 프로그램을 선택해주세요</option>
+            <option value="archive">콘텐츠 아카이브 (구독)</option>
+            <option value="roundtable">프리미엄 라운드테이블</option>
+            <option value="class">DAY ONE 클래스</option>
+            <option value="all">전체 다 궁금해요</option>
+            <option value="collab">협업 / 파트너십 문의</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fmessage">메시지 (선택)</label>
+          <textarea id="fmessage" name="message" placeholder="궁금한 점이나 하고 싶은 말을 자유롭게 남겨주세요." rows="4" style="width:100%; padding:15px 18px; background:var(--white); border:1.5px solid var(--border); border-radius:var(--r-md); font-size:0.9375rem; font-family:var(--font); color:var(--text); line-height:1.7; resize:vertical; transition:border-color 0.2s, box-shadow 0.2s; -webkit-appearance:none;"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">소식 받아보기</button>
+        <p class="form-note">개인정보는 뉴스레터 발송 외 사용되지 않습니다.</p>
+      </form>
+
+      <div class="contact__success" id="formSuccess" style="display:none;" role="status">
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p>등록해주셔서 감사합니다.<br />곧 소식을 전달드릴게요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image -->
+  <section style="padding:0 0 100px;">
+    <div class="container">
+      <div style="border-radius:var(--r-xl); overflow:hidden; height:360px;">
+        <img
+          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&fit=crop&crop=center"
+          alt="함께하는 어른이아"
+          loading="lazy"
+          style="width:100%; height:100%; object-fit:cover;"
+        />
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo"><img src="photo_2026-06-20 00.57.11.jpeg" alt="0200" class="footer__logo-img" /><span class="footer__name">어른이아</span></div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br />바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col"><h4>프로그램</h4><a href="programs.html">콘텐츠 아카이브</a><a href="programs.html">프리미엄 라운드</a><a href="programs.html">DAY ONE 클래스</a></div>
+        <div class="footer__col"><h4>어른이아</h4><a href="vision.html">비전</a><a href="values.html">가치</a><a href="contact.html">문의하기</a></div>
+        <div class="footer__col"><h4>구독</h4><a href="pricing.html">무료 플랜</a><a href="pricing.html">베이직 플랜</a><a href="pricing.html">프리미엄 플랜</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 어른이아. All rights reserved.</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
