@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>소개 — 어른이아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="logo.png" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html">가치</a>
+        <a href="about.html" class="active">소개</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html">문의</a>
+      </nav>
+      <a href="pricing.html" class="btn btn--nav">시작해보기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__label">ABOUT US</div>
+      <h1 class="page-hero__title">소개</h1>
+      <p class="page-hero__sub">어른이아를 만든 사람들, 그리고 우리가 여기까지 온 이야기.</p>
+    </div>
+  </section>
+
+  <!-- 인사말 -->
+  <section style="padding: 100px 0; background: var(--bg-dark); color: var(--white);">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-label" style="color: var(--accent);">FOUNDER'S NOTE</div>
+      <blockquote style="font-size: clamp(1.375rem, 3vw, 2rem); font-weight: 700; line-height: 1.65; letter-spacing: -0.03em; color: var(--white); margin: 32px 0 48px;">
+        "스물셋에 취업을 앞두고, 저는 아무도 알려주지 않은 질문들 앞에서 혼자였습니다.<br/>
+        무엇을 원하는지, 어떻게 결정해야 하는지, 이렇게 가도 되는 건지.<br/>
+        그 막막함이 어른이아의 시작이었습니다."
+      </blockquote>
+      <div style="display: flex; align-items: center; gap: 20px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 900; color: white; flex-shrink: 0;">김</div>
+        <div>
+          <p style="font-size: 1rem; font-weight: 700; color: var(--white);">김어른 · 어른이아 창업자</p>
+          <p style="font-size: 0.875rem; color: rgba(255,255,255,0.45); margin-top: 4px;">전 HR 컨설턴트 · 커리어 코치 · 라이프 디자이너</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 브랜드 스토리 -->
+  <section style="padding: 100px 0; background: var(--bg);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+        <div>
+          <div class="section-label">BRAND STORY</div>
+          <h2 class="section-title">왜 어른이아인가</h2>
+          <p style="font-size: 1.0625rem; color: var(--text-muted); line-height: 1.95; margin-bottom: 24px;">
+            어른이아는 "어른이 아직 다 되지 않은 사람들을 위한 공간"이라는 뜻입니다. 동시에, "어른이아 — 어른이 되는 것도 연습이 필요하다"는 선언이기도 합니다.
+          </p>
+          <p style="font-size: 1.0625rem; color: var(--text-muted); line-height: 1.95; margin-bottom: 24px;">
+            창업자는 HR 현장에서 5년간 수백 명의 20대를 만났습니다. 공통점은 하나였습니다. 스스로 선택할 준비가 되어 있지 않다는 것이 아니라, 선택을 연습할 기회 자체가 없었다는 것.
+          </p>
+          <p style="font-size: 1.0625rem; color: var(--text-muted); line-height: 1.95;">
+            강의도 아니고, 성공 스토리도 아닙니다. 지금 나와 비슷한 처지의 사람이 어떻게 고민하고, 무엇을 선택하고, 어디서 흔들렸는지를 함께 경험하는 공간. 그게 어른이아입니다.
+          </p>
+        </div>
+        <div style="position: relative; border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4/5; box-shadow: var(--sh-lg);">
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80&fit=crop&crop=center"
+            alt="어른이아 창업 초기"
+            style="width: 100%; height: 100%; object-fit: cover;"
+            loading="lazy"
+          />
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);">
+            <p style="color: rgba(255,255,255,0.9); font-size: 0.875rem; font-weight: 600;">2025년 3월 · 첫 번째 파일럿 라운드테이블</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 숫자로 보는 어른이아 -->
+  <section style="padding: 80px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
+        <div>
+          <div style="font-size: 3rem; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); line-height: 1;">300+</div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 10px; font-weight: 500;">누적 멤버</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); line-height: 1;">24회</div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 10px; font-weight: 500;">라운드테이블 진행</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); line-height: 1;">92%</div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 10px; font-weight: 500;">재참여율</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); line-height: 1;">18개월</div>
+          <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 10px; font-weight: 500;">운영 기간</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 팀 소개 -->
+  <section style="padding: 100px 0; background: var(--bg);">
+    <div class="container">
+      <div class="section-label">TEAM</div>
+      <h2 class="section-title">어른이아를 만드는 사람들</h2>
+      <p style="font-size: 1.0625rem; color: var(--text-muted); line-height: 1.85; max-width: 560px; margin-bottom: 60px;">
+        소수이지만, 각자의 자리에서 치열하게 탐색해온 사람들이 모였습니다.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+
+        <!-- 창업자 -->
+        <div style="background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 40px 36px; text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--bg-dark); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 900; color: white; margin: 0 auto 24px; letter-spacing: -0.05em;">김</div>
+          <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px;">FOUNDER & CEO</div>
+          <h3 style="font-size: 1.125rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px;">김어른</h3>
+          <p style="font-size: 0.8125rem; color: var(--text-light); margin-bottom: 20px;">창업자 · 대표</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85; text-align: left;">
+            HR 컨설팅 5년 경력. 수백 명의 20대 커리어 전환을 옆에서 함께한 뒤, "제대로 된 연습 공간이 없다"는 확신으로 어른이아를 시작했습니다.
+          </p>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; text-align: left;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 전 HR 컨설팅 팀장</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 커리어 코치 자격증 보유</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 라이프 디자인 강의 3년</span>
+          </div>
+        </div>
+
+        <!-- 콘텐츠 디렉터 -->
+        <div style="background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 40px 36px; text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 900; color: white; margin: 0 auto 24px; letter-spacing: -0.05em;">박</div>
+          <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px;">CONTENT DIRECTOR</div>
+          <h3 style="font-size: 1.125rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px;">박소연</h3>
+          <p style="font-size: 0.8125rem; color: var(--text-light); margin-bottom: 20px;">콘텐츠 디렉터</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85; text-align: left;">
+            저널리즘 전공 후 스타트업 미디어에서 4년. "사람들의 진짜 이야기를 어떻게 기록하고 전달할까"를 고민하며 어른이아의 콘텐츠 방향을 설계하고 있습니다.
+          </p>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; text-align: left;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 전 스타트업 미디어 에디터</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 저널리즘 석사</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 인터뷰이 200+ 명</span>
+          </div>
+        </div>
+
+        <!-- 커뮤니티 매니저 -->
+        <div style="background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 40px 36px; text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #4A7C59; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 900; color: white; margin: 0 auto 24px; letter-spacing: -0.05em;">이</div>
+          <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px;">COMMUNITY MANAGER</div>
+          <h3 style="font-size: 1.125rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px;">이준서</h3>
+          <p style="font-size: 0.8125rem; color: var(--text-light); margin-bottom: 20px;">커뮤니티 매니저</p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85; text-align: left;">
+            어른이아 1기 참여자 출신. "여기서 받은 것을 돌려주고 싶다"는 마음으로 합류했습니다. 라운드테이블 진행과 멤버 온보딩을 담당합니다.
+          </p>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; text-align: left;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 어른이아 1기 멤버 출신</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 커뮤니티 빌딩 2년</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">— 라운드테이블 퍼실리테이터</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 연혁 -->
+  <section style="padding: 100px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 780px;">
+      <div class="section-label">HISTORY</div>
+      <h2 class="section-title">어른이아의 발자취</h2>
+      <p style="font-size: 1.0625rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 64px;">
+        작은 질문 하나에서 시작해, 300명이 넘는 사람들이 함께하는 공간이 되기까지.
+      </p>
+
+      <div style="position: relative; padding-left: 32px; border-left: 2px solid var(--border);">
+
+        <!-- 2025 -->
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 1월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">아이디어 구체화 · 리서치 시작</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">"20대는 왜 연습 없이 결정을 강요받는가"라는 질문에서 출발해 6개월간 50명 심층 인터뷰를 진행했습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px; position: relative; left: -0px;"></div>
+
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 3월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">파일럿 라운드테이블 · 베타 멤버 30인</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">지인 네트워크로 모집한 30명과 첫 번째 라운드테이블을 진행했습니다. 참여자 전원이 "이런 자리가 필요했다"는 피드백을 남겼습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 5월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">콘텐츠 아카이브 베타 오픈</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">12편의 인터뷰 콘텐츠로 구독 서비스 베타를 시작했습니다. 오픈 2주 만에 구독자 100명을 달성했습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 7월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">어른이아 공식 론칭 · DAY ONE 클래스 1기</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">브랜드를 공식 론칭하고 DAY ONE 클래스 1기를 모집했습니다. 20명 정원이 이틀 만에 마감되었습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 9월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">누적 멤버 200명 돌파</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">별도 광고 없이 멤버 추천만으로 200명을 돌파했습니다. 커뮤니티 슬랙 채널을 열고 비공개 멤버 네트워크를 구축했습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2025년 11월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">프리미엄 라운드테이블 정규 운영 시작</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">월 2회 정규 라운드테이블을 시작했습니다. 8~15인 소수 정예 구성으로, 매 회차 대기자가 발생할 만큼 인기를 얻었습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <!-- 2026 -->
+        <div style="margin-bottom: 8px; padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-dark); border: 3px solid var(--bg-warm);"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 8px;">2026년 1월</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">어른이아 시즌 2 · 새로운 커리큘럼</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">1년의 피드백을 반영해 커리큘럼을 전면 개편했습니다. 진로·관계·돈·일상 네 가지 영역으로 콘텐츠를 체계화했습니다.</p>
+        </div>
+
+        <div style="width: 2px; height: 40px; background: var(--border); margin-left: -2px;"></div>
+
+        <div style="padding-left: 24px; position: relative;">
+          <div style="position: absolute; left: -41px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-warm); animation: dot-pulse 2s infinite;"></div>
+          <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px;">2026년 현재</div>
+          <h4 style="font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">300명과 함께 · 계속 성장 중</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.85;">누적 멤버 300명, 라운드테이블 24회, 재참여율 92%. 어른이아는 지금도 매달 새로운 경험을 쌓아가고 있습니다.</p>
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent-pale); color: var(--accent); font-size: 0.8rem; font-weight: 700; padding: 8px 16px; border-radius: var(--r-full); margin-top: 16px;">
+            <span style="width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: dot-pulse 2s infinite; display: block;"></span>
+            지금 진행 중
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?w=1400&q=70&fit=crop" alt="" loading="lazy"/>
+    </div>
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2>어른이아의 이야기에<br/>함께하세요.</h2>
+        <p>300명이 선택한 연습 공간, 지금 시작할 수 있습니다.</p>
+      </div>
+      <div class="cta-banner__action">
+        <a href="programs.html" class="btn btn--white">프로그램 보기</a>
+        <small>무료로 시작 가능 · 언제든 해지 가능</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo"><img src="logo.png" alt="0200" class="footer__logo-img" /><span class="footer__name">어른이아</span></div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br/>바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col"><h4>프로그램</h4><a href="programs.html">콘텐츠 아카이브</a><a href="programs.html">프리미엄 라운드</a><a href="programs.html">DAY ONE 클래스</a></div>
+        <div class="footer__col"><h4>어른이아</h4><a href="vision.html">비전</a><a href="values.html">가치</a><a href="about.html">소개</a><a href="contact.html">문의하기</a></div>
+        <div class="footer__col"><h4>구독</h4><a href="pricing.html">무료 플랜</a><a href="pricing.html">베이직 플랜</a><a href="pricing.html">프리미엄 플랜</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 어른이아. All rights reserved.</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
