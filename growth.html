@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성장 지원 프로그램 — 어른이아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .growth-hero {
+      padding-top: var(--nav-h);
+      min-height: 92svh;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .growth-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(232,93,58,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .growth-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,93,58,0.15);
+      border: 1px solid rgba(232,93,58,0.35);
+      color: var(--accent);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 8px 18px;
+      border-radius: var(--r-full);
+      margin-bottom: 32px;
+    }
+    .growth-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: dot-pulse 2s infinite;
+    }
+    .highlight-green { color: #4CAF50; }
+    .info-strip {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .info-strip__item {
+      flex: 1;
+      padding: 24px 28px;
+      border-right: 1.5px solid var(--border);
+      text-align: center;
+    }
+    .info-strip__item:last-child { border-right: none; }
+    .info-strip__num {
+      font-size: 1.625rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .info-strip__label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .step-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .step-item {
+      padding: 36px 28px;
+      text-align: center;
+      border-right: 1.5px solid var(--border);
+      position: relative;
+    }
+    .step-item:last-child { border-right: none; }
+    .step-item::after {
+      content: '▶';
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+      color: var(--accent);
+      z-index: 1;
+    }
+    .step-item:last-child::after { display: none; }
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 1.125rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .deadline-box {
+      background: var(--bg-dark);
+      border-radius: var(--r-lg);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    @media (max-width: 768px) {
+      .info-strip { flex-direction: column; }
+      .info-strip__item { border-right: none; border-bottom: 1.5px solid var(--border); }
+      .info-strip__item:last-child { border-bottom: none; }
+      .step-row { grid-template-columns: 1fr 1fr; }
+      .step-item::after { display: none; }
+      .deadline-box { flex-direction: column; text-align: center; }
+      .growth-hero .container > div { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="logo.png" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html">가치</a>
+        <a href="about.html">소개</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html">문의</a>
+      </nav>
+      <a href="#apply" class="btn btn--nav" style="background:var(--accent); border-color:var(--accent);">지금 지원하기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="growth-hero">
+    <div class="container" style="width:100%; padding-top:60px; padding-bottom:80px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+        <div>
+          <div class="growth-badge">2026 청년 미래성장 지원사업</div>
+          <h1 style="font-size:clamp(2.25rem,5vw,4rem); font-weight:900; line-height:1.1; letter-spacing:-0.04em; color:var(--white); margin-bottom:24px;">
+            20대에만<br/>받을 수 있는<br/><em style="font-style:normal; color:var(--accent);">성장 지원<br/>프로그램</em>
+          </h1>
+          <p style="font-size:1.0625rem; color:rgba(255,255,255,0.6); line-height:1.85; margin-bottom:40px;">
+            진로 탐색부터 실무 프로젝트 경험까지.<br/>
+            청년들의 성장과 도전을 어른이아가 지원합니다.
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:40px;">
+            <a href="#apply" class="btn btn--primary" style="font-size:1rem; padding:16px 36px;">무료 신청하기</a>
+            <a href="#detail" class="btn btn--ghost" style="color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.2);">자세히 보기</a>
+          </div>
+          <div style="display:flex; gap:24px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--accent); font-weight:800;">✓</span>
+              <span style="font-size:0.875rem; color:rgba(255,255,255,0.55);">전액 무료</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--accent); font-weight:800;">✓</span>
+              <span style="font-size:0.875rem; color:rgba(255,255,255,0.55);">만 19~29세</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--accent); font-weight:800;">✓</span>
+              <span style="font-size:0.875rem; color:rgba(255,255,255,0.55);">서울 거주자</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--accent); font-weight:800;">✓</span>
+              <span style="font-size:0.875rem; color:rgba(255,255,255,0.55);">30명 한정</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <!-- 접수 기간 카운트다운 박스 -->
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--r-lg); padding:32px 36px;">
+            <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin-bottom:20px;">📅 접수 기간</div>
+            <p style="font-size:1.5rem; font-weight:900; color:var(--white); letter-spacing:-0.03em; margin-bottom:6px;">2026.06.01 — 06.26</p>
+            <p style="font-size:0.875rem; color:rgba(255,255,255,0.4);">선착순 마감 · 조기 종료될 수 있습니다</p>
+          </div>
+          <div style="background:rgba(232,93,58,0.1); border:1px solid rgba(232,93,58,0.25); border-radius:var(--r-lg); padding:32px 36px;">
+            <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.14em; color:var(--accent); margin-bottom:20px;">👥 모집 인원</div>
+            <p style="font-size:1.5rem; font-weight:900; color:var(--white); letter-spacing:-0.03em; margin-bottom:6px;">30명 한정 선발</p>
+            <p style="font-size:0.875rem; color:rgba(255,255,255,0.4);">서류 심사 후 최종 선발 통보</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 핵심 수치 -->
+  <section style="padding:0; background:var(--bg-warm); border-bottom:1px solid var(--border);" id="detail">
+    <div class="container">
+      <div class="info-strip">
+        <div class="info-strip__item">
+          <div class="info-strip__num">무료</div>
+          <div class="info-strip__label">전액 지원</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">30명</div>
+          <div class="info-strip__label">한정 모집</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">19~29세</div>
+          <div class="info-strip__label">청년 누구나</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">4주</div>
+          <div class="info-strip__label">프로그램 기간</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지원대상 -->
+  <section style="padding:100px 0; background:var(--bg);">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+        <div>
+          <div class="section-label">ELIGIBILITY</div>
+          <h2 class="section-title">이런 분들께<br/>딱 맞습니다</h2>
+          <p style="font-size:1.0625rem; color:var(--text-muted); line-height:1.85; margin-bottom:40px;">
+            단순한 교육이 아닙니다. 실무 경험과 네트워크가 동시에 쌓이는 프로그램입니다.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:16px; align-items:flex-start; padding:20px 24px; background:var(--bg-warm); border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:var(--accent); font-weight:900; font-size:1.1rem; flex-shrink:0; margin-top:1px;">✓</span>
+              <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">만 19세 ~ 29세 청년 누구나</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start; padding:20px 24px; background:var(--bg-warm); border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:var(--accent); font-weight:900; font-size:1.1rem; flex-shrink:0; margin-top:1px;">✓</span>
+              <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">서울시 거주자 또는 서울 소재 대학·직장인</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start; padding:20px 24px; background:var(--bg-warm); border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:var(--accent); font-weight:900; font-size:1.1rem; flex-shrink:0; margin-top:1px;">✓</span>
+              <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">단순 교육을 넘어 실무 프로젝트 경험이 필요한 분</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start; padding:20px 24px; background:var(--bg-warm); border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:var(--accent); font-weight:900; font-size:1.1rem; flex-shrink:0; margin-top:1px;">✓</span>
+              <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">나만의 포트폴리오로 커리어 도약을 원하는 분</p>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start; padding:20px 24px; background:var(--bg-warm); border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:var(--accent); font-weight:900; font-size:1.1rem; flex-shrink:0; margin-top:1px;">✓</span>
+              <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">현직자 및 동료 청년들과 함께 성장하고 싶은 열정이 있는 분</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 지원내용 -->
+        <div>
+          <div class="section-label">BENEFITS</div>
+          <h2 class="section-title">받게 되는 것들</h2>
+          <p style="font-size:1.0625rem; color:var(--text-muted); line-height:1.85; margin-bottom:40px;">
+            참여비 없이, 실력과 경험을 동시에 얻어가실 수 있습니다.
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="padding:28px 24px; background:var(--bg-card); border:1.5px solid var(--border); border-radius:var(--r-lg); transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--sh-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+              <div style="font-size:1.75rem; margin-bottom:14px;">🗂️</div>
+              <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">실무 프로젝트</h4>
+              <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">실무 기반 프로젝트에 직접 참여하며 현장 경험을 쌓습니다.</p>
+            </div>
+            <div style="padding:28px 24px; background:var(--bg-card); border:1.5px solid var(--border); border-radius:var(--r-lg); transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--sh-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+              <div style="font-size:1.75rem; margin-bottom:14px;">🤝</div>
+              <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">현직자 멘토링</h4>
+              <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">업계 현직자의 밀착 멘토링과 구체적인 피드백을 받습니다.</p>
+            </div>
+            <div style="padding:28px 24px; background:var(--bg-card); border:1.5px solid var(--border); border-radius:var(--r-lg); transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--sh-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+              <div style="font-size:1.75rem; margin-bottom:14px;">📁</div>
+              <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">포트폴리오</h4>
+              <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">취업·창업에 바로 활용 가능한 포트폴리오를 완성합니다.</p>
+            </div>
+            <div style="padding:28px 24px; background:var(--bg-card); border:1.5px solid var(--border); border-radius:var(--r-lg); transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='var(--sh-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+              <div style="font-size:1.75rem; margin-bottom:14px;">🌐</div>
+              <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px;">청년 네트워킹</h4>
+              <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">우수 청년 및 실무진과의 네트워크를 형성합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지원절차 -->
+  <section style="padding:100px 0; background:var(--bg-warm);">
+    <div class="container">
+      <div class="section-label">PROCESS</div>
+      <h2 class="section-title">지원 절차</h2>
+      <p style="font-size:1.0625rem; color:var(--text-muted); line-height:1.85; margin-bottom:56px; max-width:480px;">
+        온라인 지원서 작성부터 최종 선발까지, 총 4단계로 진행됩니다.
+      </p>
+      <div class="step-row">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">온라인 지원</h4>
+          <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">지원서를 작성하고 제출합니다. 5분이면 충분합니다.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">서류 심사</h4>
+          <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">지원서를 검토 후 개별 안내드립니다.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">최종 선발</h4>
+          <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">30명 한정으로 최종 선발 결과를 통보합니다.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <h4 style="font-size:1rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:10px;">프로젝트 시작</h4>
+          <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.75;">온보딩 후 본 프로그램을 시작합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 신청 CTA -->
+  <section style="padding:100px 0; background:var(--bg);" id="apply">
+    <div class="container" style="max-width:720px;">
+      <div class="deadline-box">
+        <div>
+          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--accent); margin-bottom:16px;">📅 지원 기간</div>
+          <h2 style="font-size:clamp(1.5rem,3.5vw,2.5rem); font-weight:900; letter-spacing:-0.04em; color:var(--white); line-height:1.2; margin-bottom:12px;">
+            2026.06.01<br/>~ 06.26
+          </h2>
+          <p style="font-size:0.9rem; color:rgba(255,255,255,0.4); line-height:1.6;">선착순 30명 모집 · 조기 마감 가능</p>
+        </div>
+        <div style="flex-shrink:0; text-align:center;">
+          <a href="contact.html" class="btn btn--primary" style="font-size:1.0625rem; padding:18px 44px; margin-bottom:12px; display:block;">
+            무료 신청하기
+          </a>
+          <p style="font-size:0.8125rem; color:rgba(255,255,255,0.3);">참여비 없음 · 서울 거주자 대상</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding:80px 0 100px; background:var(--bg);">
+    <div class="container" style="max-width:720px;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title" style="margin-bottom:40px;">자주 묻는 질문</h2>
+      <div style="display:flex; flex-direction:column; gap:2px;">
+        <details style="background:var(--bg-warm); border:1.5px solid var(--border); border-radius:var(--r-md); overflow:hidden;">
+          <summary style="padding:22px 24px; font-size:0.9375rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            어른이아 구독자가 아니어도 지원할 수 있나요?
+            <span style="font-size:1.2rem; color:var(--accent); flex-shrink:0;">+</span>
+          </summary>
+          <p style="padding:0 24px 22px; font-size:0.9rem; color:var(--text-muted); line-height:1.85;">네, 어른이아 구독 여부와 무관하게 지원 조건을 충족하시면 누구나 신청 가능합니다.</p>
+        </details>
+        <details style="background:var(--bg-warm); border:1.5px solid var(--border); border-radius:var(--r-md); overflow:hidden;">
+          <summary style="padding:22px 24px; font-size:0.9375rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            정말 무료인가요?
+            <span style="font-size:1.2rem; color:var(--accent); flex-shrink:0;">+</span>
+          </summary>
+          <p style="padding:0 24px 22px; font-size:0.9rem; color:var(--text-muted); line-height:1.85;">네, 2026 청년 미래성장 지원사업으로 운영되어 참여비는 전혀 없습니다. 선발 이후 어떤 비용도 청구되지 않습니다.</p>
+        </details>
+        <details style="background:var(--bg-warm); border:1.5px solid var(--border); border-radius:var(--r-md); overflow:hidden;">
+          <summary style="padding:22px 24px; font-size:0.9375rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            서울 소재 대학교 재학생도 지원 가능한가요?
+            <span style="font-size:1.2rem; color:var(--accent); flex-shrink:0;">+</span>
+          </summary>
+          <p style="padding:0 24px 22px; font-size:0.9rem; color:var(--text-muted); line-height:1.85;">네, 서울 거주자뿐 아니라 서울 소재 대학교 재학생 또는 서울 소재 직장인도 지원 가능합니다.</p>
+        </details>
+        <details style="background:var(--bg-warm); border:1.5px solid var(--border); border-radius:var(--r-md); overflow:hidden;">
+          <summary style="padding:22px 24px; font-size:0.9375rem; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            선발 결과는 언제 안내받나요?
+            <span style="font-size:1.2rem; color:var(--accent); flex-shrink:0;">+</span>
+          </summary>
+          <p style="padding:0 24px 22px; font-size:0.9rem; color:var(--text-muted); line-height:1.85;">서류 심사 후 개별 이메일로 안내드립니다. 궁금한 사항은 문의 페이지를 통해 연락주세요.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo"><img src="logo.png" alt="0200" class="footer__logo-img" /><span class="footer__name">어른이아</span></div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br/>바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col"><h4>프로그램</h4><a href="programs.html">콘텐츠 아카이브</a><a href="programs.html">프리미엄 라운드</a><a href="programs.html">DAY ONE 클래스</a><a href="growth.html">성장 지원 프로그램</a></div>
+        <div class="footer__col"><h4>어른이아</h4><a href="vision.html">비전</a><a href="values.html">가치</a><a href="about.html">소개</a><a href="contact.html">문의하기</a></div>
+        <div class="footer__col"><h4>구독</h4><a href="pricing.html">무료 플랜</a><a href="pricing.html">베이직 플랜</a><a href="pricing.html">프리미엄 플랜</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2024 어른이아. All rights reserved.</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
