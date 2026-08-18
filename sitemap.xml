@@ -36,6 +36,16 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://arunia.co.kr/growth_1.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arunia.co.kr/growth_2.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://arunia.co.kr/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

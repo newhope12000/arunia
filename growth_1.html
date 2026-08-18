@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>현직자 멘토링 프로젝트 1기 — 어른이아</title>
+  <meta name="description" content="어른이아 현직자 멘토링 프로젝트 1기. 28명이 함께한 4주간의 커리어 인큐베이팅 프로그램 아카이브." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://arunia.co.kr/growth_1.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="현직자 멘토링 프로젝트 1기 — 어른이아" />
+  <meta property="og:description" content="어른이아 현직자 멘토링 프로젝트 1기 아카이브." />
+  <meta property="og:url" content="https://arunia.co.kr/growth_1.html" />
+  <meta property="og:site_name" content="어른이아" />
+  <meta name="naver-site-verification" content="3ce8e42ff87025c0d4bfec693d02441009d77b4a" />
+  <meta name="google-site-verification" content="LwDGb3KsC-mK9bpX_Df2DePA2xBKZ8cVHW1Ci-eAuyI" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .archive-hero {
+      padding-top: var(--nav-h);
+      min-height: 60svh;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .archive-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(74,124,89,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .done-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(74,124,89,0.2);
+      border: 1px solid rgba(74,124,89,0.4);
+      color: #4A7C59;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 8px 18px;
+      border-radius: var(--r-full);
+      margin-bottom: 20px;
+    }
+    .info-strip {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .info-strip__item {
+      flex: 1;
+      padding: 28px 24px;
+      border-right: 1.5px solid var(--border);
+      text-align: center;
+    }
+    .info-strip__item:last-child { border-right: none; }
+    .info-strip__num {
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .info-strip__label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .step-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .step-item {
+      padding: 32px 20px;
+      text-align: center;
+      border-right: 1.5px solid var(--border);
+      position: relative;
+    }
+    .step-item:last-child { border-right: none; }
+    .step-item::after {
+      content: '▶';
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7rem;
+      color: var(--accent);
+      z-index: 1;
+    }
+    .step-item:last-child::after { display: none; }
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #4A7C59;
+      color: white;
+      font-size: 1rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .review-card {
+      background: var(--bg-warm);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 36px;
+    }
+    .review-stars { color: #F59E0B; font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .review-text { font-size: 0.9375rem; color: var(--text); line-height: 1.9; margin-bottom: 24px; }
+    .review-author { display: flex; align-items: center; gap: 14px; }
+    .review-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .info-strip { flex-direction: column; }
+      .info-strip__item { border-right: none; border-bottom: 1.5px solid var(--border); }
+      .info-strip__item:last-child { border-bottom: none; }
+      .step-row { grid-template-columns: 1fr 1fr; }
+      .step-item::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo" aria-label="어른이아 홈">
+        <img src="logo.png" alt="0200 로고" class="nav__logo-img" />
+        <span class="nav__brand">어른이아</span>
+      </a>
+      <nav class="nav__menu" id="navMenu" role="navigation" aria-label="주요 메뉴">
+        <a href="vision.html">비전</a>
+        <a href="values.html">가치</a>
+        <a href="about.html">소개</a>
+        <a href="programs.html">프로그램</a>
+        <a href="pricing.html">구독</a>
+        <a href="contact.html">문의</a>
+        <a href="growth.html" style="color:var(--accent);font-weight:700;">지원 모집 중 ●</a>
+      </nav>
+      <a href="growth.html" class="btn btn--nav" style="background:var(--accent); border-color:var(--accent); color:#fff;">3기 지원하기</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="archive-hero">
+    <div class="container" style="padding-top:60px; padding-bottom:60px;">
+      <div class="done-badge">✓ 완료된 프로그램 — 1기 아카이브</div>
+      <h1 style="font-size:clamp(2rem,4.5vw,3.5rem); font-weight:900; line-height:1.1; letter-spacing:-0.04em; color:var(--white); margin-bottom:16px;">
+        현직자 멘토링<br/><span style="color:#4A7C59;">프로젝트 1기</span>
+      </h1>
+      <p style="font-size:1rem; color:rgba(255,255,255,0.55); line-height:1.8; margin-bottom:36px; max-width:520px;">
+        2026년 4–5월 · 2026 청년 커리어 인큐베이팅 프로젝트<br/>
+        28명의 크루가 함께 4주간 커리어의 방향을 잡았습니다.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="growth.html" class="btn btn--primary">현재 모집 중인 3기 보기</a>
+        <a href="growth_2.html" class="btn btn--ghost" style="color:rgba(255,255,255,0.6); border-color:rgba(255,255,255,0.2);">2기 아카이브 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="padding:64px 0; background:var(--bg);">
+    <div class="container">
+      <div class="info-strip">
+        <div class="info-strip__item">
+          <div class="info-strip__num">28명</div>
+          <div class="info-strip__label">최종 수료</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">4주</div>
+          <div class="info-strip__label">프로그램 기간</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">4.8 / 5</div>
+          <div class="info-strip__label">참여자 만족도</div>
+        </div>
+        <div class="info-strip__item">
+          <div class="info-strip__num">50%↑</div>
+          <div class="info-strip__label">교육비 지원</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지원대상 & 내용 -->
+  <section style="padding:80px 0; background:var(--bg-warm);">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px;">
+        <div>
+          <div class="section-label">지원대상</div>
+          <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:28px; line-height:1.35;">이런 분들과 함께했습니다</h2>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:14px; align-items:flex-start; padding:20px 24px; background:white; border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:#4A7C59; font-weight:800; font-size:1.1rem; flex-shrink:0;">✓</span>
+              <p style="font-size:0.9rem; color:var(--text); line-height:1.75;">인터넷 검색만으로는 알 수 없는 <strong>'진짜 현업의 실무'</strong>가 궁금한 분</p>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start; padding:20px 24px; background:white; border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:#4A7C59; font-weight:800; font-size:1.1rem; flex-shrink:0;">✓</span>
+              <p style="font-size:0.9rem; color:var(--text); line-height:1.75;">방향성 없는 스펙 쌓기를 멈추고, <strong>나만의 확고한 커리어 무기</strong>를 만들고 싶은 분</p>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start; padding:20px 24px; background:white; border-radius:var(--r-md); border:1.5px solid var(--border);">
+              <span style="color:#4A7C59; font-weight:800; font-size:1.1rem; flex-shrink:0;">✓</span>
+              <p style="font-size:0.9rem; color:var(--text); line-height:1.75;">현직자 멘토의 피드백으로 <strong>진로 액션 플랜</strong>을 실행할 분</p>
+            </div>
+          </div>
+          <div style="margin-top:24px; padding:16px 20px; background:var(--accent-pale); border-radius:var(--r-md); border:1px solid rgba(232,93,58,0.2);">
+            <p style="font-size:0.85rem; color:var(--accent); font-weight:600;">자격 요건 · 만 19~29세 / 서울시 거주자 및 서울 소재 대학·직장인</p>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">지원내용</div>
+          <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:28px; line-height:1.35;">4주 동안 받은 것들</h2>
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; font-size:0.8rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">01</div>
+              <div>
+                <p style="font-size:0.9375rem; font-weight:700; margin-bottom:4px;">직무 적합도(FIT) 분석</p>
+                <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.7;">현직자의 시각에서 나의 강점과 이력을 객관적으로 진단</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; font-size:0.8rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">02</div>
+              <div>
+                <p style="font-size:0.9375rem; font-weight:700; margin-bottom:4px;">실전 커리어 로드맵 기획</p>
+                <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.7;">당장 자소서와 면접에 활용할 수 있는 나만의 직무 방향성 도출</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; font-size:0.8rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">03</div>
+              <div>
+                <p style="font-size:0.9375rem; font-weight:700; margin-bottom:4px;">업계 실무진 밀착 멘토링</p>
+                <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.7;">일방적인 강연이 아닌, 소수 정예 집중 피드백 세션</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; font-size:0.8rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0;">04</div>
+              <div>
+                <p style="font-size:0.9375rem; font-weight:700; margin-bottom:4px;">우수 청년 네트워킹</p>
+                <p style="font-size:0.875rem; color:var(--text-muted); line-height:1.7;">열정적인 또래 크루들과 인사이트를 교류하고 함께 성장</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 절차 -->
+  <section style="padding:80px 0; background:var(--bg);">
+    <div class="container">
+      <div class="section-label">진행 절차</div>
+      <h2 class="section-title">1기가 걸어간 4단계</h2>
+      <div class="step-row" style="margin-top:40px;">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <p style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">온라인 지원</p>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">지원서 제출</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <p style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">서류 심사</p>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">지원 동기 검토</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <p style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">최종 크루 선발</p>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">28명 최종 선발</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <p style="font-size:0.9rem; font-weight:700; margin-bottom:6px;">인큐베이팅 시작</p>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">4주 프로그램</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 참여 후기 -->
+  <section style="padding:96px 0; background:var(--bg-dark);">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="section-label" style="color:rgba(255,255,255,0.4);">VOICES FROM 1기</div>
+        <h2 style="font-size:clamp(1.75rem,3vw,2.5rem); font-weight:900; letter-spacing:-0.04em; color:var(--white); margin-top:12px;">1기 크루들의 이야기</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"FIT 분석을 통해 막연하게 '마케팅이 하고 싶다'고 생각했던 게 콘텐츠 마케팅 중에서도 어떤 부분이 저한테 맞는지 구체적으로 바뀌었어요. 현직자분이 실제 채용공고를 같이 보면서 강점을 짚어주셔서 자소서 방향이 완전히 달라졌고, 1기 참여 이후 서류 통과율이 눈에 띄게 달라졌습니다."</p>
+          <div class="review-author">
+            <div class="review-avatar">이</div>
+            <div>
+              <p style="font-size:0.875rem; font-weight:700; color:var(--text);">이○○ 씨</p>
+              <p style="font-size:0.8rem; color:var(--text-muted);">24세 · 마케팅 취업준비생</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"졸업 전에 뭔가 해야 한다는 압박만 있었는데, 멘토링 세션에서 처음으로 제가 어떤 사람인지를 객관적으로 들었어요. 강연이 아니라 저만을 위한 피드백이라 달랐어요. 커리어 로드맵을 만들어서 지금도 기준으로 삼고 있습니다."</p>
+          <div class="review-author">
+            <div class="review-avatar" style="background:#4A7C59;">박</div>
+            <div>
+              <p style="font-size:0.875rem; font-weight:700; color:var(--text);">박○○ 씨</p>
+              <p style="font-size:0.8rem; color:var(--text-muted);">22세 · 대학교 4학년</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"직장 1년 반 만에 방향이 안 보여서 이직을 결심했는데 기준이 없었어요. 멘토분이 제 경력을 보고 이건 강점으로 쓸 수 있다고 알려줘서 완전히 다른 시각이 생겼어요. 같이 참여한 크루들이랑 지금도 연락하고 있어요."</p>
+          <div class="review-author">
+            <div class="review-avatar" style="background:#E85D3A;">김</div>
+            <div>
+              <p style="font-size:0.875rem; font-weight:700; color:var(--text);">김○○ 씨</p>
+              <p style="font-size:0.8rem; color:var(--text-muted);">26세 · 이직 준비 중</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:96px 0; background:var(--bg);">
+    <div class="container" style="text-align:center;">
+      <div class="section-label">NEXT STEP</div>
+      <h2 style="font-size:clamp(1.75rem,3vw,2.25rem); font-weight:900; letter-spacing:-0.04em; margin:16px 0 12px;">지금은 3기를 모집하고 있습니다</h2>
+      <p style="font-size:1rem; color:var(--text-muted); margin-bottom:40px;">2026년 8월 21일까지 · 만 26세 이하 · 30명 한정</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="growth.html" class="btn btn--primary" style="padding:16px 40px; font-size:1rem;">3기 지원하기</a>
+        <a href="growth_2.html" class="btn btn--outline">2기 아카이브 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <img src="logo.png" alt="0200" class="footer__logo-img" />
+          <span class="footer__name">어른이아</span>
+        </div>
+        <p class="footer__tagline">청년이 어른이 된 이후 마주하는 선택 앞에서<br />바로 결정하지 않고, 충분히 경험해볼 수 있도록.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="유튜브"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="뉴스레터"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h4>성장 지원 프로그램</h4>
+          <a href="growth_1.html">1기 아카이브</a>
+          <a href="growth_2.html">2기 아카이브</a>
+          <a href="growth.html">3기 모집 중</a>
+        </div>
+        <div class="footer__col">
+          <h4>프로그램</h4>
+          <a href="programs.html">콘텐츠 아카이브</a>
+          <a href="programs.html">프리미엄 라운드</a>
+          <a href="programs.html">DAY ONE 클래스</a>
+        </div>
+        <div class="footer__col">
+          <h4>어른이아</h4>
+          <a href="vision.html">비전</a>
+          <a href="values.html">가치</a>
+          <a href="about.html">소개</a>
+          <a href="contact.html">문의하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2026 어른이아. All rights reserved. &nbsp;|&nbsp; 사업자등록번호 703-14-03438</p>
+        <div class="footer__legal"><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
