@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>청년 역량·리더십 강화 프로젝트 — 리더십이 필요해</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#2451E8;
+    --blue-d:#1A3EC7;
+    --blue-soft:#EEF3FF;
+    --yellow:#F5CE00;
+    --yellow-d:#D4AE00;
+    --red:#E53E3E;
+    --ink:#0E1829;
+    --ink-2:#2D3A52;
+    --gray-pill:#3A4560;
+    --muted:#6B7280;
+    --line:#D4DCF0;
+    --bg:#EEF2FB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;}
+  .wrap{max-width:620px;margin:0 auto;background:var(--bg);min-height:100vh;padding-bottom:6px;}
+
+  /* HERO */
+  .hero{padding:38px 24px 10px;position:relative;overflow:hidden;}
+  .tagpill{display:inline-block;background:var(--gray-pill);color:#fff;font-size:12.5px;font-weight:700;padding:7px 15px;border-radius:20px;letter-spacing:-.3px;margin-bottom:18px;}
+  .hero h1{font-weight:900;font-size:clamp(2rem,8vw,2.6rem);line-height:1.18;letter-spacing:-.06em;word-break:keep-all;}
+  .hero h1 .hl{
+    position:relative;display:inline;
+    background:linear-gradient(to bottom, transparent 55%, var(--yellow) 55%);
+    background-repeat:no-repeat;
+    padding-bottom:2px;
+  }
+  .hero .hook{margin-top:22px;font-size:15px;line-height:1.9;color:var(--ink-2);font-weight:600;letter-spacing:-.02em;border-left:3.5px solid var(--blue);padding-left:14px;}
+  .hero .count-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;border:2px solid var(--red);border-radius:12px;
+    padding:10px 18px;margin-top:22px;
+  }
+  .hero .count-badge .cn{font-weight:900;font-size:22px;color:var(--red);letter-spacing:-.04em;}
+  .hero .count-badge .cl{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+
+  /* 스테어 일러스트 — CSS only */
+  .stair-wrap{position:absolute;right:-8px;top:24px;width:130px;height:120px;pointer-events:none;}
+  .stair-wrap .s{position:absolute;background:var(--blue);border-radius:4px 4px 0 0;}
+  .stair-wrap .s1{width:36px;height:36px;bottom:0;right:90px;}
+  .stair-wrap .s2{width:36px;height:72px;bottom:0;right:48px;}
+  .stair-wrap .s3{width:36px;height:108px;bottom:0;right:6px;}
+  .stair-wrap .s1::after,.stair-wrap .s2::after,.stair-wrap .s3::after{
+    content:"";position:absolute;left:0;right:0;bottom:-4px;height:4px;background:rgba(0,0,0,.2);border-radius:0 0 4px 4px;
+  }
+  .stair-wrap .ybox{position:absolute;top:0;right:6px;width:18px;height:18px;background:var(--yellow);border-radius:4px;}
+
+  /* 섹션 헤더 */
+  .ghead{padding:34px 22px 2px;}
+  .ghead h2{font-weight:900;font-size:22px;letter-spacing:-.04em;line-height:1.3;display:flex;align-items:center;gap:10px;}
+  .ghead h2::before{content:"";width:6px;height:19px;border-radius:3px;background:var(--blue);flex:0 0 auto;}
+  .ghead p{margin-top:8px;padding-left:16px;font-size:13.5px;color:var(--muted);font-weight:600;letter-spacing:-.01em;}
+
+  /* 기간 배너 */
+  .period{margin:12px 16px 0;background:#fff;border:1.8px solid var(--ink);border-radius:14px;padding:18px;text-align:center;}
+  .period .lab{font-size:12.5px;font-weight:800;color:var(--blue);letter-spacing:.2px;}
+  .period .dt{margin-top:6px;font-weight:900;font-size:21px;letter-spacing:-.03em;}
+  .period .dt b{color:var(--blue);}
+
+  /* 지원대상 탭 카드 */
+  .target-cards{padding:14px 16px 0;display:flex;flex-direction:column;gap:10px;}
+  .tc{background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:18px 16px;position:relative;overflow:hidden;}
+  .tc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--blue);}
+  .tc .tc-tag{display:inline-block;background:var(--blue-soft);color:var(--blue);font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:-.01em;}
+  .tc h3{font-size:15px;font-weight:900;color:var(--ink);margin-bottom:6px;letter-spacing:-.03em;}
+  .tc p{font-size:13.3px;color:var(--ink-2);line-height:1.7;font-weight:500;letter-spacing:-.01em;}
+
+  /* 자격 박스 */
+  .qual{margin:14px 16px 0;background:var(--blue-soft);border:1.5px solid #B8CAF8;border-radius:14px;padding:20px 18px;text-align:center;}
+  .qual .big{font-weight:900;font-size:17px;letter-spacing:-.03em;line-height:1.55;}
+  .qual .big b{color:var(--blue-d);}
+  .qual .small{margin-top:10px;font-size:13.5px;color:var(--ink-2);font-weight:600;letter-spacing:-.02em;line-height:1.6;}
+
+  /* 넘버 카드 */
+  .gcards{padding:14px 16px 0;display:flex;flex-direction:column;gap:10px;}
+  .gcard{background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:16px;position:relative;overflow:hidden;}
+  .gcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--blue);}
+  .gcard .no{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-weight:900;font-size:12px;width:24px;height:24px;border-radius:8px;}
+  .gcard h3{margin-top:9px;font-weight:900;font-size:16px;letter-spacing:-.03em;}
+  .gcard p{margin-top:6px;font-size:13.4px;color:var(--ink-2);line-height:1.65;letter-spacing:-.01em;font-weight:500;}
+  .gcard .note{margin-top:9px;background:var(--blue-soft);border-radius:8px;padding:9px 11px;font-size:12.3px;color:var(--blue-d);font-weight:700;line-height:1.55;letter-spacing:-.02em;}
+
+  /* 마무리 */
+  .closing{margin:32px 16px 0;background:var(--ink);color:#fff;border-radius:18px;padding:28px 22px;text-align:center;}
+  .closing h3{font-weight:900;font-size:19px;line-height:1.6;letter-spacing:-.04em;}
+  .closing h3 .yl{color:var(--yellow);}
+  .closing .fx{margin-top:16px;font-weight:800;font-size:12.5px;color:#A8BADA;letter-spacing:-.01em;line-height:1.9;}
+  .closing .brand{margin-top:14px;font-size:12.5px;color:#6B7A9A;font-weight:700;}
+
+  /* CTA */
+  .ctawrap{padding:22px 16px 4px;}
+  .cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--blue);color:#fff;border:none;
+    font-family:'Noto Sans KR';font-weight:900;font-size:18px;padding:19px;border-radius:14px;cursor:pointer;
+    transition:.18s;text-decoration:none;letter-spacing:-.04em;box-shadow:0 6px 18px rgba(36,81,232,.3);}
+  .cta:hover{background:var(--blue-d);transform:translateY(-1px);}
+  .cta:active{transform:scale(.976);transition:transform .1s ease-out;}
+  .cta .arr{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:12px;}
+  .urgent{display:flex;align-items:center;justify-content:center;gap:8px;margin:13px 16px 0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;color:var(--ink);font-weight:800;font-size:13.3px;letter-spacing:-.02em;}
+  .urgent::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.3s infinite;}
+  @keyframes blink{50%{opacity:.25;}}
+
+  /* 폼 */
+  .formcard{margin:26px 16px 0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .section{padding:24px 20px 8px;}
+  .sec-title{border-left:4px solid var(--blue);padding-left:12px;}
+  .sec-title h2{font-weight:900;font-size:20px;color:var(--ink);letter-spacing:-.03em;}
+  .sec-sub{color:var(--muted);font-size:13.5px;margin:10px 0 0 16px;}
+  form{padding:6px 20px 28px;}
+  .field{margin-bottom:23px;}
+  .field>label{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:10px;line-height:1.5;letter-spacing:-.01em;}
+  .qnum{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:12px;font-weight:800;width:22px;height:22px;border-radius:7px;margin-right:8px;}
+  .req{color:#fff;background:var(--blue);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:2px;}
+  .opt-hint{color:var(--muted);font-weight:500;font-size:13px;margin-left:4px;}
+  input[type=text],input[type=tel],textarea{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:13px 14px;font-family:'Noto Sans KR';font-size:15px;color:var(--ink);outline:none;transition:.15s;}
+  input::placeholder,textarea::placeholder{color:#A6ADBB;}
+  input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,81,232,.12);}
+  textarea{resize:vertical;min-height:115px;line-height:1.7;}
+  .ex{color:var(--muted);font-size:12.5px;margin-top:9px;line-height:1.8;background:var(--blue-soft);border-radius:9px;padding:11px 13px;}
+  .ex b{color:var(--blue-d);}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opts.grid{display:grid;grid-template-columns:1fr 1fr;}
+  .opt{position:relative;}
+  .opt input{position:absolute;opacity:0;inset:0;cursor:pointer;}
+  .opt label{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:12px 14px;font-size:14.5px;color:#4A4F5A;cursor:pointer;transition:.15s;word-break:keep-all;}
+  .opt label::before{content:"";width:17px;height:17px;border:2px solid #C7D0DA;border-radius:50%;flex:0 0 auto;transition:.15s;}
+  .opt input:checked+label{border-color:var(--blue);background:var(--blue-soft);color:var(--ink);font-weight:700;}
+  .opt input:checked+label::before{border-color:var(--blue);background:radial-gradient(circle,var(--blue) 0 5px,transparent 6px);}
+  .opt label:active{transform:scale(.99);transition:transform .1s ease-out;}
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#4A4F5A;margin:6px 0 18px;background:#F7FAFC;border:1px solid var(--line);border-radius:9px;padding:13px;}
+  .agree input{width:18px;height:18px;margin-top:1px;accent-color:var(--blue);flex:0 0 auto;}
+  .submit{width:100%;background:var(--blue);color:#fff;border:none;font-weight:900;font-size:18px;padding:17px;border-radius:14px;cursor:pointer;transition:.18s;letter-spacing:-.03em;font-family:'Noto Sans KR';}
+  .submit:hover{background:var(--blue-d);}
+  .submit:active{transform:scale(.976);transition:transform .1s ease-out;}
+  .submit:disabled{opacity:.6;cursor:not-allowed;}
+
+  footer{text-align:center;color:var(--ink-2);font-size:13px;padding:30px 20px 44px;font-weight:700;letter-spacing:-.02em;line-height:1.8;}
+  footer .org{color:var(--ink);font-weight:900;}
+
+  .modal{position:fixed;inset:0;background:rgba(14,24,41,.55);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;}
+  .modal.show{display:flex;}
+  .modal-box{background:#fff;border-radius:16px;padding:36px 28px;max-width:380px;width:100%;text-align:center;}
+  .modal-box .ic{width:60px;height:60px;border-radius:50%;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;margin:0 auto;}
+  .modal-box .ic svg{width:32px;height:32px;color:var(--blue);}
+  .modal-box h3{font-weight:900;font-size:21px;color:var(--ink);margin-top:16px;}
+  .modal-box p{color:var(--muted);font-size:14.5px;margin-top:10px;line-height:1.7;}
+  .modal-btn{margin-top:22px;background:var(--blue);color:#fff;border:none;font-weight:700;font-size:15px;padding:13px 36px;border-radius:11px;cursor:pointer;font-family:'Noto Sans KR';}
+
+  /* 스크롤 리빌 */
+  .rv{opacity:0;transform:translateY(10px);transition:opacity .55s cubic-bezier(.2,.7,.3,1),transform .55s cubic-bezier(.2,.7,.3,1);}
+  .rv.in{opacity:1;transform:none;}
+  /* 반투명 스티키 CTA */
+  .apbar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(238,242,251,.78);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+    border-top:1px solid rgba(0,0,0,.07);transform:translateY(115%);transition:transform .42s cubic-bezier(.2,.7,.3,1);}
+  .apbar.show{transform:none;}
+  .apbar a{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:588px;margin:0 auto;
+    background:var(--blue);color:#fff;font-weight:900;font-size:1.0625rem;letter-spacing:-.03em;padding:16px;border-radius:999px;text-decoration:none;
+    box-shadow:0 4px 14px rgba(36,81,232,.32);}
+
+  @media (prefers-reduced-motion: reduce){
+    .rv{opacity:1;transform:none;transition:none;}
+    .apbar{transform:none;opacity:0;pointer-events:none;transition:opacity .2s ease;}
+    .apbar.show{opacity:1;pointer-events:auto;}
+    .urgent::before{animation:none;}
+    .cta:active,.submit:active,.opt label:active{transform:none;}
+  }
+  @media (prefers-reduced-transparency: reduce){ .apbar{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;} }
+  @media (max-width:480px){ .opts.grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="stair-wrap" aria-hidden="true">
+      <div class="s s1"></div>
+      <div class="s s2"></div>
+      <div class="s s3"></div>
+      <div class="ybox"></div>
+    </div>
+    <span class="tagpill">청년 역량·리더십 강화 프로젝트</span>
+    <h1>리더십이<br/><span class="hl">필요해</span></h1>
+    <p class="hook">팀플에서는 내가 다 하고,<br/>면접에서는 할 말이 없고,<br/>회사에서는 눈치만 보고 있다면.</p>
+    <div class="count-badge">
+      <span class="cn">선착순 30명</span>
+      <span class="cl">최종 선발 20명</span>
+    </div>
+  </section>
+
+  <!-- 모집기간 -->
+  <div class="ghead"><h2>모집기간</h2></div>
+  <div class="period">
+    <div class="lab">ONLINE APPLICATION</div>
+    <div class="dt">2026. <b>09. 11</b>(목) ~ <b>09. 18</b>(목)</div>
+  </div>
+
+  <!-- 지원대상 -->
+  <div class="ghead"><h2>지원대상</h2><p>이런 분들을 찾습니다</p></div>
+  <div class="target-cards">
+    <div class="tc">
+      <span class="tc-tag">대학생</span>
+      <h3>팀플은 내가 다 했는데, 내 성과로 설명하기 어렵다면?</h3>
+      <p>역할 분담과 의견 조율을 익히고, 활동 경험을 나만의 강점으로 정리하고 싶은 청년</p>
+    </div>
+    <div class="tc">
+      <span class="tc-tag">취업준비생·졸업예정자</span>
+      <h3>"리더십을 발휘한 경험이 있나요?"에 말문이 막힌다면?</h3>
+      <p>내 경험에서 리더십·협업 사례를 찾아 자소서와 면접에서 전달하고 싶은 청년</p>
+    </div>
+    <div class="tc">
+      <span class="tc-tag">사회초년생</span>
+      <h3>첫 직장, 일보다 사람 대하는 게 더 어렵다면?</h3>
+      <p>질문·보고·의견 전달 방법을 익혀 업무 상황에서 자신 있게 소통하고 싶은 청년</p>
+    </div>
+  </div>
+
+  <!-- 지원자격 -->
+  <div class="ghead"><h2>지원자격</h2></div>
+  <div class="qual">
+    <div class="big"><b>만 19세~만 23세</b> 청년 중<br/>서울시 거주 또는 서울 소재 대학·직장 재학·재직</div>
+    <div class="small">대학생 · 취업준비생 · 졸업예정자 · 사회초년생</div>
+  </div>
+
+  <!-- 선정방식 -->
+  <div class="ghead"><h2>선정방식</h2><p>지원부터 합격까지 5단계</p></div>
+  <div class="gcards">
+    <div class="gcard"><div class="no">01</div><h3>온라인 서류 지원</h3><p>현재 상황과 참여하고 싶은 이유를 지원서에 작성해주세요.</p></div>
+    <div class="gcard"><div class="no">02</div><h3>서류 심사</h3><p>지원 동기와 현재 상황을 바탕으로 사전미팅 대상자를 선정합니다.</p></div>
+    <div class="gcard"><div class="no">03</div><h3>사전미팅</h3><p>함께 일했던 경험과 평소 행동 방식을 살펴보고, 리더십·소통 스타일을 점검합니다.<div class="note">※ 사전미팅 참여 서류합격자 전원에게 진단을 제공합니다.</div></p></div>
+    <div class="gcard"><div class="no">04</div><h3>최종 선발</h3><p>서류와 사전미팅 내용을 종합해 최종 참여자 <b>20명</b>을 선발합니다.</p></div>
+    <div class="gcard"><div class="no">05</div><h3>합격자 발표</h3><p>선발 결과와 이후 참여 일정을 개별 안내합니다.</p></div>
+  </div>
+
+  <!-- 진행방식 -->
+  <div class="ghead"><h2>진행방식</h2><p>진단 → 행동가이드 → 이력서 + 현직자 미팅</p></div>
+  <div class="gcards">
+    <div class="gcard">
+      <div class="no">01</div><h3>내 리더십·소통 스타일 진단</h3>
+      <p>스스로 판단하고 행동하는 방식과 함께 일할 때의 소통 스타일을 살펴봅니다.</p>
+      <div class="note">※ 사전미팅에 참여한 서류합격자 전원 진단 제공</div>
+    </div>
+    <div class="gcard">
+      <div class="no">02</div><h3>맞춤 행동 가이드, 실전 및 피드백</h3>
+      <p>자신의 상황에 맞는 행동 가이드를 만들고, 의견 제안·역할 분담·갈등 조율 등 실제 상황을 연습합니다.</p>
+    </div>
+    <div class="gcard">
+      <div class="no">03</div><h3>프로필 이력서 제작 및 현직자 미팅</h3>
+      <p>현직자와 함께 나의 경험을 돌아보고, 자신의 역할과 경험을 프로필 이력서로 정리합니다.</p>
+    </div>
+  </div>
+
+  <!-- 마무리 -->
+  <div class="closing">
+    <h3>스스로 판단하고,<br/>함께 일할 때 발휘하는<br/><span class="yl">리더십.</span></h3>
+    <div class="fx">리더십·소통 스타일 진단 × 맞춤 행동 가이드<br/>× 프로필 이력서 제작 × 현직자 미팅</div>
+    <div class="brand">청년 역량·리더십 강화 프로젝트 — 리더십이 필요해</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="ctawrap">
+    <a href="#apply" class="cta">지금 지원하기 <span class="arr">▶</span></a>
+  </div>
+  <div class="urgent">2026. 09. 18(목)까지 지원하세요</div>
+
+  <!-- 신청서 -->
+  <div class="formcard">
+    <div class="section" id="apply">
+      <div class="sec-title"><h2>온라인 지원서</h2></div>
+      <p class="sec-sub">현재의 상황과 참여 목적을 확인합니다. 솔직하게 적어주실수록 좋아요.</p>
+    </div>
+
+    <form id="applyForm" onsubmit="return handleSubmit(event)">
+
+      <div class="field">
+        <label><span class="qnum">1</span>이름 <span class="req">필수</span></label>
+        <input type="text" name="name" id="f-name" placeholder="홍길동" required />
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">2</span>연락처 <span class="req">필수</span></label>
+        <input type="tel" name="phone" id="f-phone" placeholder="010-0000-0000" required />
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">3</span>생년월일 <span class="req">필수</span></label>
+        <input type="text" name="birth" id="f-birth" placeholder="예) 2001-03-15" required />
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">4</span>거주지 <span class="req">필수</span></label>
+        <input type="text" name="residence" id="f-residence" placeholder="예) 서울 마포구" required />
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">5</span>현재 상태 <span class="req">필수</span></label>
+        <div class="opts grid">
+          <div class="opt"><input type="radio" name="job" id="j1" value="대학생" required /><label for="j1">대학생</label></div>
+          <div class="opt"><input type="radio" name="job" id="j2" value="졸업예정자" /><label for="j2">졸업예정자</label></div>
+          <div class="opt"><input type="radio" name="job" id="j3" value="취업준비생" /><label for="j3">취업준비생</label></div>
+          <div class="opt"><input type="radio" name="job" id="j4" value="사회초년생/직장인" /><label for="j4">사회초년생/직장인</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">6</span>학교 / 전공 (또는 소속) <span class="req">필수</span></label>
+        <input type="text" name="school" id="f-school" placeholder="예) 한국대학교 경영학과 / 직장명" required />
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">7</span>관심 직무 / 희망 분야 <span class="req">필수</span></label>
+        <input type="text" name="job_field" id="f-jobfield" placeholder="예) 마케팅 / IT 개발 / 디자인 / 아직 탐색 중" required />
+      </div>
+
+      <!-- 리더십 전용 질문 -->
+      <div class="field">
+        <label><span class="qnum">8</span>현재 가장 고민되는 것은 무엇인가요? <span class="opt-hint">(1개 선택)</span></label>
+        <div class="opts">
+          <div class="opt"><input type="radio" name="concern" id="c1" value="팀 활동에서 역할 분담·의견 조율" required /><label for="c1">팀 활동에서 역할 분담·의견 조율</label></div>
+          <div class="opt"><input type="radio" name="concern" id="c2" value="자소서·면접에서 경험과 강점 표현" /><label for="c2">자소서·면접에서 경험과 강점 표현</label></div>
+          <div class="opt"><input type="radio" name="concern" id="c3" value="직장 내 의사소통" /><label for="c3">직장 내 의사소통</label></div>
+          <div class="opt"><input type="radio" name="concern" id="c4" value="나의 강점 파악" /><label for="c4">나의 강점 파악</label></div>
+          <div class="opt"><input type="radio" name="concern" id="c5" value="주도적으로 나서는 자신감" /><label for="c5">주도적으로 나서는 자신감</label></div>
+          <div class="opt"><input type="radio" name="concern" id="c6" value="기타" /><label for="c6">기타</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">9</span>이 프로젝트에서 가장 기대하는 것은? <span class="opt-hint">(1개 선택)</span></label>
+        <div class="opts">
+          <div class="opt"><input type="radio" name="need" id="n1" value="나의 강점·리더십 스타일 발견" required /><label for="n1">나의 강점·리더십 스타일 발견</label></div>
+          <div class="opt"><input type="radio" name="need" id="n2" value="협업·의사소통 역량 향상" /><label for="n2">협업·의사소통 역량 향상</label></div>
+          <div class="opt"><input type="radio" name="need" id="n3" value="자소서·면접에 활용할 경험 정리" /><label for="n3">자소서·면접에 활용할 경험 정리</label></div>
+          <div class="opt"><input type="radio" name="need" id="n4" value="직장 내 소통 자신감 향상" /><label for="n4">직장 내 소통 자신감 향상</label></div>
+          <div class="opt"><input type="radio" name="need" id="n5" value="현직자의 조언과 피드백" /><label for="n5">현직자의 조언과 피드백</label></div>
+          <div class="opt"><input type="radio" name="need" id="n6" value="기타" /><label for="n6">기타</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">10</span>프로젝트 참여 목적 <span class="req">필수</span></label>
+        <textarea name="motivation" id="f-motivation" placeholder="이 프로젝트에 지원한 이유와, 참여를 통해 얻고 싶은 것을 적어주세요." required></textarea>
+      </div>
+
+      <div class="field">
+        <label><span class="qnum">11</span>리더십이나 소통과 관련해 요즘 고민되는 상황을 적어주세요. <span class="req">필수</span></label>
+        <textarea name="story" id="f-story" placeholder="지금 겪고 있는 상황을 편하게 적어주세요." required></textarea>
+        <div class="ex">
+          <b>예시)</b><br/>
+          "팀플에서 일을 많이 맡는데, 역할을 다시 나누자고 말하기 어려워요."<br/>
+          "면접에서 리더십 경험을 물으면 어떤 이야기를 해야 할지 모르겠어요."<br/>
+          "업무 중 모르는 것이 있어도 언제 어떻게 질문해야 할지 망설여져요."<br/>
+          "제 의견은 있지만 자신이 없어서 다른 사람의 결정을 기다리게 돼요."
+        </div>
+      </div>
+
+      <label class="agree"><input type="checkbox" name="agree_privacy" id="f-privacy" required /><span>[필수] 개인정보 수집·이용에 동의합니다. 수집 항목은 선발 및 안내 연락 목적으로만 사용됩니다.</span></label>
+
+      <button type="submit" class="submit" id="submitBtn">지원서 제출하기</button>
+    </form>
+  </div>
+
+  <footer>
+    주관 · <span class="org">어른이아</span><br/>
+    청년 역량·리더십 강화 프로젝트 — 리더십이 필요해
+  </footer>
+</div>
+
+<!-- 완료 모달 -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 2.5 2.5L16 9"/></svg></div>
+    <h3>지원이 접수되었습니다</h3>
+    <p>소중한 지원 감사합니다.<br/>서류심사 후 사전미팅 안내는<br/>기재해주신 연락처로 개별 연락드립니다.</p>
+    <button class="modal-btn" onclick="closeModal()">확인</button>
+  </div>
+</div>
+
+<script>
+  var GAS_URL   = 'https://script.google.com/macros/s/AKfycbwLrz_VGJMFPtOaGUV0aHnp9pYPMs5IDnmnlU6YMElX_FXN_qPXDnbylGAFY4CHZ9uJ/exec';
+  var FORM_TYPE = 'leadership1';
+
+  function saveToSheet(data) {
+    if (!GAS_URL || GAS_URL.indexOf('YOUR_APPS_SCRIPT') === 0) return;
+    var payload = { formType: FORM_TYPE, userAgent: navigator.userAgent, timestamp: new Date().toISOString() };
+    Object.keys(data).forEach(function (k) { payload[k] = data[k]; });
+    fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).catch(function (err) { console.error('[Sheet] 저장 실패:', err); });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form = document.getElementById('applyForm');
+    if (!form.checkValidity()) { form.reportValidity(); return false; }
+
+    var data = {
+      name:          form.name.value.trim(),
+      phone:         form.phone.value.trim(),
+      birth:         form.birth.value.trim(),
+      residence:     form.residence.value.trim(),
+      job:           form.job.value,
+      school:        form.school.value.trim(),
+      job_field:     form.job_field.value.trim(),
+      concern:       form.concern.value,
+      need:          form.need.value,
+      motivation:    form.motivation.value.trim(),
+      story:         form.story.value.trim(),
+      agree_privacy: form.agree_privacy.checked
+    };
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = '제출 중...';
+
+    saveToSheet(data);
+
+    setTimeout(function () {
+      document.getElementById('modal').classList.add('show');
+      btn.disabled = false; btn.textContent = '지원서 제출하기';
+    }, 600);
+
+    return false;
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+    document.getElementById('applyForm').reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<script>
+/* Apple-design: 스크롤 리빌 + 반투명 스티키 CTA */
+(function(){
+  var d = document, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    var blocks = [].slice.call(d.querySelectorAll('.wrap > div, .wrap > section'))
+      .filter(function(el){ return !el.classList.contains('hero') && !el.classList.contains('formcard') && el.id !== 'apply'; });
+    blocks.forEach(function(el){ el.classList.add('rv'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+    blocks.forEach(function(el){ io.observe(el); });
+  }
+  var main = d.querySelector('.cta'), form = d.querySelector('#apply');
+  if (main && form) {
+    var bar = d.createElement('div'); bar.className = 'apbar';
+    var a = d.createElement('a'); a.href = '#apply'; a.textContent = '지금 지원하기';
+    bar.appendChild(a); d.body.appendChild(bar);
+    var ticking = false;
+    function update(){
+      var fy = form.getBoundingClientRect().top;
+      var my = main.getBoundingClientRect().bottom;
+      bar.classList.toggle('show', my < 0 && fy > window.innerHeight);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){ if(!ticking){ requestAnimationFrame(update); ticking=true; }}, {passive:true});
+    update();
+  }
+})();
+</script>
+</body>
+</html>
