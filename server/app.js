@@ -204,7 +204,7 @@ export async function createApp(options = {}) {
     res.cookie("arunia_session", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: config.production,
+      secure: config.production || config.origin.startsWith("https://"),
       maxAge: 7 * 86400000,
       path: "/",
     });
@@ -412,7 +412,7 @@ export async function createApp(options = {}) {
       path: "/",
       httpOnly: true,
       sameSite: "lax",
-      secure: config.production,
+      secure: config.production || config.origin.startsWith("https://"),
     });
     res.json({ ok: true });
   });

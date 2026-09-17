@@ -86,3 +86,9 @@ PR은 검토용입니다. 원격 DB와 환경 변수 없이 Vercel 자동 미리
 6. 운영 DB 백업과 미확정 결제 확인 절차, 운영자 접근 관리
 
 제휴 로고는 넣지 않았습니다. 실제 협업과 사용 허락이 확인된 뒤 추가합니다. 공간 대관을 공식 제휴로 표현하지 않습니다.
+
+## 일시적인 외부 공유
+
+`server/share-preview.js`는 이미 빌드된 `dist`와 별도 `.data/shared-preview/preview.db`만 사용하는 임시 공유 진입점입니다. 실제 PG 키를 읽지 않고 항상 모의 결제로 동작하며, 기존 로컬 계정/운영 데이터와 분리됩니다. Vite 소스 서버를 공개하지 않습니다.
+
+Cloudflare Quick Tunnel이 `http://127.0.0.1:4180`을 가리키도록 실행한 뒤, 발급된 정확한 HTTPS 주소를 인자로 `node server/share-preview.js <HTTPS_ORIGIN>`을 실행합니다. 별도 계약 없이 체험하는 용도이며 노트북·공유 서버·터널이 켜져 있는 동안만 접속할 수 있습니다. 종료 시 해당 공유 서버와 터널 프로세스를 종료합니다. 접속 주소와 공유 서버 PID는 Git에서 제외된 `.data/shared-preview/share.json`에 기록됩니다.
