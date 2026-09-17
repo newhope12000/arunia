@@ -2711,13 +2711,49 @@ function App() {
     );
   return (
     <AppContext.Provider value={{ data, refresh }}>
-      <BrowserRouter>
-        <Shell />
-      </BrowserRouter>
+      <Shell />
     </AppContext.Provider>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+
+class AppErrorBoundary extends React.Component<
+  { children: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    if (this.state.failed) {
+      return (
+        <div className="container page" role="alert">
+          <p className="eyebrow">ARUNIA</p>
+          <h1>화면을 다시 준비할게요.</h1>
+          <p className="muted">
+            화면을 불러오는 중 문제가 생겼어요. 아래에서 다시 시작해 주세요.
+          </p>
+          <a className="button" href="/">
+            홈 다시 불러오기
+          </a>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+// The loading and error screens also contain links, so routing must exist
+// before App's first render, not only after the bootstrap request completes.
+createRoot(document.getElementById("root")!).render(
+  <AppErrorBoundary>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </AppErrorBoundary>,
+);
 
 function Support({
   r,
