@@ -1109,6 +1109,9 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 
   .contact__wrap { grid-template-columns: 1fr; gap: 48px; }
   .contact__success { grid-column: 1; }
+
+  .contest__layout { grid-template-columns: 1fr !important; }
+  .contest__card { position: static !important; }
 }
 
 @media (max-width: 768px) {

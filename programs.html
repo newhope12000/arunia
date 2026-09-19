@@ -188,6 +188,7 @@
   <!-- 공모전 -->
   <section id="contest" style="padding:100px 0; background:var(--bg);">
     <div class="container">
+
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
         <span style="display:inline-block; background:var(--accent); color:#fff; font-size:0.7rem; font-weight:800; letter-spacing:0.12em; padding:4px 12px; border-radius:2px;">OPEN NOW</span>
         <span style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase;">어른이아 이야기 공모전</span>
@@ -195,62 +196,70 @@
       <h2 style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; letter-spacing:-0.05em; line-height:1.1; margin-bottom:8px;">그만둘만두</h2>
       <p style="font-size:clamp(1rem,2vw,1.25rem); font-weight:700; color:var(--text-muted); letter-spacing:-0.02em; margin-bottom:48px;">나만의 속 시원한 이야기 공모전</p>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1.5px solid var(--border); margin-bottom:48px;">
+      <!-- 2-col: 정보 좌 / 카드뉴스 우 -->
+      <div class="contest__layout" style="display:grid; grid-template-columns:1fr 380px; gap:48px; align-items:start;">
 
-        <!-- 공모주제 -->
-        <div style="padding:36px 40px; border-right:1.5px solid var(--border); border-bottom:1.5px solid var(--border);">
-          <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">공모주제</div>
-          <p style="font-size:0.9375rem; font-weight:700; color:var(--text); line-height:1.7;">"지금까지 내가 그만둔 이야기,<br/>그리고 그만둔 뒤 알게 된 나"</p>
-          <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:12px; line-height:1.8;">무엇을, 왜 그만두었는가<br/>그만둔 후 새롭게 알게 된 점<br/>앞으로 되고 싶은 사람</p>
-        </div>
+        <!-- 좌: 공모 정보 -->
+        <div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1.5px solid var(--border); margin-bottom:32px;">
 
-        <!-- 응모자격 -->
-        <div style="padding:36px 40px; border-bottom:1.5px solid var(--border);">
-          <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">응모자격</div>
-          <p style="font-size:0.9375rem; font-weight:700; color:var(--text); margin-bottom:8px;">만 20~26세 청년 누구나</p>
-          <p style="font-size:0.8125rem; color:var(--text-muted); line-height:1.8;">대학생 · 휴학생 · 졸업예정자<br/>취준생 · 사회초년생<br/><strong style="color:var(--text);">참가비 전액 무료</strong></p>
-        </div>
-
-        <!-- 접수기간 -->
-        <div style="padding:36px 40px; border-right:1.5px solid var(--border);">
-          <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">접수기간</div>
-          <p style="font-size:1.0625rem; font-weight:900; color:var(--text); letter-spacing:-0.03em; margin-bottom:6px;">2026.09.01 — 09.20</p>
-          <p style="font-size:0.8125rem; color:var(--text-muted);">결과 발표: 2026.09.23(수)</p>
-        </div>
-
-        <!-- 시상내역 -->
-        <div style="padding:36px 40px;">
-          <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:16px;">시상내역</div>
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="display:flex; align-items:baseline; gap:12px;">
-              <span style="font-size:0.75rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 10px; border-radius:2px; white-space:nowrap;">대상 1명</span>
-              <span style="font-size:0.875rem; color:var(--text-muted);">활동 지원금 200만원 + 단독 인터뷰</span>
+            <!-- 공모주제 -->
+            <div style="padding:32px 36px; border-right:1.5px solid var(--border); border-bottom:1.5px solid var(--border);">
+              <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">공모주제</div>
+              <p style="font-size:0.9375rem; font-weight:700; color:var(--text); line-height:1.7;">"지금까지 내가 그만둔 이야기,<br/>그리고 그만둔 뒤 알게 된 나"</p>
+              <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:12px; line-height:1.8;">무엇을, 왜 그만두었는가<br/>그만둔 후 새롭게 알게 된 점<br/>앞으로 되고 싶은 사람</p>
             </div>
-            <div style="display:flex; align-items:baseline; gap:12px;">
-              <span style="font-size:0.75rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 10px; border-radius:2px; white-space:nowrap;">우수상 3명</span>
-              <span style="font-size:0.875rem; color:var(--text-muted);">50만원 + 카드뉴스·아티클 제작</span>
+
+            <!-- 응모자격 -->
+            <div style="padding:32px 36px; border-bottom:1.5px solid var(--border);">
+              <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">응모자격</div>
+              <p style="font-size:0.9375rem; font-weight:700; color:var(--text); margin-bottom:8px;">만 20~26세 청년 누구나</p>
+              <p style="font-size:0.8125rem; color:var(--text-muted); line-height:1.8;">대학생 · 휴학생 · 졸업예정자<br/>취준생 · 사회초년생<br/><strong style="color:var(--text);">참가비 전액 무료</strong></p>
             </div>
-            <div style="display:flex; align-items:baseline; gap:12px;">
-              <span style="font-size:0.75rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 10px; border-radius:2px; white-space:nowrap;">장려상 30명</span>
-              <span style="font-size:0.875rem; color:var(--text-muted);">상장 + 만두 키캡(선착 10명) + 1:1 코칭권</span>
+
+            <!-- 접수기간 -->
+            <div style="padding:32px 36px; border-right:1.5px solid var(--border);">
+              <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px;">접수기간</div>
+              <p style="font-size:1.0625rem; font-weight:900; color:var(--text); letter-spacing:-0.03em; margin-bottom:6px;">2026.09.01 — 09.20</p>
+              <p style="font-size:0.8125rem; color:var(--text-muted);">결과 발표: 2026.09.23(수)</p>
+            </div>
+
+            <!-- 시상내역 -->
+            <div style="padding:32px 36px;">
+              <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:16px;">시상내역</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:baseline; gap:10px;">
+                  <span style="font-size:0.7rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 8px; border-radius:2px; white-space:nowrap;">대상 1명</span>
+                  <span style="font-size:0.8125rem; color:var(--text-muted);">활동 지원금 200만원 + 단독 인터뷰</span>
+                </div>
+                <div style="display:flex; align-items:baseline; gap:10px;">
+                  <span style="font-size:0.7rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 8px; border-radius:2px; white-space:nowrap;">우수상 3명</span>
+                  <span style="font-size:0.8125rem; color:var(--text-muted);">50만원 + 카드뉴스·아티클 제작</span>
+                </div>
+                <div style="display:flex; align-items:baseline; gap:10px;">
+                  <span style="font-size:0.7rem; font-weight:800; color:var(--text); background:var(--bg-warm); padding:3px 8px; border-radius:2px; white-space:nowrap;">장려상 30명</span>
+                  <span style="font-size:0.8125rem; color:var(--text-muted);">상장 + 만두 키캡 + 1:1 코칭권</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- 참여혜택 + CTA -->
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
-        <div>
-          <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase; margin-bottom:10px;">참여혜택 — 전원</div>
-          <p style="font-size:0.9375rem; color:var(--text); line-height:1.8;">어른이아 클래스 할인 쿠폰<br/><span style="color:var(--accent); font-weight:700;">얼리버드 지원자: 말랑이 50개 증정</span></p>
+          <!-- 참여혜택 + CTA -->
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+            <div>
+              <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px;">참여혜택 — 전원</div>
+              <p style="font-size:0.9rem; color:var(--text); line-height:1.8;">어른이아 클래스 할인 쿠폰<br/><span style="color:var(--accent); font-weight:700;">얼리버드 지원자: 말랑이 50개 증정</span></p>
+            </div>
+            <a href="https://arunia-apply.vercel.app/mandu3" target="_blank" class="btn btn--primary" style="white-space:nowrap; padding:14px 32px;">지금 응모하기</a>
+          </div>
         </div>
-        <a href="https://arunia-apply.vercel.app/mandu3" target="_blank" class="btn btn--primary" style="white-space:nowrap; padding:16px 36px; font-size:1rem;">지금 응모하기</a>
-      </div>
 
-      <!-- 카드뉴스 -->
-      <div style="margin-top:48px; border-top:1.5px solid var(--border); padding-top:40px;">
-        <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; margin-bottom:20px;">카드뉴스</div>
-        <img src="contest-card-a.png" alt="그만둘만두 이야기 공모전 카드뉴스" style="max-width:480px; width:100%; display:block; border:1.5px solid var(--border);">
+        <!-- 우: 카드뉴스 이미지 -->
+        <div class="contest__card" style="position:sticky; top:100px;">
+          <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; margin-bottom:14px;">카드뉴스</div>
+          <img src="contest-card-a.png" alt="그만둘만두 이야기 공모전 카드뉴스" style="width:100%; display:block; border:1.5px solid var(--border);">
+        </div>
+
       </div>
     </div>
   </section>
