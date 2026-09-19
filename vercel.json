@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/counseling-preview/:path*",
+      "destination": "/counseling-preview/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/counseling-preview/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}
