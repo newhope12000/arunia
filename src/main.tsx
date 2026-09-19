@@ -43,6 +43,9 @@ import {
   LockKeyhole,
 } from "lucide-react";
 import "./style.css";
+const previewOnly = import.meta.env.VITE_PUBLIC_PREVIEW === "true";
+const baseUrl = import.meta.env.BASE_URL;
+const imageUrl = (name: string) => baseUrl + "images/" + name;
 type User = { id: string; name: string; email: string; role: string };
 type Counselor = {
   id: string;
@@ -116,6 +119,12 @@ const AppContext = createContext<{
 }>({} as never);
 const useApp = () => useContext(AppContext);
 async function api<T = any>(url: string, body?: unknown): Promise<T> {
+  // A static review must never contact the live site's API or collect input.
+  if (previewOnly) {
+    throw new Error(
+      "구성 검토 페이지에서는 회원가입·신청·결제를 받지 않습니다.",
+    );
+  }
   const r = await fetch("/api" + url, {
     credentials: "same-origin",
     ...(body !== undefined
@@ -295,9 +304,11 @@ function Shell() {
       </a>
       {data.demo && (
         <div className="preview-bar">
-          미리보기{" "}
+          {previewOnly ? "구성 검토용" : "미리보기"}{" "}
           <span>
-            사진·상담사·후기는 구성용 예시이며, 실제 결제가 발생하지 않습니다.
+            {previewOnly
+              ? "사진·상담사·후기는 가상 예시입니다. 회원가입·상담 신청·결제는 받지 않습니다."
+              : "사진·상담사·후기는 구성용 예시이며, 실제 결제가 발생하지 않습니다."}
           </span>
         </div>
       )}
@@ -349,8 +360,14 @@ function Shell() {
           <Route path="/guide" element={<Guide />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
-          <Route path="/login" element={<Auth />} />
-          <Route path="/signup" element={<Auth signup />} />
+          <Route
+            path="/login"
+            element={previewOnly ? <PreviewUnavailable /> : <Auth />}
+          />
+          <Route
+            path="/signup"
+            element={previewOnly ? <PreviewUnavailable /> : <Auth signup />}
+          />
           <Route
             path="/request"
             element={
@@ -391,7 +408,10 @@ function Shell() {
               </Protected>
             }
           />
-          <Route path="/payment/fail" element={<PaymentFailure />} />
+          <Route
+            path="/payment/fail"
+            element={previewOnly ? <PreviewUnavailable /> : <PaymentFailure />}
+          />
           <Route path="/privacy" element={<Policy privacy />} />
           <Route path="/terms" element={<Policy />} />
           {[
@@ -530,7 +550,7 @@ function Home() {
         </div>
         <div className="hero-image">
           <img
-            src="/images/arunia-hero.jpg"
+            src={imageUrl("arunia-hero.jpg")}
             alt="햇살이 들어오는 공간에서 편안하게 대화하는 두 사람의 콘셉트 사진"
             fetchPriority="high"
           />
@@ -718,7 +738,7 @@ function ServiceCards() {
           <div className="service-image">
             <img
               loading="lazy"
-              src={"/images/" + s.image}
+              src={imageUrl(s.image)}
               alt={s.name + " 콘셉트 사진"}
             />
             <span>{s.tag}</span>
@@ -1071,7 +1091,7 @@ function Programs() {
         {programs.map(([title, text, img], i) => (
           <article className="program-card" key={title}>
             <img
-              src={"/images/" + img}
+              src={imageUrl(img)}
               alt={title + " 프로그램 콘셉트"}
               loading="lazy"
             />
@@ -1189,7 +1209,7 @@ function About() {
     <>
       <section className="about-hero">
         <img
-          src="/images/arunia-everyday-recovery.jpg"
+          src={imageUrl("arunia-everyday-recovery.jpg")}
           alt="녹음이 있는 산책길을 함께 걷는 두 사람의 콘셉트 사진"
         />
         <div>
@@ -1276,6 +1296,26 @@ function Reviews() {
     </div>
   );
 }
+function PreviewUnavailable() {
+  return (
+    <div className="container page narrow">
+      <PageIntro label="A LITTLE PREVIEW" title="지금은 둘러보는 시간이에요.">
+        이 페이지는 어른이아의 새로운 디자인과 구성을 함께 살펴보는 공간입니다.
+      </PageIntro>
+      <Notice>
+        회원가입·로그인·상담 신청·결제는 아직 이 검토 페이지에서 제공하지
+        않습니다. 이름이나 연락처를 입력할 필요 없이 서비스와 상담사 소개를
+        둘러보세요.
+      </Notice>
+      <div className="form-actions">
+        <Button to="/services">서비스 살펴보기</Button>
+        <Button to="/" light>
+          홈으로 돌아가기
+        </Button>
+      </div>
+    </div>
+  );
+}
 function Protected({
   children,
   admin = false,
@@ -1285,6 +1325,7 @@ function Protected({
 }) {
   const { data } = useApp();
   const l = useLocation();
+  if (previewOnly) return <PreviewUnavailable />;
   if (!data.user)
     return (
       <Navigate
@@ -1338,7 +1379,7 @@ function Auth({ signup = false }: { signup?: boolean }) {
     <div className="auth-page container">
       <div className="auth-story">
         <img
-          src="/images/arunia-self-understanding.jpg"
+          src={imageUrl("arunia-self-understanding.jpg")}
           alt="마음을 정리할 수 있는 따뜻한 책상 콘셉트"
         />
         <div>
@@ -2129,8 +2170,9 @@ function Checkout() {
                   await widgets.requestPayment({
                     orderId: o.id,
                     orderName: "어른이아 " + serviceNames[r.data.service],
-                    successUrl: window.location.origin + "/payment/success",
-                    failUrl: window.location.origin + "/payment/fail",
+                    successUrl:
+                      window.location.origin + baseUrl + "payment/success",
+                    failUrl: window.location.origin + baseUrl + "payment/fail",
                   });
                 } catch (e) {
                   setMessage((e as Error).message);
@@ -2679,7 +2721,9 @@ function App() {
   const [data, setData] = useState<Bootstrap | null>(null),
     [error, setError] = useState("");
   const refresh = async () => {
-    const v = await api<Bootstrap>("/bootstrap");
+    const v: Bootstrap = previewOnly
+      ? (await import("./preview-data")).default
+      : await api<Bootstrap>("/bootstrap");
     setData(v);
     setError("");
   };
@@ -2735,7 +2779,7 @@ class AppErrorBoundary extends React.Component<
           <p className="muted">
             화면을 불러오는 중 문제가 생겼어요. 아래에서 다시 시작해 주세요.
           </p>
-          <a className="button" href="/">
+          <a className="button" href={baseUrl}>
             홈 다시 불러오기
           </a>
         </div>
@@ -2749,7 +2793,7 @@ class AppErrorBoundary extends React.Component<
 // before App's first render, not only after the bootstrap request completes.
 createRoot(document.getElementById("root")!).render(
   <AppErrorBoundary>
-    <BrowserRouter>
+    <BrowserRouter basename={baseUrl.replace(/\/$/, "") || "/"}>
       <App />
     </BrowserRouter>
   </AppErrorBoundary>,

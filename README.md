@@ -89,6 +89,14 @@ PR은 검토용입니다. 원격 DB와 환경 변수 없이 Vercel 자동 미리
 
 ## 일시적인 외부 공유
 
+### 고정 경로에서 디자인 검토
+
+`npm run build:review`는 `/counseling-preview/` 전용 정적 파일을 `review-dist/`에 만듭니다. 이 빌드는 가상 공개 콘텐츠만 포함하며 서버 API를 호출하지 않습니다. 로그인·회원가입·상담 신청·계정·관리자·결제 경로는 접수하지 않는다는 안내 화면으로 연결됩니다. 기존 `npm run build`와 회원·매칭·결제 서버는 그대로 유지됩니다.
+
+운영 중인 정적 홈페이지에 추가할 때는 최신 `main`의 별도 작업 공간에서 `review-dist/`의 내용만 `counseling-preview/`로 복사합니다. 해당 경로의 SPA rewrite와 `X-Robots-Tag: noindex, nofollow`만 추가하고 기존 홈 및 프로그램 페이지를 보존합니다. 이 개편 브랜치 전체를 합쳐서 운영 홈페이지를 교체하지 않습니다. 배포 커밋에는 빌드에 사용한 소스 커밋을 기록합니다.
+
+### 전체 기능의 임시 검토
+
 `server/share-preview.js`는 이미 빌드된 `dist`와 별도 `.data/shared-preview/preview.db`만 사용하는 임시 공유 진입점입니다. 실제 PG 키를 읽지 않고 항상 모의 결제로 동작하며, 기존 로컬 계정/운영 데이터와 분리됩니다. Vite 소스 서버를 공개하지 않습니다.
 
 Cloudflare Quick Tunnel이 `http://127.0.0.1:4180`을 가리키도록 실행한 뒤, 발급된 정확한 HTTPS 주소를 인자로 `node server/share-preview.js <HTTPS_ORIGIN>`을 실행합니다. 별도 계약 없이 체험하는 용도이며 노트북·공유 서버·터널이 켜져 있는 동안만 접속할 수 있습니다. 종료 시 해당 공유 서버와 터널 프로세스를 종료합니다. 접속 주소와 공유 서버 PID는 Git에서 제외된 `.data/shared-preview/share.json`에 기록됩니다.
