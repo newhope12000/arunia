@@ -1,84 +1,86 @@
-# 어른이아 Vercel · Google 로그인 연결 체크리스트
+# 어른이아 Vercel 배포 · Google 로그인 연결 체크리스트
 
-기준일: 2026-09-22. 먼저 공개 디자인 검토 화면을 배포하고, 이후 서버·Google 로그인 연결을 완료하기 위한 항목입니다. 아래 배포 설정은 저장소에 준비한 상태이며 실제 배포 완료를 뜻하지 않습니다.
+기준일: 2026-09-22. 저장소의 배포 구성은 **기존 사이트를 루트에 유지하고, 개편안을 `/preview/`에서 읽기 전용으로 제공**하는 방식입니다. 아래 확인 항목은 실제 배포 결과를 검증하기 위한 것이며, 코드 설정만으로 검증 완료를 뜻하지 않습니다.
 
-## 현재 확인한 상태
+## 이번 배포 범위
 
-| 항목 | 상태 |
+| 항목 | 구성 |
 | --- | --- |
-| Vercel 관리 접근 | 현재 브라우저는 ELIM Hobby 계정이며 ELIM 팀만 표시됩니다. 확인된 프로젝트는 `playnote`뿐이므로 `arunia` 관리 권한은 아직 확보하지 못했습니다. 계정 식별 정보: `elim2`, `elimeo1215-8334`. |
-| 새 Google 프로젝트 | `arunia-login-20260922`에 앱 이름 `어른이아`와 새 웹 OAuth 클라이언트 생성 완료. 관련 정책 동의도 완료했습니다. |
-| 로컬 Google 로그인 | 로컬 `.env`를 새 프로젝트의 클라이언트 키로 전환했습니다. 기존 `we-it` 클라이언트로는 로그인 검증에 성공했으며, 새 클라이언트로의 사용자 로그인 재검증은 아직 남아 있습니다. |
-| 등록된 콜백 URI | 새 클라이언트의 다운로드한 설정 JSON에서 `http://localhost:4173/api/auth/google/callback`과 `https://arunia.vercel.app/api/auth/google/callback` 두 주소를 확인했습니다. |
-| Vercel 로그인 연결 | Vercel 환경 변수 등록과 배포는 아직 완료하지 않았습니다. 관리 접근 확보, 원격 DB 준비 및 실제 로그인 검증이 남아 있습니다. |
+| 기존 홈페이지 | `https://arunia.vercel.app/` — 기존 정적 사이트 |
+| 새 개편안 | `https://arunia.vercel.app/preview/` — 읽기 전용 디자인 검토 |
+| 빌드 명령 / 결과 디렉터리 | `npm run build:review` / `review-dist` |
+| 기존 페이지·자산 | `legacy/`의 공개 정적 파일을 결과물 루트에 배치하고 원래 URL 유지 |
+| 개편안 결과물 | `review-dist/preview/`에 배치, 이미지·메뉴 경로도 `/preview/` 기준 |
+| SPA 라우팅 | `/preview/`의 앱 화면 경로만 `/preview/index.html`로 연결 |
+| 검색 차단 | `/preview/`에만 `X-Robots-Tag: noindex, nofollow`와 robots 차단 적용 |
+| 서버 API | `ARUNIA_REVIEW_ONLY=true`로 차단 |
+| Google 로그인·접수·결제 | 공개 개편안에서 비활성화 |
+| 로컬 전체 앱 | 기존 `npm run dev`, `npm run build` 동작 유지 |
 
-## 이번 배포: DB 없는 공개 검토 화면
+`/growth.html`, `/programs.html` 등 기존 페이지와 이미지·스타일·스크립트는 원래 경로를 유지합니다. 이전 `/archive/:path*` 링크는 같은 파일의 루트 주소 `/:path*`로 연결합니다. 기존 사이트의 외부 신청 링크와 안내 콘텐츠를 보존하는 것과 새 상담 앱의 접수를 활성화하는 것은 별개입니다.
 
-`vercel.json`의 기본값을 `npm run build:review` / `review-dist`로 설정했습니다. 이 빌드는 루트(`/`)에서 가상 공개 콘텐츠로 화면을 표시하며, Google 로그인·회원가입·상담 신청·결제는 비활성화합니다. DB나 Google 키가 없어도 공개 화면을 검토할 수 있습니다.
+공개 개편안은 서버 API를 호출하지 않습니다. `/api` 요청은 DB나 앱을 초기화하기 전에 `503`과 `code: "REVIEW_ONLY"`를 반환합니다. 이 응답은 이번 배포에서 의도된 동작이며, 기존 Vercel 환경 변수에 서버 인증키가 있더라도 로그인·접수·결제를 시작하지 않습니다.
 
-서버에는 `ARUNIA_REVIEW_ONLY=true`를 명시했습니다. 모든 API 요청은 DB나 앱을 초기화하기 전에 `503`과 `code: "REVIEW_ONLY"`를 반환하므로, 기존 Vercel 환경 변수에 서버 키가 있어도 접수를 시작하지 않습니다. 이 응답은 공개 검토 배포의 의도된 동작이며, 화면은 API를 호출하지 않습니다.
+## 1. 공개 배포 확인
 
-정적 `robots.txt`는 `Disallow: /`를 반환하고, Vercel의 모든 경로에 `X-Robots-Tag: noindex, nofollow`를 설정합니다. 기존 `legacy/`의 HTML·CSS·JS·이미지·폰트는 `review-dist/archive/`에 함께 복사하며 숨김 파일·설정 파일·이전 robots 및 sitemap은 포함하지 않습니다. `/growth.html`, `/growth_1.html`, `/growth_2.html`, `/growth_4.html`, `/leadership1.html`, `/programs.html`은 각각 같은 이름의 `/archive/` 페이지로 임시 리디렉션합니다. 기존 프로그램·공모전 안내와 외부 신청 링크의 접근 경로를 보존하는 목적이며, 새 상담 앱의 접수 기능과는 별개입니다. 로컬 `npm run dev`와 전체 앱 `npm run build` 명령은 그대로 유지합니다.
+- [ ] `arunia.vercel.app`의 실제 Vercel 프로젝트와 연결 저장소·배포 브랜치·프로젝트 루트를 확인합니다.
+- [ ] 빌드 명령이 `npm run build:review`, 결과 디렉터리가 `review-dist`인지 확인합니다.
+- [ ] 서버의 `ARUNIA_REVIEW_ONLY`가 `true`인지 확인합니다. 이번 배포에는 원격 DB나 Google 비밀키 등록이 필요하지 않습니다.
+- [ ] `/`에서 기존 홈페이지가 표시되고 기존 메뉴·이미지·프로그램 상세 주소가 유지되는지 확인합니다.
+- [ ] `/preview/`에서 새 화면이 표시되고, 메뉴 이동 후에도 `/preview/` 안에 머무는지 확인합니다.
+- [ ] `/preview/counselors/...`, `/preview/counseling/...` 상세 페이지에 직접 접속하거나 새로고침해도 화면이 열리는지 확인합니다.
+- [ ] 루트 전체에 SPA rewrite를 적용하지 않았는지 확인합니다. 존재하지 않는 루트 페이지가 새 개편안으로 바뀌어서는 안 됩니다.
+- [ ] `/preview/`에만 검색 차단 헤더를 적용하고, 루트 전체를 새로 검색 차단하지 않았는지 확인합니다.
+- [ ] `/preview/login`의 Google 버튼과 상담 신청·결제 진입이 실제 계정 생성이나 접수로 이어지지 않는지 확인합니다.
+- [ ] `/api/health`·`/api/auth/google/start` 등 API 요청이 읽기 전용 응답으로 차단되는지 확인합니다. 이번 배포에서는 정상 API 응답이나 `googleEnabled=true`를 기대하지 않습니다.
+- [ ] 환경 파일·소스·비밀 설정과 존재하지 않는 정적 자산이 공개되지 않는지 확인합니다.
 
-## 1. 연결할 Vercel 프로젝트 확보
+## 2. Google 설정의 현재 상태
 
-- [ ] `arunia.vercel.app`을 소유한 Vercel 계정·팀에서 해당 프로젝트를 열 수 있는지 확인합니다.
-- [ ] 프로젝트 설정과 환경 변수를 관리하고 배포할 수 있는 권한을 확보합니다.
-- [ ] 연결된 GitHub 저장소·배포 브랜치·프로젝트 루트가 실제 어른이아 앱을 가리키는지 확인합니다. 현재 확인된 다른 프로젝트 `playnote`에 어른이아 설정을 넣지 않습니다.
-
-## 2. 이후 로그인 연결: 서버 빌드와 원격 DB 준비
-
-- [ ] Node.js 런타임을 **22.12 이상**으로 설정합니다. 프로젝트의 `engines`는 `>=22.12.0`이고, 현재 설치된 `google-auth-library@11.1.0`도 Node `>=22`를 요구합니다.
-- [ ] 아래 전환 항목에 따라 빌드 명령 `npm run build`, 결과 디렉터리 `dist`, API 진입점 `api/index.js`인 전체 앱으로 전환합니다. 현재 API rewrite와 함수 제한 시간 60초는 유지되어 있습니다.
-- [ ] 신규 `server/google-auth.js`, `shared/counseling-categories.json` 및 의존성 변경을 포함한 서버 소스가 배포 대상에 들어가는지 확인합니다.
-- [ ] 검토용 **원격 libSQL/Turso DB**와 접근 토큰을 준비합니다. 토큰은 테이블 생성과 데이터 읽기·쓰기가 가능해야 합니다.
-- [ ] 실제 운영 DB와 검토용 DB를 분리합니다. 사용자, 세션, OAuth state와 가입 동의 기록은 이 DB에 저장됩니다. 실제 Google 로그인은 검토 모드에서도 이름·이메일을 저장합니다.
-
-`npm run build:review`로 만든 현재 루트 정적 검토 페이지는 서버 API를 호출하지 않고 Google 로그인도 비활성화합니다. 키를 추가하는 것만으로는 로그인 기능이 생기지 않습니다.
-
-현재 서버는 `NODE_ENV=production`에서 HTTPS `APP_ORIGIN` 또는 원격 `DATABASE_URL`이 없거나 DB 주소가 `file:`이면 시작을 거부합니다. API 진입점은 이때 503을 반환하므로 로컬 SQLite 파일이나 임시 파일 DB로 대신할 수 없습니다. 서버 시작 시 필요한 테이블을 자동 생성합니다.
-
-원격 DB와 서버 환경 변수 준비 후, 전체 앱 배포로 전환할 때 필요한 설정 변경은 다음과 같습니다. 설정 실패 시 정적 검토 화면으로 자동 전환하는 동작은 없습니다.
-
-1. `vercel.json`의 `buildCommand`를 `npm run build`, `outputDirectory`를 `dist`로 바꿉니다.
-2. `vercel.json`의 `env.ARUNIA_REVIEW_ONLY`를 `"false"`로 바꿉니다. Vercel 프로젝트 환경에도 같은 변수가 등록되어 있다면 해당 배포 환경의 값을 함께 `false`로 맞춥니다.
-3. `vercel.json`의 `rewrites` 첫 항목에 `{ "source": "/robots.txt", "destination": "/api/robots" }`를 복원합니다. 전체 앱은 검토 여부에 따라 서버에서 robots 응답을 제공합니다.
-4. 로그인 기능 검토 중에는 전체 경로의 `X-Robots-Tag: noindex, nofollow` 헤더를 유지합니다. 실제 운영 정보가 확정되고 정식 검색 노출을 시작할 때만 해당 전역 헤더를 제거합니다. `APP_DEMO=true`인 동안 앱의 검색 차단은 계속 유지됩니다.
-5. 아래 환경 변수를 적용하고 새로 배포해 검증합니다. 원격 DB·Origin·Google 설정을 빠뜨리면 API는 오류를 반환하며 로그인은 열리지 않습니다.
-
-현재 `/archive/` 복사는 `build:review`에 포함됩니다. 전체 앱으로 전환할 때도 기존 URL을 유지하려면 동일한 정적 아카이브를 `dist/archive/`에 복사하는 빌드 단계를 함께 마련하고 임시 리디렉션을 유지해야 합니다. 출력물 없이 리디렉션만 남기지 않습니다.
-
-## 3. Google 클라이언트와 Vercel 환경 변수 등록
-
-- [x] 새 프로젝트에서 앱 이름 `어른이아`와 **웹 애플리케이션 OAuth 클라이언트**를 생성하고 관련 정책 동의를 완료했습니다.
-- [x] 새 클라이언트에 `https://arunia.vercel.app/api/auth/google/callback`과 `http://localhost:4173/api/auth/google/callback`이 등록된 것을 다운로드한 설정 JSON으로 확인했습니다.
-- [x] 로컬 `.env`를 새 프로젝트의 클라이언트 키로 전환했습니다.
-- [ ] 새 클라이언트로 로컬 Google 로그인을 다시 검증합니다. 기존 클라이언트의 성공 결과와 구분합니다.
-- [ ] 아래 값을 실제 배포할 Vercel 환경에 등록합니다. 로컬 `.env`는 자동으로 Vercel에 전달되지 않습니다.
-
-| 환경 변수 | 검토 단계 값 또는 준비할 값 |
+| 항목 | 확인한 상태 |
 | --- | --- |
-| `APP_ORIGIN` | `https://arunia.vercel.app` — 마지막 `/`나 추가 경로 없이 |
+| 전용 Google 프로젝트 | `arunia-login-20260922`, 앱 이름 `어른이아`, 웹 클라이언트 `어른이아 웹 로그인` 생성 완료 |
+| 기존 프로젝트 | 기존 `we-it-499305` 설정 유지 |
+| 등록된 콜백 | 새 클라이언트의 다운로드 설정에서 아래 로컬·Vercel 주소 2개 확인 |
+| 로컬 설정 | 로컬 `.env`를 새 전용 클라이언트로 전환 완료 |
+| 실제 로그인 검증 | 기존 클라이언트는 로그인·세션 유지·로그아웃 확인. 새 전용 클라이언트의 최종 사용자 확인은 대기 중 |
+| Vercel 서버 인증 | 연결하지 않음. 현재 공개 `/preview/`는 정적 검토 화면 |
+
+등록된 콜백은 다음과 같습니다.
+
+- `http://localhost:4173/api/auth/google/callback`
+- `https://arunia.vercel.app/api/auth/google/callback`
+
+Google에 Vercel 콜백을 등록했다는 사실만으로 Vercel의 로그인 서버가 활성화되지는 않습니다. 현재 `/preview/`는 화면 경로이며, 등록된 서버 콜백에 `/preview`를 임의로 붙이지 않습니다. 프로젝트·브랜드·권한 설정의 상세 내용은 [Google 로그인 연결 안내](google-login-setup.md)를 참고합니다.
+
+## 3. 후속 작업: 서버 로그인 공개를 준비할 때
+
+아래 항목은 이번 배포에서 실행하지 않는 후속 작업입니다. **현재 빌드 명령만 `npm run build`로 바꾸면 전체 앱이 루트에 생성되어 기존 홈페이지를 교체합니다.** 기존 루트와 `/preview/`를 유지하는 요구가 있는 동안에는 그 방식으로 전환하지 않습니다.
+
+- [ ] 실제 로그인 기능을 어느 경로에서 제공할지 확정하고, 기존 홈페이지를 보존하는 빌드·정적 자산·API 라우팅을 준비합니다.
+- [ ] `/preview/`에서 기능을 제공한다면 로그인 시작·성공·오류 후 복귀, 계정·신청 화면 경로까지 해당 접두사에 맞춰 검증합니다. 현재 전체 서버의 `/login`·`/account` 동작을 그대로 공개 루트에 연결하지 않습니다.
+- [ ] Node.js 런타임 **22.12 이상**과 Google 인증 라이브러리 등 서버 의존성을 준비합니다.
+- [ ] 원격 libSQL/Turso DB와 테이블 생성·읽기·쓰기 권한이 있는 접근 토큰을 준비합니다. 실제 운영 DB와 검토용 DB를 분리합니다.
+- [ ] 원격 DB에 사용자·세션·OAuth state·가입 동의 기록이 저장됨을 확인합니다. 검토용 Google 로그인도 이름·이메일을 저장합니다.
+- [ ] 아래 환경 변수를 실제 서버 배포 환경에 등록합니다. 로컬 `.env`는 Vercel에 자동으로 전달되지 않습니다.
+- [ ] 서버 공개 범위가 준비된 뒤 `ARUNIA_REVIEW_ONLY` 차단 해제와 빌드·라우팅 변경을 함께 검토합니다. 키 등록만으로 차단을 해제하지 않습니다.
+
+| 환경 변수 | 향후 서버 검토에 필요한 값 |
+| --- | --- |
+| `APP_ORIGIN` | `https://arunia.vercel.app` — 마지막 `/`나 `/preview` 경로 없이 |
 | `DATABASE_URL` | 검토용 원격 libSQL/Turso DB 주소 |
-| `DATABASE_AUTH_TOKEN` | 해당 DB의 접근 토큰 |
-| `GOOGLE_CLIENT_ID` | 연결할 어른이아 웹 OAuth 클라이언트 ID |
+| `DATABASE_AUTH_TOKEN` | 해당 DB 접근 토큰 |
+| `GOOGLE_CLIENT_ID` | 어른이아 전용 웹 OAuth 클라이언트 ID |
 | `GOOGLE_CLIENT_SECRET` | 같은 클라이언트의 비밀키 |
 | `APP_DEMO` | `true` |
-| `PAYMENT_MODE` | `disabled` 또는 모의 결제까지 검토할 때 `mock` |
-| `OPERATIONS_READY` | `false` — 사업 정보·정책·실제 운영 정보가 확정될 때까지 유지 |
-| `TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY` | 검토 단계에서는 미설정 또는 공란 |
+| `PAYMENT_MODE` | `disabled` |
+| `OPERATIONS_READY` | `false` — 실제 운영 정보 확정 전까지 유지 |
+| `TOSS_CLIENT_KEY`, `TOSS_SECRET_KEY` | 미설정 또는 공란 |
 
-`DATABASE_AUTH_TOKEN`과 `GOOGLE_CLIENT_SECRET`은 서버 비밀 설정에만 보관하며 `VITE_` 접두사를 붙이지 않습니다. 실제 값은 Git·문서·공개 파일에 기록하지 않습니다. 별도 `SESSION_SECRET`은 현재 구현에서 사용하지 않습니다.
+서버 비밀에는 `VITE_` 접두사를 붙이지 않고 실제 값을 Git·문서·공개 파일에 기록하지 않습니다. 별도 `SESSION_SECRET`은 현재 구현에서 사용하지 않습니다.
 
-Vercel의 Production/Preview 배포 환경과 앱의 검토 모드는 서로 다릅니다. 배포된 Node 서버는 production 조건을 충족해야 하지만, 서비스 검토는 `APP_DEMO=true`로 유지할 수 있습니다. 현재 Google 버튼은 키가 있고 `APP_DEMO=true` 또는 `OPERATIONS_READY=true`이면 활성화됩니다. 검토 로그인만을 위해 `OPERATIONS_READY`를 켤 필요는 없습니다.
+전체 서버는 `NODE_ENV=production`에서 HTTPS `APP_ORIGIN`이나 원격 DB가 없으면 시작하지 않습니다. 파일 SQLite는 운영 DB로 사용할 수 없습니다. 서버가 실제로 연결된 뒤에만 `/api/health`와 `/api/bootstrap`의 `auth.googleEnabled`를 확인합니다. 실제 로그인·새로고침 후 세션 유지·로그아웃·인증 취소·기존 이메일 계정 충돌을 배포 주소에서 검증해야 하며, 로컬 성공이나 자동 테스트로 대신하지 않습니다.
 
-## 4. 새 배포에서 확인
+환경 변수를 변경한 뒤에는 해당 배포 환경에 새로 배포해야 합니다. [Vercel 환경 변수 공식 문서](https://vercel.com/docs/environment-variables)
 
-- [ ] 환경 변수 적용 대상을 선택한 뒤 새로 배포합니다. 환경 변수 변경은 이전 배포에 소급 적용되지 않습니다. [Vercel 환경 변수 공식 문서](https://vercel.com/docs/environment-variables)
-- [ ] 공유할 실제 주소와 `APP_ORIGIN`, Google의 등록 콜백 URI가 일치하는지 확인합니다. 위 설정으로는 `arunia.vercel.app`에서 로그인해야 하며, 다른 자동 Preview 주소의 POST 요청은 Origin 검사에서 거부될 수 있습니다.
-- [ ] `/api/health`가 정상 응답하고 `/api/bootstrap`의 `auth.googleEnabled`가 `true`인지 확인합니다.
-- [ ] `/login`에서 Google 계정 선택 → 어른이아 콜백 → 계정 화면 이동을 확인합니다.
-- [ ] 새로고침 후 로그인 유지, 로그아웃 후 재로그인, Google 화면에서 취소했을 때 안내를 확인합니다.
-- [ ] Google 전용 계정의 이메일과 같은 기존 로컬 회원이 있으면 자동 연결하지 않는 현재 동작을 확인합니다. 이 경우 기존 로그인 방식을 사용해야 합니다.
-
-세션 쿠키와 OAuth state 쿠키는 현재 구현에서 `HttpOnly`, `SameSite=Lax`, HTTPS `Secure`를 사용합니다. 세션과 일회성 OAuth state가 원격 DB에 저장되어 여러 Vercel 함수 인스턴스에서도 이어져야 합니다. 로컬 로그인 성공과 자동 테스트 통과는 이 배포 검증을 대신하지 않습니다.
+공식 고객 지원 연락처·개인정보처리방침·이용약관 및 Google 브랜드 공개·검증은 별도 준비 항목입니다. 서버 로그인 공개와 실제 상담 접수·결제 시작도 각각 검토합니다.
