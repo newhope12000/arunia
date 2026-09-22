@@ -1416,10 +1416,10 @@ function Programs() {
           <h2 id="existing-programs">기존 프로그램과 공모전도 확인해 보세요.</h2>
           <p>기존 프로그램의 모집 일정과 상세 안내를 확인할 수 있어요.</p>
           <div className="existing-program-links">
-            <a href="/archive/programs.html" className="text-link">
+            <a href="/programs.html" className="text-link">
               프로그램·공모전 안내 <ArrowUpRight size={17} />
             </a>
-            <a href="/archive/growth_4.html" className="text-link">
+            <a href="/growth_4.html" className="text-link">
               커리어 지원 프로그램 <ArrowUpRight size={17} />
             </a>
           </div>

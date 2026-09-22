@@ -1,8 +1,8 @@
 # 어른이아 — 마음을 만나는 플랫폼
 
-서울·경기 2030을 위한 상담 전문가 매칭 서비스. 기존 정적 페이지를 밝은 사진 중심의 React 화면과 회원·신청·운영자 배정·결제 API로 개편했습니다.
+기존 어른이아 정적 사이트를 루트(`/`)에서 제공하고, 서울·경기 2030을 위한 상담 전문가 매칭 서비스 개편안은 `/preview/`에서 별도로 검토합니다. 개편안에는 React 화면과 로컬에서 실행할 수 있는 회원·신청·운영자 배정·결제 API가 포함되어 있습니다.
 
-현재 기본 실행 환경은 **미리보기**입니다. 상담사 6명, 후기 10개는 명확히 표시한 가상 콘텐츠이며 콘셉트 사진 5장과 가상 인물 사진 6장은 AI로 새로 제작한 콘셉트 이미지입니다. 실제 상담사 사진, 실제 후기 또는 협업 실적이 아닙니다.
+공개된 개편안은 **읽기 전용 미리보기**입니다. 상담사 6명, 후기 10개는 명확히 표시한 가상 콘텐츠이며 콘셉트 사진 5장과 가상 인물 사진 6장은 AI로 새로 제작한 콘셉트 이미지입니다. 실제 상담사 사진, 실제 후기 또는 협업 실적이 아닙니다. 공개 미리보기에서는 Google 로그인·상담 접수·결제를 활성화하지 않습니다.
 
 ## 시작하기
 
@@ -14,7 +14,7 @@ cp .env.example .env
 npm run dev
 ```
 
-`http://localhost:4173`에서 확인합니다. `.env`와 `.data/`는 Git에 포함되지 않습니다. 기본 DB는 로컬 SQLite입니다. 개발 중 `server/` 변경 시 서버를 다시 시작하세요.
+`http://localhost:4173`에서 개편안의 전체 로컬 앱을 확인합니다. 이 개발 명령은 공개 사이트의 기존 홈페이지와 `/preview/`를 합치는 배포 빌드와 별개이며, 기존 동작을 유지합니다. `.env`와 `.data/`는 Git에 포함되지 않습니다. 기본 DB는 로컬 SQLite입니다. 개발 중 `server/` 변경 시 서버를 다시 시작하세요.
 
 ```sh
 npm run build
@@ -39,7 +39,7 @@ npm test
 
 ## Google 로그인
 
-기본 `/login`과 `/signup`은 Google로 시작하는 화면입니다. 새 이용자는 동의 체크 후 Google의 인증된 계정으로 가입하며, 기존 Google 회원은 같은 회원 계정으로 로그인합니다. 기존 이메일 회원과 운영자는 `/login/email`을 사용합니다. 이메일이 같아도 기존 계정을 Google 계정과 자동으로 합치지 않습니다.
+전체 로컬 앱의 `/login`과 `/signup`은 Google로 시작하는 화면입니다. 새 이용자는 동의 체크 후 Google의 인증된 계정으로 가입하며, 기존 Google 회원은 같은 회원 계정으로 로그인합니다. 기존 이메일 회원과 운영자는 `/login/email`을 사용합니다. 이메일이 같아도 기존 계정을 Google 계정과 자동으로 합치지 않습니다. 공개 `/preview/login`에서는 버튼을 비활성화하며, Vercel의 Google 로그인 서버는 연결하지 않았습니다.
 
 `.env` 또는 서버 환경 변수에 `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`을 등록하고 Google의 웹 OAuth 클라이언트에 `APP_ORIGIN` + `/api/auth/google/callback`을 정확히 등록합니다. 값이 없거나 운영 준비가 완료되지 않은 경우 버튼은 비활성화됩니다. 비밀키는 서버에서만 사용하며 정적 검토 빌드에 포함하지 않습니다. Google 전용 회원에게는 사이트 비밀번호 변경을 제공하지 않습니다.
 
@@ -78,18 +78,19 @@ server/content.json       가상 후기 10개·상담사 예시 6개
 server/admin.js           운영자 계정 발급 CLI
 public/images/            콘셉트 사진 5장·가상 인물 사진 6장 (JPEG 최적화본)
 docs/image-prompts.json   이미지 제작 프롬프트
-api/index.js              Vercel Node API 진입점
-legacy/                  이전 HTML/CSS/JS 보관본 (dist에 포함되지 않음)
+api/index.js              Vercel Node API 진입점 (현재 공개 배포에서는 차단)
+legacy/                  루트에 제공하는 기존 HTML/CSS/JS와 이미지
+scripts/build-review.mjs  기존 사이트 루트 + /preview/ 개편안의 정적 배포 빌드
 tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 ```
 
-사진은 동일 파일명으로 교체할 수 있습니다. 데모 상담사 예시는 데모 서버 시작 시 콘텐츠 파일과 동기화합니다. 실제 프로필과 비활성화 상태, 회원·신청·결제 기록은 유지됩니다. 프로필 사진과 이력은 가상 예시이며, 실제 운영 전 확인된 정보로 교체하세요. 기존 HTML 주소는 새 화면으로 연결됩니다.
+사진은 동일 파일명으로 교체할 수 있습니다. 데모 상담사 예시는 데모 서버 시작 시 콘텐츠 파일과 동기화합니다. 실제 프로필과 비활성화 상태, 회원·신청·결제 기록은 유지됩니다. 프로필 사진과 이력은 가상 예시이며, 실제 운영 전 확인된 정보로 교체하세요. 공개 배포의 기존 HTML 페이지와 정적 자산은 원래 URL을 유지합니다.
 
 ## Vercel / 실제 운영 연결
 
-현재 Vercel 설정은 **루트 주소에서 새 화면을 공개하는 읽기 전용 검토 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB 없이도 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
+현재 Vercel 설정은 **루트의 기존 사이트와 `/preview/`의 새 읽기 전용 화면을 함께 제공하는 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB나 Google 인증키 없이도 두 사이트의 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
 
-전체 로그인·매칭 서버로 전환하려면 별도 원격 libSQL/Turso DB와 `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `APP_ORIGIN=https://arunia.vercel.app`, Google 인증키가 필요합니다. Vercel의 빌드 명령·결과 디렉터리·읽기 전용 설정을 함께 전환하고 재배포합니다. 운영 서버는 파일 DB로 시작하지 않습니다. 정확한 변경과 검증 순서는 [Vercel 연결 체크리스트](docs/vercel-google-login-checklist.md)에 정리했습니다.
+이후 로그인·매칭 서버를 공개하려면 원격 libSQL/Turso DB와 서버 환경 변수, 실제 계정 검증이 필요합니다. 기존 루트를 보존하면서 `/preview/`에 서버 기능을 연결하려면 앱과 인증 후 복귀 경로까지 별도로 준비해야 합니다. 현재 설정에서 빌드 명령만 전체 앱용으로 바꾸면 기존 루트를 다시 교체하므로, 단순 설정 변경으로 운영을 활성화하지 않습니다. 배포 범위와 후속 준비 항목은 [Vercel 연결 체크리스트](docs/vercel-google-login-checklist.md)에 정리했습니다.
 
 정식 공개 전에 확정할 항목:
 
@@ -104,13 +105,13 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ## 일시적인 외부 공유
 
-### 기본 주소에서 디자인 검토
+### 기존 홈페이지와 별도 개편안 검토
 
-`npm run build:review`는 기본 경로 `/`에서 열리는 정적 파일을 `review-dist/`에 만듭니다. 더 이상 `/counseling-preview/` 접두사를 사용하지 않습니다. 모든 메뉴와 이미지 경로도 루트 기준입니다. 이 빌드는 가상 공개 콘텐츠만 포함하며 서버 API를 호출하지 않습니다. 로그인·가입 페이지에서는 비활성화된 Google 버튼과 연결 준비 안내를 보여주며, 상담 신청·계정·관리자·결제 경로는 접수하지 않는다는 안내 화면으로 연결됩니다. 기존 `npm run build`는 회원·매칭·결제 서버와 사용하는 전체 앱을 생성합니다.
+`npm run build:review`는 기존 `legacy/` 정적 사이트를 `review-dist/` 루트에, 새 개편안을 `review-dist/preview/`에 만듭니다. 기존 홈페이지는 `https://arunia.vercel.app/`, 개편안은 `https://arunia.vercel.app/preview/`에서 확인하는 구성입니다. `/growth.html`, `/programs.html` 등 기존 페이지는 원래 주소를 유지하며 `/archive/`로 옮기지 않습니다.
 
-정적 호스팅에는 `review-dist/`만 업로드하고 `/counselors/...`, `/counseling/...` 등의 공개 화면 경로를 `index.html`로 연결합니다. 존재하지 않는 자산 및 `/api`, 소스, 환경 설정 파일은 공개하지 않습니다. 검토 단계에는 `X-Robots-Tag: noindex, nofollow`를 유지합니다.
+새 개편안의 메뉴와 이미지 경로는 `/preview/` 기준입니다. 이 화면은 가상 공개 콘텐츠만 포함하며 서버 API를 호출하지 않습니다. 로그인·가입 페이지에서는 비활성화된 Google 버튼과 연결 준비 안내를 보여주며, 상담 신청·계정·관리자·결제 경로는 접수하지 않는다는 안내 화면으로 연결됩니다. 기존 `npm run build`는 로컬 전체 앱을 생성하는 별도 명령입니다.
 
-이번 개편안은 기본 주소의 메인 화면을 교체합니다. 최신 운영 프로그램·공모전 페이지와 기존 이미지·스타일은 `/archive/`에 보존하고, 기존 프로그램 URL은 해당 페이지로 연결합니다. 새 프로그램 페이지에서도 기존 안내를 열 수 있습니다. 종전 슬러그 전용 PR은 이 루트 개편으로 대체됩니다. 화면 공개와 실제 상담 서비스 운영 시작은 별도입니다.
+정적 호스팅에는 `review-dist/`를 업로드합니다. `/preview/counselors/...`, `/preview/counseling/...` 등 개편안의 화면 경로에만 `/preview/index.html`로 연결하는 SPA 규칙을 적용합니다. 루트 전체를 새 앱으로 연결하지 않습니다. `X-Robots-Tag: noindex, nofollow`와 robots의 새 검색 차단 범위도 `/preview/`에 한정하며, 기존 홈페이지 전체를 검색 차단하지 않습니다. 존재하지 않는 자산·소스·환경 설정 파일은 공개하지 않고 `/api`는 읽기 전용 배포 설정으로 차단합니다.
 
 카테고리 참고 자료는 `docs/counseling-categories-research.md`, 가상 인물 이미지 제작 기록은 `docs/counselor-image-prompts.json`에서 확인합니다. 푸터의 사업자 정보는 실제처럼 만든 번호나 주소 없이 `등록 예정`으로 표시했습니다.
 
