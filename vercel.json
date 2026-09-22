@@ -11,33 +11,8 @@
   },
   "redirects": [
     {
-      "source": "/growth.html",
-      "destination": "/archive/growth.html",
-      "permanent": false
-    },
-    {
-      "source": "/growth_1.html",
-      "destination": "/archive/growth_1.html",
-      "permanent": false
-    },
-    {
-      "source": "/growth_2.html",
-      "destination": "/archive/growth_2.html",
-      "permanent": false
-    },
-    {
-      "source": "/growth_4.html",
-      "destination": "/archive/growth_4.html",
-      "permanent": false
-    },
-    {
-      "source": "/leadership1.html",
-      "destination": "/archive/leadership1.html",
-      "permanent": false
-    },
-    {
-      "source": "/programs.html",
-      "destination": "/archive/programs.html",
+      "source": "/archive/:path*",
+      "destination": "/:path*",
       "permanent": false
     }
   ],
@@ -47,13 +22,13 @@
       "destination": "/api"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/preview/:path*",
+      "destination": "/preview/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/preview/:path*",
       "headers": [
         {
           "key": "X-Robots-Tag",
