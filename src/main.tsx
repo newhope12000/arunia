@@ -1411,6 +1411,20 @@ function Programs() {
       <PageIntro label="GROW TOGETHER" title="함께라서 가능한 작은 변화.">
         마음을 알아가는 시간에서, 관계와 일상으로 한 걸음씩.
       </PageIntro>
+      {previewOnly && (
+        <section className="panel space-note" aria-labelledby="existing-programs">
+          <h2 id="existing-programs">기존 프로그램과 공모전도 확인해 보세요.</h2>
+          <p>기존 프로그램의 모집 일정과 상세 안내를 확인할 수 있어요.</p>
+          <div className="existing-program-links">
+            <a href="/archive/programs.html" className="text-link">
+              프로그램·공모전 안내 <ArrowUpRight size={17} />
+            </a>
+            <a href="/archive/growth_4.html" className="text-link">
+              커리어 지원 프로그램 <ArrowUpRight size={17} />
+            </a>
+          </div>
+        </section>
+      )}
       <Notice>
         아래는 준비 중인 프로그램 방향입니다. 모집 중인 일정이나 확정된 기관
         연계를 의미하지 않습니다.

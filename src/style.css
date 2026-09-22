@@ -1172,6 +1172,11 @@ footer {
 .space-note h2 {
   font-size: 25px;
 }
+.existing-program-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+}
 .about-hero {
   height: 500px;
   position: relative;

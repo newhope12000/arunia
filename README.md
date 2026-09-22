@@ -87,9 +87,9 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ## Vercel / 실제 운영 연결
 
-기존 Vercel 구조를 유지할 수 있도록 설정했습니다. 별도 원격 libSQL/Turso DB가 필요하며 `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, 정확한 `APP_ORIGIN=https://…`를 해당 Vercel 환경 변수에 등록합니다. 운영 환경은 파일 DB로 시작하지 않습니다. 미리보기와 운영 DB 및 결제 키는 분리하세요.
+현재 Vercel 설정은 **루트 주소에서 새 화면을 공개하는 읽기 전용 검토 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB 없이도 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
 
-PR은 검토용입니다. 원격 DB와 환경 변수 없이 Vercel 자동 미리보기가 생성되면 API가 준비되지 않아 화면이 열리지 않을 수 있습니다. 로컬 미리보기는 별도 DB 없이 실행됩니다. 코드만 합치는 것으로 실제 운영 전환이 완료되지는 않습니다.
+전체 로그인·매칭 서버로 전환하려면 별도 원격 libSQL/Turso DB와 `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `APP_ORIGIN=https://arunia.vercel.app`, Google 인증키가 필요합니다. Vercel의 빌드 명령·결과 디렉터리·읽기 전용 설정을 함께 전환하고 재배포합니다. 운영 서버는 파일 DB로 시작하지 않습니다. 정확한 변경과 검증 순서는 [Vercel 연결 체크리스트](docs/vercel-google-login-checklist.md)에 정리했습니다.
 
 정식 공개 전에 확정할 항목:
 
@@ -110,7 +110,7 @@ PR은 검토용입니다. 원격 DB와 환경 변수 없이 Vercel 자동 미리
 
 정적 호스팅에는 `review-dist/`만 업로드하고 `/counselors/...`, `/counseling/...` 등의 공개 화면 경로를 `index.html`로 연결합니다. 존재하지 않는 자산 및 `/api`, 소스, 환경 설정 파일은 공개하지 않습니다. 검토 단계에는 `X-Robots-Tag: noindex, nofollow`를 유지합니다.
 
-이번 개편은 로컬 검토용 변경이며 운영 중인 GitHub `main`이나 Vercel 메인 사이트에는 자동 반영하지 않습니다. 운영 배포 시에는 루트 파일이 기존 사이트를 교체하므로 별도 검토 후 적용해야 합니다. 종전 슬러그 전용 PR은 이전 검토안입니다.
+이번 개편안은 기본 주소의 메인 화면을 교체합니다. 최신 운영 프로그램·공모전 페이지와 기존 이미지·스타일은 `/archive/`에 보존하고, 기존 프로그램 URL은 해당 페이지로 연결합니다. 새 프로그램 페이지에서도 기존 안내를 열 수 있습니다. 종전 슬러그 전용 PR은 이 루트 개편으로 대체됩니다. 화면 공개와 실제 상담 서비스 운영 시작은 별도입니다.
 
 카테고리 참고 자료는 `docs/counseling-categories-research.md`, 가상 인물 이미지 제작 기록은 `docs/counselor-image-prompts.json`에서 확인합니다. 푸터의 사업자 정보는 실제처럼 만든 번호나 주소 없이 `등록 예정`으로 표시했습니다.
 
