@@ -7,6 +7,10 @@ export async function connect(url, authToken) {
  PRAGMA foreign_keys=ON;
  CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,email TEXT UNIQUE NOT NULL,name TEXT NOT NULL,password TEXT NOT NULL,role TEXT NOT NULL DEFAULT 'member',created TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS sessions(hash TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id),expires INTEGER NOT NULL);
+ CREATE TABLE IF NOT EXISTS oauth_identities(provider TEXT NOT NULL,subject TEXT NOT NULL,user_id TEXT NOT NULL REFERENCES users(id),created TEXT NOT NULL,PRIMARY KEY(provider,subject),UNIQUE(provider,user_id));
+ CREATE TABLE IF NOT EXISTS oauth_states(hash TEXT PRIMARY KEY,binding_hash TEXT NOT NULL,nonce TEXT NOT NULL,verifier TEXT NOT NULL,next TEXT NOT NULL,expires INTEGER NOT NULL,consented TEXT NOT NULL);
+ CREATE INDEX IF NOT EXISTS oauth_states_expiry ON oauth_states(expires);
+ CREATE TABLE IF NOT EXISTS auth_consents(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id),version TEXT NOT NULL,accepted TEXT NOT NULL,source TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);
  CREATE TABLE IF NOT EXISTS counselors(id TEXT PRIMARY KEY,data TEXT NOT NULL,demo INTEGER NOT NULL,active INTEGER NOT NULL DEFAULT 1);
  CREATE TABLE IF NOT EXISTS requests(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id),data TEXT NOT NULL,status TEXT NOT NULL,counselor_id TEXT,amount INTEGER,slot TEXT,location TEXT,venue_note TEXT,offer_expires TEXT,offer_revision TEXT,demo INTEGER NOT NULL DEFAULT 0,created TEXT NOT NULL,updated TEXT NOT NULL);

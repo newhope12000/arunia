@@ -16,6 +16,7 @@ import {
   useNavigate,
   useLocation,
   useParams,
+  useSearchParams,
   Navigate,
 } from "react-router-dom";
 import {
@@ -41,12 +42,23 @@ import {
   Plus,
   CheckCircle2,
   LockKeyhole,
+  BriefcaseBusiness,
+  Compass,
+  CloudSun,
 } from "lucide-react";
 import "./style.css";
+import SiteFooter from "./SiteFooter";
+import { counselingCategories } from "./counseling-content";
 const previewOnly = import.meta.env.VITE_PUBLIC_PREVIEW === "true";
 const baseUrl = import.meta.env.BASE_URL;
 const imageUrl = (name: string) => baseUrl + "images/" + name;
-type User = { id: string; name: string; email: string; role: string };
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  hasPassword?: boolean;
+};
 type Counselor = {
   id: string;
   name: string;
@@ -56,6 +68,17 @@ type Counselor = {
   description: string;
   fee: string;
   demo: boolean;
+  quote?: string;
+  approach?: string;
+  sessionStyle?: string;
+  suitableFor?: string[];
+  sampleBackground?: string[];
+  methods?: string[];
+  formats?: string[];
+  sessionLength?: string;
+  firstSession?: string;
+  availability?: string;
+  categoryIds?: string[];
 };
 type Review = {
   id: string;
@@ -105,6 +128,7 @@ type RequestItem = {
   member_email?: string;
 };
 type Bootstrap = {
+  auth?: { googleEnabled: boolean };
   user: User | null;
   demo: boolean;
   ready: boolean;
@@ -162,18 +186,22 @@ const statuses: Record<string, string> = {
   refund_pending: "취소 확인 중",
   failed: "결제 미승인",
 };
-const topics = [
-  "일·진로 고민",
-  "불안한 마음",
-  "관계의 어려움",
-  "나를 알고 싶어요",
-  "지친 일상",
-  "함께 이야기하고 싶어요",
+const topics = counselingCategories.map((category) => category.label);
+const categoryIcons = [
+  Sprout,
+  BriefcaseBusiness,
+  Compass,
+  CloudSun,
+  Sun,
+  Users,
+  Heart,
+  Leaf,
 ];
+const hasPortrait = (c: Counselor) => c.demo && /^counselor-0[1-6]$/.test(c.id);
 const serviceNames: Record<string, string> = {
   individual: "개인상담",
   assessment: "심리검사",
-  group: "그룹 프로그램",
+  group: "집단 프로그램",
 };
 function useLoad<T>(url: string) {
   const [value, setValue] = useState<T | null>(null),
@@ -269,7 +297,12 @@ function Shell() {
   const location = useLocation();
   useEffect(() => {
     setOpen(false);
-    window.scrollTo(0, 0);
+    const scrollFrame = window.requestAnimationFrame(() => {
+      const anchor =
+        location.hash && document.getElementById(location.hash.slice(1));
+      if (anchor) anchor.scrollIntoView();
+      else window.scrollTo(0, 0);
+    });
     const titles: Record<string, string> = {
       "/": "나다운 속도로, 함께",
       "/counselors": "상담 전문가",
@@ -278,11 +311,19 @@ function Shell() {
       "/guide": "이용 안내",
       "/about": "어른이아 소개",
       "/reviews": "상담 이야기 미리보기",
+      "/login": "구글 계정으로 시작하기",
+      "/signup": "구글 계정으로 시작하기",
+      "/login/email": "기존 이메일 계정 로그인",
       "/account": "나의 상담 여정",
       "/admin": "운영 관리",
     };
     document.title =
-      "어른이아 — " + (titles[location.pathname] || "마음을 만나는 시간");
+      "어른이아 — " +
+      (titles[location.pathname] ||
+        counselingCategories.find(
+          (item) => location.pathname === "/counseling/" + item.slug,
+        )?.label ||
+        "마음을 만나는 시간");
     let meta = document.querySelector<HTMLMetaElement>("meta[name=robots]");
     if (!meta) {
       meta = document.createElement("meta");
@@ -296,7 +337,8 @@ function Shell() {
       )
         ? "noindex,nofollow"
         : "index,follow";
-  }, [location.pathname, data.demo]);
+    return () => window.cancelAnimationFrame(scrollFrame);
+  }, [location.pathname, location.hash, data.demo]);
   return (
     <>
       <a href="#main" className="skip">
@@ -356,17 +398,16 @@ function Shell() {
           <Route path="/counselors" element={<Counselors />} />
           <Route path="/counselors/:id" element={<CounselorDetail />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/counseling/:slug" element={<CounselingDetail />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/login" element={<GoogleAuth />} />
+          <Route path="/signup" element={<GoogleAuth />} />
           <Route
-            path="/login"
+            path="/login/email"
             element={previewOnly ? <PreviewUnavailable /> : <Auth />}
-          />
-          <Route
-            path="/signup"
-            element={previewOnly ? <PreviewUnavailable /> : <Auth signup />}
           />
           <Route
             path="/request"
@@ -466,51 +507,14 @@ function Shell() {
           />
         </Routes>
       </main>
-      <footer>
-        <div className="container">
-          <div className="footer-top">
-            <div>
-              <Brand />
-              <p>
-                어른이라는 이름 앞에서,
-                <br />
-                당신의 마음은 혼자이지 않도록.
-              </p>
-            </div>
-            <div className="footer-links">
-              <Link to="/counselors">상담 전문가</Link>
-              <Link to="/guide">이용 안내</Link>
-              <Link to="/about#partnership">기관·기업 협업</Link>
-              <Link to="/privacy">개인정보 처리방침</Link>
-              <Link to="/terms">이용약관</Link>
-              {data.user?.role === "admin" && (
-                <Link to="/admin">운영 관리</Link>
-              )}
-              {data.user && (
-                <button
-                  onClick={async () => {
-                    await api("/auth/logout", {});
-                    await refresh();
-                  }}
-                >
-                  로그아웃 <LogOut size={13} />
-                </button>
-              )}
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>
-              © {new Date().getFullYear()} ARUNIA. All hearts welcome.
-            </span>
-            <span>서울·경기 · 상담 전문가 매칭 서비스</span>
-          </div>
-          <p className="fine">
-            고정 상담센터를 운영하지 않습니다. 상담 장소와 일정·비용은 예약 전에
-            함께 확인합니다.
-            {" 페이지의 사진은 AI로 제작한 콘셉트 이미지입니다."}
-          </p>
-        </div>
-      </footer>
+      <SiteFooter
+        isAdmin={data.user?.role === "admin"}
+        signedIn={Boolean(data.user)}
+        onLogout={async () => {
+          await api("/auth/logout", {});
+          await refresh();
+        }}
+      />
     </>
   );
 }
@@ -535,7 +539,7 @@ function Home() {
             당신의 이야기에 귀 기울일 상담 전문가를 만나보세요.
           </p>
           <div className="hero-buttons">
-            <Button to="/request">나에게 맞는 상담 찾기</Button>
+            <Button to="/counselors">나에게 맞는 상담사 찾기</Button>
             <Link className="text-link" to="/guide">
               처음이라면
               <ArrowRight size={17} />
@@ -589,24 +593,10 @@ function Home() {
           title="요즘, 어떤 마음으로 지내고 있나요?"
           text="딱 맞는 단어가 없어도 괜찮아요. 가까운 마음부터 골라보세요."
         />
-        <div className="concern-grid">
-          {topics.map((t, i) => {
-            const Icon = [Sprout, Sun, Heart, Leaf, Clock, Users][i];
-            return (
-              <Link
-                to={"/request?topic=" + encodeURIComponent(t)}
-                key={t}
-                className="concern"
-              >
-                <span className={"concern-icon tone-" + i}>
-                  <Icon size={26} />
-                </span>
-                <span>{t}</span>
-                <ArrowUpRight size={16} />
-              </Link>
-            );
-          })}
-        </div>
+        <CategoryCards />
+        <Link className="text-link category-help" to="/guide">
+          어떤 상담이 필요한지 아직 모르겠어요 <ArrowRight size={16} />
+        </Link>
       </section>
       <section className="cream section">
         <div className="container">
@@ -757,34 +747,75 @@ function ServiceCards() {
     </div>
   );
 }
+function CategoryCards() {
+  return (
+    <div className="topic-grid">
+      {counselingCategories.map((category, i) => {
+        const Icon = categoryIcons[i];
+        return (
+          <Link
+            key={category.slug}
+            className="topic-card"
+            to={"/counseling/" + category.slug}
+          >
+            <span className={"topic-symbol topic-tone-" + (i % 4)}>
+              <Icon size={25} strokeWidth={1.5} />
+            </span>
+            <h3>{category.label}</h3>
+            <p>{category.description}</p>
+            <span className="topic-more">
+              함께 살펴보기 <ArrowUpRight size={16} />
+            </span>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
 function CounselorCard({ c, index = 0 }: { c: Counselor; index?: number }) {
   return (
-    <Link to={"/counselors/" + c.id} className="counselor-card">
-      <div className="counselor-top">
-        <div className={"avatar avatar-" + (index % 3)}>
-          {c.name.slice(1)}
-          <Leaf size={21} />
+    <Link to={"/counselors/" + c.id} className="expert-card">
+      <div className={"expert-photo expert-tone-" + (index % 3)}>
+        {hasPortrait(c) ? (
+          <img
+            src={imageUrl(c.id + ".jpg")}
+            alt={c.name + " 가상 상담사 프로필 · AI 생성 이미지"}
+            loading="lazy"
+            width="768"
+            height="768"
+          />
+        ) : (
+          <span className="expert-initial" aria-hidden="true">
+            {c.name.slice(1)}
+            <Leaf size={26} />
+          </span>
+        )}
+        <span className="expert-label">
+          {c.demo
+            ? hasPortrait(c)
+              ? "가상 프로필 · AI 이미지"
+              : "가상 프로필"
+            : "상담 전문가"}
+        </span>
+      </div>
+      <div className="expert-card-body">
+        <div className="expert-name">
+          <h3>{c.name}</h3>
+          <span>상담사</span>
         </div>
-        <span className="subtle-tag">
-          {c.demo ? "가상 상담사" : "상담 전문가"}
-        </span>
-      </div>
-      <h3>
-        {c.name}
-        <span>상담사</span>
-      </h3>
-      <p className="counselor-description">{c.description}</p>
-      <div className="tags">
-        {c.fields.map((f) => (
-          <span key={f}>{f}</span>
-        ))}
-      </div>
-      <div className="counselor-bottom">
-        <span>
-          <MapPin size={14} />
-          {c.regions.join(" · ")}
-        </span>
-        <ArrowUpRight size={19} />
+        <p className="expert-card-quote">{c.quote || c.description}</p>
+        <div className="tags">
+          {c.fields.map((f) => (
+            <span key={f}>{f}</span>
+          ))}
+        </div>
+        <div className="expert-card-bottom">
+          <span>
+            <MapPin size={14} />
+            {c.regions.join(" · ")}
+          </span>
+          <ArrowUpRight size={20} />
+        </div>
       </div>
     </Link>
   );
@@ -825,8 +856,8 @@ function FinalCTA() {
           있는 그대로 이야기해요.
         </h2>
         <p>어른이아가 당신의 첫 대화를 함께 준비할게요.</p>
-        <Button to="/request" light>
-          나에게 맞는 상담 찾기
+        <Button to="/counselors" light>
+          나에게 맞는 상담사 찾기
         </Button>
       </div>
     </section>
@@ -851,12 +882,15 @@ function PageIntro({
 }
 function Counselors() {
   const { data } = useApp();
-  const [region, setRegion] = useState("전체"),
-    [query, setQuery] = useState("");
+  const [params, setParams] = useSearchParams();
+  const category = params.get("topic") || "";
+  const [region, setRegion] = useState("전체");
+  const [query, setQuery] = useState("");
   const rows = data.counselors.filter(
     (c) =>
       (region === "전체" || c.regions.some((r) => r.startsWith(region))) &&
-      (c.name + c.fields.join("") + c.description).includes(query),
+      (!category || c.categoryIds?.includes(category)) &&
+      (c.name + c.fields.join("") + c.description).includes(query.trim()),
   );
   return (
     <div className="container page">
@@ -864,40 +898,72 @@ function Counselors() {
         label="FIND YOUR PERSON"
         title="마음이 향하는 사람을 만나세요."
       >
-        상담 분야와 지역을 살펴보고, 나에게 맞는 만남을 시작해요.
+        어떤 고민을 나누고 싶은지, 어떤 대화가 편한지. 소개 글에서 먼저
+        만나보세요.
       </PageIntro>
       {data.demo && (
         <Notice>
-          현재 6개 프로필은 구성 확인용 가상 상담사입니다. 실제 자격과 일정을
-          등록한 뒤 정식 매칭을 열 예정입니다.
+          아래 인물·사진·이력은 구성 확인용 가상 프로필입니다. 실제 상담사의
+          정보와 일정은 정식 운영 전에 안내됩니다.
         </Notice>
       )}
-      <div className="filter-bar">
-        <label className="search-input">
-          <SlidersHorizontal size={18} />
-          <input
-            aria-label="이름 또는 상담 주제 검색"
-            placeholder="이름 또는 상담 주제 검색"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </label>
-        <div className="pills" aria-label="지역 선택">
-          {["전체", "서울", "경기"].map((r) => (
-            <button
-              aria-pressed={r === region}
-              className={r === region ? "selected" : ""}
-              onClick={() => setRegion(r)}
-              key={r}
-            >
-              {r}
-            </button>
-          ))}
+      <div className="expert-filters">
+        <p className="filter-label">어떤 이야기를 나누고 싶나요?</p>
+        <div className="pills topic-pills" aria-label="고민 주제 선택">
+          {[{ slug: "", label: "전체 주제" }, ...counselingCategories].map(
+            (item) => (
+              <button
+                key={item.slug}
+                aria-pressed={category === item.slug}
+                className={category === item.slug ? "selected" : ""}
+                onClick={() => setParams(item.slug ? { topic: item.slug } : {})}
+              >
+                {item.label}
+              </button>
+            ),
+          )}
+        </div>
+        <div className="filter-bar">
+          <label className="search-input">
+            <SlidersHorizontal size={18} />
+            <input
+              aria-label="이름 또는 상담 주제 검색"
+              placeholder="이름 또는 상담 주제 검색"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </label>
+          <div className="pills" aria-label="지역 선택">
+            {["전체", "서울", "경기"].map((r) => (
+              <button
+                key={r}
+                aria-pressed={r === region}
+                className={r === region ? "selected" : ""}
+                onClick={() => setRegion(r)}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      <p className="results-count">
-        {rows.length}개의 {data.demo ? "예시 프로필" : "상담사 프로필"}
-      </p>
+      <div className="expert-results">
+        <p className="results-count" aria-live="polite">
+          {rows.length}개의 {data.demo ? "예시 프로필" : "상담사 프로필"}
+        </p>
+        {(category || region !== "전체" || query) && (
+          <button
+            className="text-link"
+            onClick={() => {
+              setParams({});
+              setRegion("전체");
+              setQuery("");
+            }}
+          >
+            조건 초기화 <X size={14} />
+          </button>
+        )}
+      </div>
       <div className="counselor-grid">
         {rows.map((c, i) => (
           <CounselorCard key={c.id} c={c} index={i} />
@@ -927,59 +993,279 @@ function CounselorDetail() {
       </div>
     );
   return (
-    <div className="container page narrow">
+    <div className="container page expert-detail">
       <Link to="/counselors" className="back">
         <ArrowLeft size={16} />
         전문가 목록
       </Link>
       {c.demo && (
         <Notice>
-          구성 확인용 가상 상담사입니다. 실제 인물·자격·제공 일정을 뜻하지
-          않습니다.
+          구성 확인용 가상 상담사입니다. 이름·AI 사진·이력·지역·일정은 가상
+          설정이며 실제 인물이나 예약 가능 정보를 뜻하지 않습니다.
         </Notice>
       )}
-      <div className="profile">
-        <div className="avatar large">
-          {c.name.slice(1)}
-          <Leaf />
+      <section className="expert-intro">
+        <div className="expert-portrait">
+          {hasPortrait(c) ? (
+            <img
+              src={imageUrl(c.id + ".jpg")}
+              alt={c.name + " 가상 상담사 · AI 생성 이미지"}
+              width="768"
+              height="768"
+            />
+          ) : (
+            <div className="expert-initial">
+              {c.name.slice(1)}
+              <Leaf size={40} />
+            </div>
+          )}
+          {c.demo && <span>가상 인물 · AI 생성 이미지</span>}
         </div>
-        <p className="eyebrow">YOUR COUNSELOR</p>
-        <h1>
-          {c.name} <span>상담사</span>
-        </h1>
-        <p>{c.description}</p>
-        <div className="tags">
-          {c.fields.map((f) => (
-            <span key={f}>{f}</span>
-          ))}
+        <div className="expert-intro-copy">
+          <p className="eyebrow">A PERSON TO TALK TO</p>
+          <h1>
+            {c.name} <span>상담사</span>
+          </h1>
+          {c.quote && <blockquote>“{c.quote}”</blockquote>}
+          <p>{c.description}</p>
+          <div className="tags">
+            {c.fields.map((f) => (
+              <span key={f}>{f}</span>
+            ))}
+          </div>
+          <p className="expert-region">
+            <MapPin size={16} />
+            {c.regions.join(" · ")}
+            {c.demo && " (설정 지역)"}
+          </p>
+          <Button to={previewOnly ? "/guide" : "/request?counselor=" + c.id}>
+            {previewOnly
+              ? "첫 상담 과정 알아보기"
+              : c.demo
+                ? "이 프로필로 매칭 흐름 체험"
+                : "이 상담사로 매칭 신청"}
+          </Button>
         </div>
+      </section>
+      <div className="expert-detail-grid">
+        <div className="expert-story">
+          {c.suitableFor?.length ? (
+            <section>
+              <p className="eyebrow">WE CAN TALK ABOUT</p>
+              <h2>이런 마음이라면, 함께 이야기해요.</h2>
+              <ul className="expert-check-list">
+                {c.suitableFor.map((item) => (
+                  <li key={item}>
+                    <Check size={18} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          {c.approach && (
+            <section>
+              <p className="eyebrow">MY APPROACH</p>
+              <h2>저는 이렇게 함께합니다.</h2>
+              <p>{c.approach}</p>
+              {c.sessionStyle && (
+                <div className="expert-note">
+                  <MessageCircle size={22} />
+                  <div>
+                    <h3>대화를 나누는 방식</h3>
+                    <p>{c.sessionStyle}</p>
+                  </div>
+                </div>
+              )}
+              {c.methods?.length ? (
+                <div className="tags">
+                  {c.methods.map((method) => (
+                    <span key={method}>{method}</span>
+                  ))}
+                </div>
+              ) : null}
+            </section>
+          )}
+          {c.firstSession && (
+            <section>
+              <p className="eyebrow">OUR FIRST CONVERSATION</p>
+              <h2>첫 만남은 이렇게 시작해요.</h2>
+              <p>{c.firstSession}</p>
+            </section>
+          )}
+          <section>
+            <p className="eyebrow">BACKGROUND</p>
+            <h2>{c.demo ? "이력 소개 예시" : "자격과 활동 이력"}</h2>
+            {c.sampleBackground?.length ? (
+              <ul className="expert-background">
+                {c.sampleBackground.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>{c.qualifications}</p>
+            )}
+            {c.demo && (
+              <p className="fine">
+                실제 학력·자격·활동 경력이 아닙니다. 정식 프로필에는 확인된
+                이력과 자격 정보를 게시합니다.
+              </p>
+            )}
+          </section>
+        </div>
+        <aside className="expert-facts">
+          <p className="eyebrow">BEFORE WE MEET</p>
+          <h2>만남을 준비하며</h2>
+          <dl>
+            <div>
+              <dt>진행 방식</dt>
+              <dd>{c.formats?.join(" · ") || "매칭 제안에서 확인"}</dd>
+            </div>
+            <div>
+              <dt>회기 시간</dt>
+              <dd>{c.sessionLength || "매칭 제안에서 확인"}</dd>
+            </div>
+            <div>
+              <dt>일정</dt>
+              <dd>
+                {c.availability || "가능한 시간을 확인한 뒤 개별 조율합니다."}
+              </dd>
+            </div>
+            <div>
+              <dt>상담 장소</dt>
+              <dd>
+                가능 지역에서 상담사와 협의해 정합니다. 고정 상담센터를 운영하지
+                않으며 장소와 대관비 포함 여부를 예약 전에 확인합니다.
+              </dd>
+            </div>
+            <div>
+              <dt>비용</dt>
+              <dd>{c.fee}</dd>
+            </div>
+          </dl>
+          <Link className="text-link" to="/guide#faq">
+            일정·비용이 궁금하다면 <ArrowRight size={16} />
+          </Link>
+        </aside>
       </div>
-      <div className="detail-grid">
-        <article className="panel">
-          <ShieldCheck />
-          <h3>자격 정보</h3>
-          <p>{c.qualifications}</p>
-        </article>
-        <article className="panel">
-          <MapPin />
-          <h3>만날 수 있는 지역</h3>
-          <p>{c.regions.join(" · ")}</p>
-        </article>
-        <article className="panel">
-          <MessageCircle />
-          <h3>상담 비용</h3>
-          <p>{c.fee}</p>
-        </article>
-        <article className="panel">
-          <Clock />
-          <h3>일정과 장소</h3>
-          <p>신청 후 상담사와 협의하고, 결제 전에 정확히 안내합니다.</p>
-        </article>
+      <div className="expert-end">
+        <p>다른 대화의 방식도 살펴보고 싶으신가요?</p>
+        <Button to="/counselors" light>
+          다른 상담사 둘러보기
+        </Button>
       </div>
-      <Button to={"/request?counselor=" + c.id}>
-        {c.demo ? "이 프로필로 매칭 흐름 체험" : "이 상담사로 매칭 신청"}
-      </Button>
     </div>
+  );
+}
+function CounselingDetail() {
+  const { slug } = useParams();
+  const { data } = useApp();
+  const category = counselingCategories.find((item) => item.slug === slug);
+  if (!category)
+    return (
+      <div className="container page">
+        <Empty
+          title="상담 주제를 찾을 수 없어요."
+          text="상담 안내에서 다른 주제를 살펴보세요."
+        />
+        <Button to="/services">상담 안내 보기</Button>
+      </div>
+    );
+  const related = data.counselors.filter((c) =>
+    c.categoryIds?.includes(category.slug),
+  );
+  const Icon = categoryIcons[counselingCategories.indexOf(category)];
+  return (
+    <>
+      <section className="topic-detail-hero">
+        <div className="container">
+          <Link to="/services#topics" className="back">
+            <ArrowLeft size={16} />
+            고민별 상담 안내
+          </Link>
+          <div className="topic-detail-heading">
+            <span className="topic-symbol">
+              <Icon size={34} strokeWidth={1.4} />
+            </span>
+            <p className="eyebrow">A PLACE FOR YOUR STORY</p>
+            <h1>{category.label}</h1>
+            <p>{category.description}</p>
+          </div>
+        </div>
+      </section>
+      <div className="container">
+        <section className="topic-detail-body">
+          <div>
+            <p className="eyebrow">DOES THIS SOUND FAMILIAR?</p>
+            <h2>이런 마음이 들 때가 있나요?</h2>
+            <p>
+              비슷한 고민이라도 사람마다 맥락은 달라요.
+              <br />
+              나에게 가까운 이야기부터 시작해도 괜찮아요.
+            </p>
+          </div>
+          <ul>
+            {category.concernExamples.map((item) => (
+              <li key={item}>
+                <MessageCircle size={20} />
+                <span>“{item}”</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="topic-detail-care">
+          <div>
+            <p className="eyebrow">AT YOUR OWN PACE</p>
+            <h2>함께 살펴볼 이야기</h2>
+            <p>{category.detail}</p>
+          </div>
+          <div>
+            <h3>어떤 방식으로 만나볼까요?</h3>
+            <p>
+              아래 서비스의 진행 방식을 살펴보세요. 실제 상담 방식과 검사 필요
+              여부는 상담사와 함께 정합니다.
+            </p>
+            <div className="topic-service-links">
+              {category.recommendedServices.map((id) => (
+                <Link
+                  key={id}
+                  to={id === "group" ? "/programs" : "/services#" + id}
+                >
+                  {serviceNames[id]}
+                  <ArrowUpRight size={17} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="section">
+          <SectionHead
+            eyebrow="MEET YOUR PERSON"
+            title="이 주제를 함께 나눌 상담사"
+            text="상담사가 이야기를 듣는 방식과 다루는 고민을 먼저 살펴보세요."
+            to={"/counselors?topic=" + category.slug}
+            link="조건을 더 살펴보기"
+          />
+          {data.demo && (
+            <p className="inline-demo">
+              인물·사진·이력은 구성 확인용 가상 예시입니다.
+            </p>
+          )}
+          <div className="counselor-grid">
+            {related.slice(0, 3).map((c, i) => (
+              <CounselorCard key={c.id} c={c} index={i} />
+            ))}
+          </div>
+          {!related.length && (
+            <Empty
+              title="이 주제를 다루는 상담사를 준비하고 있어요."
+              text="전문가 목록에서 다른 분야도 살펴보세요."
+            />
+          )}
+        </section>
+      </div>
+      <FinalCTA />
+    </>
   );
 }
 function Services() {
@@ -993,36 +1279,78 @@ function Services() {
           대화와 자기이해의 시간을 나에게 맞는 방식으로 만나보세요.
         </PageIntro>
         <ServiceCards />
+        <section id="topics" className="service-topic-section">
+          <SectionHead
+            eyebrow="START WITH YOUR STORY"
+            title="지금 마음에 가까운 주제부터."
+            text="고민의 이름을 고르고, 상담에서 어떤 이야기를 나눌 수 있는지 살펴보세요."
+          />
+          <CategoryCards />
+        </section>
         <div className="service-details">
           <article id="individual">
             <span className="number">01</span>
             <h2>개인상담</h2>
             <p>
-              일과 진로, 관계, 지친 마음. 상담사와 개별적으로 만나 지금 필요한
-              이야기를 나눕니다.
+              지금 가장 마음 쓰이는 주제를 상담사와 일대일로 나눕니다. 처음부터
+              생각을 정리해 오지 않아도 괜찮아요. 상담 목표와 진행 방식은 첫
+              대화에서 함께 상의합니다.
             </p>
             <ul>
               <li>고민 주제에 맞는 상담사 연결</li>
               <li>가능한 지역·시간을 바탕으로 장소 협의</li>
               <li>회기 시간과 총비용을 제안서에서 먼저 확인</li>
             </ul>
-            <Button to="/request?service=individual">개인상담 알아보기</Button>
+            <Button to="/counselors">개인상담 전문가 둘러보기</Button>
           </article>
           <article id="assessment">
             <span className="number">02</span>
             <h2>심리검사</h2>
             <p>
-              검사 결과와 전문가의 해석을 통해 자신을 살펴보는 시간입니다.
-              목적에 맞는 검사 종류를 먼저 안내받습니다.
+              궁금한 영역과 상담 목적을 먼저 확인하고 필요한 검사를 안내합니다.
+              결과는 점수만 전달하기보다 해석 상담을 통해 생활의 맥락과 함께
+              살펴봅니다.
             </p>
             <ul>
-              <li>신청 목적과 검사 적합성 확인</li>
-              <li>검사 종류·실시 방법·해석 상담 안내</li>
-              <li>검사비와 해석비 포함 여부를 결제 전 확인</li>
+              <li>성격·기질 이해 — 나의 성향과 반응 패턴 살펴보기</li>
+              <li>정서·스트레스 이해 — 지금 마음과 생활 돌아보기</li>
+              <li>진로·흥미 탐색 — 관심사와 선택 기준 알아가기</li>
             </ul>
-            <Button to="/request?service=assessment">심리검사 알아보기</Button>
+            <p className="fine">
+              실제 검사 종류·진행 방법·해석 상담 포함 범위와 비용은 사전
+              안내합니다.
+            </p>
+            <Button to={previewOnly ? "/guide" : "/request?service=assessment"}>
+              {previewOnly ? "검사 신청 과정 알아보기" : "심리검사 신청하기"}
+            </Button>
           </article>
         </div>
+        <article className="group-service-detail" id="group">
+          <img
+            src={imageUrl("arunia-small-group.jpg")}
+            alt="소규모 모임에서 이야기를 나누는 사람들의 AI 콘셉트 사진"
+            loading="lazy"
+          />
+          <div>
+            <span className="number">03</span>
+            <h2>집단 프로그램</h2>
+            <p>
+              비슷한 관심사를 가진 사람들과 경험을 나누고, 일상에서 작은 시도를
+              함께합니다. 모임의 목적과 진행자, 참여 조건을 먼저 살펴보세요.
+            </p>
+            <ul>
+              <li>나를 알아가는 모임 · 가치관과 자기표현</li>
+              <li>관계를 연습하는 모임 · 감정 표현과 경계</li>
+              <li>일상을 돌보는 모임 · 일과 쉼의 균형</li>
+              <li>다음 걸음을 준비하는 모임 · 변화와 새로운 시작</li>
+            </ul>
+            <p className="fine">
+              준비 중인 프로그램입니다. 인원·일정·장소·비용은 모집 시
+              안내됩니다.
+            </p>
+            <Button to="/programs">프로그램 방향 살펴보기</Button>
+          </div>
+        </article>
         <article className="cost-note panel">
           <div>
             <p className="eyebrow">CLEAR FROM THE START</p>
@@ -1341,13 +1669,181 @@ function Protected({
     );
   return <>{children}</>;
 }
+function safeLoginDestination(value: string | null) {
+  if (
+    !value ||
+    !value.startsWith("/") ||
+    value.startsWith("//") ||
+    /[\\\r\n]/.test(value)
+  )
+    return "/account";
+  try {
+    const target = new URL(value, window.location.origin);
+    if (target.origin !== window.location.origin) return "/account";
+    return /^\/(?:account|request|admin|checkout\/[a-zA-Z0-9-]+)$/.test(
+      target.pathname,
+    )
+      ? target.pathname + target.search
+      : "/account";
+  } catch {
+    return "/account";
+  }
+}
+const googleLoginErrors: Record<string, string> = {
+  google_unavailable:
+    "구글 로그인 연결을 준비하고 있어요. 잠시 후 다시 이용해 주세요.",
+  google_cancelled: "구글 로그인을 취소했어요. 준비되면 다시 시작해 주세요.",
+  google_failed: "구글 계정을 확인하지 못했어요. 다시 로그인해 주세요.",
+  google_expired:
+    "로그인 시간이 지났거나 이미 사용한 요청이에요. 다시 시작해 주세요.",
+  existing_account:
+    "같은 이메일로 가입한 계정이 있어요. 아래 ‘기존 이메일 계정으로 로그인’을 이용해 주세요.",
+};
+function GoogleAuth() {
+  const { data } = useApp();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const next = safeLoginDestination(query.get("next"));
+  const callbackError = query.get("error");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const available = !previewOnly && Boolean(data.auth?.googleEnabled);
+  if (data.user) return <Navigate to={next} replace />;
+  async function begin(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!available || busy) return;
+    setError("");
+    setBusy(true);
+    try {
+      const result = await api<{ url: string }>("/auth/google/start", {
+        next,
+        consent,
+      });
+      const destination = new URL(result.url);
+      if (destination.origin !== "https://accounts.google.com")
+        throw new Error(
+          "구글 로그인 연결을 확인하지 못했어요. 다시 시도해 주세요.",
+        );
+      window.location.assign(destination.href);
+    } catch (e) {
+      setError((e as Error).message);
+      setBusy(false);
+    }
+  }
+  return (
+    <div className="auth-page container google-auth-page">
+      <div className="auth-story">
+        <img
+          src={imageUrl("arunia-self-understanding.jpg")}
+          alt="햇살 아래 노트와 차가 놓인 책상의 AI 콘셉트 사진"
+        />
+        <div>
+          <p className="eyebrow">AT YOUR OWN PACE</p>
+          <h2>
+            나를 돌보는 시간,
+            <br />
+            여기서 시작해요.
+          </h2>
+        </div>
+      </div>
+      <div className="auth-form google-auth-form">
+        <span className="google-welcome">
+          <Sprout size={25} strokeWidth={1.5} />
+        </span>
+        <p className="eyebrow">WELCOME, ARUNIA</p>
+        <h1>
+          반가워요.
+          <br />
+          마음의 여정을 이어가요.
+        </h1>
+        <p className="muted">
+          구글 계정으로 간편하게 시작하세요.
+          <br />
+          처음이라면 같은 과정에서 회원가입이 이루어져요.
+        </p>
+        <div className="google-login-note">
+          <ShieldCheck size={20} />
+          <p>
+            가입에 필요한 이름과 이메일을 사용해요.
+            <br />
+            비밀번호나 메일 내용은 가져오지 않아요.
+          </p>
+        </div>
+        <form onSubmit={begin}>
+          <label className="checkbox google-consent">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              required
+              disabled={!available || busy}
+            />
+            <span>
+              <Link to="/terms" target="_blank" rel="noreferrer">
+                이용약관
+              </Link>
+              과{" "}
+              <Link to="/privacy" target="_blank" rel="noreferrer">
+                개인정보 처리방침
+              </Link>
+              을 확인하고 동의합니다.
+            </span>
+          </label>
+          {(error || callbackError) && (
+            <Notice tone="error">
+              {error ||
+                googleLoginErrors[callbackError || ""] ||
+                googleLoginErrors.google_failed}
+            </Notice>
+          )}
+          <button
+            className="google-signin-button"
+            disabled={!available || busy}
+            aria-describedby={!available ? "google-login-status" : undefined}
+          >
+            <img src={imageUrl("google-g.png")} alt="" width="20" height="20" />
+            <span>{busy ? "Google로 이동하는 중…" : "Google로 계속하기"}</span>
+          </button>
+          {!available && (
+            <p
+              id="google-login-status"
+              className="google-login-status"
+              role="status"
+            >
+              {previewOnly
+                ? "로그인 화면을 미리 보고 있어요. 실제 구글 로그인은 연결 준비 중입니다."
+                : "구글 로그인을 준비하고 있어요. 연결이 완료되면 이용할 수 있습니다."}
+            </p>
+          )}
+        </form>
+        <p className="google-after-login">
+          로그인하면 상담 신청과 매칭 제안,
+          <br />
+          예약 내역을 한곳에서 확인할 수 있어요.
+        </p>
+        {!previewOnly && (
+          <Link
+            className="google-existing-link"
+            to={"/login/email?next=" + encodeURIComponent(next)}
+          >
+            기존 이메일 계정으로 로그인 <ArrowRight size={14} />
+          </Link>
+        )}
+        <Link className="google-home-link" to="/">
+          먼저 어른이아 둘러보기 <ArrowUpRight size={15} />
+        </Link>
+      </div>
+    </div>
+  );
+}
 function Auth({ signup = false }: { signup?: boolean }) {
   const { data, refresh } = useApp();
   const navigate = useNavigate();
   const l = useLocation();
-  const next = new URLSearchParams(l.search).get("next") || "/account";
-  const safeNext =
-    next.startsWith("/") && !next.startsWith("//") ? next : "/account";
+  const safeNext = safeLoginDestination(
+    new URLSearchParams(l.search).get("next"),
+  );
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -1462,15 +1958,8 @@ function Auth({ signup = false }: { signup?: boolean }) {
           </button>
         </form>
         <p className="auth-switch">
-          {signup ? "이미 계정이 있나요?" : "처음 방문하셨나요?"}{" "}
-          <Link
-            to={
-              (signup ? "/login" : "/signup") +
-              "?next=" +
-              encodeURIComponent(safeNext)
-            }
-          >
-            {signup ? "로그인" : "회원가입"}
+          <Link to={"/login?next=" + encodeURIComponent(safeNext)}>
+            구글 계정으로 시작하기
           </Link>
         </p>
       </div>
@@ -1911,48 +2400,59 @@ function Account() {
           <ChevronDown size={16} />
         </summary>
         <p>{data.user?.email}</p>
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setPasswordMessage("");
-            const f = new FormData(e.currentTarget);
-            try {
-              await api("/auth/password", {
-                current: f.get("current"),
-                password: f.get("password"),
-              });
-              setPasswordMessage(
-                "비밀번호가 변경되었습니다. 다른 기기의 로그인은 해제됩니다.",
-              );
-            } catch (e) {
-              setPasswordMessage((e as Error).message);
-            }
-          }}
-        >
-          <h3>비밀번호 변경</h3>
-          <label>
-            현재 비밀번호
-            <input
-              type="password"
-              required
-              name="current"
-              autoComplete="current-password"
-            />
-          </label>
-          <label>
-            새 비밀번호
-            <input
-              type="password"
-              required
-              minLength={10}
-              maxLength={128}
-              name="password"
-              autoComplete="new-password"
-            />
-          </label>
-          {passwordMessage && <Notice>{passwordMessage}</Notice>}
-          <button className="button secondary">변경하기</button>
-        </form>
+        {data.user?.hasPassword === false ? (
+          <div className="google-account-note">
+            <img src={imageUrl("google-g.png")} alt="" width="20" height="20" />
+            <p>
+              Google 계정으로 로그인하고 있어요.
+              <br />
+              비밀번호는 Google 계정에서 관리합니다.
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setPasswordMessage("");
+              const f = new FormData(e.currentTarget);
+              try {
+                await api("/auth/password", {
+                  current: f.get("current"),
+                  password: f.get("password"),
+                });
+                setPasswordMessage(
+                  "비밀번호가 변경되었습니다. 다른 기기의 로그인은 해제됩니다.",
+                );
+              } catch (e) {
+                setPasswordMessage((e as Error).message);
+              }
+            }}
+          >
+            <h3>비밀번호 변경</h3>
+            <label>
+              현재 비밀번호
+              <input
+                type="password"
+                required
+                name="current"
+                autoComplete="current-password"
+              />
+            </label>
+            <label>
+              새 비밀번호
+              <input
+                type="password"
+                required
+                minLength={10}
+                maxLength={128}
+                name="password"
+                autoComplete="new-password"
+              />
+            </label>
+            {passwordMessage && <Notice>{passwordMessage}</Notice>}
+            <button className="button secondary">변경하기</button>
+          </form>
+        )}
         <button
           className="text-link"
           onClick={async () => {
@@ -2546,6 +3046,7 @@ function Admin() {
               qualifications: f.get("qualifications"),
               description: f.get("description"),
               fee: f.get("fee"),
+              categoryIds: f.getAll("categoryIds"),
               demo: f.get("demo") === "on",
             });
             if (ok) form.reset();
@@ -2568,6 +3069,21 @@ function Admin() {
               />
             </label>
           ))}
+          <fieldset className="wide admin-category-options">
+            <legend>고민별 안내에 표시할 상담 주제</legend>
+            <div>
+              {counselingCategories.map((category) => (
+                <label className="checkbox" key={category.slug}>
+                  <input
+                    type="checkbox"
+                    name="categoryIds"
+                    value={category.slug}
+                  />
+                  <span>{category.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
           {data.demo && (
             <label className="checkbox">
               <input type="checkbox" name="demo" defaultChecked />
@@ -2638,10 +3154,20 @@ function Policy({ privacy = false }: { privacy?: boolean }) {
         <>
           <h2>수집하는 정보와 목적</h2>
           <p>
-            계정 생성 시 이름·이메일·암호화된 비밀번호를 저장합니다. 로그인
-            유지를 위해 세션 쿠키를 사용합니다. 매칭 신청 시 선택한 주제·희망
-            지역·시간·서비스와 동의 시점을 저장하며, 신청 처리와 상담 제안
-            확인에 이용합니다.
+            Google로 가입하면 Google 계정 식별자, 이름, 인증된 이메일과 약관
+            동의 기록을 저장합니다. Google 비밀번호와 메일 내용은 받지 않습니다.
+            기존 이메일 계정에는 이름·이메일·암호화된 비밀번호를 저장합니다.
+            로그인 유지를 위해 세션 쿠키를 사용합니다. 매칭 신청 시 선택한
+            주제·희망 지역·시간·서비스와 동의 시점을 저장하며, 신청 처리와 상담
+            제안 확인에 이용합니다.
+          </p>
+          <h2>Google 로그인 정보의 이용</h2>
+          <p>
+            Google 계정 식별자는 재방문 시 같은 회원임을 확인하는 데, 이름과
+            이메일은 회원 식별과 상담 신청 관리에 사용합니다. Google에서 받은
+            접근 토큰과 ID 토큰은 인증 확인에만 사용하며 별도로 보관하지
+            않습니다. 로그인 취소 시에는 회원가입이나 로그인 세션을 만들지
+            않습니다.
           </p>
           <h2>마음·고민 주제와 별도 동의</h2>
           <p>

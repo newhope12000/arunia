@@ -10,6 +10,11 @@ import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
 import { z } from "zod";
 import { connect, one, many, run } from "./db.js";
+import {
+  googleConfigured,
+  registerGoogleAuth,
+  validateGoogleOrigin,
+} from "./google-auth.js";
 const scrypt = promisify(scryptCb),
   now = () => new Date().toISOString(),
   id = () => randomUUID(),
@@ -19,12 +24,15 @@ export async function passwordHash(value) {
   return `${salt}:${(await scrypt(value, salt, 64)).toString("hex")}`;
 }
 async function passwordOK(value, stored) {
+  if (!hasPassword(stored)) return false;
   const [salt, key] = stored.split(":");
   return timingSafeEqual(
     await scrypt(value, salt, 64),
     Buffer.from(key, "hex"),
   );
 }
+const hasPassword = (stored) =>
+  typeof stored === "string" && /^[a-f0-9]{32}:[a-f0-9]{128}$/.test(stored);
 export function configuration(env = process.env) {
   const production = env.NODE_ENV === "production";
   const config = {
@@ -38,6 +46,8 @@ export function configuration(env = process.env) {
     clientKey: env.TOSS_CLIENT_KEY || "",
     secretKey: env.TOSS_SECRET_KEY || "",
     ready: env.OPERATIONS_READY === "true",
+    googleClientId: env.GOOGLE_CLIENT_ID?.trim() || "",
+    googleClientSecret: env.GOOGLE_CLIENT_SECRET?.trim() || "",
   };
   if (
     production &&
@@ -66,6 +76,7 @@ export function configuration(env = process.env) {
       !config.clientKey.startsWith("test_"))
   )
     throw new Error("Toss test mode requires a test key pair.");
+  validateGoogleOrigin(config);
   return config;
 }
 function failure(status, message) {
@@ -78,6 +89,7 @@ const safeUser = (u) => ({
   email: u.email,
   name: u.name,
   role: u.role,
+  hasPassword: hasPassword(u.password),
 });
 const services = [
   {
@@ -108,11 +120,21 @@ export async function createApp(options = {}) {
   const content = JSON.parse(
     await readFile(new URL("./content.json", import.meta.url), "utf8"),
   );
+  // Keep public filters and profile validation aligned; see docs/counseling-categories-research.md.
+  const categoryIds = JSON.parse(
+    await readFile(
+      new URL("../shared/counseling-categories.json", import.meta.url),
+      "utf8",
+    ),
+  ).map((category) => category.slug);
   if (config.demo)
-    for (const c of content.counselors)
+    for (const c of content.counselors.filter(
+      (profile) => profile.demo === true,
+    ))
       await run(
         db,
-        "INSERT OR IGNORE INTO counselors(id,data,demo) VALUES(?,?,1)",
+        // Refresh bundled examples without replacing real profiles or reactivating archived ones.
+        "INSERT INTO counselors(id,data,demo) VALUES(?,?,1) ON CONFLICT(id) DO UPDATE SET data=excluded.data WHERE counselors.demo=1",
         [c.id, JSON.stringify(c)],
       );
   const app = express();
@@ -345,6 +367,10 @@ export async function createApp(options = {}) {
       demo: config.demo,
       paymentMode: config.paymentMode,
       ready: config.ready,
+      auth: {
+        googleEnabled:
+          googleConfigured(config) && (config.demo || config.ready),
+      },
       services,
       counselors: await counselors(),
       testimonials: config.demo ? content.testimonials : [],
@@ -360,19 +386,34 @@ export async function createApp(options = {}) {
       .transform((v) => v.toLowerCase()),
     password: z.string().min(10).max(128),
   });
+  registerGoogleAuth({
+    app,
+    db,
+    config,
+    enabled,
+    throttle,
+    session,
+    provider: options.googleProvider,
+  });
   app.post("/api/auth/register", async (req, res) => {
     enabled();
     const v = credentials
       .extend({ name: short.max(40), consent: z.literal(true) })
       .parse(req.body);
     await throttle("register:" + req.clientAddress, 15);
-    const u = { id: id(), email: v.email, name: v.name, role: "member" };
+    const u = {
+      id: id(),
+      email: v.email,
+      name: v.name,
+      role: "member",
+      password: await passwordHash(v.password),
+    };
     try {
       await run(db, "INSERT INTO users VALUES(?,?,?,?,?,?)", [
         u.id,
         u.email,
         u.name,
-        await passwordHash(v.password),
+        u.password,
         "member",
         now(),
       ]);
@@ -385,7 +426,7 @@ export async function createApp(options = {}) {
       throw e;
     }
     await session(req, res, u);
-    res.status(201).json({ user: u });
+    res.status(201).json({ user: safeUser(u) });
   });
   app.post("/api/auth/login", async (req, res) => {
     const v = credentials.parse(req.body);
@@ -417,6 +458,11 @@ export async function createApp(options = {}) {
     res.json({ ok: true });
   });
   app.post("/api/auth/password", member, async (req, res) => {
+    if (!hasPassword(req.user.password))
+      throw failure(
+        400,
+        "구글로 가입한 계정입니다. 구글 계정에서 비밀번호를 관리해 주세요.",
+      );
     const v = z
       .object({
         current: z.string().max(128),
@@ -941,6 +987,7 @@ export async function createApp(options = {}) {
       .object({
         name: short.max(40),
         fields: z.array(short.max(30)).min(1).max(8),
+        categoryIds: z.array(z.enum(categoryIds)).max(8).default([]),
         regions: z.array(short.max(30)).min(1).max(8),
         qualifications: bounded(300),
         description: bounded(500),

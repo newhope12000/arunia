@@ -1,0 +1,43 @@
+{
+  "mode": "built-in image_gen",
+  "useCase": "photorealistic-natural",
+  "disclosure": "All people are fictional AI-generated models used only for example counselor profiles.",
+  "images": [
+    {
+      "id": "01",
+      "name": "윤해솔",
+      "filename": "public/images/counselor-01.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult woman, late 30s, with a softly rounded oval face, warm brown eyes and a tidy chin-length dark brown bob with a subtle side part, wearing a simple cream knit sweater. She has a relaxed, reassuring slight smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    },
+    {
+      "id": "02",
+      "name": "한이든",
+      "filename": "public/images/counselor-02.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult man, early 40s, with a long oval face, gently hooded eyes, thin rectangular dark brown glasses, short naturally side-parted black hair, wearing a plain muted olive cotton shirt with its collar open. He has an easy, reassuring slight smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture and faint smile lines, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    },
+    {
+      "id": "03",
+      "name": "박도윤",
+      "filename": "public/images/counselor-03.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult man, late 30s, with a slightly broad angular face, straight eyebrows, kind deep-set eyes, no glasses, short tidy black hair swept up loosely, clean shaven, wearing an understated navy blue cardigan over an ivory crew-neck shirt. He has a relaxed open slight smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred warm cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    },
+    {
+      "id": "04",
+      "name": "서나래",
+      "filename": "public/images/counselor-04.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult woman, early 40s, with a gracefully long oval face, gentle smile lines, soft almond-shaped eyes, no glasses, shoulder-length dark brown hair tucked behind one ear with a subtle natural wave, wearing a plain warm beige linen-blend button-down shirt. She has a composed, friendly slight smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    },
+    {
+      "id": "05",
+      "name": "정유담",
+      "filename": "public/images/counselor-05.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult woman, late 40s, with a softly square face, warm lively eyes, subtle natural lines around her eyes and mouth, no glasses, short softly waved dark hair with a few understated silver strands, wearing a plain pale sage green knit sweater. She has a kind, confident slight smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture appropriate for a woman in her late 40s, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    },
+    {
+      "id": "06",
+      "name": "오시온",
+      "filename": "public/images/counselor-06.jpg",
+      "prompt": "Use case: photorealistic-natural\nAsset type: fictional counselor profile photograph for a Korean counseling service website design prototype.\nPrimary request: Generate one original fictional Korean adult man, early 30s, with a youthful round-oval face, soft straight eyebrows, warm expressive eyes behind slim round dark metal glasses, slightly wavy short dark hair with a soft fringe, clean shaven, wearing a plain light blue Oxford cotton shirt with an open collar. He has a fresh, relaxed reassuring smile while looking naturally into the camera.\nScene/backdrop: a bright, softly blurred cream-colored interior with a hint of muted sage, no identifiable location.\nStyle/medium: authentic editorial portrait photography, visible natural skin texture, realistic proportions, no glamour retouching.\nComposition/framing: square image, centered head and upper torso, full head with generous breathing room above, shoulders visible, hands outside frame, eye-level 85mm portrait lens.\nLighting/mood: soft window daylight, warm, calm, approachable and professional.\nConstraints: one person only; completely fictional model, not a real or famous person. No text, badges, credentials, certificates, logos, watermarks, medical coat or stethoscope. Avoid strong shadows, artificial plastic skin and clutter."
+    }
+  ]
+}

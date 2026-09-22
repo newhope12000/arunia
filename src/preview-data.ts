@@ -4,6 +4,7 @@ import content from "../server/content.json";
 // Member accounts, sessions, applications and payment data are never exported.
 export default {
   user: null,
+  auth: { googleEnabled: false },
   demo: true,
   ready: false,
   paymentMode: "disabled",
