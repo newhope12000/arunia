@@ -1,0 +1,65 @@
+{
+  "buildCommand": "npm run build:review",
+  "outputDirectory": "review-dist",
+  "env": {
+    "ARUNIA_REVIEW_ONLY": "true"
+  },
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60
+    }
+  },
+  "redirects": [
+    {
+      "source": "/growth.html",
+      "destination": "/archive/growth.html",
+      "permanent": false
+    },
+    {
+      "source": "/growth_1.html",
+      "destination": "/archive/growth_1.html",
+      "permanent": false
+    },
+    {
+      "source": "/growth_2.html",
+      "destination": "/archive/growth_2.html",
+      "permanent": false
+    },
+    {
+      "source": "/growth_4.html",
+      "destination": "/archive/growth_4.html",
+      "permanent": false
+    },
+    {
+      "source": "/leadership1.html",
+      "destination": "/archive/leadership1.html",
+      "permanent": false
+    },
+    {
+      "source": "/programs.html",
+      "destination": "/archive/programs.html",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}
