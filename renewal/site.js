@@ -1,4 +1,7 @@
 import { recruitmentState } from "./availability.js";
+import { initContact, sendInquiry } from "./contact.mjs";
+
+initContact(document, sendInquiry);
 
 const menuButton = document.querySelector(".menu-toggle");
 const menu = document.querySelector("#site-menu");

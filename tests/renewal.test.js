@@ -23,9 +23,8 @@ test("all renewal navigation stays in v0_1, resolves to a page and preserves val
     assert.match(html, /name="robots" content="noindex,nofollow"/);
     for (const [, href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
       if (href.startsWith("https://")) {
-        assert.equal(
-          href,
-          COHORT.application,
+        assert.ok(
+          [COHORT.application, "https://formsubmit.co/privacy.pdf"].includes(href),
           `${slug}: unexpected external destination`,
         );
         continue;
