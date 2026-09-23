@@ -327,13 +327,13 @@ summary:focus-visible {
 .site-menu > a[aria-current="page"] {
   box-shadow: inset 0 -2px var(--green);
 }
-.nav-cohort {
+.nav-opportunities {
   color: var(--green);
   display: flex;
   gap: 7px;
   align-items: center;
 }
-.nav-cohort i {
+.nav-opportunities i {
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -1065,6 +1065,85 @@ figcaption.note {
 .prose > .eyebrow + h2 {
   margin-top: 0;
 }
+/* The ongoing offer is separate from cohort-based recruitment. */
+.program-cost {
+  margin-top: 14px;
+  font-size: 13px !important;
+  color: var(--green);
+}
+.experience-list .text-link {
+  margin-top: 8px;
+}
+.membership-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+.membership-option {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--green);
+  padding-top: 25px;
+}
+.membership-option h3 {
+  font-size: 21px;
+}
+.plan-price {
+  margin: 16px 0;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.plan-price span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.plan-summary {
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+.membership-option .text-link {
+  margin-top: auto;
+}
+.opportunity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid #d2dee3;
+  padding-top: 32px;
+}
+.opportunity > div {
+  max-width: 730px;
+}
+.opportunity h3 {
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+.opportunity .eyebrow {
+  margin-bottom: 14px;
+}
+.opportunity .small {
+  margin-top: 17px;
+}
+.opportunity > .button {
+  flex-shrink: 0;
+}
+.cta-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.cta-options > .text-link {
+  color: white;
+}
+.cta-options > .text-link:hover {
+  color: #c5d6cc;
+}
+
 @media (min-width: 1440px) {
   .hero {
     gap: 70px;
@@ -1235,6 +1314,33 @@ figcaption.note {
   }
 }
 @media (max-width: 760px) {
+  .membership-preview {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .membership-option {
+    padding-top: 22px;
+  }
+  .plan-price {
+    font-size: 30px;
+    margin: 12px 0;
+  }
+  .plan-summary {
+    margin-bottom: 10px;
+  }
+  .opportunity {
+    display: block;
+  }
+  .opportunity h3 {
+    font-size: 24px;
+  }
+  .opportunity > .button {
+    margin-top: 24px;
+  }
+  .cta-options {
+    margin-top: 26px;
+  }
+
   body {
     font-size: 16px;
   }
