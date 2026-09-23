@@ -281,7 +281,8 @@ summary:focus-visible {
 .site-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--white);
+  isolation: isolate;
   z-index: 10;
   border-bottom: 1px solid #f0f2ef;
 }
@@ -294,23 +295,18 @@ summary:focus-visible {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 15px;
+  min-height: 44px;
   flex-shrink: 0;
 }
 .brand img {
-  width: 77px;
-  height: 20px;
+  width: 180px;
+  height: auto;
   object-fit: contain;
+  /* Preserve the supplied artwork; its white background blends into this section. */
+  mix-blend-mode: multiply;
 }
-.brand > span {
-  height: 19px;
-  width: 1px;
-  background: var(--line);
-}
-.brand strong {
-  font-size: 20px;
-  font-weight: 750;
-  letter-spacing: -0.065em;
+.site-footer .brand img {
+  width: 200px;
 }
 .site-menu {
   display: flex;
@@ -620,6 +616,7 @@ summary:focus-visible {
   margin-top: 18px;
 }
 .site-footer {
+  isolation: isolate;
   background: #fafbf8;
   padding: 68px 0 25px;
 }
@@ -1086,11 +1083,8 @@ figcaption.note {
   .site-menu {
     gap: 18px;
   }
-  .brand {
-    gap: 12px;
-  }
   .brand img {
-    width: 65px;
+    width: 170px;
   }
   .hero {
     gap: 35px;
@@ -1255,18 +1249,11 @@ figcaption.note {
     height: 70px;
     gap: 8px;
   }
-  .brand {
-    gap: 10px;
-  }
   .brand img {
-    width: 62px;
-    height: 17px;
+    width: 144px;
   }
-  .brand strong {
-    font-size: 18px;
-  }
-  .brand > span {
-    height: 16px;
+  .site-footer .brand img {
+    width: 170px;
   }
   .header-cta {
     font-size: 11px;
@@ -1717,14 +1704,8 @@ figcaption.note {
   .header-inner {
     gap: 4px;
   }
-  .brand {
-    gap: 8px;
-  }
   .brand img {
-    width: 55px;
-  }
-  .brand strong {
-    font-size: 16px;
+    width: 132px;
   }
   .header-cta {
     padding: 9px 10px;
