@@ -8,6 +8,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { basename } from "node:path";
+import { buildRenewal } from "./build-renewal.mjs";
 
 // Keep the existing public site at / and isolate the counseling review at /preview/.
 rmSync("review-dist", { recursive: true, force: true });
@@ -41,6 +42,7 @@ cpSync("legacy", "review-dist", {
 // Preserve the original site's indexing policy while excluding the review and API.
 const robots = readFileSync("legacy/robots.txt", "utf8").replace(
   /User-agent:\s*\*[^\S\r\n]*(?:\r?\n|$)/i,
-  "$&Disallow: /preview\nDisallow: /api/\n",
+  "$&Disallow: /preview\nDisallow: /v0_1\nDisallow: /api/\n",
 );
 writeFileSync("review-dist/robots.txt", robots);
+buildRenewal();
