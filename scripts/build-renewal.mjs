@@ -19,7 +19,7 @@ export function buildRenewal(outputRoot = "review-dist") {
   cpSync("renewal/assets/images", join(output, "assets/images"), {
     recursive: true,
   });
-  for (const name of ["style.css", "site.js"])
+  for (const name of ["style.css", "site.js", "contact.mjs"])
     cpSync(`renewal/${name}`, join(output, "assets", name));
   cpSync("renewal/availability.mjs", join(output, "assets/availability.js"));
   cpSync("renewal/assets/brand", join(output, "assets/brand"), {

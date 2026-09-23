@@ -7,6 +7,7 @@ import {
   ctaBand,
   notice,
 } from "./shared.mjs";
+import { CONTACT } from "./contact.mjs";
 
 const photo = (name, alt) =>
   `<figure class="image-frame">${picture(name, alt)}<figcaption>AI로 연출한 예시 사진</figcaption></figure>`;
@@ -109,22 +110,35 @@ export const contentPages = [
     title: "문의",
     description:
       "콘텐츠 구독, 라운드테이블, DAY ONE 클래스, 별도 모집과 협업에 관한 어른이아 문의 안내예요.",
-    body: `${intro("문의", "어떤 경험이 궁금한가요?", "구독을 고르는 일부터 클래스 참여, 프로그램 제안까지. 궁금한 내용에 맞춰 안내를 살펴봐요.")}
-      <section class="section wrap"><div class="split"><div>${notice("문의 채널을 준비하고 있어요", "공개할 이메일과 연락 채널을 정리하고 있어요. 현재 이 페이지에는 메시지를 보내거나 구독을 접수하는 기능이 없어요.")}<ul class="line-list"><li><h3>구독 · 콘텐츠 이용</h3><p>플랜별 아카이브 범위, 뉴스레터, 라운드테이블 이용을 안내할 예정이에요.</p>${link("pricing.html", "구독 플랜 살펴보기")}</li><li><h3>클래스 · 프로그램 참여</h3><p>DAY ONE 클래스와 기수별 프로젝트의 일정·참여 방법을 확인해요.</p>${link("programs.html", "프로그램 둘러보기")}</li><li><h3>협업 · 제안</h3><p>콘텐츠, 커뮤니티, 클래스와 청년 프로그램에 관한 제안을 받을 채널도 함께 준비하고 있어요.</p></li></ul></div><div><p class="eyebrow">자주 묻는 질문</p><div class="faq-list">
+    body: `${intro("문의", "궁금한 점을 남겨주세요.", "구독과 프로그램 참여, 협업 제안까지. 답변받을 이메일과 문의 내용을 적어주세요.")}
+      <section class="section wrap contact-section"><div class="contact-layout"><div>
+        <form class="contact-form" method="post" data-contact-form>
+          <p class="contact-status" role="status" tabindex="-1" data-contact-status></p>
+          <fieldset disabled><legend class="visually-hidden">어른이아 문의 작성</legend>
+            <div class="contact-field"><label for="contact-email">이메일 <span>필수</span></label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="hello@example.com" aria-describedby="email-help"><p id="email-help" class="small">이 주소로 답변을 보내드려요.</p></div>
+            <div class="contact-field"><label for="contact-message">문의 내용 <span>필수</span></label><textarea id="contact-message" name="message" required maxlength="5000" rows="7" placeholder="궁금한 내용을 편하게 적어주세요." aria-describedby="message-help"></textarea><p id="message-help" class="small">최대 5,000자 · 비밀번호나 민감한 개인정보는 적지 마세요.</p></div>
+            <label class="contact-consent"><input name="consent" type="checkbox" required><span>이메일·문의 내용을 답변에 이용하고, FormSubmit을 통해 어른이아에 전달하는 데 동의해요. <a href="/v0_1/privacy.html">개인정보 안내 보기</a></span></label>
+            <button class="button" type="submit" disabled>문의하기</button>
+          </fieldset>
+          <noscript><p class="contact-status">문의 폼을 사용하려면 자바스크립트를 켜주세요. 아래 이메일로도 문의할 수 있어요.</p></noscript>
+        </form>
+        <div class="contact-success" data-contact-success hidden><span class="success-mark" aria-hidden="true">✓</span><h2 tabindex="-1">문의하신 내용이<br>전달되었습니다.</h2><p>빠른 시일 내에 답변 드리겠습니다.</p><p class="small">작성하신 이메일로 답변을 보내드려요.</p><div class="actions">${link("", "홈으로 돌아가기", "button")}<button class="button button-outline" type="button" data-contact-again>새 문의 작성</button></div></div>
+      </div><aside class="contact-aside"><p class="eyebrow">어른이아에 물어보세요</p><h2>함께 시작할 일도,<br>이용 중 궁금한 점도.</h2><p>구독 이용, 클래스 일정, 프로그램 참여 방법과 협업 제안을 남겨주세요.</p><div class="contact-email-note"><p class="small">이메일로 직접 문의할 수도 있어요.</p><p>${CONTACT.recipient}</p></div><div class="contact-shortcuts">${link("pricing.html", "구독 플랜 살펴보기")}${link("programs.html", "프로그램 둘러보기")}</div></aside></div></section>
+      <section class="section section-soft"><div class="wrap faq-section"><div><p class="eyebrow">자주 묻는 질문</p><h2>먼저 살펴볼까요?</h2></div><div class="faq-list">
         ${faq("처음이라면 무엇부터 보면 좋을까요?", `무료 플랜의 콘텐츠 구성부터 살펴보세요. 더 많은 콘텐츠가 필요하다면 베이직, 다른 사람과 이야기하는 자리도 원한다면 프리미엄을 비교할 수 있어요. ${link("pricing.html", "무료·베이직·프리미엄 비교")}`)}
         ${faq("클래스에 참여하려면 구독해야 하나요?", "DAY ONE 클래스는 구독과 별도로 참여하는 프로그램이에요. 프리미엄 플랜에는 클래스 할인 혜택이 포함돼요. 일정과 개별 비용은 실제 클래스 모집 안내에서 확인하도록 준비하고 있어요.")}
         ${faq("프로그램마다 참여 조건이 다른가요?", "네. 예를 들어 만 26세 이하·서울 거주 또는 서울 소재 대학·직장 소속 조건은 CORE-UP 4기에 해당해요. 구독과 클래스, 다른 프로젝트는 각각의 이용·참여 안내를 확인해주세요.")}
         ${faq("CORE-UP 4기에는 어떻게 지원하나요?", `4기는 구독과 별도로 지원하는 프로젝트예요. 지원 기간은 ${COHORT.period}이고, 결과는 ${COHORT.result}에 개별 안내할 예정이에요. ${link("growth_4.html", "지원 조건과 과정 확인")}`)}
         ${faq("사진은 실제 프로그램 현장인가요?", "이번 검토 페이지의 사진은 한국 청년의 활동 장면을 AI로 연출한 예시예요. 실제 참여자나 운영 현장을 촬영한 사진은 아니에요.")}
-      </div></div></div></section>${ctaBand()}`,
+      </div></div></section>`,
   },
   {
     slug: "privacy.html",
     title: "개인정보 안내",
     description:
       "v0_1 검토 페이지의 개인정보 입력 기능과 외부 지원 페이지 이동에 관한 안내예요.",
-    body: `${intro("개인정보 안내", "이 검토 페이지에서는<br>개인정보를 입력받지 않아요.", "v0_1은 어른이아 홈페이지 개편 방향을 확인하기 위한 페이지예요. 실제 서비스 운영에 필요한 개인정보 처리방침은 별도로 확정해야 해요.")}
-      <section class="section wrap reading prose"><h2>이 페이지의 기능</h2><p>v0_1에는 회원가입, 로그인, 결제, 상담 접수, 문의 제출, 구독 신청 입력 기능이 없어요. 이름·이메일·연락처 등을 작성하는 양식을 제공하지 않아요.</p><h2>외부 지원 페이지</h2><p>‘4기 지원하기’는 외부 지원 페이지로 연결돼요. 이동한 페이지에서 개인정보를 입력하기 전에는 해당 페이지의 운영 주체, 수집 항목, 이용 목적과 동의 내용을 확인해주세요.</p><h2>운영 전 확인할 정보</h2><p>문의 연락처, 개인정보 처리 담당자, 수집 항목과 보유 기간 등 실제 운영 정보를 확인한 뒤 정식 개인정보 처리방침에 반영할 예정이에요. 이 검토 안내를 정식 처리방침으로 대신할 수는 없어요.</p><h2>궁금한 점이 있다면</h2><p>문의 채널은 준비 중이에요. 공개되는 연락 방법은 문의 페이지에서 확인할 수 있어요.</p>${link("contact.html", "문의 안내 보기")}</section>`,
+    body: `${intro("개인정보 안내", "문의한 내용에<br>답변하기 위해 사용해요.", "문의 양식으로 전달하는 정보와 이메일 전달 방식을 안내해요. 제출 전에 확인해주세요.")}
+      <section class="section wrap reading prose"><h2>입력하는 정보와 목적</h2><p>답변받을 이메일 주소와 문의 내용을 받아 문의 확인과 답변에 사용해요. 두 항목과 동의 확인은 필수이며, 동의하지 않으면 문의 양식으로 제출할 수 없어요. 비밀번호나 민감한 개인정보는 문의 내용에 적지 마세요.</p><h2>전달 방식</h2><p>동의 후 문의하기를 누르면 이메일 주소와 문의 내용이 이메일 전달 서비스 FormSubmit(formsubmit.co)에 전송되고, 운영자 수신 주소 ${CONTACT.recipient}로 전달돼요. 작성한 이메일은 답변 주소로 사용해요.</p><h2>보관과 삭제 문의</h2><p>FormSubmit은 제출 내용을 30일간 보관한다고 안내하고 있어요. 전달된 문의는 운영자 이메일에도 보관돼요. 이 사이트는 문의 내용을 브라우저 저장소나 별도 사이트 데이터베이스에 저장하지 않아요. 열람·정정·삭제를 요청하려면 ${CONTACT.recipient}로 연락해주세요.</p><p><a class="text-link" href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit 개인정보 안내 보기 ↗</a></p><h2>그 밖의 기능</h2><p>v0_1에서는 회원가입, 로그인, 결제, 상담 접수, 구독 신청을 받지 않아요. 정식 운영 주체, 개인정보 담당자와 운영자 이메일의 보유 기간 등 상세 운영 정보는 확정 후 추가할 예정이에요.</p><h2>외부 지원 페이지</h2><p>‘4기 지원하기’는 외부 지원 페이지로 연결돼요. 이동한 페이지에서 개인정보를 입력하기 전에는 해당 페이지의 운영 주체, 수집 항목, 이용 목적과 동의 내용을 확인해주세요.</p>${link("contact.html", "문의 작성하기")}</section>`,
   },
   {
     slug: "terms.html",
@@ -132,7 +146,7 @@ export const contentPages = [
     description:
       "어른이아 v0_1 검토 페이지의 이용 범위, 예시 사진, 프로그램 안내와 외부 지원 연결을 설명해요.",
     body: `${intro("이용 안내", "먼저 살펴보는<br>어른이아 개편 페이지예요.", "현재 페이지는 구성과 문구를 검토하는 단계예요. 정식 서비스의 이용 조건과 운영 정보는 확정 후 별도로 안내해요.")}
-      <section class="section wrap reading prose"><h2>볼 수 있는 내용</h2><p>어른이아 소개, 기본 프로그램, 무료·베이직·프리미엄 구독 구성, 별도 모집과 이전 프로그램의 개요를 확인할 수 있어요. 이 페이지 자체에서 신청을 접수하거나 결제를 진행하지 않아요.</p><h2>사진과 예시 콘텐츠</h2><p>사진은 한국 청년의 활동 장면을 AI로 연출한 예시예요. 실제 참여자 사진이나 활동 실적을 뜻하지 않아요. 실제 후기와 구분해 표시한 문구 예시 역시 실제 참여자의 발언으로 볼 수 없어요.</p><h2>프로그램 참여</h2><p>프로그램의 참여 조건은 해당 모집 안내에서 확인해주세요. ‘4기 지원하기’를 누르면 외부 지원 페이지로 이동해요. 실제 신청 전에는 그곳의 최신 모집 정보와 개인정보 안내를 확인해주세요.</p><h2>아직 준비 중인 기능</h2><p>회원가입, 로그인, 결제, 문의 제출, 구독 신청은 이 검토 페이지에서 제공하지 않아요. 운영 주체와 연락처, 이용 조건이 확정되면 정식 안내를 추가할 예정이에요.</p>${link("programs.html", "프로그램으로 돌아가기")}</section>`,
+      <section class="section wrap reading prose"><h2>볼 수 있는 내용</h2><p>어른이아 소개, 기본 프로그램, 무료·베이직·프리미엄 구독 구성, 별도 모집과 이전 프로그램의 개요를 확인할 수 있어요. 이 페이지 자체에서 프로그램 신청을 접수하거나 결제를 진행하지 않아요.</p><h2>사진과 예시 콘텐츠</h2><p>사진은 한국 청년의 활동 장면을 AI로 연출한 예시예요. 실제 참여자 사진이나 활동 실적을 뜻하지 않아요. 실제 후기와 구분해 표시한 문구 예시 역시 실제 참여자의 발언으로 볼 수 없어요.</p><h2>프로그램 참여</h2><p>프로그램의 참여 조건은 해당 모집 안내에서 확인해주세요. ‘4기 지원하기’를 누르면 외부 지원 페이지로 이동해요. 실제 신청 전에는 그곳의 최신 모집 정보와 개인정보 안내를 확인해주세요.</p><h2>문의하기</h2><p>문의 양식에서 이메일과 문의 내용을 보내면 운영자가 이메일로 답변해요. 전송은 FormSubmit을 통해 처리해요. 문의 제출만으로 구독·결제·프로그램 신청이 완료되지는 않아요. 수신 주소는 ${CONTACT.recipient}예요.</p><h2>아직 준비 중인 기능</h2><p>회원가입, 로그인, 결제, 구독 신청은 이 검토 페이지에서 제공하지 않아요. 운영 주체와 이용 조건이 확정되면 정식 안내를 추가할 예정이에요.</p>${link("programs.html", "프로그램으로 돌아가기")}</section>`,
   },
   {
     slug: "growth.html",
