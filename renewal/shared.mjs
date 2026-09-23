@@ -31,7 +31,50 @@ export const intro = (eyebrow, title, text) =>
 export const applyLink = (text = "4기 지원하기", cls = "button") =>
   `<a class="${cls}" href="${COHORT.application}" target="_blank" rel="noopener noreferrer" data-application>${text}${arrow}</a>`;
 export const ctaBand = () =>
-  `<section class="cta-band"><div class="wrap cta-inner"><div><p class="eyebrow">CORE-UP 4기 <span data-cohort-status>모집 중</span></p><h2>내게 맞는 일을,<br>경험하며 찾아봐요.</h2><p>${COHORT.period} · 최종 ${COHORT.capacity}명</p></div><div>${link("growth_4.html", "4기 자세히 보기", "button button-light")}<p class="small">만 26세 이하 · 서울 거주 또는 서울 소재 대학·직장 소속</p></div></div></section>`;
+  `<section class="cta-band"><div class="wrap cta-inner"><div><p class="eyebrow">나에게 맞는 시작</p><h2>읽어보고, 이야기하고,<br>한 번 해봐요.</h2><p>지금 필요한 경험부터 골라보세요.</p></div><div class="cta-options">${link("programs.html", "프로그램 둘러보기", "button button-light")}${link("pricing.html", "구독 플랜 비교하기", "text-link")}</div></div></section>`;
+export const PROGRAMS = [
+  {
+    id: "content-archive",
+    name: "전문가 콘텐츠 아카이브",
+    label: "읽고 생각해요",
+    text: "다른 사람의 시작과 선택을 읽고, 질문 카드에 내 생각을 남겨요. 필요할 때 다시 꺼내볼 수 있어요.",
+    price: "일부 콘텐츠 무료 · 베이직 월 9,900원",
+  },
+  {
+    id: "premium-round",
+    name: "프리미엄 라운드테이블",
+    label: "만나서 이야기해요",
+    text: "비슷한 고민을 하는 8~15명이 모여 일과 일상 이야기를 나눠요. 서로의 경험에서 다음 생각을 찾아봐요.",
+    price: "프리미엄 구독에 포함",
+  },
+  {
+    id: "day-one",
+    name: "DAY ONE 클래스",
+    label: "직접 경험해요",
+    text: "한 번쯤 궁금했던 일을 짧은 클래스로 경험해요. 온라인과 오프라인 중 나에게 맞는 방식을 살펴보세요.",
+    price: "원데이 클래스 5만원부터 · 프리미엄 회원 할인",
+  },
+];
+export const PLANS = [
+  {
+    id: "free",
+    name: "무료",
+    price: "0원",
+    text: "일부 아카이브와 영상 3편, 질문 카드 5장으로 가볍게 둘러봐요.",
+  },
+  {
+    id: "basic",
+    name: "베이직",
+    price: "9,900원",
+    text: "전체 아카이브와 질문 카드, 월간 큐레이션으로 꾸준히 생각을 정리해요.",
+  },
+  {
+    id: "premium",
+    name: "프리미엄",
+    price: "29,000원",
+    text: "베이직 혜택에 라운드테이블 참여와 클래스 할인을 더해요.",
+  },
+];
 export const notice = (title, text) =>
   `<aside class="notice"><h3>${title}</h3><p>${text}</p></aside>`;
 export const steps = [

@@ -41,10 +41,10 @@ if (state !== "open") {
   document.querySelectorAll("[data-application]").forEach((el) => {
     el.href =
       state === "closed"
-        ? "/v0_1/pricing.html"
+        ? "/v0_1/programs.html"
         : "/v0_1/growth_4.html#recruitment";
     el.textContent =
-      state === "closed" ? "다음 모집 소식 보기 ↗" : "모집 일정 확인하기 ↗";
+      state === "closed" ? "다른 프로그램 보기 ↗" : "모집 일정 확인하기 ↗";
     el.removeAttribute("target");
   });
   if (state === "closed")
