@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { homePage, cohortPage } from "../renewal/feature-pages.mjs";
 import { contentPages } from "../renewal/content-pages.mjs";
@@ -22,11 +22,9 @@ export function buildRenewal(outputRoot = "review-dist") {
   for (const name of ["style.css", "site.js"])
     cpSync(`renewal/${name}`, join(output, "assets", name));
   cpSync("renewal/availability.mjs", join(output, "assets/availability.js"));
-  const logo = readFileSync("legacy/logo.svg", "utf8").replaceAll(
-    'fill="#111111"',
-    'fill="#217346"',
-  );
-  writeFileSync(join(output, "assets/logo.svg"), logo);
+  cpSync("renewal/assets/brand", join(output, "assets/brand"), {
+    recursive: true,
+  });
   writeFileSync(join(output, "robots.txt"), "User-agent: *\nDisallow: /\n");
   console.log(`Built ${pages.length} renewal pages at /v0_1/.`);
 }
