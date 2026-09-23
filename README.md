@@ -4,6 +4,14 @@
 
 공개된 개편안은 **읽기 전용 미리보기**입니다. 상담사 6명, 후기 10개는 명확히 표시한 가상 콘텐츠이며 콘셉트 사진 5장과 가상 인물 사진 6장은 AI로 새로 제작한 콘셉트 이미지입니다. 실제 상담사 사진, 실제 후기 또는 협업 실적이 아닙니다. 공개 미리보기에서는 Google 로그인·상담 접수·결제를 활성화하지 않습니다.
 
+## 청년 성장 플랫폼 리뉴얼 V0.1
+
+기획안에 따른 기존 홈페이지 리뉴얼 시안은 `/v0_1/`에서 별도로 제공합니다. 비전·가치·소개·프로그램·소식 구독·문의·CORE-UP 4기와 지난 프로그램·정책 안내를 포함한 **14개 정적 페이지**이며, 내부 링크와 이미지도 `/v0_1/` 아래에 있습니다. 기존 루트(`/`)와 상담 시안(`/preview/`)은 유지합니다.
+
+`npm run build:review`가 세 경로를 함께 `review-dist/`에 생성합니다. 이번 시안의 코드·이미지는 `renewal/`, 생성기는 `scripts/build-renewal.mjs`, 이미지 프롬프트는 `renewal/image-prompts.json`에 있습니다. 한국 청년 사진은 AI 연출 예시, 경험 이야기는 가상 사례로 표시했습니다. 문의·구독 채널은 미정이므로 제출 기능이 없으며, 4기 지원만 승인된 외부 페이지로 연결합니다. 현재 외부 지원 페이지는 ChatGPT 로그인을 요구할 수 있습니다.
+
+CORE-UP 4기는 9월 30일까지 모집하고 10월 12일 결과를 안내하는 구성입니다. 브라우저에서 한국 시간 10월 1일 0시 이후 페이지를 열면 마감 상태와 다음 소식 안내로 전환합니다. 참가비·전체 진행 일정·장소·참여 시간은 확정 후 보충합니다. 이번 시안도 검색에서 제외하며, 아래의 상담 앱 구현·운영 설명과는 구분합니다. 전체 경로와 수정 위치는 [V0.1 리뉴얼 안내](docs/renewal-v0-1.md)를 확인하세요.
+
 ## 시작하기
 
 Node.js 22.12+ 권장.
@@ -80,7 +88,7 @@ public/images/            콘셉트 사진 5장·가상 인물 사진 6장 (JPEG
 docs/image-prompts.json   이미지 제작 프롬프트
 api/index.js              Vercel Node API 진입점 (현재 공개 배포에서는 차단)
 legacy/                  루트에 제공하는 기존 HTML/CSS/JS와 이미지
-scripts/build-review.mjs  기존 사이트 루트 + /preview/ 개편안의 정적 배포 빌드
+scripts/build-review.mjs  기존 사이트 루트 + /preview/ + /v0_1/ 정적 배포 빌드
 tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 ```
 
@@ -88,7 +96,7 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ## Vercel / 실제 운영 연결
 
-현재 Vercel 설정은 **루트의 기존 사이트와 `/preview/`의 새 읽기 전용 화면을 함께 제공하는 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB나 Google 인증키 없이도 두 사이트의 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
+현재 Vercel 설정은 **기존 사이트(`/`), 상담 시안(`/preview/`), 청년 성장 플랫폼 리뉴얼(`/v0_1/`)을 함께 제공하는 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB나 Google 인증키 없이도 세 경로의 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
 
 이후 로그인·매칭 서버를 공개하려면 원격 libSQL/Turso DB와 서버 환경 변수, 실제 계정 검증이 필요합니다. 기존 루트를 보존하면서 `/preview/`에 서버 기능을 연결하려면 앱과 인증 후 복귀 경로까지 별도로 준비해야 합니다. 현재 설정에서 빌드 명령만 전체 앱용으로 바꾸면 기존 루트를 다시 교체하므로, 단순 설정 변경으로 운영을 활성화하지 않습니다. 배포 범위와 후속 준비 항목은 [Vercel 연결 체크리스트](docs/vercel-google-login-checklist.md)에 정리했습니다.
 
@@ -107,11 +115,11 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ### 기존 홈페이지와 별도 개편안 검토
 
-`npm run build:review`는 기존 `legacy/` 정적 사이트를 `review-dist/` 루트에, 새 개편안을 `review-dist/preview/`에 만듭니다. 기존 홈페이지는 `https://arunia.vercel.app/`, 개편안은 `https://arunia.vercel.app/preview/`에서 확인하는 구성입니다. `/growth.html`, `/programs.html` 등 기존 페이지는 원래 주소를 유지하며 `/archive/`로 옮기지 않습니다.
+`npm run build:review`는 기존 `legacy/` 정적 사이트를 `review-dist/` 루트에, 상담 개편안을 `review-dist/preview/`에, 청년 성장 플랫폼 리뉴얼을 `review-dist/v0_1/`에 만듭니다. 기존 홈페이지는 `https://arunia.vercel.app/`, 개편안은 `https://arunia.vercel.app/preview/`에서 확인하는 구성입니다. `/growth.html`, `/programs.html` 등 기존 페이지는 원래 주소를 유지하며 `/archive/`로 옮기지 않습니다.
 
 새 개편안의 메뉴와 이미지 경로는 `/preview/` 기준입니다. 이 화면은 가상 공개 콘텐츠만 포함하며 서버 API를 호출하지 않습니다. 로그인·가입 페이지에서는 비활성화된 Google 버튼과 연결 준비 안내를 보여주며, 상담 신청·계정·관리자·결제 경로는 접수하지 않는다는 안내 화면으로 연결됩니다. 기존 `npm run build`는 로컬 전체 앱을 생성하는 별도 명령입니다.
 
-정적 호스팅에는 `review-dist/`를 업로드합니다. `/preview/counselors/...`, `/preview/counseling/...` 등 개편안의 화면 경로에만 `/preview/index.html`로 연결하는 SPA 규칙을 적용합니다. 루트 전체를 새 앱으로 연결하지 않습니다. `X-Robots-Tag: noindex, nofollow`와 robots의 새 검색 차단 범위도 `/preview/`에 한정하며, 기존 홈페이지 전체를 검색 차단하지 않습니다. 존재하지 않는 자산·소스·환경 설정 파일은 공개하지 않고 `/api`는 읽기 전용 배포 설정으로 차단합니다.
+정적 호스팅에는 `review-dist/`를 업로드합니다. `/preview/counselors/...`, `/preview/counseling/...` 등 개편안의 화면 경로에만 `/preview/index.html`로 연결하는 SPA 규칙을 적용합니다. 루트 전체를 새 앱으로 연결하지 않습니다. `X-Robots-Tag: noindex, nofollow`와 robots의 새 검색 차단은 `/preview/`, `/v0_1/` 검토 화면과 API에 적용하며, 기존 홈페이지 전체를 검색 차단하지 않습니다. 존재하지 않는 자산·소스·환경 설정 파일은 공개하지 않고 `/api`는 읽기 전용 배포 설정으로 차단합니다.
 
 카테고리 참고 자료는 `docs/counseling-categories-research.md`, 가상 인물 이미지 제작 기록은 `docs/counselor-image-prompts.json`에서 확인합니다. 푸터의 사업자 정보는 실제처럼 만든 번호나 주소 없이 `등록 예정`으로 표시했습니다.
 
