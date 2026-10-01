@@ -1,0 +1,52 @@
+{
+  "buildCommand": "npm run build:review",
+  "outputDirectory": "review-dist",
+  "env": {
+    "ARUNIA_REVIEW_ONLY": "true"
+  },
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60
+    }
+  },
+  "redirects": [
+    {
+      "source": "/archive/:path*",
+      "destination": "/:path*",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api"
+    },
+    {
+      "source": "/preview/:path*",
+      "destination": "/preview/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/v0_1",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/v0_1/",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/v0_1/:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/preview/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}

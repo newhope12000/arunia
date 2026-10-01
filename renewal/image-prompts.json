@@ -1,0 +1,28 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-09-23",
+  "usage": "AI 연출 예시 이미지. 실제 참가자·활동·상담사 사진이 아님.",
+  "assets": [
+    {
+      "name": "hero",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide website hero photograph for a Korean youth career exploration community, staged example with entirely fictitious people. Scene: a bright contemporary Korean university neighborhood cafe with large windows, a wood shared table and subtle green plants. Subjects: exactly three ordinary Korean university students or early-career friends in their twenties (two women and one man), candidly collaborating over one notebook and a plain unbranded laptop. Different everyday casual clothing, natural hair, authentic skin textures, understated expressions, one person listening while another explains a note. Composition: landscape 3:2 at high resolution, medium-wide editorial photograph, people grouped toward the middle-right; faces comfortably within the frame with headroom, the left quarter has softly lit cafe context and breathing room. Eye level documentary lens, natural depth. Lighting: gentle daylight, warm ivory walls, realistic color and a subtle green accent from plants only. No direct look to camera, no posed high fives, no exaggerated smiles, no stock photography glamour, no flawless model retouching. No visible logos, no legible text, no captions, no watermark. Natural human anatomy and plausible fingers, realistic material texture. Deliver one coherent photographic image, not collage.",
+      "paths": ["assets/images/hero-1600.webp", "assets/images/hero-640.webp"]
+    },
+    {
+      "name": "mentoring",
+      "prompt": "Use case: photorealistic-natural. Asset type: career mentoring website editorial photograph, staged example with entirely fictitious people. Scene: a light-filled Korean university library coworking area near a broad window, quiet wood table, ivory walls and a small natural green plant in background. Subjects: two Korean people, a young woman university participant aged about 23 and a female working professional mentor aged about 30, sitting slightly diagonally to each other discussing a paper notebook. Mentor in a relaxed simple shirt, participant in ordinary casual cardigan; relaxed attentive expressions, looking at each other and the notebook rather than camera. Composition: landscape 3:2, medium wide shot with both faces and table visible, generous room on all sides for crop; natural documentary editorial photography. Lighting: soft window daylight, authentic skin and hair texture, calm warmth with neutral color. Realistic ordinary people, no glamorous stock models, no exaggerated gestures, no medical/therapy setting. No visible brand logos, no legible text, no captions, no watermark; anatomy and hands realistic. Deliver one coherent photographic image.",
+      "paths": [
+        "assets/images/mentoring-1600.webp",
+        "assets/images/mentoring-640.webp"
+      ]
+    },
+    {
+      "name": "workshop",
+      "prompt": "Use case: photorealistic-natural. Asset type: career workshop website editorial photograph, staged example with entirely fictitious people. Scene: a real-feeling shared studio at a Korean university, bright daylight from tall side windows, warm pale wood tables, ivory interior with a few leafy plants. Subjects: exactly four Korean young adults in their twenties, two women and two men, doing a modest collaborative career exploration task together around one table with a plain laptop, a few sheets of paper and pencils. Different everyday clothes (muted navy shirt, light gray sweatshirt, ivory cardigan, soft green shirt), natural varied hairstyles, unposed and focused, one making a small note while others discuss. Composition: landscape 3:2 medium-wide documentary editorial photo, full heads and upper bodies safely in frame, authentic casual group activity, background is credible but uncluttered. Soft natural daylight, true colors, real skin texture, no artificial green color wash. No highfives or forced smile, no direct look at camera, no glamorous model retouching. No legible text, no brand logos, no captions, no watermark, plausible hands and natural human anatomy. Deliver a single coherent photographic image, not collage.",
+      "paths": [
+        "assets/images/workshop-1600.webp",
+        "assets/images/workshop-640.webp"
+      ]
+    }
+  ]
+}

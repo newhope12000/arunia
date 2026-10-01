@@ -1,0 +1,10 @@
+node_modules/
+dist/
+review-dist/
+.env
+.env.*
+!.env.example
+.data/
+*.db*
+*.tsbuildinfo
+.DS_Store
