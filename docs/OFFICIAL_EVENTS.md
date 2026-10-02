@@ -48,3 +48,6 @@ CORE-UP의 기존 9월 30일 마감은 연장하지 않았다. 이번 작업은 
 - 중앙 저장소 커밋 `f773229`에 공식 도메인 두 개의 정확한 허용 및 `test:arunia-api` 회귀 테스트 25개를 반영했다. 별도 시트·Telegram 로컬 테스트 27개도 통과했다.
 - 배포된 두 중앙 API에서 `Origin: https://www.arunia.co.kr`의 GET은 HTTP 200, `verify.ready`, `{ok:true,ready:true}`이고 OPTIONS는 HTTP 204다. 응답의 허용 출처는 요청한 공식 도메인과 정확히 일치한다. 새 신청 행이나 Telegram 메시지를 생성하지 않는 읽기 전용 확인이다.
 - 데스크톱과 390px 모바일에서 홈페이지 카드·모바일 메뉴→공모전 이동을 확인했다. 모바일 문서 너비와 화면 너비가 같아 가로 넘침이 없다. 기존 그만둘만두 공지는 원문을 유지한다.
+- 공식 main 커밋 `9686a30`의 기존 Vercel 자동 배포가 성공했다: `https://vercel.com/newhope12000s-projects/arunia/JAMGUFgyiACqyGnhcYLzd7w2McGz`. 중앙 서버 커밋 `f773229`의 Vercel 배포도 성공했다: `https://vercel.com/hj-1st/applications-collection/J9HrS2avMXT3Zef4wuwjTq9mvHvq`.
+- 공개 `https://www.arunia.co.kr/`의 새 행사 카드와 메뉴→`/hunmin`→`/hunmin/apply`를 실제 브라우저로 확인했다. 응모 화면의 준비 확인이 완료되어 입력칸과 내용 확인 버튼이 활성화됐다. `/career-core-up`도 같은 도메인에서 준비 확인 및 버튼 활성화를 확인했다.
+- 접수 확인 두 경로와 기존 `/preview/`, `/v0_1/`는 HTTP 200이며 행사 `.html` 및 후행 슬래시 주소는 확장자 없는 공식 경로로 정상 이동한다. 운영 화면 확인 중 실제 응모 POST나 추가 Telegram 발송은 하지 않았다.
