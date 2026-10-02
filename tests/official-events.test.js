@@ -15,6 +15,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { renderOfficialHome } from "../renewal/official-home.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (path) => readFileSync(join(root, path), "utf8");
@@ -254,7 +255,7 @@ test("campaign tracking and former direct-form links survive the official clean 
   assert.deepEqual(redirects, ["/hunmin/apply?utm_source=test#hunminForm"]);
 });
 
-test("review build publishes nested event pages and assets alongside the existing root, preview and v0_1", () => {
+test("review build publishes nested event pages and assets alongside the renewed root, preview and v0_1", () => {
   // Isolate the static packaging check. The main production build separately
   // validates the TypeScript and Vite bundles; this stub only supplies /preview.
   const fixture = mkdtempSync(join(tmpdir(), "arunia-official-events-"));
@@ -274,7 +275,7 @@ test("review build publishes nested event pages and assets alongside the existin
     const output = join(fixture, "review-dist");
     assert.equal(
       readFileSync(join(output, "index.html"), "utf8"),
-      read("legacy/index.html"),
+      renderOfficialHome(),
     );
     assert.equal(
       readFileSync(join(output, "preview/index.html"), "utf8"),

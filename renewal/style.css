@@ -1131,6 +1131,10 @@ figcaption.note {
 .opportunity > .button {
   flex-shrink: 0;
 }
+.official-opportunities {
+  display: grid;
+  gap: 36px;
+}
 .cta-options {
   display: flex;
   flex-direction: column;

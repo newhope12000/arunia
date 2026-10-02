@@ -9,8 +9,9 @@ import {
 } from "node:fs";
 import { basename } from "node:path";
 import { buildRenewal } from "./build-renewal.mjs";
+import { buildOfficialHome } from "./build-official-home.mjs";
 
-// Keep the existing public site at / and isolate the counseling review at /preview/.
+// Publish the official homepage and keep the counseling review at /preview/.
 rmSync("review-dist", { recursive: true, force: true });
 mkdirSync("review-dist", { recursive: true });
 const result = spawnSync(
@@ -24,7 +25,7 @@ const result = spawnSync(
   { stdio: "inherit", env: { ...process.env, VITE_PUBLIC_PREVIEW: "true" } },
 );
 if (result.status !== 0) process.exit(result.status ?? 1);
-// Restore the original HTML pages and their relative assets at their original URLs.
+// Keep existing detail pages, event intakes and their assets at the original URLs.
 cpSync("legacy", "review-dist", {
   recursive: true,
   filter(source) {
@@ -46,3 +47,5 @@ const robots = readFileSync("legacy/robots.txt", "utf8").replace(
 );
 writeFileSync("review-dist/robots.txt", robots);
 buildRenewal();
+// Promote only the renewal homepage after copying legacy detail pages.
+buildOfficialHome();

@@ -11,22 +11,31 @@ import {
   steps,
 } from "./shared.mjs";
 
-export const homePage = {
-  slug: "index.html",
-  title: "일과 일상을 함께 연습하는 곳",
-  description:
-    "콘텐츠 아카이브, 프리미엄 라운드테이블, DAY ONE 클래스와 구독 플랜. 어른이아에서 나에게 필요한 경험을 골라보세요.",
-  body: `<section class="hero wrap">
-    <div class="hero-copy"><p class="eyebrow"><span class="tiny-line"></span>라이프 디자인 · 커리어 탐색</p><h1>일도, 일상도.<br>내 속도로<br><em>경험해봐요.</em></h1><p class="lead">다른 사람의 시작을 읽고, 비슷한 고민을 나누고,<br class="desktop-only"> 궁금했던 일을 직접 해봐요.<br>나에게 맞는 선택을 찾는 시간을 함께해요.</p><div class="actions">${link("programs.html", "프로그램 둘러보기", "button")}${link("pricing.html", "구독 플랜 보기", "text-link")}</div><p class="hero-caption">가볍게 둘러보고, 필요한 경험부터 골라보세요.</p></div>
-    <figure class="hero-photo">${picture("hero", "밝은 캠퍼스 공간에서 함께 자료를 살펴보는 한국 청년들", { eager: true })}<figcaption><span>처음인 일이 많은 우리에게</span><strong>함께 경험하는 일과 일상.</strong></figcaption></figure>
+export function createHomePage({
+  linkTo = link,
+  image = picture,
+  closingCta = ctaBand,
+  opportunities,
+} = {}) {
+  return {
+    slug: "index.html",
+    title: "일과 일상을 함께 연습하는 곳",
+    description:
+      "콘텐츠 아카이브, 프리미엄 라운드테이블, DAY ONE 클래스와 구독 플랜. 어른이아에서 나에게 필요한 경험을 골라보세요.",
+    body: `<section class="hero wrap">
+    <div class="hero-copy"><p class="eyebrow"><span class="tiny-line"></span>라이프 디자인 · 커리어 탐색</p><h1>일도, 일상도.<br>내 속도로<br><em>경험해봐요.</em></h1><p class="lead">다른 사람의 시작을 읽고, 비슷한 고민을 나누고,<br class="desktop-only"> 궁금했던 일을 직접 해봐요.<br>나에게 맞는 선택을 찾는 시간을 함께해요.</p><div class="actions">${linkTo("programs.html", "프로그램 둘러보기", "button")}${linkTo("pricing.html", "구독 플랜 보기", "text-link")}</div><p class="hero-caption">가볍게 둘러보고, 필요한 경험부터 골라보세요.</p></div>
+    <figure class="hero-photo">${image("hero", "밝은 캠퍼스 공간에서 함께 자료를 살펴보는 한국 청년들", { eager: true })}<figcaption><span>처음인 일이 많은 우리에게</span><strong>함께 경험하는 일과 일상.</strong></figcaption></figure>
   </section>
-  <section class="section wrap question-section"><div>${sectionHead("이런 고민을 하고 있나요?", "혼자 정하기 어려울 땐,<br>다른 경험도 만나봐요.", "일을 고를 때도, 새로운 생활을 시작할 때도.<br>먼저 해본 사람의 이야기가 도움이 될 수 있어요.")}${link("vision.html", "어른이아가 생각하는 시작")}</div><ol class="question-list"><li><span>01</span><h3>내가 원하는 일은 뭘까?<br>다들 어떻게 찾았을까?</h3></li><li><span>02</span><h3>요즘 나와 비슷한 고민을 하는<br>사람들을 만나볼 수 있을까?</h3></li><li><span>03</span><h3>궁금했던 일,<br>부담 없이 한 번 해볼 수 없을까?</h3></li></ol></section>
-  <section class="section section-soft" id="programs"><div class="wrap"><div class="heading-line">${sectionHead("어른이아의 프로그램", "읽고, 만나고, 해보는<br>세 가지 방법.")}${link("programs.html", "프로그램 전체 보기")}</div><div class="experience-layout"><figure class="experience-photo">${picture("workshop", "공유 작업 공간에서 자료를 함께 살펴보며 이야기를 나누는 청년들")}<figcaption>지금 내게 필요한 방식으로 함께해요.</figcaption></figure><ol class="experience-list">${PROGRAMS.map((program, index) => `<li><span class="row-number">0${index + 1}</span><div><span class="small">${program.label}</span><h3>${program.name}</h3><p>${program.text}</p><p class="program-cost">${program.price}</p>${link(`programs.html#${program.id}`, "자세히 보기")}</div></li>`).join("")}</ol></div></div></section>
-  <section class="section wrap" id="membership"><div class="heading-line">${sectionHead("구독 플랜", "가볍게 둘러보고,<br>필요할 때 구독해요.", "콘텐츠를 혼자 읽는 시간부터 함께하는 모임까지, 이용하고 싶은 범위에 맞춰 골라요.")}${link("pricing.html", "혜택과 가격 비교하기")}</div><div class="membership-preview">${PLANS.map((plan) => `<article class="membership-option"><h3>${plan.name}</h3><p class="plan-price">${plan.price}${plan.id !== "free" ? "<span> / 월</span>" : ""}</p><p class="plan-summary">${plan.text}</p>${link(`pricing.html#${plan.id}`, `${plan.name} 플랜 보기`)}</article>`).join("")}</div></section>
-  <section class="section section-sky"><div class="wrap"><div class="heading-line">${sectionHead("모집·이벤트", "기간을 정해,<br>조금 더 깊이 경험해요.", "기본 프로그램과 함께, 주제별 프로젝트와 참여 기회도 열려요.")}${link("programs.html#open-programs", "모집 소식 보기")}</div><article class="opportunity"><div><p class="eyebrow">기수별 모집 · <span data-cohort-status>모집 중</span></p><h3>${COHORT.name}</h3><p>성향상담, 현직자 멘토링과 3일 실무 경험, 프로필 이력서 제작을 함께해요.</p><p class="small">${COHORT.period} · 최종 ${COHORT.capacity}명<br>만 26세 이하 · 서울 거주 또는 서울 소재 대학·직장 소속</p></div>${link("growth_4.html", "4기 모집 자세히 보기", "button button-outline")}</article></div></section>
+  <section class="section wrap question-section"><div>${sectionHead("이런 고민을 하고 있나요?", "혼자 정하기 어려울 땐,<br>다른 경험도 만나봐요.", "일을 고를 때도, 새로운 생활을 시작할 때도.<br>먼저 해본 사람의 이야기가 도움이 될 수 있어요.")}${linkTo("vision.html", "어른이아가 생각하는 시작")}</div><ol class="question-list"><li><span>01</span><h3>내가 원하는 일은 뭘까?<br>다들 어떻게 찾았을까?</h3></li><li><span>02</span><h3>요즘 나와 비슷한 고민을 하는<br>사람들을 만나볼 수 있을까?</h3></li><li><span>03</span><h3>궁금했던 일,<br>부담 없이 한 번 해볼 수 없을까?</h3></li></ol></section>
+  <section class="section section-soft" id="programs"><div class="wrap"><div class="heading-line">${sectionHead("어른이아의 프로그램", "읽고, 만나고, 해보는<br>세 가지 방법.")}${linkTo("programs.html", "프로그램 전체 보기")}</div><div class="experience-layout"><figure class="experience-photo">${image("workshop", "공유 작업 공간에서 자료를 함께 살펴보며 이야기를 나누는 청년들")}<figcaption>지금 내게 필요한 방식으로 함께해요.</figcaption></figure><ol class="experience-list">${PROGRAMS.map((program, index) => `<li><span class="row-number">0${index + 1}</span><div><span class="small">${program.label}</span><h3>${program.name}</h3><p>${program.text}</p><p class="program-cost">${program.price}</p>${linkTo(`programs.html#${program.id}`, "자세히 보기")}</div></li>`).join("")}</ol></div></div></section>
+  <section class="section wrap" id="membership"><div class="heading-line">${sectionHead("구독 플랜", "가볍게 둘러보고,<br>필요할 때 구독해요.", "콘텐츠를 혼자 읽는 시간부터 함께하는 모임까지, 이용하고 싶은 범위에 맞춰 골라요.")}${linkTo("pricing.html", "혜택과 가격 비교하기")}</div><div class="membership-preview">${PLANS.map((plan) => `<article class="membership-option"><h3>${plan.name}</h3><p class="plan-price">${plan.price}${plan.id !== "free" ? "<span> / 월</span>" : ""}</p><p class="plan-summary">${plan.text}</p>${linkTo(`pricing.html#${plan.id}`, `${plan.name} 플랜 보기`)}</article>`).join("")}</div></section>
+  ${opportunities ?? `<section class="section section-sky"><div class="wrap"><div class="heading-line">${sectionHead("모집·이벤트", "기간을 정해,<br>조금 더 깊이 경험해요.", "기본 프로그램과 함께, 주제별 프로젝트와 참여 기회도 열려요.")}${linkTo("programs.html#open-programs", "모집 소식 보기")}</div><article class="opportunity"><div><p class="eyebrow">기수별 모집 · <span data-cohort-status>모집 중</span></p><h3>${COHORT.name}</h3><p>성향상담, 현직자 멘토링과 3일 실무 경험, 프로필 이력서 제작을 함께해요.</p><p class="small">${COHORT.period} · 최종 ${COHORT.capacity}명<br>만 26세 이하 · 서울 거주 또는 서울 소재 대학·직장 소속</p></div>${linkTo("growth_4.html", "4기 모집 자세히 보기", "button button-outline")}</article></div></section>`}
   <section class="section wrap"><div class="heading-line">${sectionHead("경험 이야기", "각자에게 필요한,<br>서로 다른 시작.", "어른이아에서 어떤 경험을 할 수 있는지 그려봤어요.")}<span class="sample-label">후기 구성 예시</span></div><div class="story-grid"><article class="story-quote"><span class="story-type">콘텐츠 아카이브 · 진로를 고민하는 대학생</span><blockquote>“다른 사람의 첫날을<br>읽으면서, 내 질문을<br>하나씩 적어봤어요.”</blockquote><p>진로를 정하기 전 여러 경험을 읽고, 질문 카드에 내가 중요하게 여기는 기준을 남겨보는 이야기.</p></article><article class="story-quote"><span class="story-type">라운드테이블 · 새로운 생활을 시작한 직장인</span><blockquote>“요즘의 고민을<br>편하게 나눌 사람이<br>있으면 좋겠어요.”</blockquote><p>비슷한 시기를 보내는 사람들을 만나 직장과 일상 이야기를 나누고, 서로의 경험을 들어보는 이야기.</p></article><article class="story-quote"><span class="story-type">DAY ONE 클래스 · 새로운 경험이 궁금한 청년</span><blockquote>“계속 궁금했던 일을<br>한 번 해보고<br>결정하고 싶었어요.”</blockquote><p>오래 고민하던 관심사를 짧은 클래스로 만나보고, 무엇이 즐거웠는지 돌아보는 이야기.</p></article></div><p class="note">위 이야기는 화면 구성을 위한 가상 예시예요. 실제 참여자의 인터뷰를 확인한 뒤 교체할 예정이에요.</p></section>
-  ${ctaBand()}`,
-};
+  ${closingCta()}`,
+  };
+}
+
+export const homePage = createHomePage();
 
 export const cohortPage = {
   slug: "growth_4.html",

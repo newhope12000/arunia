@@ -1,20 +1,20 @@
 # 어른이아 — 마음을 만나는 플랫폼
 
-기존 어른이아 정적 사이트를 루트(`/`)에서 제공하고, 서울·경기 2030을 위한 상담 전문가 매칭 서비스 개편안은 `/preview/`에서 별도로 검토합니다. 개편안에는 React 화면과 로컬에서 실행할 수 있는 회원·신청·운영자 배정·결제 API가 포함되어 있습니다.
+공식 메인(`/`)은 기존 `/v0_1/` 리뉴얼 콘텐츠와 이미지를 사용하며, 훈민정음·CORE-UP 4기·그만둘만두 및 지난 프로그램의 진입점을 함께 제공합니다. 기존 상세 페이지와 행사 접수는 원래 주소를 유지합니다. 서울·경기 2030을 위한 상담 전문가 매칭 서비스 개편안은 `/preview/`에서 별도로 검토합니다. 개편안에는 React 화면과 로컬에서 실행할 수 있는 회원·신청·운영자 배정·결제 API가 포함되어 있습니다. 메인 교체 범위와 연결은 [공식 메인 싱크 문서](docs/OFFICIAL_HOME.md)를 참고하세요.
 
 ## 공식 도메인의 행사 안내·접수
 
 공식 운영 저장소는 `newhope12000/arunia`이며, main 반영 시 기존 Vercel 프로젝트 `newhope12000s-projects/arunia`가 자동 빌드·배포합니다. 공식 홈페이지 `https://www.arunia.co.kr/`를 유지하며 훈민정음 안내 `/hunmin`, 응모 `/hunmin/apply`, 접수 확인 `/hunmin/thanks` 및 CORE-UP 안내·신청 `/career-core-up`, 확인 `/career-core-up/thanks`를 같은 도메인 아래 제공합니다.
 
-행사 원본은 `legacy/hunmin/`, `legacy/career-core-up/`, 공통 자산은 `legacy/assets/`에 있습니다. `npm run build:review`가 기존 홈페이지와 함께 배포 폴더에 복사하며 행사 전용 경로는 `vercel.json`에서 연결합니다. 상담 미리보기의 서버 차단 설정은 유지합니다. 실제 행사 접수는 기존 중앙 `applications-collection.vercel.app` API와 Google Sheets·Telegram 연결을 사용하며, 정적 저장소에 봇·웹훅 비밀값을 넣지 않습니다. 상세 연결 및 운영 범위는 [공식 행사 연동 문서](docs/OFFICIAL_EVENTS.md)를 참고하세요.
+행사 원본은 `legacy/hunmin/`, `legacy/career-core-up/`, 공통 자산은 `legacy/assets/`에 있습니다. `npm run build:review`가 공식 메인과 함께 배포 폴더에 복사하며 행사 전용 경로는 `vercel.json`에서 연결합니다. 상담 미리보기의 서버 차단 설정은 유지합니다. 실제 행사 접수는 기존 중앙 `applications-collection.vercel.app` API와 Google Sheets·Telegram 연결을 사용하며, 정적 저장소에 봇·웹훅 비밀값을 넣지 않습니다. 상세 연결 및 운영 범위는 [공식 행사 연동 문서](docs/OFFICIAL_EVENTS.md)를 참고하세요.
 
 공개된 개편안은 **읽기 전용 미리보기**입니다. 상담사 6명, 후기 10개는 명확히 표시한 가상 콘텐츠이며 콘셉트 사진 5장과 가상 인물 사진 6장은 AI로 새로 제작한 콘셉트 이미지입니다. 실제 상담사 사진, 실제 후기 또는 협업 실적이 아닙니다. 공개 미리보기에서는 Google 로그인·상담 접수·결제를 활성화하지 않습니다.
 
 ## 청년 성장 플랫폼 리뉴얼 V0.1
 
-기획안에 따른 기존 홈페이지 리뉴얼 시안은 `/v0_1/`에서 별도로 제공합니다. 비전·가치·소개·프로그램·구독 플랜·문의·CORE-UP 4기와 지난 프로그램·정책 안내를 포함한 **14개 정적 페이지**이며, 내부 링크와 이미지도 `/v0_1/` 아래에 있습니다. 기존 루트(`/`)와 상담 시안(`/preview/`)은 유지합니다.
+기획안에 따른 기존 홈페이지 리뉴얼 시안은 `/v0_1/`에서 별도로 제공합니다. 비전·가치·소개·프로그램·구독 플랜·문의·CORE-UP 4기와 지난 프로그램·정책 안내를 포함한 **14개 정적 페이지**이며, 내부 링크와 이미지도 `/v0_1/` 아래에 있습니다. 공식 루트(`/`)에는 이 시안의 메인 콘텐츠와 이미지를 게시하며, 기존 하위 페이지와 상담 시안(`/preview/`)은 유지합니다.
 
-`npm run build:review`가 세 경로를 함께 `review-dist/`에 생성합니다. 이번 시안의 코드·이미지는 `renewal/`, 생성기는 `scripts/build-renewal.mjs`, 이미지 프롬프트는 `renewal/image-prompts.json`에 있습니다. 한국 청년 사진은 AI 연출 예시, 경험 이야기는 가상 사례로 표시했습니다. 기존 콘텐츠 아카이브·라운드테이블·DAY ONE 클래스와 무료·베이직·프리미엄 구독을 기본으로 안내합니다. 실제 가입·결제는 연결하지 않았으며, 4기 지원은 승인된 외부 페이지로 연결합니다. 현재 외부 지원 페이지는 ChatGPT 로그인을 요구할 수 있습니다. `/v0_1/contact.html`의 문의는 방문자 동의 후 FormSubmit을 통해 `hwajeongup@gmail.com`으로 전달합니다.
+`npm run build:review`가 공식 메인·기존 하위 페이지와 두 시안 경로를 함께 `review-dist/`에 생성합니다. 이번 시안의 코드·이미지는 `renewal/`, 생성기는 `scripts/build-renewal.mjs`, 이미지 프롬프트는 `renewal/image-prompts.json`에 있습니다. 한국 청년 사진은 AI 연출 예시, 경험 이야기는 가상 사례로 표시했습니다. 기존 콘텐츠 아카이브·라운드테이블·DAY ONE 클래스와 무료·베이직·프리미엄 구독을 기본으로 안내합니다. 실제 가입·결제는 연결하지 않았으며, 4기 지원은 승인된 외부 페이지로 연결합니다. 현재 외부 지원 페이지는 ChatGPT 로그인을 요구할 수 있습니다. `/v0_1/contact.html`의 문의는 방문자 동의 후 FormSubmit을 통해 `hwajeongup@gmail.com`으로 전달합니다.
 
 CORE-UP 4기는 9월 30일까지 모집하고 10월 12일 결과를 안내하는 구성입니다. 브라우저에서 한국 시간 10월 1일 0시 이후 페이지를 열면 마감 상태와 다음 소식 안내로 전환합니다. 참가비·전체 진행 일정·장소·참여 시간은 확정 후 보충합니다. 이번 시안도 검색에서 제외하며, 아래의 상담 앱 구현·운영 설명과는 구분합니다. 전체 경로와 수정 위치는 [V0.1 리뉴얼 안내](docs/renewal-v0-1.md)를 확인하세요.
 
@@ -93,8 +93,8 @@ server/admin.js           운영자 계정 발급 CLI
 public/images/            콘셉트 사진 5장·가상 인물 사진 6장 (JPEG 최적화본)
 docs/image-prompts.json   이미지 제작 프롬프트
 api/index.js              Vercel Node API 진입점 (현재 공개 배포에서는 차단)
-legacy/                  루트에 제공하는 기존 HTML/CSS/JS와 이미지
-scripts/build-review.mjs  기존 사이트 루트 + /preview/ + /v0_1/ 정적 배포 빌드
+legacy/                  기존 상세·행사 HTML/CSS/JS와 이전 메인 원본
+scripts/build-review.mjs  공식 메인·기존 상세 + /preview/ + /v0_1/ 정적 배포 빌드
 tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 ```
 
@@ -102,7 +102,7 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ## Vercel / 실제 운영 연결
 
-현재 Vercel 설정은 **기존 사이트(`/`), 상담 시안(`/preview/`), 청년 성장 플랫폼 리뉴얼(`/v0_1/`)을 함께 제공하는 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB나 Google 인증키 없이도 세 경로의 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
+현재 Vercel 설정은 **공식 리뉴얼 메인(`/`)과 기존 상세·행사 페이지, 상담 시안(`/preview/`), 청년 성장 플랫폼 시안(`/v0_1/`)을 함께 제공하는 배포**입니다. `npm run build:review`와 `review-dist`를 사용하며, 로그인·접수·결제 API는 `ARUNIA_REVIEW_ONLY=true`로 차단합니다. DB나 Google 인증키 없이도 세 경로의 공개 화면을 볼 수 있습니다. 로컬 `npm run dev`와 전체 앱의 `npm run build`는 그대로 사용할 수 있습니다.
 
 이후 로그인·매칭 서버를 공개하려면 원격 libSQL/Turso DB와 서버 환경 변수, 실제 계정 검증이 필요합니다. 기존 루트를 보존하면서 `/preview/`에 서버 기능을 연결하려면 앱과 인증 후 복귀 경로까지 별도로 준비해야 합니다. 현재 설정에서 빌드 명령만 전체 앱용으로 바꾸면 기존 루트를 다시 교체하므로, 단순 설정 변경으로 운영을 활성화하지 않습니다. 배포 범위와 후속 준비 항목은 [Vercel 연결 체크리스트](docs/vercel-google-login-checklist.md)에 정리했습니다.
 
@@ -121,7 +121,7 @@ tests/platform.test.js    격리된 DB와 가짜 결제사로 API 통합 검증
 
 ### 기존 홈페이지와 별도 개편안 검토
 
-`npm run build:review`는 기존 `legacy/` 정적 사이트를 `review-dist/` 루트에, 상담 개편안을 `review-dist/preview/`에, 청년 성장 플랫폼 리뉴얼을 `review-dist/v0_1/`에 만듭니다. 기존 홈페이지는 `https://arunia.vercel.app/`, 개편안은 `https://arunia.vercel.app/preview/`에서 확인하는 구성입니다. `/growth.html`, `/programs.html` 등 기존 페이지는 원래 주소를 유지하며 `/archive/`로 옮기지 않습니다.
+`npm run build:review`는 기존 상세 페이지와 행사를 `review-dist/`에 복사하고 공식 메인을 갱신하며, 상담 개편안을 `review-dist/preview/`에, 청년 성장 플랫폼 시안을 `review-dist/v0_1/`에 만듭니다. 공식 홈페이지는 `https://www.arunia.co.kr/`, 상담 시안은 `https://www.arunia.co.kr/preview/`에서 확인합니다. `/growth.html`, `/programs.html` 등 기존 페이지는 원래 주소를 유지하며 `/archive/`로 옮기지 않습니다.
 
 새 개편안의 메뉴와 이미지 경로는 `/preview/` 기준입니다. 이 화면은 가상 공개 콘텐츠만 포함하며 서버 API를 호출하지 않습니다. 로그인·가입 페이지에서는 비활성화된 Google 버튼과 연결 준비 안내를 보여주며, 상담 신청·계정·관리자·결제 경로는 접수하지 않는다는 안내 화면으로 연결됩니다. 기존 `npm run build`는 로컬 전체 앱을 생성하는 별도 명령입니다.
 
