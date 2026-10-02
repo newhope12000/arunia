@@ -170,8 +170,12 @@ test("Hunmin form requires integer age, two residence fields, consent and confir
     html,
     /residenceDong|address-level3|동·읍·면|동\/읍\/면|만\s*나이|만\s*20/,
   );
-  assert.match(html, /거주 지역\(시·군·구까지\)/);
-  assert.match(html, /현재 거주하는 시·군·구까지만 입력해주세요/);
+  assert.match(html, /거주 지역\(시까지\)/);
+  assert.match(html, /현재 거주하는 시까지만 입력해주세요/);
+  assert.match(html, /<label for="residenceSido">도시<\/label>/);
+  assert.match(html, /<label for="residenceSigungu">시<\/label>/);
+  assert.match(tagById(html, "residenceSigungu"), /placeholder="시를 입력해주세요"/);
+  assert.doesNotMatch(html, /시·군·구|시·도 선택/);
   for (const id of ["lineHun", "lineMin", "lineJeong", "lineEum"]) {
     const tag = tagById(html, id);
     assert.match(tag, /^<textarea\b/);

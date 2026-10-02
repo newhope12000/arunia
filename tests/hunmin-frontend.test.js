@@ -183,7 +183,7 @@ function create(replies) {
       phone: "010-1234-5678",
       age,
       residenceSido: "경기도",
-      residenceSigungu: "고양시 덕양구",
+      residenceSigungu: "고양시",
       lineHun: "훈훈한 마음으로 시작해요",
       lineMin: "민들레처럼 나답게 피어나요",
       lineJeong: "정해진 답보다 내 말을 믿어요",
@@ -228,7 +228,7 @@ test("two-field residence starts without a dong DOM element, previews age 20 and
   assert.equal(env.state(), "reviewing");
   assert.equal(env.requests.length, 1, "Preview must not send a submission");
   assert.equal(env.ids.previewAge.textContent, "20세");
-  assert.equal(env.ids.previewResidence.textContent, "경기도 고양시 덕양구");
+  assert.equal(env.ids.previewResidence.textContent, "경기도 고양시");
   assert.equal(env.ids.previewHun.textContent, "훈훈한 마음으로 시작해요");
   env.confirm();
   await flush();
@@ -266,7 +266,7 @@ test("two-field residence starts without a dong DOM element, previews age 20 and
   assert.equal(payload.age, 20);
   assert.equal(typeof payload.age, "number");
   assert.equal(payload.residenceSido, "경기도");
-  assert.equal(payload.residenceSigungu, "고양시 덕양구");
+  assert.equal(payload.residenceSigungu, "고양시");
   assert.ok(!Object.hasOwn(payload, "residenceDong"));
   assert.equal(payload.consent, true);
   assert.equal(payload.consentVersion, "arunia-hunmin-v2");
@@ -376,7 +376,7 @@ test("uncertain submission retries preserve the same v2 body and ID and show onl
   );
   assert.equal(
     JSON.parse(env.requests[2].options.body).residenceSigungu,
-    "고양시 덕양구",
+    "고양시",
   );
   assert.equal(env.state(), "complete");
   assert.deepEqual(env.navigations, [
