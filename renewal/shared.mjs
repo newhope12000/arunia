@@ -7,7 +7,7 @@ export const COHORT = Object.freeze({
   period: "2026. 9. 7. — 9. 30.",
   result: "2026. 10. 12.",
   capacity: 30,
-  application: "https://arunia-career-core-up.lkhy48.chatgpt.site/#apply",
+  application: "https://www.arunia.co.kr/career-core-up#apply",
 });
 export const esc = (text) =>
   String(text).replace(

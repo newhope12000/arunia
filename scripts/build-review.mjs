@@ -10,6 +10,7 @@ import {
 import { basename } from "node:path";
 import { buildRenewal } from "./build-renewal.mjs";
 import { buildOfficialHome } from "./build-official-home.mjs";
+import { buildNews } from "./build-news.mjs";
 
 // Publish the official homepage and keep the counseling review at /preview/.
 rmSync("review-dist", { recursive: true, force: true });
@@ -49,3 +50,4 @@ writeFileSync("review-dist/robots.txt", robots);
 buildRenewal();
 // Promote only the renewal homepage after copying legacy detail pages.
 buildOfficialHome();
+buildNews();

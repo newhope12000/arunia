@@ -33,9 +33,14 @@ function filesBelow(directory, prefix = "") {
 
 function outputFile(output, pathname) {
   const rewritten = config.rewrites.find((rule) => rule.source === pathname);
+  const newsSlug = /^\/news\/([a-z0-9]+(?:-[a-z0-9]+)*)$/.exec(pathname)?.[1];
+  const newsRewrite = newsSlug
+    ? config.rewrites.find((rule) => rule.source === "/news/:slug")
+    : undefined;
   return join(
     output,
     rewritten?.destination ??
+      newsRewrite?.destination.replace(":slug", newsSlug) ??
       (pathname.endsWith("/") ? `${pathname}index.html` : pathname),
   );
 }

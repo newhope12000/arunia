@@ -1,30 +1,9 @@
 import { createHomePage } from "./feature-pages.mjs";
 import { renderPage } from "./layout.mjs";
-import { BASE, arrow, esc, picture, sectionHead } from "./shared.mjs";
-
-const asset = (path) => `/assets/renewal/${path.replace(/^assets\//, "")}`;
-
-// The official homepage keeps the existing public pages and event intakes.
-// Review-only subsection anchors do not exist on those legacy pages.
-function url(path = "") {
-  if (!path || path === "index.html") return "/";
-  if (path === "programs.html#open-programs") return "/#open-programs";
-  if (path === "growth_4.html") return "/career-core-up";
-  const [page] = path.split("#");
-  if (page === "programs.html" || page === "pricing.html") return `/${page}`;
-  return `/${path}`;
-}
-
-function link(path, text, cls = "text-link") {
-  return `<a class="${esc(cls)}" href="${esc(url(path))}">${text}${arrow}</a>`;
-}
-
-function image(name, alt, options) {
-  return picture(name, alt, options).replaceAll(
-    `${BASE}assets/`,
-    "/assets/renewal/",
-  );
-}
+import { arrow, sectionHead } from "./shared.mjs";
+import { image, link, officialPageOptions } from "./official-shared.mjs";
+import { NEWS } from "./news-data.mjs";
+import { renderNewsSection } from "./news-pages.mjs";
 
 function closingCta() {
   return `<section class="cta-band"><div class="wrap cta-inner"><div><p class="eyebrow">나에게 맞는 시작</p><h2>읽어보고, 이야기하고,<br>한 번 해봐요.</h2><p>지금 필요한 경험부터 골라보세요.</p></div><div class="cta-options">${link("programs.html", "프로그램 둘러보기", "button button-light")}${link("pricing.html", "구독 플랜 비교하기", "text-link")}</div></div></section>`;
@@ -41,12 +20,13 @@ function opportunities() {
   <section class="section wrap"><div class="heading-line">${sectionHead("이전 프로그램", "먼저 시작한<br>경험도 살펴보세요.", "이전 프로그램에서 제안한 참여 과정과 경험을 살펴봐요.")}</div><div class="archive-list">${link("growth_1.html", "01 <span>성장 프로젝트 1기</span><small>이전 프로그램</small>", "archive-link")}${link("growth_2.html", "02 <span>성장 프로젝트 2기</span><small>이전 프로그램</small>", "archive-link")}${link("growth.html", "03 <span>성장 프로젝트 3기</span><small>이전 프로그램</small>", "archive-link")}${link("leadership1.html", "04 <span>리더십 프로젝트 1기</span><small>이전 프로그램</small>", "archive-link")}</div></section>`;
 }
 
-export function renderOfficialHome() {
+export function renderOfficialHome(newsRecords = NEWS) {
   const page = createHomePage({
     linkTo: link,
     image,
-    closingCta,
+    closingCta: () => `${renderNewsSection(newsRecords)}${closingCta()}`,
     opportunities: opportunities(),
+    includeStories: false,
   });
-  return renderPage(page, { official: true, url, asset, link });
+  return renderPage(page, officialPageOptions);
 }

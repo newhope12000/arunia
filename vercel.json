@@ -64,6 +64,26 @@
       "source": "/career-core-up/thanks/",
       "destination": "/career-core-up/thanks",
       "permanent": true
+    },
+    {
+      "source": "/news/index.html",
+      "destination": "/news",
+      "permanent": true
+    },
+    {
+      "source": "/news/",
+      "destination": "/news",
+      "permanent": true
+    },
+    {
+      "source": "/news/:slug.html",
+      "destination": "/news/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/news/:slug/",
+      "destination": "/news/:slug",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -94,6 +114,14 @@
     {
       "source": "/preview/:path*",
       "destination": "/preview/index.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news/index.html"
+    },
+    {
+      "source": "/news/:slug",
+      "destination": "/news/:slug.html"
     }
   ],
   "headers": [
