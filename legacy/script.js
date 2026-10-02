@@ -62,7 +62,7 @@ document.querySelectorAll(targets.join(',')).forEach(el => {
 
 // Contact form → Google Sheets
 // Google Apps Script 배포 후 아래 URL을 교체하세요
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxj8PqxeRRc2Fidc9fTPVf_0kDL3rrKjliTnl2IklyDmcgvsnXvJgE74vuL8jgg6tmoFw/exec';
 
 const form = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
