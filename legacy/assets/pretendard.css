@@ -1,0 +1,28 @@
+/*
+ * Pretendard v1.3.9 by Kil Hyung-jin.
+ * Source: https://github.com/orioncactus/pretendard/tree/v1.3.9
+ * SIL Open Font License 1.1: ./fonts/LICENSE
+ * The original variable WOFF2 is self-hosted without modification.
+ */
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+/* Keep each page's sizes and weights while applying the common typeface. */
+html,
+body,
+body::before,
+body::after,
+body *,
+body *::before,
+body *::after,
+body *::marker,
+body *::placeholder,
+body *::file-selector-button {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif !important;
+}

@@ -33,6 +33,27 @@ desktopMenu.addEventListener("change", () => setMenu(false));
 
 const data = JSON.parse(document.querySelector("#cohort-data").textContent);
 const state = recruitmentState(Date.now(), data.start, data.end);
+// Refresh catalog deadlines on each visit even when static pages were built earlier.
+document.querySelectorAll("[data-program-end]").forEach((el) => {
+  const programState = recruitmentState(
+    Date.now(),
+    el.dataset.programStart || "1970-01-01T00:00:00Z",
+    el.dataset.programEnd,
+  );
+  el.dataset.programStatus = programState;
+  el.textContent = {
+    open: "접수 중",
+    upcoming: "접수 예정",
+    closed: "접수 마감",
+  }[programState];
+});
+function openLinkedArchive() {
+  if (location.hash !== "#contest") return;
+  const archive = document.querySelector("details#contest");
+  if (archive) archive.open = true;
+}
+openLinkedArchive();
+window.addEventListener("hashchange", openLinkedArchive);
 document.querySelectorAll("[data-cohort-status]").forEach((el) => {
   el.textContent = {
     open: "모집 중",

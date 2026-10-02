@@ -1160,6 +1160,10 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 @media (max-width: 768px) {
+  /* Legacy content grids use inline desktop columns; stack them on small screens. */
+  .legacy-stack-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .legacy-compact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .legacy-stack-grid > *, .legacy-compact-grid > * { min-width: 0; }
   :root { --nav-h: 60px; }
 
   .nav .btn--nav { display: none; }

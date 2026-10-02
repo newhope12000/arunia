@@ -6,10 +6,10 @@ export const asset = (path) =>
 // Keep public navigation on the current operational detail pages.
 export function url(path = "") {
   if (!path || path === "index.html") return "/";
-  if (path === "programs.html#open-programs") return "/#open-programs";
+  if (path === "programs.html#open-programs") return "/programs.html#events";
   if (path === "growth_4.html") return "/career-core-up";
   const [page] = path.split("#");
-  if (page === "programs.html" || page === "pricing.html") return `/${page}`;
+  if (page === "pricing.html") return `/${page}`;
   return `/${path}`;
 }
 

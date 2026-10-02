@@ -1,0 +1,54 @@
+/*
+ * MaruBuri by NAVER Corporation / NAVER Culture Foundation.
+ * Official source: https://hangeul.naver.com/font
+ * Official WOFF2: https://hangeul.pstatic.net/0/hangeul/2023/fonts/
+ * Copyright and SIL Open Font License 1.1: ./fonts/maruburi/LICENSE
+ * Original font files are self-hosted without modification.
+ * Only the Hunmin contest pages load this theme.
+ */
+@font-face {
+  font-family: "MaruBuri";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/maruburi/MaruBuri-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "MaruBuri";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/maruburi/MaruBuri-Bold.woff2") format("woff2");
+}
+
+/* Headings carry the traditional mood; body copy and controls stay Pretendard. */
+body.hunmin-theme h1,
+body.hunmin-theme h2,
+body.hunmin-theme h3,
+body.hunmin-theme h4,
+body.hunmin-theme :is(h1, h2, h3, h4) * {
+  font-family: "MaruBuri", "Noto Serif KR", "Batang", serif !important;
+}
+body.hunmin-theme :is(h1, h2, h3) {
+  font-weight: 700;
+}
+body.hunmin-theme h4,
+body.hunmin-theme .hero-subtitle,
+body.hunmin-theme .purpose-quote,
+body.hunmin-theme .frame-label {
+  font-family: "MaruBuri", "Noto Serif KR", "Batang", serif !important;
+  font-weight: 600;
+}
+body.hunmin-theme .medal,
+body.hunmin-theme .verse-row > strong,
+body.hunmin-theme .syllable {
+  font-family: "MaruBuri", "Noto Serif KR", "Batang", serif !important;
+  font-weight: 700;
+}
+
+/* Numeric form steps and award counts remain easy to scan. */
+body.hunmin-theme :is(h1, h2, h3, h4) .step,
+body.hunmin-theme .award-count {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif !important;
+}
