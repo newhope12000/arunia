@@ -26,7 +26,7 @@
   const endpoint = 'https://applications-collection.vercel.app/api/arunia-hunmin-apply/';
   const openedAt = performance.now();
   const lineSpecs = [['lineHun', '훈', 'countHun', 'previewHun'], ['lineMin', '민', 'countMin', 'previewMin'], ['lineJeong', '정', 'countJeong', 'previewJeong'], ['lineEum', '음', 'countEum', 'previewEum']];
-  const inputIds = ['name', 'phone', 'age', 'residenceSido', 'residenceSigungu', 'residenceDong'];
+  const inputIds = ['name', 'phone', 'age', 'residenceSido', 'residenceSigungu'];
   const inputs = Object.fromEntries([...inputIds, ...lineSpecs.map(item => item[0])].map(id => [id, document.getElementById(id)]));
   if (Object.values(inputs).some(input => !input)) return;
   let state = 'checking';
@@ -61,7 +61,7 @@
   }
 
   function validateParticipant() {
-    for (const id of ['name', 'residenceSido', 'residenceSigungu', 'residenceDong']) {
+    for (const id of ['name', 'residenceSido', 'residenceSigungu']) {
       const value = inputs[id].value.trim();
       inputs[id].setCustomValidity(value && value.length <= 80 ? '' : '80자 이내로 입력해주세요. 공백만 입력할 수 없습니다.');
     }
@@ -69,7 +69,7 @@
     inputs.phone.setCustomValidity(/^01[016789]\d{7,8}$/.test(phone) ? '' : '휴대전화 번호를 확인해주세요. 예: 010-1234-5678');
     const ageText = inputs.age.value.trim();
     const age = Number(ageText);
-    inputs.age.setCustomValidity(/^\d+$/.test(ageText) && Number.isInteger(age) && age >= 20 && age <= 27 ? '' : '현재 나이를 20부터 27 사이의 정수로 입력해주세요.');
+    inputs.age.setCustomValidity(/^\d+$/.test(ageText) && Number.isInteger(age) && age >= 20 && age <= 27 ? '' : '나이를 20부터 27 사이의 정수로 입력해주세요.');
   }
 
   lineSpecs.forEach(([id, prefix, counterId]) => inputs[id].addEventListener('input', () => validateLine(id, prefix, counterId)));
@@ -100,13 +100,12 @@
       age: Number(value('age')),
       residenceSido: value('residenceSido'),
       residenceSigungu: value('residenceSigungu'),
-      residenceDong: value('residenceDong'),
       lineHun: value('lineHun'),
       lineMin: value('lineMin'),
       lineJeong: value('lineJeong'),
       lineEum: value('lineEum'),
       consent: data.get('consent') !== null,
-      consentVersion: 'arunia-hunmin-v1',
+      consentVersion: 'arunia-hunmin-v2',
       consentedAt: new Date().toISOString(),
       elapsedMs,
       website: value('bot-field'),
@@ -128,7 +127,7 @@
     document.getElementById('previewName').textContent = payload.name;
     document.getElementById('previewPhone').textContent = payload.phone;
     document.getElementById('previewAge').textContent = `${payload.age}세`;
-    document.getElementById('previewResidence').textContent = [payload.residenceSido, payload.residenceSigungu, payload.residenceDong].join(' ');
+    document.getElementById('previewResidence').textContent = [payload.residenceSido, payload.residenceSigungu].join(' ');
   }
 
   async function request(options = {}) {

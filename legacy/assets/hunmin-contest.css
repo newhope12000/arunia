@@ -276,7 +276,7 @@ textarea { min-height: 76px; resize: vertical; }
 .age-input { position: relative; }
 .age-input input { padding-right: 40px; }
 .age-input span { position: absolute; top: 12px; right: 8px; pointer-events: none; }
-.residence-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+.residence-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
 .privacy { margin: 0 0 24px; padding: 20px 23px; color: #526377; border-left: 4px solid var(--jade); background: rgba(255,255,255,.55); font-size: 14px; line-height: 1.8; }
 .privacy strong { color: var(--navy); }
 .consent { display: flex; align-items: flex-start; gap: 12px; color: #45566b; font-size: 16px; cursor: pointer; }

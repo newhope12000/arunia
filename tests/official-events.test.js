@@ -113,12 +113,12 @@ test("event pages use the official domain and resolve every local asset referenc
   }
 });
 
-test("migration keeps approved intake, duplicate retry and five-digit receipt scripts unchanged", () => {
+test("event scripts match the approved intake and district-only Hunmin contract", () => {
   const approvedDigests = {
     "application.js":
       "270d2fb621b919895e1e68f6c424c0bfe6d87bcd903d4818e4efb7adf702e97e",
     "hunmin-application.js":
-      "1c3ad42d1248cb6e88d921b521c089b4e55b3caabb5efb92a3193ac027e3fc98",
+      "498f6036f1a8fb52af4987ab23f323e0d4f9dfd9b57cd1cdbe1b80c120da9489",
     "hunmin-navigation.js":
       "51d1c170dbb4c377376b7873dba65e621f298028d45af00dfb6d8f9130dde687",
   };
@@ -132,7 +132,7 @@ test("migration keeps approved intake, duplicate retry and five-digit receipt sc
   }
 });
 
-test("Hunmin form retains participant validation, residence fields, consent and confirmation controls", () => {
+test("Hunmin form requires integer age, two residence fields, consent and confirmation controls", () => {
   const html = read("legacy/hunmin/apply.html");
   const endpoint =
     "https://applications-collection.vercel.app/api/arunia-hunmin-apply/";
@@ -158,7 +158,6 @@ test("Hunmin form retains participant validation, residence fields, consent and 
     "phone",
     "residenceSido",
     "residenceSigungu",
-    "residenceDong",
     "consent",
   ]) {
     const tag = tagById(html, id);
@@ -167,6 +166,12 @@ test("Hunmin form retains participant validation, residence fields, consent and 
     if (id.startsWith("residence"))
       assert.doesNotMatch(tag, /예[:)]|화정동|고양시/);
   }
+  assert.doesNotMatch(
+    html,
+    /residenceDong|address-level3|동·읍·면|동\/읍\/면|만\s*나이|만\s*20/,
+  );
+  assert.match(html, /거주 지역\(시·군·구까지\)/);
+  assert.match(html, /현재 거주하는 시·군·구까지만 입력해주세요/);
   for (const id of ["lineHun", "lineMin", "lineJeong", "lineEum"]) {
     const tag = tagById(html, id);
     assert.match(tag, /^<textarea\b/);
