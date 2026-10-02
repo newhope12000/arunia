@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="어른이아 훈민정음 4행시 공모전 응모하기. 만 20~27세 청년, 2026년 10월 6일 오후 6시 마감.">
+  <title>훈민정음 4행시 응모하기 | 어른이아</title>
+  <link rel="stylesheet" href="/assets/hunmin-contest.css">
+  <script src="/assets/hunmin-navigation.js" defer></script>
+  <script src="/assets/hunmin-application.js" defer></script>
+
+<link rel="canonical" href="https://www.arunia.co.kr/hunmin/apply">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="어른이아">
+<meta property="og:url" content="https://www.arunia.co.kr/hunmin/apply">
+<meta property="og:title" content="훈민정음 4행시 응모하기 | 어른이아">
+<meta property="og:description" content="나의 4행시와 응모자 정보를 작성하고 제출 전 내용을 확인해주세요.">
+<meta property="og:image" content="https://www.arunia.co.kr/assets/hunmin-contest-poster-20261002.png">
+</head>
+<body class="application-page">
+  <a class="skip" href="#hunminForm">응모 양식으로 바로 가기</a>
+  <header class="topbar">
+    <nav class="topbar-inner" aria-label="사이트 메뉴">
+      <a class="logo" href="/" aria-label="어른이아 홈"><img src="/assets/arunia-logo-new.svg" alt="어른이아" width="135" height="34"></a>
+      <a class="back-link" href="/hunmin">공모전 안내로 돌아가기</a>
+    </nav>
+  </header>
+  <main class="page-shell">
+    <div class="content">
+      <section class="page-head" aria-labelledby="applicationTitle">
+        <div class="page-head-inner">
+          <div class="title-image"><img src="/assets/hunmin/hunmin-title.png" alt="훈민정음 4행시 공모전" width="1774" height="887" decoding="async"></div>
+          <p class="page-kicker">APPLICATION</p>
+          <h1 id="applicationTitle">나의 4행시 응모하기</h1>
+          <p class="page-lead">훈·민·정·음 네 줄에 나의 생각을 담아주세요.<br>아래 내용을 작성한 뒤, 제출 전 한 번 더 확인해주세요.</p>
+          <div class="summary"><span>만 20~27세 청년</span><span>10월 6일(화) 오후 6시 마감</span></div>
+        </div>
+      </section>
+      <section class="form-area" aria-label="응모 양식">
+        <div class="form-inner">
+          <div id="hunminNotice" class="notice" role="status" aria-live="polite" tabindex="-1" data-state="checking">응모 접수 준비 상태를 확인하고 있습니다.</div>
+          <button id="hunminRetry" class="btn secondary retry" type="button" hidden>응모 접수 다시 확인하기</button>
+          <noscript><p class="notice">응모하려면 브라우저에서 JavaScript를 사용하도록 설정해 주세요.</p></noscript>
+        </div>
+    <form id="hunminForm" class="form-inner" action="https://applications-collection.vercel.app/api/arunia-hunmin-apply/" method="post" aria-busy="true" aria-labelledby="applicationTitle">
+      <fieldset id="hunminFields" disabled>
+        <legend class="trap">훈민정음 4행시 응모 정보</legend>
+        <section class="part" aria-labelledby="poemTitle">
+          <h2 id="poemTitle"><span class="step">01</span>나의 4행시</h2>
+          <p id="poemHint" class="hint">첫 글자 ‘훈·민·정·음’을 포함해서 한 줄씩 적어주세요. 각 줄은 최대 200자입니다.</p>
+          <div class="poem-fields poem-frame">
+            <div class="poem-field"><span class="syllable" aria-hidden="true">훈</span><div class="field"><label for="lineHun">훈으로 시작하는 첫째 줄<span class="required">필수</span></label><textarea id="lineHun" name="lineHun" rows="2" maxlength="200" required aria-describedby="poemHint countHun" placeholder="훈으로 시작하는 문장을 적어주세요"></textarea><div class="field-meta"><span>첫 글자 포함</span><span id="countHun" class="counter">0 / 200자</span></div></div></div>
+            <div class="poem-field"><span class="syllable" aria-hidden="true">민</span><div class="field"><label for="lineMin">민으로 시작하는 둘째 줄<span class="required">필수</span></label><textarea id="lineMin" name="lineMin" rows="2" maxlength="200" required aria-describedby="poemHint countMin" placeholder="민으로 시작하는 문장을 적어주세요"></textarea><div class="field-meta"><span>첫 글자 포함</span><span id="countMin" class="counter">0 / 200자</span></div></div></div>
+            <div class="poem-field"><span class="syllable" aria-hidden="true">정</span><div class="field"><label for="lineJeong">정으로 시작하는 셋째 줄<span class="required">필수</span></label><textarea id="lineJeong" name="lineJeong" rows="2" maxlength="200" required aria-describedby="poemHint countJeong" placeholder="정으로 시작하는 문장을 적어주세요"></textarea><div class="field-meta"><span>첫 글자 포함</span><span id="countJeong" class="counter">0 / 200자</span></div></div></div>
+            <div class="poem-field"><span class="syllable" aria-hidden="true">음</span><div class="field"><label for="lineEum">음으로 시작하는 넷째 줄<span class="required">필수</span></label><textarea id="lineEum" name="lineEum" rows="2" maxlength="200" required aria-describedby="poemHint countEum" placeholder="음으로 시작하는 문장을 적어주세요"></textarea><div class="field-meta"><span>첫 글자 포함</span><span id="countEum" class="counter">0 / 200자</span></div></div></div>
+          </div>
+        </section>
+        <section class="part" aria-labelledby="participantTitle">
+          <h2 id="participantTitle"><span class="step">02</span>응모자 정보</h2>
+          <p class="hint">응모 확인과 안내 연락에 필요한 정보를 적어주세요.</p>
+          <div class="form-grid">
+            <div class="field"><label for="name">이름<span class="required">필수</span></label><input id="name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="이름을 입력해주세요"></div>
+            <div class="field"><label for="phone">연락처<span class="required">필수</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" required placeholder="010-1234-5678"></div>
+            <div class="field"><label for="age">만 나이<span class="required">필수</span></label><div class="age-input"><input id="age" name="age" type="number" inputmode="numeric" min="20" max="27" step="1" required placeholder="숫자로 입력" aria-describedby="ageHint"><span aria-hidden="true">세</span></div><span id="ageHint" class="field-meta">만 20~27세 · 현재 만 나이를 입력해주세요.</span></div>
+            <div class="field full"><div id="residenceTitle"><strong>거주지</strong><span class="required">필수</span></div><p id="residenceHint" class="hint" style="margin:0">현재 거주하는 동·읍·면까지만 입력해주세요.</p><div class="residence-grid" role="group" aria-labelledby="residenceTitle" aria-describedby="residenceHint">
+              <div class="field"><label for="residenceSido">시·도</label><select id="residenceSido" name="residenceSido" autocomplete="address-level1" required><option value="" selected disabled>시·도 선택</option><option>서울특별시</option><option>부산광역시</option><option>대구광역시</option><option>인천광역시</option><option>광주광역시</option><option>대전광역시</option><option>울산광역시</option><option>세종특별자치시</option><option>경기도</option><option>강원특별자치도</option><option>충청북도</option><option>충청남도</option><option>전북특별자치도</option><option>전라남도</option><option>경상북도</option><option>경상남도</option><option>제주특별자치도</option></select></div>
+              <div class="field"><label for="residenceSigungu">시·군·구</label><input id="residenceSigungu" name="residenceSigungu" type="text" autocomplete="address-level2" maxlength="80" required placeholder="시·군·구를 입력해주세요"></div>
+              <div class="field"><label for="residenceDong">동·읍·면</label><input id="residenceDong" name="residenceDong" type="text" autocomplete="address-level3" maxlength="80" required placeholder="동·읍·면을 입력해주세요"></div>
+            </div>
+          </div>
+        </section>
+        <section class="part" aria-labelledby="consentTitle">
+          <h2 id="consentTitle"><span class="step">03</span>제출 전 확인</h2>
+          <div id="privacyInfo" class="privacy"><strong>개인정보 수집·이용 안내</strong><br>수집 항목: 이름, 연락처, 만 나이, 거주 지역(동·읍·면까지)<br>이용 목적: 공모전 응모 확인, 참가 자격 확인, 심사 및 안내 연락<br>동의를 거부할 수 있으나, 동의하지 않으면 응모할 수 없습니다.</div>
+          <label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" required aria-describedby="privacyInfo"><span>[필수] 개인정보 수집·이용에 동의합니다.</span></label>
+          <div class="trap" aria-hidden="true"><label for="bot-field">이 칸은 비워주세요</label><input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="actions"><button id="hunminPreview" class="btn primary" type="submit">응모 내용 확인하기 ↗</button></div>
+          <p class="submit-hint">다음 화면에서 내용을 확인한 뒤 최종 제출합니다.</p>
+        </section>
+      </fieldset>
+      <section id="hunminReview" class="review" aria-labelledby="reviewTitle" hidden>
+        <h2 id="reviewTitle" class="review-title" tabindex="-1">이 내용으로 응모할까요?</h2>
+        <p class="hint">네 줄과 응모자 정보를 확인해주세요.</p>
+        <div class="review-poem"><p id="previewHun"></p><p id="previewMin"></p><p id="previewJeong"></p><p id="previewEum"></p></div>
+        <dl class="review-info"><dt>이름</dt><dd id="previewName"></dd><dt>연락처</dt><dd id="previewPhone"></dd><dt>만 나이</dt><dd id="previewAge"></dd><dt>거주 지역</dt><dd id="previewResidence"></dd></dl>
+        <div class="actions"><button id="hunminEdit" class="btn secondary" type="button">수정하기</button><button id="hunminConfirm" class="btn primary" type="button">4행시 응모하기 ↗</button></div>
+      </section>
+    </form>
+      </section>
+      <footer class="footer"><a class="logo" href="/" aria-label="어른이아 홈"><img src="/assets/arunia-logo-new.svg" alt="어른이아" width="120" height="30"></a><p>훈민정음 4행시 공모전 · 나의 언어로, 나의 기준을 찾다</p></footer>
+    </div>
+    <aside class="character-rail" aria-hidden="true"><img src="/assets/hunmin/character-rail.png" alt="" width="724" height="2172" decoding="async"></aside>
+  </main>
+</body>
+</html>

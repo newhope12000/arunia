@@ -2,6 +2,12 @@
 
 기존 어른이아 정적 사이트를 루트(`/`)에서 제공하고, 서울·경기 2030을 위한 상담 전문가 매칭 서비스 개편안은 `/preview/`에서 별도로 검토합니다. 개편안에는 React 화면과 로컬에서 실행할 수 있는 회원·신청·운영자 배정·결제 API가 포함되어 있습니다.
 
+## 공식 도메인의 행사 안내·접수
+
+공식 운영 저장소는 `newhope12000/arunia`이며, main 반영 시 기존 Vercel 프로젝트 `newhope12000s-projects/arunia`가 자동 빌드·배포합니다. 공식 홈페이지 `https://www.arunia.co.kr/`를 유지하며 훈민정음 안내 `/hunmin`, 응모 `/hunmin/apply`, 접수 확인 `/hunmin/thanks` 및 CORE-UP 안내·신청 `/career-core-up`, 확인 `/career-core-up/thanks`를 같은 도메인 아래 제공합니다.
+
+행사 원본은 `legacy/hunmin/`, `legacy/career-core-up/`, 공통 자산은 `legacy/assets/`에 있습니다. `npm run build:review`가 기존 홈페이지와 함께 배포 폴더에 복사하며 행사 전용 경로는 `vercel.json`에서 연결합니다. 상담 미리보기의 서버 차단 설정은 유지합니다. 실제 행사 접수는 기존 중앙 `applications-collection.vercel.app` API와 Google Sheets·Telegram 연결을 사용하며, 정적 저장소에 봇·웹훅 비밀값을 넣지 않습니다. 상세 연결 및 운영 범위는 [공식 행사 연동 문서](docs/OFFICIAL_EVENTS.md)를 참고하세요.
+
 공개된 개편안은 **읽기 전용 미리보기**입니다. 상담사 6명, 후기 10개는 명확히 표시한 가상 콘텐츠이며 콘셉트 사진 5장과 가상 인물 사진 6장은 AI로 새로 제작한 콘셉트 이미지입니다. 실제 상담사 사진, 실제 후기 또는 협업 실적이 아닙니다. 공개 미리보기에서는 Google 로그인·상담 접수·결제를 활성화하지 않습니다.
 
 ## 청년 성장 플랫폼 리뉴얼 V0.1

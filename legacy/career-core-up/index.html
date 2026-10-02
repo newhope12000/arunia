@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="어른이아 커리어 CORE-UP! 성장 프로젝트 4기 · 2026 하반기 서울 청년 지원 프로젝트" name="description"/>
+<title>어른이아 · 커리어 CORE-UP! 성장 프로젝트 4기</title>
+<style>
+    :root{
+      --blue:#0757ff;
+      --blue-deep:#052d88;
+      --navy:#071b50;
+      --sky:#a9dcff;
+      --sky-soft:#eaf6ff;
+      --coral:#ff5139;
+      --cream:#fbfaf6;
+      --ink:#101522;
+      --muted:#667085;
+      --line:#d9dfec;
+      --white:#ffffff;
+      --radius:28px;
+      --shadow:0 24px 70px rgba(7,27,80,.14);
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--cream)}
+    body{margin:0;font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--cream);letter-spacing:-.02em}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,select,textarea{font:inherit}
+    .skip{position:absolute;left:-9999px;top:auto}
+    .skip:focus{left:16px;top:16px;z-index:1000;background:#fff;padding:12px 16px;border:2px solid var(--blue)}
+    .container{width:min(var(--max),calc(100% - 44px));margin:0 auto}
+    .eyebrow{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+    .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--blue-deep)}
+    .kicker::before{content:"";width:9px;height:9px;border-radius:999px;background:var(--coral)}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-bottom:48px}
+    .section-no{font-size:13px;font-weight:900;letter-spacing:.08em;color:var(--blue);white-space:nowrap}
+    .section-title{margin:12px 0 0;font-size:clamp(32px,4vw,58px);line-height:1.12;letter-spacing:-.045em;font-weight:900;text-wrap:balance;word-break:keep-all}
+    .section-desc{max-width:540px;margin:16px 0 0;font-size:17px;line-height:1.75;color:#4d5666}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border-radius:999px;border:1px solid transparent;font-weight:800;cursor:pointer;transition:.18s ease}
+    .btn.primary{background:var(--blue);color:#fff;box-shadow:0 10px 30px rgba(7,87,255,.22)}
+    .btn.primary:hover{transform:translateY(-2px);background:#004ce8}
+    .btn.dark{background:var(--navy);color:#fff}
+    .btn.ghost{border-color:#b8c4de;background:rgba(255,255,255,.66);color:var(--navy)}
+    .arrow{font-size:18px}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(7,27,80,.08)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em}
+    .brand-logo{width:110px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 1px 0 rgba(0,0,0,.04))}
+    .brand span{font-size:16px}
+    .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:700;color:#34405a}
+    .nav-links a:hover{color:var(--blue)}
+    .nav-cta{padding:12px 18px;border-radius:999px;background:var(--navy);color:#fff!important}
+
+    .hero{position:relative;overflow:hidden;padding:88px 0 92px;background:
+      radial-gradient(circle at 78% 16%, rgba(169,220,255,.7) 0 8%, transparent 8.4%),
+      linear-gradient(180deg,#fff 0%,#fbfaf6 100%)}
+    .hero::after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;right:-180px;bottom:-250px;background:rgba(7,87,255,.08)}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(320px,.98fr);gap:42px;align-items:start;max-width:1180px}
+    .hero-copy h1{margin:14px 0 22px;font-size:clamp(56px,7.4vw,102px);line-height:.93;letter-spacing:-.085em;font-weight:980;color:var(--navy)}
+    .hero-copy h1 .accent{display:block;color:var(--blue)}
+    .hero-copy h1 .bang{color:var(--coral)}
+    .hero-lead{max-width:600px;font-size:20px;line-height:1.6;font-weight:750;color:#1e2d4e;text-wrap:balance;word-break:keep-all}
+    .hero-sub{max-width:610px;margin:12px 0 0;font-size:16px;line-height:1.75;color:#596276;word-break:keep-all}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .hero-meta{margin-top:38px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .hero-meta div{padding:20px 20px 20px 0}
+    .hero-meta div+div{border-left:1px solid var(--line);padding-left:20px}
+    .hero-meta b{display:block;font-size:13px;color:var(--blue);margin-bottom:5px}
+    .hero-meta span{font-size:15px;font-weight:750;color:#273451}
+    .poster-wrap{position:relative}
+
+
+    .poster-tag{position:absolute;left:-24px;top:40px;background:var(--coral);color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:900;transform:rotate(-7deg);box-shadow:0 10px 24px rgba(255,81,57,.26)}
+    .poster-caption{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;padding:0 4px 2px;font-size:13px;color:#5f6878}
+    .poster-caption a{font-weight:800;color:var(--blue)}
+
+    .chapter{padding:22px 0;border-top:1px solid rgba(7,27,80,.10);border-bottom:1px solid rgba(7,27,80,.10);background:#fff}
+    .chapter-row{display:flex;align-items:center;justify-content:space-between;gap:24px;color:var(--navy);font-weight:900;letter-spacing:.05em}
+    .chapter-row .right{color:var(--blue);font-size:13px}
+
+    section{padding:112px 0}
+    .why{background:var(--cream)}
+    .why-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:start}
+    .why-copy p{font-size:18px;line-height:1.8;color:#4d5666;margin:0}
+    .questions{display:grid;gap:14px}
+    .question{display:grid;grid-template-columns:60px 1fr;align-items:center;gap:18px;padding:24px 26px;background:#fff;border:1px solid #e2e7f0;border-radius:24px;box-shadow:0 8px 26px rgba(17,38,84,.05)}
+    .qnum{width:48px;height:48px;border-radius:16px;background:var(--sky-soft);display:grid;place-items:center;font-weight:950;color:var(--blue)}
+    .question strong{font-size:21px;color:var(--navy)}
+    .quote-note{margin-top:30px;padding:24px 26px;border-left:4px solid var(--coral);background:#fff4f0;border-radius:0 20px 20px 0;color:#374151;line-height:1.7;font-weight:650}
+
+    .program{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+    .program::before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;right:-240px;top:-250px;background:rgba(169,220,255,.08)}
+    .program .eyebrow,.program .section-no{color:var(--sky)}
+    .program .section-desc{color:#bfcae0}
+    .program-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .program-card{min-height:350px;padding:28px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .program-card::after{content:"";width:150px;height:150px;border-radius:50%;position:absolute;right:-60px;bottom:-50px;background:rgba(169,220,255,.10)}
+    .program-card:nth-child(2)::after{background:rgba(255,81,57,.12)}
+    .program-card .step{font-size:13px;font-weight:900;color:var(--sky);letter-spacing:.12em}
+    .program-card h3{font-size:27px;line-height:1.25;margin:14px 0 12px;letter-spacing:-.035em;text-wrap:balance;word-break:keep-all}
+    .program-card p{margin:0;font-size:15px;line-height:1.8;color:#d5def0;word-break:keep-all}
+    .program-card .badge{align-self:flex-start;margin-top:28px;padding:10px 12px;border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:900;position:relative;z-index:2}
+
+    .recruit{background:#fff}
+    .recruit-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:stretch}
+    .info-board{margin:0;border:2px solid #b8ccf3;border-radius:26px;overflow:hidden;background:#f5f9ff;box-shadow:0 12px 34px rgba(7,87,255,.08);height:100%}
+    .info-row{display:flex;flex-direction:column;height:100%;border-bottom:0}
+    .info-row:last-child{border-bottom:0}
+    .info-row dt{margin:0;padding:26px 26px 8px;background:transparent;font-size:14px;font-weight:900;color:var(--blue);letter-spacing:.02em}
+    .info-row dd{margin:0;padding:4px 26px 26px;font-size:18px;line-height:1.65;color:var(--navy);font-weight:800;word-break:keep-all}
+
+    .selection-box{
+      background:#f6f9ff;
+      border:1px solid #cfdcf4;
+      border-radius:26px;
+      padding:28px 30px 30px;
+      box-shadow:0 10px 30px rgba(7,27,80,.05);
+    }
+    .selection-label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:20px;
+      font-size:14px;
+      font-weight:900;
+      color:var(--blue-deep);
+      letter-spacing:-.01em;
+    }
+    .selection-label::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--blue);
+      flex:0 0 auto;
+    }
+    .selection-label span{
+      color:var(--blue);
+      font-size:12px;
+      letter-spacing:.08em;
+      font-weight:900;
+    }
+
+    .timeline{margin-top:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .timeline-item{position:relative;padding:18px 14px;background:#fff;border:1px solid #dce6f6;border-radius:18px;min-width:0}
+    .timeline-item:not(:last-child)::after{content:"";display:none}
+    .timeline-item b{display:block;color:var(--blue);font-size:12px;letter-spacing:.08em;margin-bottom:8px}
+    .timeline-item strong{display:block;font-size:16px;line-height:1.35;color:var(--navy);word-break:keep-all}
+    .timeline-item span{display:block;margin-top:6px;font-size:13px;line-height:1.5;color:#697386;word-break:keep-all}
+
+    .apply{background:linear-gradient(180deg,#eff6ff 0%,#fbfaf6 100%);position:relative}
+    .apply-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px}
+    .deadline{flex:0 0 auto;border:1px solid #c8d6ee;background:#fff;padding:14px 18px;border-radius:18px;font-weight:900;color:var(--navy)}
+    .deadline span{color:var(--coral);margin-left:7px}
+    .form-card{background:#fff;border:1px solid #dbe4f3;border-radius:32px;padding:36px;box-shadow:0 18px 70px rgba(7,27,80,.09)}
+    .form-title{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid #e6ebf3}
+    .form-title h3{margin:0 0 8px;font-size:30px;color:var(--navy)}
+    .form-title p{margin:0;color:#6b7485;font-size:14px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .field{display:flex;flex-direction:column;gap:9px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:14px;font-weight:850;color:#26334f}
+    .required{color:var(--coral);font-size:12px;margin-left:6px}
+    .field input,.field select,.field textarea{width:100%;border:1px solid #cfd8e8;border-radius:14px;background:#fff;padding:14px 15px;color:var(--ink);outline:none;transition:.15s;border-color:.15s}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(7,87,255,.08)}
+    .field textarea{min-height:145px;resize:vertical;line-height:1.65}
+
+    .birth-picker{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,.85fr);
+      gap:10px;
+      width:100%;
+    }
+    .birth-picker select{
+      width:100%;
+      min-width:0;
+      height:50px;
+      padding:0 38px 0 14px;
+      border:1px solid #cfd8e8;
+      border-radius:14px;
+      background:#fff;
+      color:var(--ink);
+      outline:none;
+      box-sizing:border-box;
+      appearance:auto;
+    }
+    .birth-picker select:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(7,87,255,.08);
+    }
+    .birth-picker select:invalid{
+      color:#8a94a6;
+    }
+    @media (max-width:420px){
+      .birth-picker{gap:7px}
+      .birth-picker select{padding-left:10px;padding-right:26px;font-size:14px}
+    }
+
+    .radio-box{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .radio{position:relative}
+    .radio input{position:absolute;opacity:0;pointer-events:none}
+    .radio label{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #d5ddeb;border-radius:14px;padding:13px 12px;color:#526078;background:#fafbfe;cursor:pointer;font-weight:750;transition:.15s}
+    .radio input:checked+label{border-color:var(--blue);background:#edf4ff;color:var(--blue-deep);box-shadow:inset 0 0 0 1px var(--blue)}
+    .consent{display:flex;align-items:flex-start;gap:10px;margin-top:22px;padding:16px;border-radius:14px;background:#f7f9fc;color:#596579;font-size:13px;line-height:1.6}
+    .consent input{margin-top:3px}
+    .submit-row{display:flex;justify-content:flex-end;margin-top:24px}
+    .submit{min-width:210px;border:0}
+    .form-msg{display:none;margin-top:16px;padding:14px 16px;border-radius:14px;background:#edf4ff;color:var(--blue-deep);font-size:14px;font-weight:750}
+
+    footer{background:var(--navy);color:#dbe5f9;padding:54px 0 34px}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.14)}
+    .footer-brand{display:flex;align-items:center;gap:14px}
+    .footer-logo-wrap{display:inline-flex;align-items:center;justify-content:center;background:transparent;border-radius:0;padding:0}
+    .footer-logo{width:118px;height:auto;display:block}
+    .footer-name{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.04em}
+    .footer-sub{margin-top:8px;font-size:13px;color:#aab8d4}
+    .footer-code{font-size:12px;letter-spacing:.14em;color:var(--sky)}
+    .footer-bottom{display:flex;justify-content:space-between;gap:20px;padding-top:22px;font-size:12px;color:#8798ba}
+
+    .mobile-bar{display:none}
+
+    @media (max-width:960px){
+      .nav-links a:not(.nav-cta){display:none}
+      .hero{padding-top:62px}
+      .hero-grid,.why-grid,.recruit-layout{grid-template-columns:1fr}
+      .hero-grid{gap:48px}
+      .poster-wrap{max-width:650px;margin:0 auto}
+      .program-cards{grid-template-columns:1fr}
+      .program-card{min-height:260px}
+      .section-head{align-items:flex-start;flex-direction:column;gap:10px}
+      .section-desc{max-width:720px}
+      .timeline{grid-template-columns:1fr 1fr;gap:18px}
+      .timeline-item:not(:last-child)::after{display:none}
+    }
+    @media (max-width:720px){
+      .container{width:min(100% - 28px,var(--max))}
+      header{position:relative}
+      .nav{height:66px}
+      .brand-logo{width:88px}
+      .brand span{font-size:14px}
+      .nav-cta{font-size:13px;padding:10px 14px}
+      .hero{padding:52px 0 62px}
+      .hero-copy h1{font-size:clamp(52px,16.8vw,78px)}
+      .hero-lead{font-size:18px}
+      .hero-sub{font-size:15px;line-height:1.7}
+      .hero-meta{grid-template-columns:1fr}
+      .hero-meta div{padding:14px 0}
+      .hero-meta div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}
+      .poster-tag{left:-8px;top:26px}
+      section{padding:82px 0}
+      .section-title{font-size:36px;line-height:1.18}
+      .question{grid-template-columns:48px 1fr;padding:20px}
+      .question strong{font-size:18px}
+      .qnum{width:42px;height:42px}
+      .info-row{grid-template-columns:1fr}
+      .info-row dt{padding:16px 18px 8px;background:#fff;color:var(--blue)}
+      .info-row dd{padding:0 18px 17px}
+      .selection-box{padding:22px 18px}
+      .timeline{grid-template-columns:1fr}
+      .timeline-item{padding:14px 0;border-bottom:1px solid #e6ebf3}
+      .form-card{padding:22px 18px;border-radius:24px}
+      .form-title{flex-direction:column}
+      .form-grid{grid-template-columns:1fr}
+      .field.full{grid-column:auto}
+      .radio-box{grid-template-columns:1fr 1fr}
+      .apply-intro{align-items:flex-start;flex-direction:column}
+      .footer-top,.footer-bottom{align-items:flex-start;flex-direction:column}
+      .mobile-bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px max(10px,env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-top:1px solid #dfe6f1}
+      .mobile-bar .btn{width:100%}
+      footer{padding-bottom:90px}
+    }
+
+    .hero-meta{grid-template-columns:repeat(2,1fr)}
+
+    .footer-simple{display:flex;justify-content:space-between;align-items:center;gap:20px;color:#fff;font-size:14px}
+    .footer-simple strong{font-size:18px;letter-spacing:-.03em}
+    .footer-simple span{font-size:12px;letter-spacing:.10em;color:var(--sky)}
+    .footer-copy{margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);font-size:12px;color:#8798ba}
+    @media (max-width:720px){.footer-simple{align-items:flex-start;flex-direction:column;gap:8px}footer{padding-bottom:34px}}
+
+    .eligibility-note{
+      display:block;
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.5;
+      color:#65728a;
+      font-weight:700;
+    }
+    .question strong,
+    .section-desc,
+    .form-title h3,
+    .field label,
+    .radio label{
+      word-break:keep-all;
+      overflow-wrap:break-word;
+    }
+
+
+    @media (max-width:460px){
+      .timeline{grid-template-columns:1fr}
+      .timeline-item{display:grid;grid-template-columns:32px 1fr;column-gap:8px;align-items:start}
+      .timeline-item b{grid-row:1 / span 2;margin:1px 0 0}
+      .timeline-item strong{grid-column:2}
+      .timeline-item span{grid-column:2;margin-top:3px}
+    }
+
+
+    /* Mobile readability & overflow fixes */
+    html, body{
+      max-width:100%;
+      overflow-x:hidden;
+    }
+    *, *::before, *::after{
+      box-sizing:border-box;
+    }
+    h1,h2,h3,h4,p,li,dt,dd,label,strong,span{
+      overflow-wrap:break-word;
+    }
+    .container,
+    .hero-grid,
+    .recruit-layout,
+    .form-grid,
+    .program-grid,
+    .questions,
+    .selection-box,
+    .info-board{
+      min-width:0;
+      max-width:100%;
+    }
+    .section-title,
+    .hero-lead,
+    .hero-sub,
+    .section-desc,
+    .program-card h3,
+    .program-card p,
+    .question strong,
+    .info-row dd,
+    .timeline-item strong,
+    .timeline-item span,
+    .field label,
+    .radio label{
+      word-break:keep-all;
+      overflow-wrap:break-word;
+    }
+    .radio-grid{
+      min-width:0;
+    }
+    .radio-grid label{
+      min-width:0;
+      white-space:normal;
+      text-align:center;
+      line-height:1.38;
+      padding:14px 12px;
+    }
+    input, select, textarea, button{
+      max-width:100%;
+      min-width:0;
+    }
+
+    /* Selection process emphasis */
+    .selection-box{
+      position:relative;
+      border:2px solid #73a2f5;
+      background:linear-gradient(180deg,#f5f9ff 0%,#eef5ff 100%);
+      box-shadow:0 16px 36px rgba(7,87,255,.12);
+      overflow:hidden;
+    }
+    .selection-box::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:5px;
+      background:#0757ff;
+    }
+    .selection-label{
+      margin:4px 0 22px;
+      padding-bottom:16px;
+      border-bottom:1px solid #cdddf7;
+      font-size:24px;
+      color:#071b50;
+    }
+    .selection-label::before{
+      width:10px;
+      height:10px;
+    }
+    .selection-label .en{
+      font-size:11px;
+      letter-spacing:.11em;
+      color:#0757ff;
+    }
+    .timeline{
+      position:relative;
+    }
+    .timeline-item{
+      background:#fff;
+      border:1px solid #d1def1;
+      box-shadow:0 5px 14px rgba(7,27,80,.04);
+    }
+    .timeline-item b{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      background:#eaf2ff;
+      color:#0757ff;
+      font-size:12px;
+      margin-bottom:12px;
+    }
+    .timeline-item strong{
+      font-size:17px;
+      line-height:1.35;
+    }
+    .timeline-item span{
+      margin-top:7px;
+      line-height:1.45;
+    }
+
+    @media (max-width:760px){
+      .wrap,.container{
+        width:100%;
+        padding-left:20px;
+        padding-right:20px;
+      }
+      .section{
+        padding-top:68px;
+        padding-bottom:68px;
+      }
+      .section-title{
+        font-size:clamp(34px,10vw,44px);
+        line-height:1.14;
+      }
+      .hero-lead{
+        font-size:18px;
+        line-height:1.55;
+      }
+      .hero-sub,
+      .section-desc{
+        font-size:15px;
+        line-height:1.7;
+      }
+      .recruit-layout{
+        grid-template-columns:1fr !important;
+        gap:20px !important;
+      }
+      .info-board,
+      .selection-box{
+        width:100%;
+        border-radius:24px;
+      }
+      .info-row dt{
+        padding:22px 22px 8px;
+      }
+      .info-row dd{
+        padding:4px 22px 24px;
+        font-size:17px;
+        line-height:1.6;
+      }
+      .selection-box{
+        padding:24px 18px 20px !important;
+      }
+      .selection-label{
+        gap:8px;
+        font-size:22px;
+        margin-bottom:18px;
+        padding-bottom:14px;
+      }
+      .timeline{
+        grid-template-columns:1fr !important;
+        gap:12px !important;
+      }
+      .timeline-item{
+        display:grid;
+        grid-template-columns:40px minmax(0,1fr);
+        column-gap:10px;
+        row-gap:2px;
+        padding:16px !important;
+        border-radius:18px;
+      }
+      .timeline-item b{
+        grid-row:1 / span 2;
+        grid-column:1;
+        margin:0;
+      }
+      .timeline-item strong{
+        grid-column:2;
+        font-size:17px;
+      }
+      .timeline-item span{
+        grid-column:2;
+        margin-top:2px;
+        font-size:13px;
+      }
+      .form-grid{
+        grid-template-columns:1fr !important;
+      }
+      .radio-grid{
+        grid-template-columns:1fr 1fr !important;
+        gap:10px !important;
+      }
+      .radio-grid label{
+        min-height:66px;
+        font-size:14px;
+        padding:12px 10px;
+      }
+      .field label{
+        font-size:15px;
+        line-height:1.45;
+      }
+      .birth-picker{
+        grid-template-columns:1.15fr .85fr .85fr;
+        gap:7px;
+      }
+      .birth-picker select{
+        font-size:14px;
+        padding-left:10px;
+        padding-right:24px;
+      }
+    }
+
+    @media (max-width:390px){
+      .wrap,.container{
+        padding-left:16px;
+        padding-right:16px;
+      }
+      .radio-grid{
+        grid-template-columns:1fr !important;
+      }
+      .radio-grid label{
+        min-height:54px;
+      }
+      .selection-label{
+        font-size:20px;
+      }
+      .selection-label .en{
+        width:100%;
+        margin-left:18px;
+      }
+    }
+
+
+    /* v11 mobile form fixes */
+    .radio-box{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      width:100%;
+      min-width:0;
+    }
+    .radio{
+      min-width:0;
+    }
+    .radio label{
+      min-width:0;
+      width:100%;
+      min-height:58px;
+      white-space:normal;
+      word-break:keep-all;
+      overflow-wrap:break-word;
+      line-height:1.4;
+      padding:12px 10px;
+    }
+    .field{
+      min-width:0;
+    }
+    .field > label{
+      display:block;
+      max-width:100%;
+      word-break:keep-all;
+      line-height:1.45;
+    }
+    .field .required{
+      display:inline;
+      white-space:nowrap;
+    }
+    .form-card{
+      max-width:100%;
+      overflow:hidden;
+    }
+    .form-grid > *{
+      min-width:0;
+    }
+
+    /* Recruitment readability */
+    #recruit .section-head{
+      margin-bottom:30px;
+    }
+    .info-board{
+      border-color:#8fb2f3;
+      background:#f4f8ff;
+    }
+    .info-row dt{
+      font-size:15px;
+    }
+    .info-row dd{
+      font-size:19px;
+      line-height:1.58;
+    }
+    .eligibility-note{
+      margin-top:12px;
+      padding-top:10px;
+      border-top:1px solid #d7e3f7;
+      font-size:13px;
+    }
+
+    /* Make selection process easier to scan */
+    .selection-label{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .selection-label .en{
+      opacity:.9;
+    }
+    .timeline-item{
+      transition:none;
+    }
+    .timeline-item strong{
+      font-weight:900;
+    }
+
+    @media (max-width:760px){
+      .form-card{
+        padding:24px 20px !important;
+        border-radius:24px;
+      }
+      .form-grid{
+        gap:18px !important;
+      }
+      .radio-box{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:10px !important;
+      }
+      .radio label{
+        min-height:68px;
+        font-size:14px;
+        line-height:1.35;
+        padding:11px 8px;
+      }
+      .field > label{
+        font-size:15px;
+        margin-bottom:8px;
+      }
+      #recruit .section-title{
+        margin-bottom:4px;
+      }
+      .info-row dd{
+        font-size:18px;
+      }
+      .selection-box{
+        margin-top:2px;
+      }
+    }
+
+    @media (max-width:390px){
+      .form-card{
+        padding:22px 16px !important;
+      }
+      .radio-box{
+        grid-template-columns:1fr !important;
+      }
+      .radio label{
+        min-height:52px;
+        font-size:14px;
+      }
+      .field .required{
+        font-size:12px;
+      }
+      .selection-label{
+        align-items:flex-start;
+      }
+      .selection-label .en{
+        width:auto !important;
+        margin-left:0 !important;
+      }
+    }
+
+
+    /* v12 professional refinement */
+    body{background:#fff;color:#172033}
+    header{background:rgba(255,255,255,.97);border-bottom:1px solid #e5e9f0;box-shadow:none}
+    .hero{background:linear-gradient(180deg,#f7faff 0%,#fff 100%);border-bottom:1px solid #e8edf4}
+    .hero-copy{padding:92px 0 78px}
+    .hero-title{max-width:820px;font-size:clamp(54px,7vw,82px);line-height:.98;letter-spacing:-.06em;color:#10233f}
+    .hero-lead{max-width:720px;font-size:21px;line-height:1.58;color:#24364f;font-weight:760}
+    .hero-sub{max-width:720px;font-size:16px;line-height:1.8;color:#667085}
+    .hero-meta{margin-top:34px;padding-top:24px;border-top:1px solid #dfe6f0}
+    .section{padding-top:96px;padding-bottom:96px}
+    .section-head{max-width:800px;margin-bottom:42px}
+    .section-title{font-size:clamp(34px,4.2vw,56px);line-height:1.12;color:#10233f}
+    .section-desc{margin-top:18px;max-width:740px;font-size:16px;line-height:1.8;color:#667085}
+    .question{background:#fff;border:1px solid #e1e6ee;border-radius:18px;padding:22px 24px;box-shadow:none}
+    .question strong{font-size:16px;line-height:1.5;color:#24364f}
+    .program{background:#13243e}
+    .program-card{background:#182b49;border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:28px;box-shadow:none}
+    .program-card h3{font-size:25px}
+    .program-card p{font-size:15px;color:#cad5e5}
+    #recruit{background:#f8fafc}
+    .info-board,.selection-box{background:#fff;border:1px solid #dce3ec;box-shadow:none;border-radius:20px}
+    .selection-box::before{height:3px;background:#1456d8}
+    .selection-label{font-size:20px;border-bottom:1px solid #e4e9f0}
+    .timeline-item{box-shadow:none;border:1px solid #e0e6ef;border-radius:16px;background:#fbfcfe}
+    #apply{background:#fff}
+    .form-card{border:1px solid #dfe5ed;box-shadow:0 16px 42px rgba(16,35,63,.06);border-radius:24px}
+    .field input,.field select,.field textarea{border-radius:12px;background:#fff}
+    .radio label{background:#fff;border-radius:12px}
+    footer{background:#10233f}
+    @media (max-width:760px){
+      .hero-copy{padding:72px 0 60px}
+      .hero-title{font-size:clamp(48px,15vw,64px)}
+      .hero-lead{font-size:19px}
+      .section{padding-top:72px;padding-bottom:72px}
+      .program-card{padding:22px}
+    }
+
+
+    /* v17 exact title */
+    .hero-copy h1 .growth-title{
+      color:#1456d8;
+    }
+    .hero-copy h1 .growth-title .coral{
+      color:#ff5b42;
+    }
+
+
+    /* v18 headline refinement */
+    .hero-copy h1 .headline-top{
+      display:block;
+      white-space:nowrap;
+    }
+    .hero-copy h1 .growth-title{
+      display:block;
+      margin-top:8px;
+      color:#1456d8;
+    }
+    .hero-copy h1 .growth-title .coral{
+      color:#ff5b42;
+    }
+    .hero-copy h1 .kr-heavy{
+      font-weight:980;
+      letter-spacing:-.1em;
+    }
+    .hero-copy h1 .en-heavy{
+      font-weight:950;
+      letter-spacing:-.065em;
+    }
+
+    @media (max-width:760px){
+      .hero-copy h1{
+        font-size:clamp(42px,10.8vw,64px);
+        line-height:.96;
+      }
+      .hero-copy h1 .growth-title{
+        margin-top:6px;
+      }
+    }
+
+    @media (max-width:430px){
+      .hero-copy h1{
+        font-size:clamp(36px,10.2vw,48px);
+      }
+    }
+
+
+    /* v19 force single-line CORE-UP title */
+    .hero-copy h1 .headline-nowrap{
+      display:inline-block;
+      white-space:nowrap;
+    }
+
+
+    /* v20 definitive headline fix */
+    .main-headline{
+      margin:14px 0 24px !important;
+      width:100%;
+      max-width:none;
+      line-height:.94 !important;
+      letter-spacing:-.075em !important;
+      font-weight:950 !important;
+    }
+    .main-headline .headline-line1{
+      display:block;
+      white-space:nowrap !important;
+      word-break:keep-all !important;
+      overflow-wrap:normal !important;
+      font-size:clamp(50px,7vw,92px);
+      color:#10233f;
+    }
+    .main-headline .headline-line2{
+      display:block;
+      white-space:nowrap;
+      margin-top:10px;
+      font-size:clamp(46px,6.4vw,84px);
+      color:#1456d8;
+    }
+    .main-headline .kr-heavy{
+      font-weight:950;
+      letter-spacing:-.095em;
+    }
+    .main-headline .accent{
+      color:#1456d8;
+      font-weight:950;
+      letter-spacing:-.055em;
+    }
+    .main-headline .coral{
+      color:#ff5b42;
+    }
+
+    @media (max-width:760px){
+      .main-headline .headline-line1{
+        font-size:clamp(34px,9.6vw,54px);
+      }
+      .main-headline .headline-line2{
+        font-size:clamp(32px,8.8vw,50px);
+        margin-top:7px;
+      }
+    }
+
+    @media (max-width:390px){
+      .main-headline .headline-line1{
+        font-size:9vw;
+      }
+      .main-headline .headline-line2{
+        font-size:8.4vw;
+      }
+    }
+
+
+    /* v21 fix: CORE-UP stays beside 커리어 */
+    .main-headline .headline-line1{
+      display:flex !important;
+      align-items:baseline;
+      flex-wrap:nowrap !important;
+      white-space:nowrap !important;
+      gap:.18em;
+    }
+    .main-headline .headline-line1 .kr-heavy,
+    .main-headline .headline-line1 .accent{
+      display:inline !important;
+      white-space:nowrap !important;
+      flex:0 0 auto;
+    }
+    .main-headline .headline-line1 .accent{
+      color:#1456d8 !important;
+    }
+
+    @media (max-width:760px){
+      .main-headline .headline-line1{
+        font-size:clamp(30px,8.8vw,48px) !important;
+      }
+    }
+
+    @media (max-width:430px){
+      .main-headline .headline-line1{
+        font-size:8.3vw !important;
+        gap:.12em;
+      }
+    }
+
+
+    /* v25 new ARUNIA logo */
+    .brand-logo{
+      width:132px !important;
+      height:auto !important;
+      display:block;
+      object-fit:contain;
+      filter:none !important;
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+    .footer-logo{
+      width:154px;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter:invert(1) brightness(2);
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+    @media (max-width:760px){
+      .brand-logo{width:118px !important;}
+      .footer-logo{width:138px;}
+      .footer-simple{
+        align-items:flex-start;
+      }
+    }
+
+
+    /* v26 poster insert */
+    .hero-poster{
+      width:100%;
+      max-width:520px;
+      justify-self:end;
+      align-self:start;
+      background:#fff;
+      border:1px solid #e1e7ef;
+      border-radius:24px;
+      padding:12px;
+      box-shadow:0 20px 54px rgba(16,35,63,.10);
+    }
+    .hero-poster img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:16px;
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+
+    @media (max-width:980px){
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap:30px;
+      }
+      .hero-poster{
+        max-width:560px;
+        justify-self:start;
+      }
+    }
+
+    @media (max-width:760px){
+      .hero-poster{
+        max-width:100%;
+        padding:8px;
+        border-radius:20px;
+      }
+      .hero-poster img{
+        border-radius:12px;
+      }
+    }
+
+
+    /* v27 slightly smaller poster */
+    .hero-poster{
+      max-width:440px !important;
+    }
+    @media (max-width:980px){
+      .hero-poster{
+        max-width:500px !important;
+      }
+    }
+    @media (max-width:760px){
+      .hero-poster{
+        max-width:92% !important;
+        justify-self:center !important;
+      }
+    }
+
+
+    /* Keep keyboard navigation visible on links and form choices. */
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible{
+      outline:3px solid var(--blue);
+      outline-offset:4px;
+    }
+    .radio input:focus-visible + label{
+      outline:3px solid var(--blue);
+      outline-offset:4px;
+    }
+
+    .application-fields{margin:0;padding:0;border:0;min-width:0}
+    .application-fields:disabled{opacity:.65}
+    .application-fields:disabled button{cursor:wait}
+    .application-notice{margin:0 0 22px;padding:16px 18px;border-radius:14px;background:#edf4ff;color:var(--blue-deep);font-size:14px;line-height:1.65;font-weight:650;word-break:keep-all}
+    .application-notice[data-state="pending"],
+    .application-notice[data-state="conflict"]{background:#fff4f0;color:#7b321f}
+    .application-retry{margin:0 0 24px}
+    .application-retry[hidden]{display:none}
+    .hunmin-mobile-entry{display:none}
+    @media(max-width:980px){
+      .hunmin-mobile-entry{display:block;padding:12px 14px;background:#edf4ff;text-align:center;color:var(--navy);font-size:14px;font-weight:750}
+    }
+</style>
+
+<link rel="canonical" href="https://www.arunia.co.kr/career-core-up">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="어른이아">
+<meta property="og:url" content="https://www.arunia.co.kr/career-core-up">
+<meta property="og:title" content="커리어 CORE-UP! 성장 프로젝트 4기 | 어른이아">
+<meta property="og:description" content="어른이아 커리어 CORE-UP! 성장 프로젝트 4기 · 2026 하반기 서울 청년 지원 프로젝트">
+<meta property="og:image" content="https://www.arunia.co.kr/assets/career-growth-project-4-poster-v26.png">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 이동</a>
+<header>
+<div class="container nav">
+<a aria-label="어른이아 홈" class="brand" href="/">
+<img alt="어른이아 로고" class="brand-logo" src="/assets/arunia-logo-new.svg" draggable="false"/>
+
+</a>
+<nav aria-label="주요 메뉴" class="nav-links">
+<a class="hunmin-link" href="/hunmin">훈민정음 4행시 응모</a>
+<a href="#why">프로젝트 소개</a>
+<a href="#recruit">모집 안내</a>
+<a class="nav-cta" href="#apply">지원하기 <span class="arrow">↗</span></a>
+</nav>
+</div>
+</header>
+<a class="hunmin-mobile-entry" href="/hunmin">훈민정음 4행시 응모하기 <span aria-hidden="true">↗</span></a>
+<main id="main">
+<section class="hero" id="top">
+<div class="container hero-grid">
+<div class="hero-copy">
+<div class="kicker">2026 하반기 서울 청년 지원 프로젝트</div>
+<h1 class="main-headline"><span class="headline-line1"><span class="kr-heavy">커리어</span> <span class="accent">CORE-UP!</span></span><span class="headline-line2"><span class="kr-heavy">성장 프로젝트</span> <span class="coral kr-heavy">4기</span></span></h1>
+<p class="hero-lead">취업 준비의 출발점은, 나에게 맞는 방향을 구체적으로 정리하는 것입니다.</p>
+<p class="hero-sub">현재의 경험과 고민을 바탕으로 직무 방향을 정리하고, 현직자 멘토링과 이력서 피드백까지 단계적으로 연결합니다.</p>
+<div class="hero-actions">
+<a class="btn primary" href="#apply">커리어 CORE-UP 지원하기 <span class="arrow">↗</span></a>
+
+</div>
+<div class="hero-meta">
+<div><b>모집기간</b><span>2026.09.07 — 09.30(수)</span></div>
+<div><b>선발인원</b><span>최종 30명 선발</span></div>
+
+</div>
+</div>
+        <figure class="hero-poster" aria-label="청년 커리어 성장 프로젝트 4기 모집 포스터">
+          <img src="/assets/career-growth-project-4-poster-v26.png" alt="청년 커리어 성장 프로젝트 4기 모집 포스터" draggable="false"/>
+        </figure>
+
+
+</div>
+</section>
+
+<section class="why" id="why">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="section-no">01 — WHY CORE-UP</div>
+<h2 class="section-title">진로가 막막하다면,<br/>현재의 기준부터 정리해보세요.</h2>
+</div>
+</div>
+<div class="why-grid">
+<div class="why-copy">
+<p>관심 있는 분야는 있지만 어떤 직무가 적합한지, 무엇부터 준비해야 할지 정리가 필요할 수 있습니다. 지금까지의 경험과 관심사를 바탕으로 직무 선택 기준을 정리하고, 이후의 준비 방향을 구체화합니다.</p>
+
+</div>
+<div class="questions">
+<div class="question"><span class="qnum">01</span><strong>어떤 직무가 나와 맞는지 잘 모르겠을 때</strong></div>
+<div class="question"><span class="qnum">02</span><strong>취업 준비를 어디서부터 시작해야 할지 막막할 때</strong></div>
+<div class="question"><span class="qnum">03</span><strong>진로 방향을 다시 점검하고 싶을 때</strong></div>
+</div>
+</div>
+</div>
+</section>
+<section class="program" id="program">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="section-no">02 — THE PROGRAM</div>
+<h2 class="section-title">프로그램은<br/>3단계로 진행됩니다.</h2>
+</div>
+
+</div>
+<div class="program-cards">
+<article class="program-card">
+<div><div class="step">01 · DISCOVER</div><h3>커리어 진단</h3><p>사전미팅과 커리어 진단을 통해 성향, 경험, 관심 분야를 정리하고 우선적으로 탐색할 직무를 확인합니다.</p></div>
+<span class="badge">사전미팅 완료자 대상</span>
+</article>
+<article class="program-card">
+<div><div class="step">02 · DEFINE</div><h3>라이프 방향 설정</h3><p>직무 선택에 중요한 기준을 정리하고, 향후 진로 방향과 준비 우선순위를 구체화합니다.</p></div>
+<span class="badge">최종선발자 대상</span>
+</article>
+<article class="program-card">
+<div><div class="step">03 · CONNECT</div><h3>현직자 미팅 ·<br/>프로필 이력서</h3><p>관심 직무의 현직자와 1:1로 소통하고, 지금까지의 경험을 이력서에 구조화합니다. 필요에 따라 자소서와 포트폴리오 피드백도 진행합니다.</p></div>
+<span class="badge">최종선발자 대상</span>
+</article>
+</div>
+</div>
+</section>
+<section class="recruit" id="recruit">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="section-no">03 — RECRUITMENT</div>
+<h2 class="section-title">모집 안내</h2>
+
+</div>
+</div>
+<div class="recruit-layout">
+<dl class="info-board">
+<div class="info-row"><dt>지원자격</dt><dd>서울에 거주하거나 서울 소재 대학에 재학 중인<br/>만 26세 미만 청년 <span class="eligibility-note">※ 졸업예정자·취업준비생 포함</span></dd></div>
+
+</dl>
+<div class="selection-box">
+            <div class="selection-label">선발 과정 <span class="en">SELECTION PROCESS</span></div>
+            <div class="timeline">
+<div class="timeline-item"><b>01</b><strong>온라인 신청</strong><span>지원서 작성</span></div>
+<div class="timeline-item"><b>02</b><strong>서류검토</strong><span>지원 내용 검토</span></div>
+<div class="timeline-item"><b>03</b><strong>사전미팅</strong><span>커리어 고민 확인</span></div>
+<div class="timeline-item"><b>04</b><strong>최종선발</strong><span>10.12(월) · 개별 통지 예정</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="apply" id="apply">
+<div class="container">
+<div class="apply-intro">
+<div>
+<div class="section-no">04 — APPLY NOW</div>
+<h2 class="section-title">지원서 작성</h2>
+<p class="section-desc">현재 상황과 지원 이유를 편하게 작성해 주세요.</p>
+</div>
+
+</div>
+<form action="https://applications-collection.vercel.app/api/arunia-apply/" class="form-card" id="applicationForm" method="POST" name="career-core-up-application" aria-busy="true">
+<div class="form-title">
+<div><h3>커리어 CORE-UP 지원서</h3></div>
+
+</div>
+<div class="application-notice" id="applicationNotice" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">신청 접수 준비 상태를 확인하고 있습니다.</div>
+<button class="btn ghost application-retry" id="applicationRetry" type="button" hidden>신청 접수 다시 확인하기</button>
+<noscript><p class="application-notice">지원서를 작성하려면 브라우저에서 JavaScript를 허용해 주세요.</p></noscript>
+<fieldset class="application-fields" id="applicationFields" aria-label="지원서 입력" aria-describedby="applicationNotice" disabled>
+<p hidden><label>이 항목은 비워 두세요. <input name="bot-field" tabindex="-1" autocomplete="off"/></label></p>
+<div class="form-grid">
+<div class="field"><label for="name">이름 <span class="required">필수</span></label><input id="name" name="name" placeholder="홍길동" required=""/></div>
+<div class="field"><label for="phone">연락처 <span class="required">필수</span></label><input id="phone" inputmode="tel" name="phone" placeholder="010-0000-0000" required=""/></div>
+<div class="field">
+              <label>생년월일 <span class="required">필수</span></label>
+              <div class="birth-picker" aria-label="생년월일 선택">
+                <select id="birthYear" required aria-label="출생 연도">
+                  <option value="" selected disabled>YYYY</option>
+                </select>
+                <select id="birthMonth" required aria-label="출생 월">
+                  <option value="" selected disabled>MM</option>
+                </select>
+                <select id="birthDay" required aria-label="출생 일">
+                  <option value="" selected disabled>DD</option>
+                </select>
+              </div>
+              <input type="hidden" id="birth" name="birth" />
+              <small style="color:#8a94a6">YYYY-MM-DD 순서로 선택해 주세요</small>
+            </div>
+<div class="field"><label for="residence">거주지 <span class="required">필수</span></label><input id="residence" name="residence" placeholder="예) 서울 마포구" required=""/></div>
+<div class="field"><label for="status">현재 상태 <span class="required">필수</span></label><select id="status" name="status" required=""><option value="">선택해 주세요</option><option>대학생</option><option>졸업예정자</option><option>취업준비생</option></select></div>
+<div class="field"><label for="school">학교 / 전공 <span class="required">필수</span></label><input id="school" name="school" placeholder="예) 한국대학교 경영학과" required=""/></div>
+<div class="field full"><label for="job">관심 직무 / 희망 분야 <span class="required">필수</span></label><input id="job" name="job" placeholder="예) 마케팅 / IT 개발 / 디자인 / 아직 탐색 중" required=""/></div>
+<div class="field full">
+<label>현재 가장 고민되는 것은 무엇인가요? <span class="required">(복수 선택 가능)</span></label>
+<div class="radio-box">
+<div class="radio"><input id="c1" name="concern"  type="checkbox" value="맞는 직무를 모르겠다"/><label for="c1">맞는 직무를 모르겠다</label></div>
+<div class="radio"><input id="c2" name="concern" type="checkbox" value="취업 준비가 막막하다"/><label for="c2">취업 준비가 막막하다</label></div>
+<div class="radio"><input id="c3" name="concern" type="checkbox" value="커리어 방향 구체화"/><label for="c3">커리어 방향 구체화</label></div>
+<div class="radio"><input id="c4" name="concern" type="checkbox" value="실무 경험 부족"/><label for="c4">실무 경험 부족</label></div>
+<div class="radio"><input id="c5" name="concern" type="checkbox" value="방향에 확신이 없다"/><label for="c5">방향에 확신이 없다</label></div>
+<div class="radio"><input id="c6" name="concern" type="checkbox" value="기타"/><label for="c6">기타</label></div>
+</div>
+</div>
+<div class="field full">
+<label>프로그램에서 가장 기대하는 것은? <span class="required">(1개 선택)</span></label>
+<div class="radio-box">
+<div class="radio"><input id="e1" name="expectation" required="" type="radio" value="나에게 맞는 직무 찾기"/><label for="e1">나에게 맞는 직무 찾기</label></div>
+<div class="radio"><input id="e2" name="expectation" type="radio" value="커리어·라이프 방향 설정"/><label for="e2">커리어·라이프 방향 설정</label></div>
+<div class="radio"><input id="e3" name="expectation" type="radio" value="현직자 1:1 멘토링"/><label for="e3">현직자 1:1 멘토링</label></div>
+<div class="radio"><input id="e4" name="expectation" type="radio" value="프로필 이력서 제작·첨삭"/><label for="e4">프로필 이력서 제작·첨삭</label></div>
+<div class="radio"><input id="e5" name="expectation" type="radio" value="선택한 방향에 대한 확신"/><label for="e5">선택한 방향에 대한 확신</label></div>
+</div>
+</div>
+<div class="field full"><label for="reason">지원한 이유 <span class="required">필수</span></label><textarea id="reason" name="reason" placeholder="지원한 이유와, 참여하면서 얻고 싶은 것을 편하게 적어주세요." required=""></textarea></div>
+<div class="field full"><label for="career">현재 진로·커리어 고민을 적어주세요. <span class="required">필수</span></label><textarea id="career" name="career" placeholder="지금 하고 있는 진로·커리어 고민을 편하게 적어주세요.\n예시) ‘내게 맞는 직무가 뭔지 모르겠어요’ / ‘취업을 앞두고 뭘 준비해야 할지 막막해요’ / ‘현직자에게 직접 듣고 방향을 확신하고 싶어요’" required=""></textarea></div>
+</div>
+<label class="consent"><input name="consent" required="" type="checkbox"/><span><strong>[필수] 개인정보 수집·이용에 동의합니다.</strong><br/>적어주신 정보는 선발과 안내 연락에만 사용해요.</span></label>
+<div class="submit-row"><button class="btn primary submit" id="applicationSubmit" type="submit">지원서 제출하기 <span class="arrow">↗</span></button></div>
+</fieldset>
+</form>
+</div>
+</section>
+</main>
+<footer>
+<div class="container"><div class="footer-simple"><img alt="어른이아 로고" class="footer-logo" src="/assets/arunia-logo-new.svg" draggable="false"/><span>CAREER CORE-UP · 2026</span></div><div class="footer-copy">© 2026 ARUNIA</div></div>
+</footer>
+
+<script src="/assets/application.js" defer></script>
+</body>
+</html>

@@ -1094,6 +1094,51 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================
+   Current Event
+   ========================================== */
+
+.current-event { padding: 40px 0 0; }
+.event-spotlight {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--r-md);
+}
+.event-spotlight--hero { margin-bottom: 32px; max-width: 600px; }
+.event-spotlight--wide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px;
+}
+.event-spotlight__label {
+  font-size: 0.8125rem;
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.event-spotlight__title {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.event-spotlight__details { font-size: 0.875rem; color: var(--text-muted); }
+.event-spotlight__benefits { margin: 16px 0 12px; font-size: 0.9375rem; font-weight: 600; }
+.event-spotlight__action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+}
+.event-spotlight__action p { font-size: 0.8125rem; font-weight: 700; }
+.event-spotlight .btn { flex-shrink: 0; }
+.event-spotlight--hero .btn { font-size: 0.8125rem; padding: 10px 18px; }
+
+/* ==========================================
    Responsive — Tablet
    ========================================== */
 
@@ -1153,11 +1198,14 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   .footer__bottom-inner { flex-direction: column; gap: 12px; text-align: center; }
 
   .hero__stats { gap: 20px; flex-wrap: wrap; }
+  .event-spotlight--wide { align-items: flex-start; flex-direction: column; gap: 20px; padding: 24px; }
   .stat__divider { display: none; }
   .section-sub { margin-bottom: 36px; }
 }
 
 @media (max-width: 480px) {
+  .event-spotlight--hero { padding: 18px; }
+  .event-spotlight__action { gap: 12px; }
   .hero__cta { flex-direction: column; }
   .hero__cta .btn { width: 100%; text-align: center; }
   .footer__links { grid-template-columns: 1fr; }

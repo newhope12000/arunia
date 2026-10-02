@@ -14,12 +14,82 @@
       "source": "/archive/:path*",
       "destination": "/:path*",
       "permanent": false
+    },
+    {
+      "source": "/hunmin/index.html",
+      "destination": "/hunmin",
+      "permanent": true
+    },
+    {
+      "source": "/hunmin/",
+      "destination": "/hunmin",
+      "permanent": true
+    },
+    {
+      "source": "/hunmin/apply.html",
+      "destination": "/hunmin/apply",
+      "permanent": true
+    },
+    {
+      "source": "/hunmin/apply/",
+      "destination": "/hunmin/apply",
+      "permanent": true
+    },
+    {
+      "source": "/hunmin/thanks.html",
+      "destination": "/hunmin/thanks",
+      "permanent": true
+    },
+    {
+      "source": "/hunmin/thanks/",
+      "destination": "/hunmin/thanks",
+      "permanent": true
+    },
+    {
+      "source": "/career-core-up/index.html",
+      "destination": "/career-core-up",
+      "permanent": true
+    },
+    {
+      "source": "/career-core-up/",
+      "destination": "/career-core-up",
+      "permanent": true
+    },
+    {
+      "source": "/career-core-up/thanks.html",
+      "destination": "/career-core-up/thanks",
+      "permanent": true
+    },
+    {
+      "source": "/career-core-up/thanks/",
+      "destination": "/career-core-up/thanks",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api"
+    },
+    {
+      "source": "/hunmin",
+      "destination": "/hunmin/index.html"
+    },
+    {
+      "source": "/hunmin/apply",
+      "destination": "/hunmin/apply.html"
+    },
+    {
+      "source": "/hunmin/thanks",
+      "destination": "/hunmin/thanks.html"
+    },
+    {
+      "source": "/career-core-up",
+      "destination": "/career-core-up/index.html"
+    },
+    {
+      "source": "/career-core-up/thanks",
+      "destination": "/career-core-up/thanks.html"
     },
     {
       "source": "/preview/:path*",
@@ -29,15 +99,30 @@
   "headers": [
     {
       "source": "/v0_1",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     },
     {
       "source": "/v0_1/",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     },
     {
       "source": "/v0_1/:path*",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     },
     {
       "source": "/preview/:path*",
