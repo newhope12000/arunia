@@ -32,6 +32,7 @@ const assets = [
   "application.js",
   "hunmin-contest.css",
   "hunmin-contest-poster-20261002.png",
+  "hunmin-contest-poster-20261002-v2.jpg",
   "hunmin-navigation.js",
   "hunmin-application.js",
   "hunmin/character-rail.png",
@@ -116,7 +117,7 @@ test("migration keeps approved intake, duplicate retry and five-digit receipt sc
     "application.js":
       "270d2fb621b919895e1e68f6c424c0bfe6d87bcd903d4818e4efb7adf702e97e",
     "hunmin-application.js":
-      "4d45d808f6d2856322ba222b6cffccdd1fe59a2b5a1a618d9576eabc32e3f3a4",
+      "1c3ad42d1248cb6e88d921b521c089b4e55b3caabb5efb92a3193ac027e3fc98",
     "hunmin-navigation.js":
       "51d1c170dbb4c377376b7873dba65e621f298028d45af00dfb6d8f9130dde687",
   };

@@ -69,7 +69,7 @@
     inputs.phone.setCustomValidity(/^01[016789]\d{7,8}$/.test(phone) ? '' : '휴대전화 번호를 확인해주세요. 예: 010-1234-5678');
     const ageText = inputs.age.value.trim();
     const age = Number(ageText);
-    inputs.age.setCustomValidity(/^\d+$/.test(ageText) && Number.isInteger(age) && age >= 20 && age <= 27 ? '' : '현재 만 나이를 20부터 27 사이의 정수로 입력해주세요.');
+    inputs.age.setCustomValidity(/^\d+$/.test(ageText) && Number.isInteger(age) && age >= 20 && age <= 27 ? '' : '현재 나이를 20부터 27 사이의 정수로 입력해주세요.');
   }
 
   lineSpecs.forEach(([id, prefix, counterId]) => inputs[id].addEventListener('input', () => validateLine(id, prefix, counterId)));
@@ -184,7 +184,7 @@
     }
     if ([400, 413, 415, 422].includes(response.status)) {
       pending = null;
-      setState('ready', response.status === 413 ? '작성한 내용이 너무 깁니다. 내용을 줄인 뒤 다시 확인해주세요.' : '입력한 내용을 확인해주세요. 네 줄의 첫 글자, 연락처, 만 나이와 필수 항목을 확인한 뒤 다시 제출해주세요.', true);
+      setState('ready', response.status === 413 ? '작성한 내용이 너무 깁니다. 내용을 줄인 뒤 다시 확인해주세요.' : '입력한 내용을 확인해주세요. 네 줄의 첫 글자, 연락처, 나이와 필수 항목을 확인한 뒤 다시 제출해주세요.', true);
       return;
     }
     if (response.status === 409) {
