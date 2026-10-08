@@ -63,6 +63,11 @@
             <span class="contact__detail-label">운영 시간</span>
             <span class="contact__detail-val">평일 10:00 ~ 18:00</span>
           </div>
+          <div class="contact__detail-item">
+            <span class="contact__detail-label">문의 이메일</span>
+            <a class="contact__detail-val" href="mailto:hwajeongup@gmail.com">hwajeongup@gmail.com</a>
+            <a class="contact__detail-val" href="mailto:hwajeongup@gmail.com">이메일로 직접 문의</a>
+          </div>
         </div>
 
         <div style="margin-top:40px; padding:28px; background:var(--bg-warm); border-radius:var(--r-lg); border:1.5px solid var(--border);">
@@ -84,7 +89,7 @@
         </div>
       </div>
 
-      <form class="contact__form" id="contactForm" novalidate>
+      <form class="contact__form" id="contactForm">
         <div class="form-group">
           <label class="form-label" for="fname">이름</label>
           <input type="text" id="fname" placeholder="이름을 입력해주세요" name="name" required autocomplete="name"/>
@@ -108,15 +113,19 @@
           <label class="form-label" for="fmessage">메시지 (선택)</label>
           <textarea id="fmessage" name="message" placeholder="궁금한 점이나 하고 싶은 말을 자유롭게 남겨주세요." rows="4" style="width:100%; padding:15px 18px; background:var(--white); border:1.5px solid var(--border); border-radius:var(--r-md); font-size:0.9375rem; font-family:var(--font); color:var(--text); line-height:1.7; resize:vertical; transition:border-color 0.2s, box-shadow 0.2s; -webkit-appearance:none;"></textarea>
         </div>
-        <button type="submit" class="btn btn--primary btn--full">소식 받아보기</button>
-        <p class="form-note">개인정보는 뉴스레터 발송 외 사용되지 않습니다.</p>
+        <p class="form-note" id="contactEmailNotice">입력한 이름·이메일·관심 프로그램·메시지는 기존 소식 등록과 문의 답변에 사용되며, FormSubmit을 통해 hwajeongup@gmail.com으로도 전달됩니다. FormSubmit은 제출 내용을 30일간 보관한다고 안내합니다. 전달된 내용은 운영자 이메일에도 보관됩니다.</p>
+        <label class="contact__consent"><input type="checkbox" name="emailConsent" required aria-describedby="contactEmailNotice"><span>위 내용과 이메일 전달에 동의합니다. <a href="privacy.html#contact-email">개인정보처리방침</a></span></label>
+        <button type="submit" class="btn btn--primary btn--full" disabled>소식 받아보기</button>
+        <p class="contact__status" id="contactStatus" role="status" tabindex="-1"></p>
+        <noscript><p class="form-note">소식 등록과 문의 전달에는 자바스크립트가 필요합니다. <a href="mailto:hwajeongup@gmail.com">이메일로 직접 문의해주세요.</a></p></noscript>
       </form>
 
-      <div class="contact__success" id="formSuccess" style="display:none;" role="status">
+      <div class="contact__success" id="formSuccess" style="display:none;" role="status" tabindex="-1">
         <div class="success-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p>등록해주셔서 감사합니다.<br />곧 소식을 전달드릴게요.</p>
+        <p>문의 메일 전송 요청이 접수되었습니다.<br />확인 후 답변드릴게요.</p>
+        <p class="form-note" id="contactLegacyStatus"></p>
       </div>
     </div>
   </section>
@@ -161,5 +170,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="assets/contact-inquiry.js"></script>
 </body>
 </html>

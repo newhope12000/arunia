@@ -891,6 +891,12 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .contact__detail-val { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
 
 .contact__form { display: flex; flex-direction: column; gap: 14px; }
+.contact__consent { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8125rem; color: var(--text-muted); line-height: 1.7; }
+.contact__consent input { flex: 0 0 auto; margin-top: 5px; accent-color: var(--accent); }
+.contact__consent a, .contact__status a { text-decoration: underline; }
+.contact__status { font-size: 0.875rem; line-height: 1.8; color: var(--text-muted); }
+.contact__status:empty { display: none; }
+.contact__form button:disabled { cursor: not-allowed; opacity: 0.65; }
 
 .form-label {
   display: block;

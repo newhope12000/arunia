@@ -60,48 +60,6 @@ document.querySelectorAll(targets.join(',')).forEach(el => {
   });
 });
 
-// Contact form → Google Sheets
-// Google Apps Script 배포 후 아래 URL을 교체하세요
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxj8PqxeRRc2Fidc9fTPVf_0kDL3rrKjliTnl2IklyDmcgvsnXvJgE74vuL8jgg6tmoFw/exec';
-
-const form = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const data = {
-      name:     form.querySelector('#fname').value,
-      email:    form.querySelector('#femail').value,
-      interest: form.querySelector('#finterest').value,
-      message:  form.querySelector('#fmessage').value,
-    };
-
-    // 데이터 전송 (no-cors: 응답 못 읽어도 시트엔 저장됨)
-    if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE') {
-      fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }).catch(() => {});
-    }
-
-    // 성공 UI 표시
-    form.style.transition = 'opacity 0.3s, transform 0.3s';
-    form.style.opacity = '0';
-    form.style.transform = 'scale(0.97)';
-    setTimeout(() => {
-      form.style.display = 'none';
-      formSuccess.style.display = 'block';
-      formSuccess.style.opacity = '0';
-      formSuccess.style.transition = 'opacity 0.4s';
-      requestAnimationFrame(() => { formSuccess.style.opacity = '1'; });
-    }, 320);
-  });
-}
-
 // Textarea focus style (contact page)
 const textarea = document.getElementById('fmessage');
 if (textarea) {
