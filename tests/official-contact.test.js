@@ -26,7 +26,7 @@ function fixture(emailFetch, legacyFetch = async () => ({ type: "opaque" })) {
   const timeouts = new Set();
   const fields = Object.fromEntries(Object.entries(values).map(([name, value]) => [name, { value, disabled: false }]));
   const consent = { checked: true, disabled: false };
-  const button = { disabled: true, textContent: "소식 받아보기" };
+  const button = { disabled: true, textContent: "문의 보내기" };
   const element = () => ({ textContent: "", style: {}, focused: false, focus() { this.focused = true; } });
   const status = element();
   const legacyStatus = element();
@@ -71,17 +71,54 @@ test("official form keeps its fields and discloses the email transfer before sub
   assert.match(html, /href="privacy\.html#contact-email"/);
   assert.match(html, /href="mailto:hwajeongup@gmail\.com"/);
   const visibleHtml = html.replace(/<noscript>[\s\S]*?<\/noscript>/g, "");
-  assert.match(visibleHtml, /href="mailto:hwajeongup@gmail\.com">이메일로 직접 문의<\/a>/);
+  assert.match(visibleHtml, /href="mailto:contact@arunia\.co\.kr">contact@arunia\.co\.kr<\/a>/);
+  assert.match(visibleHtml, /href="mailto:contact@arunia\.co\.kr">이메일로 직접 문의<\/a>/);
   assert.match(html, /<button type="submit"[^>]* disabled>/);
   assert.match(html, /<script src="assets\/contact-inquiry\.js"><\/script>/);
   const commonScript = readFileSync(new URL("../legacy/script.js", import.meta.url), "utf8");
   assert.doesNotMatch(commonScript, /contactForm|APPS_SCRIPT_URL/);
 });
 
+test("the inquiry page supports general and contest questions while preserving optional fields and program choices", () => {
+  assert.match(html, /<button type="submit"[^>]*>문의 보내기<\/button>/);
+  assert.doesNotMatch(html, /소식 받아보기|먼저 소식부터 받아보세요/);
+  assert.match(html, /for="finterest">문의 유형 \(선택\)<\/label>/);
+  const select = /<select\b[^>]*id="finterest"[^>]*>[\s\S]*?<\/select>/.exec(html)?.[0];
+  assert.ok(select);
+  assert.match(select, /name="interest"/);
+  assert.doesNotMatch(select.split(">")[0], /\brequired\b/);
+  assert.match(select, /문의 유형을 선택해주세요/);
+  assert.match(select, /value="general">일반 문의<\/option>/);
+  assert.match(select, /value="mandu-contest">그만둘만두 공모전 문의<\/option>/);
+  for (const existingValue of ["archive", "roundtable", "class", "all", "collab"])
+    assert.match(select, new RegExp(`value="${existingValue}"`));
+  assert.match(html, /for="fmessage">문의 내용 \(선택\)<\/label>/);
+  const messageInput = /<textarea\b[^>]*id="fmessage"[^>]*>/.exec(html)?.[0];
+  assert.ok(messageInput);
+  assert.doesNotMatch(messageInput, /\brequired\b/);
+});
+
+test("general, contest and unselected inquiry types keep the same four-field contract on both channels", async () => {
+  for (const interest of ["general", "mandu-contest", ""]) {
+    const f = fixture(response({ success: true }));
+    f.fields.interest.value = interest;
+    f.fields.message.value = "";
+    await f.submit();
+    assert.equal(f.calls.length, 2);
+    const expected = { ...values, interest, message: "" };
+    for (const { url, options } of f.calls) {
+      const sent = JSON.parse(options.body);
+      assert.deepEqual({ name: sent.name, email: sent.email, interest: sent.interest, message: sent.message }, expected);
+      if (url === legacyEndpoint) assert.deepEqual(sent, expected);
+    }
+    assert.equal(f.success.style.display, "block");
+  }
+});
+
 test("the linked privacy notice reflects the added email channel and optional fields", () => {
   const privacy = readFileSync(new URL("../legacy/privacy.html", import.meta.url), "utf8");
   assert.match(privacy, /id="contact-email"/);
-  assert.match(privacy, /관심 프로그램\(선택\), 문의 내용\(선택\)/);
+  assert.match(privacy, /문의 유형\(선택\), 문의 내용\(선택\)/);
   assert.match(privacy, /FormSubmit[\s\S]*hwajeongup@gmail\.com[\s\S]*30일/);
   assert.match(privacy, /기존 소식 등록 경로의 처리 방식은 유지합니다/);
   assert.doesNotMatch(privacy, /외부에 위탁하고 있지 않습니다/);
@@ -169,7 +206,7 @@ test("email rejection preserves values, distinguishes failure and prevents dupli
     assert.deepEqual(readFields(f), values);
     assert.ok(Object.values(f.fields).every((field) => !field.disabled));
     assert.match(f.status.textContent, /거절되어 완료되지 않았습니다/);
-    assert.match(f.status.textContent, /기존 소식 등록[\s\S]*완료 여부는[\s\S]*다시 제출하지 말고 hwajeongup@gmail\.com/);
+    assert.match(f.status.textContent, /기존 접수 경로[\s\S]*완료 여부는[\s\S]*다시 제출하지 말고 hwajeongup@gmail\.com/);
     assert.equal(f.status.focused, true);
     assert.equal(f.button.disabled, true);
     assert.equal(f.timeouts.size, 0);
@@ -189,7 +226,7 @@ test("transport failures and unreadable email responses preserve uncertain deliv
     await f.submit();
     assert.equal(f.success.style.display, "none");
     assert.match(f.status.textContent, /문의 메일 전송 결과를 확인하지 못했습니다[\s\S]*이미 전달됐을 수 있습니다/);
-    assert.match(f.status.textContent, /기존 소식 등록 요청의 전달 여부를 확인하지 못했습니다/);
+    assert.match(f.status.textContent, /기존 접수 경로의 전달 여부를 확인하지 못했습니다/);
     assert.deepEqual(readFields(f), values);
     assert.equal(f.timeouts.size, 0);
     await f.submit();
@@ -201,7 +238,7 @@ test("email acceptance is reported independently from an unconfirmed legacy requ
   const f = fixture(response({ success: true }), async () => { throw new TypeError("Legacy failed"); });
   await f.submit();
   assert.equal(f.success.style.display, "block");
-  assert.match(f.legacyStatus.textContent, /기존 소식 등록 요청의 전달 여부를 확인하지 못했습니다/);
+  assert.match(f.legacyStatus.textContent, /기존 접수 경로의 전달 여부를 확인하지 못했습니다/);
   assert.doesNotMatch(f.legacyStatus.textContent, /저장되었습니다|등록되었습니다/);
 });
 

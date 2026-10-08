@@ -69,7 +69,8 @@ test("past contest remains reachable at the original anchor with its poster, ter
     "응모자격",
     "시상내역",
     "2026.09.01 — 09.22",
-    "2026년 10월 7일(수)",
+    "/notices/mandu-contest-winners",
+    "결과 공지 확인",
   ])
     assert.ok(html.includes(preserved), `Past contest lost ${preserved}`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(([, id]) => id);

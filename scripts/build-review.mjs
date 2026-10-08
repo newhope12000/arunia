@@ -12,6 +12,7 @@ import { buildRenewal } from "./build-renewal.mjs";
 import { buildOfficialHome } from "./build-official-home.mjs";
 import { buildNews } from "./build-news.mjs";
 import { buildOfficialPrograms } from "./build-official-programs.mjs";
+import { buildNotices } from "./build-notices.mjs";
 
 // Publish the official homepage and keep the counseling review at /preview/.
 rmSync("review-dist", { recursive: true, force: true });
@@ -64,3 +65,4 @@ buildRenewal();
 buildOfficialHome();
 buildOfficialPrograms();
 buildNews();
+buildNotices();

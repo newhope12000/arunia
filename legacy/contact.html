@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>문의 — 어른이아</title>
-  <meta name="description" content="어른이아에 궁금한 것이 있으신가요? 구독, 협업, 콘텐츠 제안 모두 환영합니다." />
+  <title>문의하기 — 어른이아</title>
+  <meta name="description" content="일반 문의, 프로그램·공모전 문의, 협업 제안을 남겨주세요. 작성하신 이메일로 답변드립니다." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://arunia.co.kr/contact.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="문의 — 어른이아" />
-  <meta property="og:description" content="어른이아에 궁금한 것이 있으신가요? 구독, 협업, 콘텐츠 제안 모두 환영합니다." />
+  <meta property="og:title" content="문의하기 — 어른이아" />
+  <meta property="og:description" content="일반 문의, 프로그램·공모전 문의, 협업 제안을 남겨주세요. 작성하신 이메일로 답변드립니다." />
   <meta property="og:url" content="https://arunia.co.kr/contact.html" />
   <meta property="og:site_name" content="어른이아" />
   <meta name="naver-site-verification" content="3ce8e42ff87025c0d4bfec693d02441009d77b4a" />
@@ -31,6 +31,7 @@
         <a href="about.html">소개</a>
         <a href="programs.html">프로그램</a>
         <a href="pricing.html">구독</a>
+        <a href="/notices">공지</a>
         <a href="contact.html" class="active">문의</a>
       </nav>
       <a href="pricing.html" class="btn btn--nav">시작해보기</a>
@@ -43,8 +44,8 @@
   <section class="page-hero">
     <div class="container">
       <div class="page-hero__label">CONTACT</div>
-      <h1 class="page-hero__title">문의</h1>
-      <p class="page-hero__sub">먼저 소식부터 받아보세요. 결정은 나중에 해도 됩니다.</p>
+      <h1 class="page-hero__title">문의하기</h1>
+      <p class="page-hero__sub">프로그램, 공모전, 서비스 이용 등 궁금한 점을 남겨주세요. 작성하신 이메일로 답변드릴게요.</p>
     </div>
   </section>
 
@@ -53,10 +54,10 @@
     <div class="container contact__wrap">
       <div class="contact__info">
         <div class="section-label">GET IN TOUCH</div>
-        <h2 class="section-title">어른이아와<br />연결되기</h2>
+        <h2 class="section-title">궁금한 점을<br />물어보세요</h2>
         <p class="contact__desc">
-          아직 구독할 준비가 안 됐어도 괜찮습니다.<br />
-          먼저 소식을 받아보는 것부터 시작하세요.
+          프로그램 참여부터 공모전, 서비스 이용까지.<br />
+          궁금한 점을 편하게 남겨주세요.
         </p>
         <div class="contact__detail">
           <div class="contact__detail-item">
@@ -65,8 +66,8 @@
           </div>
           <div class="contact__detail-item">
             <span class="contact__detail-label">문의 이메일</span>
-            <a class="contact__detail-val" href="mailto:hwajeongup@gmail.com">hwajeongup@gmail.com</a>
-            <a class="contact__detail-val" href="mailto:hwajeongup@gmail.com">이메일로 직접 문의</a>
+            <a class="contact__detail-val" href="mailto:contact@arunia.co.kr">contact@arunia.co.kr</a>
+            <a class="contact__detail-val" href="mailto:contact@arunia.co.kr">이메일로 직접 문의</a>
           </div>
         </div>
 
@@ -75,15 +76,15 @@
           <ul style="display:flex; flex-direction:column; gap:8px;">
             <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
               <span style="position:absolute; left:0; color:var(--accent);">—</span>
-              당장 결정하지 않아도 됩니다. 궁금한 것만 물어보셔도 됩니다.
+              프로그램에 참여하지 않아도 일반 문의를 남길 수 있습니다.
             </li>
             <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
               <span style="position:absolute; left:0; color:var(--accent);">—</span>
-              구독 문의는 물론 콘텐츠 제안, 협업 문의도 환영합니다.
+              공모전 문의는 물론 콘텐츠 제안, 협업 문의도 환영합니다.
             </li>
             <li style="font-size:0.875rem; color:var(--text-muted); padding-left:16px; position:relative;">
               <span style="position:absolute; left:0; color:var(--accent);">—</span>
-              DAY ONE 클래스 일정은 인스타그램에서 먼저 공지됩니다.
+              답변받을 이메일을 확인하고, 문의하실 내용을 함께 남겨주세요.
             </li>
           </ul>
         </div>
@@ -96,12 +97,14 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="femail">이메일</label>
-          <input type="email" id="femail" placeholder="이메일 주소를 입력해주세요" name="email" required autocomplete="email"/>
+          <input type="email" id="femail" placeholder="답변받을 이메일 주소를 입력해주세요" name="email" required autocomplete="email"/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="finterest">관심 프로그램</label>
+          <label class="form-label" for="finterest">문의 유형 (선택)</label>
           <select id="finterest" name="interest">
-            <option value="" disabled selected>관심 있는 프로그램을 선택해주세요</option>
+            <option value="" disabled selected>문의 유형을 선택해주세요</option>
+            <option value="general">일반 문의</option>
+            <option value="mandu-contest">그만둘만두 공모전 문의</option>
             <option value="archive">콘텐츠 아카이브 (구독)</option>
             <option value="roundtable">프리미엄 라운드테이블</option>
             <option value="class">DAY ONE 클래스</option>
@@ -110,14 +113,14 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="fmessage">메시지 (선택)</label>
-          <textarea id="fmessage" name="message" placeholder="궁금한 점이나 하고 싶은 말을 자유롭게 남겨주세요." rows="4" style="width:100%; padding:15px 18px; background:var(--white); border:1.5px solid var(--border); border-radius:var(--r-md); font-size:0.9375rem; font-family:var(--font); color:var(--text); line-height:1.7; resize:vertical; transition:border-color 0.2s, box-shadow 0.2s; -webkit-appearance:none;"></textarea>
+          <label class="form-label" for="fmessage">문의 내용 (선택)</label>
+          <textarea id="fmessage" name="message" placeholder="궁금한 점을 적어주세요. 공모전 문의라면 공모전 이름과 확인이 필요한 내용을 함께 남겨주세요." rows="4" style="width:100%; padding:15px 18px; background:var(--white); border:1.5px solid var(--border); border-radius:var(--r-md); font-size:0.9375rem; font-family:var(--font); color:var(--text); line-height:1.7; resize:vertical; transition:border-color 0.2s, box-shadow 0.2s; -webkit-appearance:none;"></textarea>
         </div>
-        <p class="form-note" id="contactEmailNotice">입력한 이름·이메일·관심 프로그램·메시지는 기존 소식 등록과 문의 답변에 사용되며, FormSubmit을 통해 hwajeongup@gmail.com으로도 전달됩니다. FormSubmit은 제출 내용을 30일간 보관한다고 안내합니다. 전달된 내용은 운영자 이메일에도 보관됩니다.</p>
+        <p class="form-note" id="contactEmailNotice">입력한 이름·이메일·문의 유형·문의 내용은 문의 답변과 기존 접수 처리에 사용되며, FormSubmit을 통해 hwajeongup@gmail.com으로도 전달됩니다. FormSubmit은 제출 내용을 30일간 보관한다고 안내합니다. 전달된 내용은 운영자 이메일에도 보관됩니다.</p>
         <label class="contact__consent"><input type="checkbox" name="emailConsent" required aria-describedby="contactEmailNotice"><span>위 내용과 이메일 전달에 동의합니다. <a href="privacy.html#contact-email">개인정보처리방침</a></span></label>
-        <button type="submit" class="btn btn--primary btn--full" disabled>소식 받아보기</button>
+        <button type="submit" class="btn btn--primary btn--full" disabled>문의 보내기</button>
         <p class="contact__status" id="contactStatus" role="status" tabindex="-1"></p>
-        <noscript><p class="form-note">소식 등록과 문의 전달에는 자바스크립트가 필요합니다. <a href="mailto:hwajeongup@gmail.com">이메일로 직접 문의해주세요.</a></p></noscript>
+        <noscript><p class="form-note">문의 전달에는 자바스크립트가 필요합니다. <a href="mailto:hwajeongup@gmail.com">이메일로 직접 문의해주세요.</a></p></noscript>
       </form>
 
       <div class="contact__success" id="formSuccess" style="display:none;" role="status" tabindex="-1">

@@ -82,11 +82,11 @@
     button.disabled = true;
     button.textContent = "전송 중…";
     form.setAttribute("aria-busy", "true");
-    status.textContent = "소식 등록 요청과 문의 메일을 전달하고 있습니다. 잠시 기다려주세요.";
+    status.textContent = "문의를 접수하고 이메일로 전달하고 있습니다. 잠시 기다려주세요.";
 
     const legacyMessage = (result) => result === "unknown"
-      ? "기존 소식 등록은 별도로 처리되며, 완료 여부는 이 화면에서 확인할 수 없습니다."
-      : "기존 소식 등록 요청의 전달 여부를 확인하지 못했습니다. 이미 처리됐을 수 있습니다.";
+      ? "기존 접수 경로의 처리 완료 여부는 이 화면에서 확인할 수 없습니다."
+      : "기존 접수 경로의 전달 여부를 확인하지 못했습니다. 이미 처리됐을 수 있습니다.";
     let legacyResult = "unknown";
     sendLegacy(values).then((result) => {
       legacyResult = result;
@@ -112,7 +112,7 @@
     const emailMessage = emailResult === "rejected"
       ? "문의 메일 전송 요청이 거절되어 완료되지 않았습니다."
       : "문의 메일 전송 결과를 확인하지 못했습니다. 이미 전달됐을 수 있습니다.";
-    status.textContent = `${emailMessage} ${legacyMessage(legacyResult)} 작성한 내용은 그대로 남아 있습니다. 중복 등록을 막기 위해 다시 제출하지 말고 hwajeongup@gmail.com으로 직접 문의해주세요.`;
+    status.textContent = `${emailMessage} ${legacyMessage(legacyResult)} 작성한 내용은 그대로 남아 있습니다. 중복 접수를 막기 위해 다시 제출하지 말고 hwajeongup@gmail.com으로 직접 문의해주세요.`;
     status.focus();
   });
 })();

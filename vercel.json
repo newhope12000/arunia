@@ -84,6 +84,31 @@
       "source": "/news/:slug/",
       "destination": "/news/:slug",
       "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/notices/index.html",
+      "destination": "/notices",
+      "permanent": true
+    },
+    {
+      "source": "/notices/",
+      "destination": "/notices",
+      "permanent": true
+    },
+    {
+      "source": "/notices/:slug.html",
+      "destination": "/notices/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/notices/:slug/",
+      "destination": "/notices/:slug",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -122,6 +147,18 @@
     {
       "source": "/news/:slug",
       "destination": "/news/:slug.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/notices",
+      "destination": "/notices/index.html"
+    },
+    {
+      "source": "/notices/:slug",
+      "destination": "/notices/:slug.html"
     }
   ],
   "headers": [

@@ -49,12 +49,12 @@ export const PROGRAM_CATALOG = [
     category: "공모전",
     name: "그만둘만두 이야기 공모전",
     text: "무엇을 그만두었는지, 그 뒤에 새롭게 알게 된 나의 이야기를 나누는 공모전입니다.",
-    detail: "최종 수상자 발표 · 2026년 10월 7일(수)",
+    detail: "제1회 공모전 최종 당선자 발표 공지 게시",
     period: "2026. 09. 01 — 09. 22",
     start: "2026-09-01T00:00:00+09:00",
     end: "2026-09-23T00:00:00+09:00",
-    href: "/programs.html#contest",
-    linkLabel: "지난 공모전 안내",
+    href: "/notices/mandu-contest-winners",
+    linkLabel: "최종 당선자 확인",
   },
 ];
 

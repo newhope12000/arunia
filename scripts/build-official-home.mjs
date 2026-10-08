@@ -5,7 +5,7 @@ import { renderOfficialHome } from "../renewal/official-home.mjs";
 export function buildOfficialHome(outputRoot = "review-dist") {
   const assets = join(outputRoot, "assets/renewal");
   mkdirSync(assets, { recursive: true });
-  for (const name of ["style.css", "site.js", "contact.mjs"])
+  for (const name of ["style.css", "site.js", "contact.mjs", "notice-popup.css", "notice-popup.js"])
     cpSync(`renewal/${name}`, join(assets, name));
   cpSync("renewal/availability.mjs", join(assets, "availability.js"));
   for (const directory of ["brand", "images"])

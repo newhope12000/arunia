@@ -39,14 +39,14 @@ function filesBelow(directory, prefix = "") {
 
 function outputFile(output, pathname) {
   const rewritten = config.rewrites.find((rule) => rule.source === pathname);
-  const newsSlug = /^\/news\/([a-z0-9]+(?:-[a-z0-9]+)*)$/.exec(pathname)?.[1];
-  const newsRewrite = newsSlug
-    ? config.rewrites.find((rule) => rule.source === "/news/:slug")
+  const contentRoute = /^\/(news|notices)\/([a-z0-9]+(?:-[a-z0-9]+)*)$/.exec(pathname);
+  const contentRewrite = contentRoute
+    ? config.rewrites.find((rule) => rule.source === `/${contentRoute[1]}/:slug`)
     : undefined;
   return join(
     output,
     rewritten?.destination ??
-      newsRewrite?.destination.replace(":slug", newsSlug) ??
+      contentRewrite?.destination.replace(":slug", contentRoute[2]) ??
       (pathname.endsWith("/") ? `${pathname}index.html` : pathname),
   );
 }
@@ -250,6 +250,8 @@ test("homepage promotion publishes a usable official root and preserves events, 
       "/hunmin",
       "/career-core-up",
       "/programs.html#contest",
+      "/notices",
+      "/notices/mandu-contest-winners",
       "/growth_1.html",
       "/growth_2.html",
       "/growth.html",

@@ -1,0 +1,231 @@
+.notices-section {
+  background: var(--ivory);
+}
+.notices-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.notices-kicker {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.notices-heading h2 {
+  margin: 0;
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+}
+.notices-list,
+.notices-awards,
+.notices-names {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.notices-list {
+  display: grid;
+  gap: 16px;
+}
+.notices-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white, #fff);
+}
+.notices-card-link {
+  display: block;
+  padding: 28px 32px;
+  border-radius: inherit;
+}
+.notices-card-link:hover h2,
+.notices-card-link:hover h3 {
+  color: var(--green);
+}
+.notices-card h2,
+.notices-card h3 {
+  margin: 12px 0;
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.notices-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.notices-category {
+  color: var(--green);
+  font-weight: 700;
+}
+.notices-excerpt {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.notices-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  color: var(--green);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.notices-index {
+  padding-top: 64px;
+  padding-bottom: 100px;
+}
+.notices-index-heading {
+  margin-bottom: 40px;
+}
+.notices-index-heading h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+.notices-empty {
+  color: var(--muted);
+}
+.notices-detail {
+  max-width: 920px;
+  padding-top: 48px;
+  padding-bottom: 88px;
+}
+.notices-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.notices-detail-heading {
+  margin: 36px 0 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.notices-detail-heading h1 {
+  margin: 0 0 24px;
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.notices-body {
+  font-size: 1rem;
+  line-height: 1.95;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.notices-body p {
+  margin: 0 0 20px;
+}
+.notices-content-section {
+  margin: 44px 0;
+}
+.notices-content-section > h2 {
+  margin-bottom: 24px;
+  font-size: 1.375rem;
+}
+.notices-content-section h3 {
+  font-size: 1rem;
+}
+.notices-awards {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.notices-award {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--ivory);
+}
+.notices-award h3 {
+  margin: 0 0 16px;
+  color: var(--green);
+}
+.notices-award h3 span {
+  color: var(--muted);
+  font-weight: 500;
+}
+.notices-names {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+.notices-names li {
+  white-space: nowrap;
+}
+.notices-guidance,
+.notices-contact ul {
+  padding-left: 24px;
+  list-style: disc;
+}
+.notices-guidance li + li,
+.notices-contact li + li {
+  margin-top: 12px;
+}
+.notices-contact {
+  margin-top: 28px;
+}
+.notices-contact a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.notices-closing {
+  margin-top: 40px;
+}
+.notices-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.notices-related {
+  padding-bottom: 88px;
+}
+.notices-related > h2 {
+  margin-bottom: 24px;
+  font-size: 1.375rem;
+}
+@media (max-width: 760px) {
+  .notices-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .notices-card-link {
+    padding: 24px;
+  }
+  .notices-index,
+  .notices-detail {
+    padding-top: 36px;
+    padding-bottom: 64px;
+  }
+  .notices-detail-heading {
+    margin-top: 28px;
+  }
+  .notices-body {
+    font-size: 0.9375rem;
+  }
+  .notices-award {
+    padding: 20px;
+  }
+  .notices-names {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 12px;
+  }
+  .notices-related {
+    padding-bottom: 64px;
+  }
+}
