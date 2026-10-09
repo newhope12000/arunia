@@ -2,6 +2,120 @@
 // Keep the supplied announcement text and masked names unchanged.
 export const NOTICES = [
   {
+    slug: "hunmin-acrostic-winners",
+    title: "[당선자 발표] 2026 한글날 기념 제1회 훈민정음 4행시 공모전",
+    published: "2026-10-09",
+    category: "공모전",
+    excerpt:
+      "2026 한글날 기념 제1회 훈민정음 4행시 공모전의 최종 당선자와 수상작·출품작 공개 안내를 확인하세요.",
+    intro: [
+      "안녕하세요.",
+      "훈민정음 4행시 공모전 운영사무국입니다.",
+      "2026년 한글날을 기념하여 개최된 「제1회 훈민정음 4행시 공모전」에 참여해 주신 모든 분께 진심으로 감사드립니다.",
+      "우리말과 한글에 대한 관심을 바탕으로 창의적인 아이디어와 정성을 담아 작품을 출품해 주신 참가자 여러분께 깊은 감사의 말씀을 전합니다.",
+      "전문 심사위원단의 신중하고 공정한 심사를 거쳐 선정된 최종 당선자를 아래와 같이 발표합니다.",
+    ],
+    sections: [
+      {
+        title: "수석 | 2명",
+        awards: [
+          { label: "수석", count: 2, unit: "명", names: ["이O진", "엄O희"] },
+        ],
+      },
+      {
+        title: "차석 | 10명",
+        awards: [
+          {
+            label: "차석",
+            count: 10,
+            unit: "명",
+            names: [
+              "김O연",
+              "최O림",
+              "박O태",
+              "한O재",
+              "홍O연",
+              "이O빈",
+              "박O원",
+              "이O경",
+              "이O석",
+              "박O헌",
+            ],
+          },
+        ],
+      },
+      {
+        title: "장려상 | 30명",
+        awards: [
+          {
+            label: "장려상",
+            count: 30,
+            unit: "명",
+            names: [
+              "박O미",
+              "신O호",
+              "노O영",
+              "김O성",
+              "김O진",
+              "김O희",
+              "정O훈",
+              "강O모",
+              "최O진",
+              "오O나",
+              "이O협",
+              "최O예",
+              "강O후",
+              "박O현",
+              "고O준",
+              "김O빈",
+              "박O택",
+              "김O원",
+              "성O준",
+              "신O원",
+              "박O은",
+              "서O경",
+              "고O연",
+              "김O야",
+              "김O연",
+              "김O경",
+              "한O혁",
+              "박O택",
+              "민O진",
+              "이O미",
+            ],
+          },
+        ],
+        paragraphs: [
+          "※ 개인정보 보호를 위해 당선자 성명의 일부를 비공개 처리하였습니다.",
+          "※ 당선자에게는 상장 수여 및 상품 지급에 관한 사항을 순차적으로 개별 안내드렸습니다.",
+        ],
+      },
+      {
+        title: "수상작 및 출품작 공개 안내",
+        paragraphs: [
+          "현재 수상작을 대상으로 타 공모전 중복 수상 여부, 표절 여부, 저작권 및 작품 이용에 관한 최종 확인 절차를 진행하고 있습니다.",
+          "수상작 및 출품작은 참가자의 창작 아이디어와 권익을 보호하기 위해 관련 검증과 필요한 동의 절차가 완료된 후, 공개 여부 및 일정을 별도로 안내드릴 예정입니다.",
+          "공정한 공모전 운영과 참가자의 권익 보호를 위한 절차인 만큼 너른 양해 부탁드립니다.",
+        ],
+      },
+      {
+        title: "문의처",
+        contact: {
+          title: "문의처",
+          label: "훈민정음 4행시 공모전 운영사무국",
+          email: "contact@arunia.co.kr",
+        },
+      },
+    ],
+    closing: [
+      "이번 공모전에 관심을 가지고 참여해 주신 모든 분께 다시 한번 감사드립니다.",
+      "수상의 영예를 안으신 분들께 진심으로 축하의 말씀을 전하며, 아쉽게 수상하지 못하신 참가자 여러분께도 소중한 작품을 보내주신 것에 대해 깊이 감사드립니다.",
+      "앞으로도 우리말과 한글의 가치를 함께 나누고, 창의적인 생각을 펼칠 수 있는 뜻깊은 기회를 마련하도록 노력하겠습니다.",
+      "감사합니다.",
+      "훈민정음 4행시 공모전 운영사무국 드림",
+    ],
+  },
+  {
     slug: "mandu-contest-winners",
     title: "[공지] 제1회 '그만둘만두' 공모전 최종 당선자 발표",
     published: "2026-10-08",
@@ -143,6 +257,8 @@ export function getNotices(records = NOTICES) {
             award.count !== award.names.length
           )
             throw new Error(`Invalid notice award count: ${record.slug}`);
+          if (award.unit !== undefined && !["팀", "명"].includes(award.unit))
+            throw new Error(`Invalid notice award unit: ${record.slug}`);
         }
       }
       if (section.contact !== undefined) {
@@ -156,7 +272,10 @@ export function getNotices(records = NOTICES) {
           )
         )
           throw new Error(`Invalid notice contact email: ${record.slug}`);
-        if (contact.url !== "https://www.arunia.co.kr/contact")
+        if (
+          contact.url !== undefined &&
+          contact.url !== "https://www.arunia.co.kr/contact"
+        )
           throw new Error(`Invalid notice contact URL: ${record.slug}`);
       }
       if (

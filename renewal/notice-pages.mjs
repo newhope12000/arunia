@@ -28,14 +28,19 @@ function noticeList(records, headingTag = "h3") {
 }
 
 function noticeSection(section, index) {
+  const singleAward = section.awards?.length === 1 ? section.awards[0] : null;
+  const awardTitleInSection =
+    singleAward &&
+    section.title ===
+      `${singleAward.label} | ${singleAward.count}${singleAward.unit ?? "팀"}`;
   const awards = section.awards
-    ? `<ul class="notices-awards">${section.awards.map((award) => `<li class="notices-award"><h3>${esc(award.label)} <span>(${award.count}팀)</span></h3><ul class="notices-names" aria-label="${esc(award.label)} 당선자">${award.names.map((name) => `<li>${esc(name)}</li>`).join("")}</ul></li>`).join("")}</ul>`
+    ? `<ul class="notices-awards">${section.awards.map((award) => `<li class="notices-award">${awardTitleInSection ? "" : `<h3>${esc(award.label)} <span>(${award.count}${esc(award.unit ?? "팀")})</span></h3>`}<ul class="notices-names" aria-label="${esc(award.label)} 당선자">${award.names.map((name) => `<li>${esc(name)}</li>`).join("")}</ul></li>`).join("")}</ul>`
     : "";
   const items = section.items?.length
     ? `<ul class="notices-guidance">${section.items.map((text) => `<li>${esc(text)}</li>`).join("")}</ul>`
     : "";
   const contact = section.contact
-    ? `<div class="notices-contact"><h3>${esc(section.contact.title)}</h3><ul><li>${esc(section.contact.label)} : <a href="mailto:${esc(section.contact.email)}">${esc(section.contact.email)}</a></li><li>문의하기 : <a href="/contact">${esc(section.contact.url)}</a></li></ul></div>`
+    ? `<div class="notices-contact">${section.contact.title === section.title ? "" : `<h3>${esc(section.contact.title)}</h3>`}<ul><li>${esc(section.contact.label)} : <a href="mailto:${esc(section.contact.email)}">${esc(section.contact.email)}</a></li>${section.contact.url ? `<li>문의하기 : <a href="/contact">${esc(section.contact.url)}</a></li>` : ""}</ul></div>`
     : "";
   return `<section class="notices-content-section" aria-labelledby="notice-section-${index}"><h2 id="notice-section-${index}">${esc(section.title)}</h2>${awards}${paragraphs(section.paragraphs)}${section.subtitle ? `<h3>${esc(section.subtitle)}</h3>` : ""}${items}${contact}</section>`;
 }

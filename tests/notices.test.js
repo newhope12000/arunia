@@ -28,9 +28,11 @@ const canonical = (html) =>
 const config = JSON.parse(
   readFileSync(new URL("../vercel.json", import.meta.url), "utf8"),
 );
+const mandu = NOTICES.find((notice) => notice.slug === "mandu-contest-winners");
+const hunmin = NOTICES.find((notice) => notice.slug === "hunmin-acrostic-winners");
 
-test("the first notice preserves the exact award counts, masked names and original order", () => {
-  const [notice] = getNotices();
+test("the mandu notice preserves the exact award counts, masked names and original order", () => {
+  const notice = mandu;
   assert.equal(notice.slug, "mandu-contest-winners");
   assert.equal(
     notice.title,
@@ -96,7 +98,7 @@ test("the first notice preserves the exact award counts, masked names and origin
 });
 
 test("the detail preserves the supplied announcement, completed contact wording and publication checks", () => {
-  const notice = NOTICES[0];
+  const notice = mandu;
   const html = renderNoticeArticle(notice);
   for (const text of [
     ...notice.intro,
@@ -144,14 +146,95 @@ test("the detail preserves the supplied announcement, completed contact wording 
   );
   assert.ok(links(html).includes("/notices"));
   assert.ok(links(html).includes("/"));
+  assert.match(html, /대상 <span>\(1팀\)<\/span>/);
   assert.doesNotMatch(
     html,
     /name="robots" content="noindex|class="review-ribbon"|arunia-silk\.vercel\.app/,
   );
 });
 
+test("the hunmin notice preserves all 42 winners, uppercase O masks, repeated names and original order", () => {
+  assert.equal(getNotices()[0], hunmin);
+  assert.equal(
+    hunmin.title,
+    "[당선자 발표] 2026 한글날 기념 제1회 훈민정음 4행시 공모전",
+  );
+  assert.equal(hunmin.category, "공모전");
+  assert.equal(hunmin.published, "2026-10-09");
+  const awards = hunmin.sections.flatMap((section) => section.awards ?? []);
+  assert.deepEqual(
+    awards.map(({ label, count, unit }) => [label, count, unit]),
+    [["수석", 2, "명"], ["차석", 10, "명"], ["장려상", 30, "명"]],
+  );
+  const expectedGroups = [
+    ["이O진", "엄O희"],
+    ["김O연", "최O림", "박O태", "한O재", "홍O연", "이O빈", "박O원", "이O경", "이O석", "박O헌"],
+    [
+      "박O미", "신O호", "노O영", "김O성", "김O진",
+      "김O희", "정O훈", "강O모", "최O진", "오O나",
+      "이O협", "최O예", "강O후", "박O현", "고O준",
+      "김O빈", "박O택", "김O원", "성O준", "신O원",
+      "박O은", "서O경", "고O연", "김O야", "김O연",
+      "김O경", "한O혁", "박O택", "민O진", "이O미",
+    ],
+  ];
+  assert.deepEqual(awards.map((award) => award.names), expectedGroups);
+  const names = awards.flatMap((award) => award.names);
+  assert.equal(names.length, 42);
+  assert.ok(names.every((name) => /^[가-힣]O[가-힣]$/.test(name)));
+  assert.equal(names.filter((name) => name === "김O연").length, 2);
+  assert.equal(names.filter((name) => name === "박O택").length, 2);
+  const html = renderNoticeArticle(hunmin);
+  const renderedGroups = [
+    ...html.matchAll(/<ul class="notices-names"[^>]*>([^]*?)<\/ul>/g),
+  ].map(([, group]) =>
+    [...group.matchAll(/<li>([^]*?)<\/li>/g)].map(([, name]) => name),
+  );
+  assert.deepEqual(renderedGroups, expectedGroups);
+  for (const heading of ["수석 | 2명", "차석 | 10명", "장려상 | 30명"])
+    assert.equal(html.split(`>${heading}</h2>`).length - 1, 1);
+  assert.doesNotMatch(html, /\(2팀\)|\(10팀\)|\(30팀\)|최종 당선자 명단/);
+  assert.equal(canonical(html), `${origin}/notices/hunmin-acrostic-winners`);
+  assert.match(html, /<time datetime="2026-10-09">2026\. 10\. 09<\/time>/);
+});
+
+test("the hunmin detail preserves every supplied paragraph and its email-only contact section", () => {
+  const html = renderNoticeArticle(hunmin);
+  const suppliedParagraphs = [
+    "안녕하세요.",
+    "훈민정음 4행시 공모전 운영사무국입니다.",
+    "2026년 한글날을 기념하여 개최된 「제1회 훈민정음 4행시 공모전」에 참여해 주신 모든 분께 진심으로 감사드립니다.",
+    "우리말과 한글에 대한 관심을 바탕으로 창의적인 아이디어와 정성을 담아 작품을 출품해 주신 참가자 여러분께 깊은 감사의 말씀을 전합니다.",
+    "전문 심사위원단의 신중하고 공정한 심사를 거쳐 선정된 최종 당선자를 아래와 같이 발표합니다.",
+    "※ 개인정보 보호를 위해 당선자 성명의 일부를 비공개 처리하였습니다.",
+    "※ 당선자에게는 상장 수여 및 상품 지급에 관한 사항을 순차적으로 개별 안내드렸습니다.",
+    "현재 수상작을 대상으로 타 공모전 중복 수상 여부, 표절 여부, 저작권 및 작품 이용에 관한 최종 확인 절차를 진행하고 있습니다.",
+    "수상작 및 출품작은 참가자의 창작 아이디어와 권익을 보호하기 위해 관련 검증과 필요한 동의 절차가 완료된 후, 공개 여부 및 일정을 별도로 안내드릴 예정입니다.",
+    "공정한 공모전 운영과 참가자의 권익 보호를 위한 절차인 만큼 너른 양해 부탁드립니다.",
+    "이번 공모전에 관심을 가지고 참여해 주신 모든 분께 다시 한번 감사드립니다.",
+    "수상의 영예를 안으신 분들께 진심으로 축하의 말씀을 전하며, 아쉽게 수상하지 못하신 참가자 여러분께도 소중한 작품을 보내주신 것에 대해 깊이 감사드립니다.",
+    "앞으로도 우리말과 한글의 가치를 함께 나누고, 창의적인 생각을 펼칠 수 있는 뜻깊은 기회를 마련하도록 노력하겠습니다.",
+    "감사합니다.",
+    "훈민정음 4행시 공모전 운영사무국 드림",
+  ];
+  const actualParagraphs = [
+    ...hunmin.intro,
+    ...hunmin.sections.flatMap((section) => section.paragraphs ?? []),
+    ...hunmin.closing,
+  ];
+  assert.deepEqual(actualParagraphs, suppliedParagraphs);
+  for (const text of suppliedParagraphs)
+    assert.ok(html.includes(`<p>${esc(text)}</p>`), `Missing supplied paragraph: ${text}`);
+  assert.equal(hunmin.sections.at(-1).contact.url, undefined);
+  const contact = /<div class="notices-contact">([^]*?)<\/div>/.exec(html)?.[1];
+  assert.ok(contact.includes("훈민정음 4행시 공모전 운영사무국"));
+  assert.deepEqual(links(contact), ["mailto:contact@arunia.co.kr"]);
+  assert.doesNotMatch(contact, /문의하기|undefined|https:\/\//);
+  assert.doesNotMatch(html, /발표가 지연|사과드립니다|개별 안내드릴|hwajeongup@gmail\.com/);
+});
+
 test("unsafe slugs, invalid publication dates and inconsistent award counts fail before rendering", () => {
-  const base = NOTICES[0];
+  const base = mandu;
   for (const slug of [
     "../outside",
     "nested/path",
@@ -193,6 +276,19 @@ test("unsafe slugs, invalid publication dates and inconsistent award counts fail
         ]),
       /count/,
     );
+  for (const unit of [null, "", "팀/명", "people", "<img src=x onerror=alert(1)>"])
+    assert.throws(
+      () => getNotices([{
+        ...base,
+        sections: [{ title: "수상자", awards: [{ label: "수석", count: 1, unit, names: ["이O진"] }] }],
+      }]),
+      /unit/,
+    );
+  const individualAward = {
+    ...base,
+    sections: [{ title: "수상자", awards: [{ label: "수석", count: 1, unit: "명", names: ["이O진"] }] }],
+  };
+  assert.match(renderNoticeArticle(individualAward), /수석 <span>\(1명\)<\/span>/);
   const contact = base.sections[1].contact;
   for (const email of [
     "not-an-email",
@@ -210,6 +306,8 @@ test("unsafe slugs, invalid publication dates and inconsistent award counts fail
       /email/,
     );
   for (const url of [
+    "",
+    null,
     "javascript:alert(1)",
     "https://example.com/contact",
     "//example.com",
@@ -306,7 +404,7 @@ test("notice routes, styles and sitemap entries are generated together without d
     assert.ok(sitemap.includes(originalEntry));
     for (const url of [
       `${origin}/notices`,
-      `${origin}/notices/mandu-contest-winners`,
+      ...NOTICES.map((notice) => `${origin}/notices/${notice.slug}`),
     ])
       assert.equal(
         sitemap.split(`<loc>${url}</loc>`).length - 1,
@@ -314,6 +412,8 @@ test("notice routes, styles and sitemap entries are generated together without d
         "A rebuild must not repeat a notice URL",
       );
     assert.match(sitemap, /<lastmod>2026-10-08<\/lastmod>/);
+    assert.match(sitemap, /<lastmod>2026-10-09<\/lastmod>/);
+    assert.equal(NOTICES.length, 2);
     assert.equal(
       existsSync(join(output, "notices/missing-notice.html")),
       false,
@@ -327,7 +427,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
   const additional = {
     slug: "next-program-notice",
     title: '프로그램 <b>안내</b> & "공지"',
-    published: "2026-10-09",
+    published: "2026-10-10",
     category: "운영 <mark>안내</mark>",
     excerpt: "다음 안내 <strong>소개</strong>",
     intro: ['다음 소식 <script>alert("notice")</script> & 안내'],
@@ -347,7 +447,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
     NOTICES[0],
     "Sorting must not mutate the input order",
   );
-  assert.equal(NOTICES.length, 1);
+  assert.equal(NOTICES.length, 2);
   const route = `/notices/${additional.slug}`;
   const index = renderNoticesIndex(records);
   const section = renderNoticesSection(records);
@@ -387,6 +487,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
       article,
     );
     assert.ok(existsSync(join(output, "notices/mandu-contest-winners.html")));
+    assert.ok(existsSync(join(output, "notices/hunmin-acrostic-winners.html")));
   } finally {
     rmSync(output, { recursive: true, force: true });
   }

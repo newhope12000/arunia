@@ -1,4 +1,4 @@
-export const NOTICE_STORAGE_KEY = "arunia:notice-popup:mandu-contest-winners:2026-10-08";
+export const NOTICE_STORAGE_KEY = "arunia:notice-popup:hunmin-acrostic-winners:2026-10-09";
 
 const koreanDateFormat = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Seoul",

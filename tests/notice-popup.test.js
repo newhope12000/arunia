@@ -34,17 +34,36 @@ test("today suppression expires at midnight in Korea rather than UTC or the brow
   assert.equal(getKoreanDateKey(new Date("2026-12-31T15:00:00.000Z")), "2027-01-01");
 });
 
-test("the result card is one normal navigation link and the closing controls sit outside it", () => {
+test("the latest Hunmin result is one native dialog with its own navigation and closing controls", () => {
   const html = renderNoticePopup();
   assert.match(html, /<dialog[^>]*data-notice-popup[^>]*aria-labelledby="notice-popup-title"/);
   assert.doesNotMatch(html, /<dialog[^>]*\bopen(?:\s|=|>)/);
+  assert.equal((html.match(/<dialog\b/g) ?? []).length, 1);
   assert.equal((html.match(/<a\b/g) ?? []).length, 1);
-  assert.match(html, new RegExp(`href="${WINNERS_NOTICE_URL}"`));
-  assert.match(html, /그만둘만두[\s\S]*최종 당선자 발표/);
+  assert.equal(WINNERS_NOTICE_URL, "/notices/hunmin-acrostic-winners");
+  assert.match(html, /href="\/notices\/hunmin-acrostic-winners"/);
+  assert.match(html, /2026 한글날 기념/);
+  assert.match(html, /제1회 훈민정음 4행시 공모전<br>최종 당선자 발표/);
+  assert.match(html, /수석 2명 · 차석 10명 · 장려상 30명/);
+  assert.doesNotMatch(html, /그만둘만두|보름달/);
   const anchorEnd = html.indexOf("</a>");
   assert.ok(html.indexOf("data-notice-popup-close") > anchorEnd);
   assert.ok(html.indexOf("data-notice-popup-today") > anchorEnd);
   assert.match(html, /data-notice-popup-close autofocus/);
+});
+
+test("a saved Mandu dismissal cannot hide the new Hunmin result announcement", () => {
+  const f = fixture();
+  const oldKey = "arunia:notice-popup:mandu-contest-winners:2026-10-08";
+  const now = () => new Date("2026-10-09T06:00:00Z");
+  f.saved.set(oldKey, "2026-10-09");
+  assert.equal(NOTICE_STORAGE_KEY, "arunia:notice-popup:hunmin-acrostic-winners:2026-10-09");
+  assert.equal(setupNoticePopup(f.dialog, { storage: f.storage, now }), true);
+  f.todayButton.click();
+  assert.deepEqual(f.writes, [[NOTICE_STORAGE_KEY, "2026-10-09"]]);
+  assert.equal(f.saved.get(oldKey), "2026-10-09", "The previous notice preference stays unchanged");
+  const nextVisit = fixture();
+  assert.equal(setupNoticePopup(nextVisit.dialog, { storage: f.storage, now }), false);
 });
 
 test("closing once closes only this display without suppressing a later visit", () => {
