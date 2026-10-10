@@ -30,6 +30,71 @@ const config = JSON.parse(
 );
 const mandu = NOTICES.find((notice) => notice.slug === "mandu-contest-winners");
 const hunmin = NOTICES.find((notice) => notice.slug === "hunmin-acrostic-winners");
+const fullMoon = NOTICES.find(
+  (notice) => notice.slug === "full-moon-acrostic-winners",
+);
+
+test("the latest full moon notice preserves 33 winners, digit zero masks, original order and the corrected final name", () => {
+  assert.equal(getNotices()[0], fullMoon);
+  assert.equal(
+    fullMoon.title,
+    "[공지] 제1회 '보름달 3행시' 공모전 최종 당선자 발표",
+  );
+  assert.equal(fullMoon.category, "공모전");
+  assert.equal(fullMoon.published, "2026-10-11");
+  const awards = fullMoon.sections.flatMap((section) => section.awards ?? []);
+  assert.deepEqual(
+    awards.map(({ label, count, unit }) => [label, count, unit]),
+    [["대상", 1, "팀/명"], ["우수상", 2, "팀/명"], ["장려상", 30, "팀/명"]],
+  );
+  const expectedGroups = [
+    ["김0은"],
+    ["박0현", "고0정"],
+    [
+      "장0영", "김0경", "도0서", "백0윤", "나0미",
+      "유0희", "채0무", "김0빈", "강0훈", "윤0우",
+      "최0원", "오0민", "성0현", "송0율", "한0아",
+      "황0준", "권0은", "임0우", "장0하", "서0진",
+      "배0연", "정0호", "문0서", "안0수", "하0은",
+      "고0범", "주0솔", "전0훈", "남0현", "강0연",
+    ],
+  ];
+  assert.deepEqual(awards.map((award) => award.names), expectedGroups);
+  const names = awards.flatMap((award) => award.names);
+  assert.equal(names.length, 33);
+  assert.ok(names.every((name) => /^[가-힣]0[가-힣]$/.test(name)));
+  assert.equal(names.at(-1), "강0연");
+  assert.ok(!names.includes("신0유"));
+
+  const html = renderNoticeArticle(fullMoon);
+  const renderedGroups = [
+    ...html.matchAll(/<ul class="notices-names"[^>]*>([^]*?)<\/ul>/g),
+  ].map(([, group]) =>
+    [...group.matchAll(/<li>([^]*?)<\/li>/g)].map(([, name]) => name),
+  );
+  assert.deepEqual(renderedGroups, expectedGroups);
+  for (const [label, count] of [["대상", 1], ["우수상", 2], ["장려상", 30]])
+    assert.ok(html.includes(`${label} <span>(${count}팀/명)</span>`));
+  assert.doesNotMatch(html, /신0유|\(1팀\)|\(2팀\)|\(30팀\)/);
+  for (const text of [
+    ...fullMoon.intro,
+    ...fullMoon.sections.flatMap((section) => [
+      ...(section.paragraphs ?? []),
+      ...(section.items ?? []),
+    ]),
+    ...fullMoon.closing,
+  ])
+    assert.ok(html.includes(esc(text)), `Missing original notice text: ${text}`);
+  assert.ok(html.includes("순차적으로 개별 연락 드렸습니다."));
+  assert.equal(canonical(html), `${origin}/notices/full-moon-acrostic-winners`);
+  assert.match(html, /<time datetime="2026-10-11">2026\. 10\. 11<\/time>/);
+  const contactData = fullMoon.sections.find((section) => section.contact).contact;
+  assert.equal(contactData.email, "contact@arunia.co.kr");
+  assert.equal(contactData.url, undefined);
+  const contactHtml = /<div class="notices-contact">([^]*?)<\/div>/.exec(html)?.[1];
+  assert.deepEqual(links(contactHtml), ["mailto:contact@arunia.co.kr"]);
+  assert.doesNotMatch(contactHtml, /문의하기|undefined|https:\/\//);
+});
 
 test("the mandu notice preserves the exact award counts, masked names and original order", () => {
   const notice = mandu;
@@ -154,7 +219,7 @@ test("the detail preserves the supplied announcement, completed contact wording 
 });
 
 test("the hunmin notice preserves all 42 winners, uppercase O masks, repeated names and original order", () => {
-  assert.equal(getNotices()[0], hunmin);
+  assert.ok(getNotices().includes(hunmin));
   assert.equal(
     hunmin.title,
     "[당선자 발표] 2026 한글날 기념 제1회 훈민정음 4행시 공모전",
@@ -276,7 +341,7 @@ test("unsafe slugs, invalid publication dates and inconsistent award counts fail
         ]),
       /count/,
     );
-  for (const unit of [null, "", "팀/명", "people", "<img src=x onerror=alert(1)>"])
+  for (const unit of [null, "", "팀명", "people", "<img src=x onerror=alert(1)>"])
     assert.throws(
       () => getNotices([{
         ...base,
@@ -366,6 +431,17 @@ test("notice routes, styles and sitemap entries are generated together without d
     assert.equal(index, renderNoticesIndex());
     assert.equal(canonical(index), `${origin}/notices`);
     assert.equal([...index.matchAll(/<h1\b/g)].length, 1);
+    const expectedLatestRoutes = [
+      "/notices/full-moon-acrostic-winners",
+      "/notices/hunmin-acrostic-winners",
+      "/notices/mandu-contest-winners",
+    ];
+    for (const html of [index, renderNoticesSection()])
+      assert.deepEqual(
+        [...html.matchAll(/href="(\/notices\/[^\"]+)" class="notices-card-link"/g)].map(([, route]) => route),
+        expectedLatestRoutes,
+        "The list and homepage section must show all three notices newest first",
+      );
     for (const notice of NOTICES) {
       const route = `/notices/${notice.slug}`;
       assert.ok(links(index).includes(route));
@@ -413,7 +489,13 @@ test("notice routes, styles and sitemap entries are generated together without d
       );
     assert.match(sitemap, /<lastmod>2026-10-08<\/lastmod>/);
     assert.match(sitemap, /<lastmod>2026-10-09<\/lastmod>/);
-    assert.equal(NOTICES.length, 2);
+    assert.match(sitemap, /<lastmod>2026-10-11<\/lastmod>/);
+    const sitemapEntries = [...sitemap.matchAll(/<url>([^]*?)<\/url>/g)].map(([, entry]) => entry);
+    for (const notice of NOTICES) {
+      const entry = sitemapEntries.find((value) => value.includes(`<loc>${origin}/notices/${notice.slug}</loc>`));
+      assert.ok(entry.includes(`<lastmod>${notice.published}</lastmod>`));
+    }
+    assert.equal(NOTICES.length, 3);
     assert.equal(
       existsSync(join(output, "notices/missing-notice.html")),
       false,
@@ -427,7 +509,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
   const additional = {
     slug: "next-program-notice",
     title: '프로그램 <b>안내</b> & "공지"',
-    published: "2026-10-10",
+    published: "2026-10-12",
     category: "운영 <mark>안내</mark>",
     excerpt: "다음 안내 <strong>소개</strong>",
     intro: ['다음 소식 <script>alert("notice")</script> & 안내'],
@@ -447,7 +529,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
     NOTICES[0],
     "Sorting must not mutate the input order",
   );
-  assert.equal(NOTICES.length, 2);
+  assert.equal(NOTICES.length, 3);
   const route = `/notices/${additional.slug}`;
   const index = renderNoticesIndex(records);
   const section = renderNoticesSection(records);
@@ -488,6 +570,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
     );
     assert.ok(existsSync(join(output, "notices/mandu-contest-winners.html")));
     assert.ok(existsSync(join(output, "notices/hunmin-acrostic-winners.html")));
+    assert.ok(existsSync(join(output, "notices/full-moon-acrostic-winners.html")));
   } finally {
     rmSync(output, { recursive: true, force: true });
   }

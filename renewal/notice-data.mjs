@@ -2,6 +2,93 @@
 // Keep the supplied announcement text and masked names unchanged.
 export const NOTICES = [
   {
+    slug: "full-moon-acrostic-winners",
+    title: "[공지] 제1회 '보름달 3행시' 공모전 최종 당선자 발표",
+    published: "2026-10-11",
+    category: "공모전",
+    excerpt:
+      "제1회 '보름달 3행시' 공모전의 최종 당선자와 수상작·출품작 게시 관련 안내를 확인하세요.",
+    intro: [
+      "안녕하세요, 보름달 삼행시 공모전 운영사무국입니다.",
+      "먼저 이번 보름달 삼행시 공모전에 빛나는 아이디어와 정성을 담아 참여해 주신 모든 참가자 여러분께 진심으로 감사의 말씀을 드립니다.",
+      "아울러 제출해 주신 작품 하나하나를 보다 공정하고 엄격하게 심사하는 과정에서 당초 예정보다 발표가 지연된 점 머리 숙여 사과드립니다.",
+      "긴 시간 동안 설레는 마음으로 결과를 기다려 주신 모든 참가자 여러분의 깊은 양해를 부탁드립니다.",
+      "전문 심사위원단의 신중하고 공정한 심사를 거쳐 선정된 최종 당선자를 다음과 같이 발표합니다.",
+    ],
+    sections: [
+      {
+        title: "최종 당선자 명단",
+        awards: [
+          { label: "대상", count: 1, unit: "팀/명", names: ["김0은"] },
+          {
+            label: "우수상",
+            count: 2,
+            unit: "팀/명",
+            names: ["박0현", "고0정"],
+          },
+          {
+            label: "장려상",
+            count: 30,
+            unit: "팀/명",
+            names: [
+              "장0영",
+              "김0경",
+              "도0서",
+              "백0윤",
+              "나0미",
+              "유0희",
+              "채0무",
+              "김0빈",
+              "강0훈",
+              "윤0우",
+              "최0원",
+              "오0민",
+              "성0현",
+              "송0율",
+              "한0아",
+              "황0준",
+              "권0은",
+              "임0우",
+              "장0하",
+              "서0진",
+              "배0연",
+              "정0호",
+              "문0서",
+              "안0수",
+              "하0은",
+              "고0범",
+              "주0솔",
+              "전0훈",
+              "남0현",
+              "강0연",
+            ],
+          },
+        ],
+        paragraphs: [
+          "(※ 당선되신 분들께는 상금 지급 및 상장 수여 안내를 위해 순차적으로 개별 연락 드렸습니다.)",
+        ],
+      },
+      {
+        title: "안내 사항 및 향후 일정",
+        subtitle: "수상작 및 출품작 게시 관련 안내",
+        items: [
+          "현재 수상작에 대한 타 공모전 중복 수상 여부 확인, 표절 검증 및 저작권·이용권 최종 확인 절차가 진행 중입니다.",
+          "출품작의 아이디어 보호 및 개인정보 보호 규정에 따라, 관련 검증 절차 및 참가자 동의 확인이 완료된 후 별도 안내해 드릴 예정입니다.",
+        ],
+        contact: {
+          title: "문의처",
+          label: "공모전 운영사무국",
+          email: "contact@arunia.co.kr",
+        },
+      },
+    ],
+    closing: [
+      "다시 한번 발표를 기다려 주시고 공모전에 함께해 주신 모든 분께 깊이 감사드리며, 앞으로도 많은 관심과 성원 부탁드립니다.",
+      "감사합니다.",
+      "공모전 운영사무국 드림",
+    ],
+  },
+  {
     slug: "hunmin-acrostic-winners",
     title: "[당선자 발표] 2026 한글날 기념 제1회 훈민정음 4행시 공모전",
     published: "2026-10-09",
@@ -257,7 +344,7 @@ export function getNotices(records = NOTICES) {
             award.count !== award.names.length
           )
             throw new Error(`Invalid notice award count: ${record.slug}`);
-          if (award.unit !== undefined && !["팀", "명"].includes(award.unit))
+          if (award.unit !== undefined && !["팀", "명", "팀/명"].includes(award.unit))
             throw new Error(`Invalid notice award unit: ${record.slug}`);
         }
       }

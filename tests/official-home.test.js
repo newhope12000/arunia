@@ -23,6 +23,7 @@ import {
 } from "../renewal/official-programs.mjs";
 import { contentPages } from "../renewal/content-pages.mjs";
 import { NEWS } from "../renewal/news-data.mjs";
+import { getNotices } from "../renewal/notice-data.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const origin = "https://www.arunia.co.kr";
@@ -251,8 +252,7 @@ test("homepage promotion publishes a usable official root and preserves events, 
       "/career-core-up",
       "/programs.html#contest",
       "/notices",
-      "/notices/mandu-contest-winners",
-      "/notices/hunmin-acrostic-winners",
+      ...getNotices().slice(0, 3).map((notice) => `/notices/${notice.slug}`),
       "/growth_1.html",
       "/growth_2.html",
       "/growth.html",
@@ -262,6 +262,15 @@ test("homepage promotion publishes a usable official root and preserves events, 
         hrefs.includes(required),
         `Homepage lost its event or archive destination: ${required}`,
       );
+    assert.deepEqual(
+      [...html.matchAll(/href="(\/notices\/[^\"]+)" class="notices-card-link"/g)].map(([, route]) => route),
+      [
+        "/notices/full-moon-acrostic-winners",
+        "/notices/hunmin-acrostic-winners",
+        "/notices/mandu-contest-winners",
+      ],
+      "The built homepage must show the new full moon result first while preserving both prior notices",
+    );
 
     // Promote the main page and catalog. Existing consent, intake and detail
     // pages retain their actual deployed bytes, rather than preview substitutes.
