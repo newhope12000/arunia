@@ -34,8 +34,7 @@ const fullMoon = NOTICES.find(
   (notice) => notice.slug === "full-moon-acrostic-winners",
 );
 
-test("the latest full moon notice preserves 33 winners, digit zero masks, original order and the corrected final name", () => {
-  assert.equal(getNotices()[0], fullMoon);
+test("the full moon notice preserves 33 winners, digit zero masks, original order and the corrected final name", () => {
   assert.equal(
     fullMoon.title,
     "[공지] 제1회 '보름달 3행시' 공모전 최종 당선자 발표",
@@ -431,21 +430,24 @@ test("notice routes, styles and sitemap entries are generated together without d
     assert.equal(index, renderNoticesIndex());
     assert.equal(canonical(index), `${origin}/notices`);
     assert.equal([...index.matchAll(/<h1\b/g)].length, 1);
-    const expectedLatestRoutes = [
+    const expectedRoutes = [
+      "/notices/haebolmandu-contest-winners",
       "/notices/full-moon-acrostic-winners",
       "/notices/hunmin-acrostic-winners",
       "/notices/mandu-contest-winners",
     ];
-    for (const html of [index, renderNoticesSection()])
+    for (const [html, expected] of [
+      [index, expectedRoutes],
+      [renderNoticesSection(), expectedRoutes.slice(0, 3)],
+    ])
       assert.deepEqual(
         [...html.matchAll(/href="(\/notices\/[^\"]+)" class="notices-card-link"/g)].map(([, route]) => route),
-        expectedLatestRoutes,
-        "The list and homepage section must show all three notices newest first",
+        expected,
+        "The index shows all notices and the homepage shows the latest three, newest first",
       );
     for (const notice of NOTICES) {
       const route = `/notices/${notice.slug}`;
       assert.ok(links(index).includes(route));
-      assert.ok(links(renderNoticesSection()).includes(route));
       const detailPath = join(output, `notices/${notice.slug}.html`);
       assert.equal(
         readFileSync(detailPath, "utf8"),
@@ -495,7 +497,7 @@ test("notice routes, styles and sitemap entries are generated together without d
       const entry = sitemapEntries.find((value) => value.includes(`<loc>${origin}/notices/${notice.slug}</loc>`));
       assert.ok(entry.includes(`<lastmod>${notice.published}</lastmod>`));
     }
-    assert.equal(NOTICES.length, 3);
+    assert.equal(NOTICES.length, 4);
     assert.equal(
       existsSync(join(output, "notices/missing-notice.html")),
       false,
@@ -509,7 +511,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
   const additional = {
     slug: "next-program-notice",
     title: '프로그램 <b>안내</b> & "공지"',
-    published: "2026-10-12",
+    published: "2026-10-17",
     category: "운영 <mark>안내</mark>",
     excerpt: "다음 안내 <strong>소개</strong>",
     intro: ['다음 소식 <script>alert("notice")</script> & 안내'],
@@ -529,7 +531,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
     NOTICES[0],
     "Sorting must not mutate the input order",
   );
-  assert.equal(NOTICES.length, 3);
+  assert.equal(NOTICES.length, 4);
   const route = `/notices/${additional.slug}`;
   const index = renderNoticesIndex(records);
   const section = renderNoticesSection(records);
@@ -556,7 +558,7 @@ test("adding an ordinary notice publishes its latest list entry and detail witho
     /<script>alert|<img src=x onerror|<em>안내<\/em>|<i>드림<\/i>/,
   );
   assert.equal(canonical(article), `${origin}${route}`);
-  assert.ok(links(article).includes("/notices/mandu-contest-winners"));
+  assert.ok(links(article).includes("/notices/haebolmandu-contest-winners"));
   const output = mkdtempSync(join(tmpdir(), "arunia-future-notices-"));
   try {
     buildNotices(output, records);

@@ -265,11 +265,11 @@ test("homepage promotion publishes a usable official root and preserves events, 
     assert.deepEqual(
       [...html.matchAll(/href="(\/notices\/[^\"]+)" class="notices-card-link"/g)].map(([, route]) => route),
       [
+        "/notices/haebolmandu-contest-winners",
         "/notices/full-moon-acrostic-winners",
         "/notices/hunmin-acrostic-winners",
-        "/notices/mandu-contest-winners",
       ],
-      "The built homepage must show the new full moon result first while preserving both prior notices",
+      "The built homepage must show the new haebolmandu result first and the next two latest notices",
     );
 
     // Promote the main page and catalog. Existing consent, intake and detail
