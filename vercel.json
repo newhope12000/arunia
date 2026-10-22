@@ -11,36 +11,6 @@
   },
   "redirects": [
     {
-      "source": "/gamja/report/index.html",
-      "destination": "/gamja/report",
-      "permanent": true
-    },
-    {
-      "source": "/gamja/report/",
-      "destination": "/gamja/report",
-      "permanent": true
-    },
-    {
-      "source": "/gamja/apply/index.html",
-      "destination": "/gamja/apply",
-      "permanent": true
-    },
-    {
-      "source": "/gamja/apply/",
-      "destination": "/gamja/apply",
-      "permanent": true
-    },
-    {
-      "source": "/gamja/index.html",
-      "destination": "/gamja",
-      "permanent": true
-    },
-    {
-      "source": "/gamja/",
-      "destination": "/gamja",
-      "permanent": true
-    },
-    {
       "source": "/archive/:path*",
       "destination": "/:path*",
       "permanent": false
@@ -142,18 +112,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/gamja/report",
-      "destination": "/gamja/report/index.html"
-    },
-    {
-      "source": "/gamja/apply",
-      "destination": "/gamja/apply/index.html"
-    },
-    {
-      "source": "/gamja",
-      "destination": "/gamja/index.html"
-    },
     {
       "source": "/api/:path*",
       "destination": "/api"

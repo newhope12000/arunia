@@ -98,19 +98,10 @@ function selectorList(value) {
   return selectors;
 }
 
-test("public and generated pages use shared Pretendard, while the supplied potato quiz preserves its handwriting", () => {
+test("every existing public page and generated page loads one shared Pretendard stylesheet", () => {
   const files = htmlFiles(join(root, "legacy"));
   assert.ok(files.length > 0);
-  for (const file of files) {
-    const html = read(`legacy/${file}`);
-    if (file === "gamja/index.html") {
-      assert.ok(stylesheets(html).some((link) => link.href === "handdrawn.css"));
-      assert.ok(!stylesheets(html).some((link) => link.href === fontHref));
-      assert.match(read("legacy/gamja/style.css"), /@font-face\{font-family:Kyobo2019;/);
-      continue;
-    }
-    verifyCommonFontLink(html, file);
-  }
+  for (const file of files) verifyCommonFontLink(read(`legacy/${file}`), file);
   const generated = new Map([
     ["/", renderOfficialHome()],
     [
