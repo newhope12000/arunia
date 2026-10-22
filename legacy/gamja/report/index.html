@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="내가 몰입하는 환경, 쉽게 지치는 조건, 잘 맞는 직무 방향을 데이터로 정리하는 직무분석지입니다.">
+<title>위크메이트 - 직무분석지 선착순 이벤트</title>
+<link rel="canonical" href="https://www.arunia.co.kr/gamja/report">
+<style>
+@font-face{font-family:PretendardLocal;src:url('/assets/fonts/PretendardVariable.woff2') format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+  --blue:#4a7dff;--blue-deep:#1746c8;--blue-soft:#eaf1ff;--blue-line:#dce7ff;
+  --coral:#eb6447;--green:#158a68;--ink:#111827;--muted:#697386;--line:#e5e9f0;
+  --surface:#fff;--soft:#f7f8fa;--dark:#101828;--shadow:0 20px 48px rgba(17,24,39,.08)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:PretendardLocal,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0;padding-bottom:82px;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1120px,100%);margin:0 auto;padding:0 24px}
+.section{padding:clamp(72px,9vw,118px) 0}
+.hero{padding:clamp(72px,9vw,110px) 0;background:linear-gradient(180deg,#fff 0%,#f7faff 100%);border-bottom:1px solid #edf1f7}
+.heroGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,410px);gap:clamp(40px,7vw,82px);align-items:center}
+.heroCopy{min-width:0}
+.eventBadge{display:inline-flex;align-items:center;margin-bottom:22px;border:1px solid rgba(235,100,71,.24);border-radius:8px;background:rgba(235,100,71,.08);color:#c8462c;padding:9px 14px;font-size:14px;font-weight:900}
+.hero h1,.section h2,.sectionHead h2,.final h2{margin:0;font-weight:900;letter-spacing:0;word-break:keep-all;overflow-wrap:anywhere}
+.hero h1{font-size:clamp(42px,6vw,72px);line-height:1.08}
+.hero h1 span,.kicker{color:var(--blue)}
+.heroCopy>p,.sectionHead>p,.text{margin:22px 0 0;color:var(--muted);font-size:clamp(17px,2vw,20px);line-height:1.75;font-weight:500;word-break:keep-all}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:58px;margin-top:30px;border:0;border-radius:10px;background:var(--blue);color:#fff;padding:0 32px;font-size:18px;font-weight:900;box-shadow:0 14px 28px rgba(74,125,255,.25);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .16s ease,transform .16s ease,box-shadow .16s ease}
+.cta:focus-visible{background:var(--blue-deep);transform:translateY(-2px)}
+.cta:active{background:#102f82;transform:translateY(0) scale(.985);box-shadow:0 8px 18px rgba(16,47,130,.24)}
+@media(hover:hover){.cta:hover{background:var(--blue-deep);transform:translateY(-2px)}}
+.ctaWhite{background:#fff;color:var(--blue-deep);box-shadow:none}
+.ctaWhite:hover,.ctaWhite:focus-visible{background:#f4f7ff}
+.gift{margin-top:17px;color:#4b5565;font-size:14px;font-weight:700;word-break:keep-all}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.chips span{border:1px solid var(--blue-line);border-radius:999px;background:#fff;color:#344054;padding:8px 13px;font-size:13px;font-weight:800;white-space:nowrap}
+.phoneShell{position:relative;border:1px solid #d9e3f7;border-radius:32px;background:var(--dark);padding:12px;box-shadow:0 28px 56px rgba(20,43,91,.18)}
+.phoneBar{width:36%;height:6px;margin:2px auto 10px;border-radius:99px;background:#344054}
+.reportMini{border-radius:23px;background:#fff;padding:24px 21px 21px;overflow:hidden}
+.miniTop p{margin:0 0 8px;color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.08em}
+.miniTop h3{margin:0;font-size:25px;line-height:1.15;font-weight:900;word-break:keep-all}
+.scoreRing{display:grid;place-items:center;width:142px;aspect-ratio:1;margin:23px auto;position:relative;border-radius:50%;background:conic-gradient(var(--blue) 0 78%,#e8eef8 78% 100%)}
+.scoreRing:before{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}
+.scoreRing strong,.scoreRing span{position:relative;z-index:1;grid-column:1;grid-row:1}
+.scoreRing strong{font-size:43px;line-height:1;font-weight:900;transform:translateY(-8px)}
+.scoreRing span{align-self:end;margin-bottom:32px;color:var(--muted);font-size:11px;font-weight:800}
+.metricList{display:grid;gap:10px}
+.miniMetric{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;border:1px solid #e4eaf4;border-radius:12px;padding:12px;background:#fff}
+.miniMetric div:first-child{min-width:0}
+.miniMetric b,.miniMetric small{display:block;word-break:keep-all}
+.miniMetric b{font-size:13px}.miniMetric small{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.4;font-weight:600}
+.metricValue{text-align:right}.metricValue span,.metricValue em{display:block}.metricValue span{font-size:14px;font-weight:900}.metricValue em{margin-top:3px;color:var(--green);font-size:10px;font-style:normal;font-weight:900}
+.miniMetric i{grid-column:1/-1;display:block;height:6px;border-radius:99px;background:#e8eef8;overflow:hidden}
+.miniMetric i:before{content:"";display:block;width:var(--score);height:100%;border-radius:inherit;background:linear-gradient(90deg,#80adff,var(--blue))}
+.miniNote{margin:15px 0 0;border-radius:10px;background:var(--soft);color:#566273;padding:12px;font-size:11px;line-height:1.5;font-weight:700;word-break:keep-all}
+.worry{background:var(--soft)}
+.worryGrid,.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(38px,7vw,76px);align-items:center}
+.kicker{margin-bottom:12px;font-size:14px;font-weight:900}
+.section h2,.sectionHead h2{font-size:clamp(34px,4.8vw,52px);line-height:1.15}
+.painGrid{display:grid;gap:12px;margin-top:30px}
+.pain{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:center;border-bottom:1px solid #dfe4eb;padding:16px 0}
+.pain span{color:var(--blue);font-size:13px;font-weight:900}.pain strong{font-size:17px;line-height:1.45;word-break:keep-all}
+.worryScene h3{margin:0 0 14px;font-size:28px;line-height:1.25}.worryLead{margin:0 0 20px;color:var(--muted);font-size:15px;line-height:1.65;font-weight:700;word-break:keep-all}
+.mobileWorryBoard{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mobileWorryItem{display:grid;grid-template-columns:32px 1fr;gap:13px;padding:18px 0;border-bottom:1px solid var(--line)}
+.mobileWorryItem:last-child{border-bottom:0}
+.mobileWorryCheck{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:900}
+.mobileWorryCopy{min-width:0}.mobileWorryBadge{display:inline-flex;border-radius:999px;background:var(--blue-soft);color:var(--blue-deep);padding:6px 10px;font-size:11px;font-weight:900}
+.mobileWorryCopy strong{display:block;margin-top:9px;font-size:17px;line-height:1.45;word-break:keep-all}
+.mobileWorryCopy p{display:grid;grid-template-columns:22px 1fr;gap:7px;align-items:start;margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.55;font-weight:700;word-break:keep-all}
+.worryArrow{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid var(--blue-line);color:var(--blue);font-size:12px}
+.about,.proofSection{background:#fff}
+.reportCardLarge{border:1px solid var(--blue-line);border-radius:22px;background:#fff;padding:clamp(24px,4vw,38px);box-shadow:var(--shadow)}
+.reportCardLarge h3{margin:0;font-size:clamp(27px,3.4vw,40px);line-height:1.1}.reportCardLarge h3 span{display:block;color:var(--blue)}
+.reportCardLarge p,.reportCardLarge blockquote{color:var(--muted);font-size:16px;line-height:1.75;word-break:keep-all}
+.reportCardLarge blockquote{margin:22px 0 0;border-left:4px solid var(--blue);padding-left:16px;font-weight:600}
+.positionPanel{margin-top:25px;border-radius:16px;background:var(--blue);color:#fff;padding:25px}
+.positionPanel small,.positionPanel span{display:block;font-weight:800}.positionPanel strong{display:block;margin:14px 0 4px;font-size:56px;line-height:1}
+.reports{background:#f8faff;border-top:1px solid #edf1f7;border-bottom:1px solid #edf1f7}
+.sectionHead{max-width:720px;margin:0 auto 40px;text-align:center}.sectionHead>p{font-size:17px}
+.reportInteractive{display:grid;grid-template-columns:minmax(0,.95fr) minmax(330px,.82fr);gap:clamp(28px,5vw,56px);align-items:center;min-height:430px}
+.reportMap{position:relative;min-height:390px;isolation:isolate}
+.reportAxis{position:absolute;inset:34px 44px;border:1px solid var(--blue-line);border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(74,125,255,.08) 0 36%,transparent 37%),linear-gradient(90deg,transparent 49.8%,var(--blue-line) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,var(--blue-line) 50%,transparent 50.2%);transform:rotate(-6deg);z-index:-1}
+.reportNode{position:absolute;width:min(45%,235px);min-height:112px;border:1px solid var(--line);border-radius:17px;background:#fff;color:var(--ink);padding:17px;text-align:left;box-shadow:0 14px 32px rgba(17,24,39,.06);cursor:pointer;transition:transform .2s ease,opacity .2s ease,border-color .2s ease,box-shadow .2s ease}
+.reportNode span,.reportNode b,.reportNode small{display:block}.reportNode span{width:fit-content;border-radius:999px;background:var(--blue-soft);color:var(--blue-deep);padding:6px 9px;font-size:11px;font-weight:900}
+.reportNode b{margin-top:11px;font-size:clamp(17px,2vw,21px);line-height:1.25}.reportNode small{margin-top:6px;color:var(--muted);font-size:12px;font-weight:800}
+.nodeStrength{left:2%;top:18px}.nodeStress{right:0;top:72px}.nodeCareer{left:9%;bottom:42px}.nodeCollab{right:6%;bottom:6px}
+.reportNode:hover,.reportNode:focus-visible,.reportNode.isActive{z-index:3;transform:translateY(-8px) scale(1.05);border-color:var(--blue);box-shadow:0 22px 44px rgba(74,125,255,.16);outline:0}
+.reportDetail{border:1px solid var(--blue-line);border-radius:22px;background:#fff;padding:clamp(22px,3vw,30px);box-shadow:var(--shadow);min-height:430px}
+.reportDetail .tag{display:inline-flex;border-radius:999px;background:var(--blue-soft);color:var(--blue-deep);padding:7px 11px;font-size:12px;font-weight:900}
+.reportDetail h3{margin:17px 0 4px;font-size:clamp(26px,3vw,35px);line-height:1.1}.reportMeta{color:var(--muted);font-size:13px;font-weight:800}
+.reportDetail>p{margin:17px 0 0;color:var(--muted);font-size:15px;line-height:1.65;font-weight:700;word-break:keep-all}
+.chart{position:relative;height:150px;margin-top:19px;border-radius:15px;background:#f7f9fd;overflow:hidden}
+.radarChart{display:grid;place-items:center;padding:8px 12px 4px}
+.radarSvg{display:block;width:100%;height:100%;overflow:visible}
+.radarGrid{fill:none;stroke:#cbd9f6;stroke-width:1.3;opacity:0;transform:scale(.72);transform-box:fill-box;transform-origin:center;transition:opacity .35s ease,transform .65s cubic-bezier(.2,.72,.2,1)}
+.radarGridMid{transition-delay:.08s}.radarGridInner{transition-delay:.14s}
+.radarAxis{stroke:#d8e2f7;stroke-width:1.2;stroke-dasharray:70;stroke-dashoffset:70;transition:stroke-dashoffset .62s ease .12s}
+.radarArea{fill:rgba(74,125,255,.38);stroke:var(--blue);stroke-width:2.2;opacity:0;transform:scale(.08);transform-box:fill-box;transform-origin:center;transition:opacity .28s ease .2s,transform .72s cubic-bezier(.2,.72,.2,1) .2s}
+.radarDot{fill:#fff;stroke:var(--blue);stroke-width:3;opacity:0;transform:scale(0);transform-box:fill-box;transform-origin:center;transition:opacity .2s ease,transform .42s cubic-bezier(.2,.72,.2,1)}
+.radarDot:nth-of-type(2){transition-delay:.56s}.radarDot:nth-of-type(3){transition-delay:.64s}.radarDot:nth-of-type(4){transition-delay:.72s}
+.radarLabel{fill:#344054;font-size:11px;font-weight:900;opacity:0;transform:translateY(5px);transition:opacity .3s ease .48s,transform .42s ease .48s}
+.matrixChart{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:18px}.matrixChart span{display:grid;place-items:center;border:1px solid var(--blue-line);border-radius:10px;background:#fff;color:#344054;font-size:12px;font-weight:900}.matrixChart span:nth-child(3){border-color:var(--blue);background:var(--blue-soft);color:var(--blue-deep)}
+.barChart{display:flex;align-items:flex-end;gap:15px;padding:24px 34px}.barChart i{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#79a7ff,var(--blue))}
+.detailBars{display:grid;gap:10px;margin-top:18px}.detailBar{display:grid;grid-template-columns:minmax(78px,.8fr) minmax(100px,1fr) 34px;gap:9px;align-items:center;color:#344054;font-size:12px;font-weight:900}
+.detailBar>i{display:block;height:8px;border-radius:99px;background:#e8eef8;overflow:hidden}.detailBar em{display:block;width:var(--value);height:100%;border-radius:inherit;background:linear-gradient(90deg,#80adff,var(--blue))}.detailBar strong{text-align:right}
+.proofSection{background:#fff}.proofGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.proof{position:relative;min-height:210px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:20px;box-shadow:0 15px 34px rgba(17,24,39,.05)}
+.proofIcon{display:grid;place-items:center;width:38px;height:38px;border:2px solid var(--blue);border-radius:11px;color:var(--blue);font-size:13px;font-weight:900}
+.proof b,.proof strong,.proof small{display:block}.proof b{margin-top:24px;color:var(--blue);font-size:36px;line-height:1}.proof strong{margin-top:10px;font-size:16px}.proof small{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.5;font-weight:700;word-break:keep-all}
+.flow{display:grid;gap:11px;width:min(720px,100%);margin:42px auto 0}.flow article{display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:center}.flow i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;font-style:normal;font-weight:900}.flow div{border:1px solid var(--line);border-radius:13px;background:#fff;padding:17px 19px}.flow b{display:block;font-size:16px}.flow p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.55;font-weight:700;word-break:keep-all}
+.testimonials{background:var(--soft)}
+.chatSlider{display:flex;gap:17px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 24px;scrollbar-color:#9cbcff #edf4ff}
+.chatCard{flex:0 0 clamp(292px,31vw,370px);margin:0;border:1px solid var(--line);border-radius:20px;background:#fff;padding:10px;box-shadow:var(--shadow);scroll-snap-align:start}
+.chatShot{display:grid;place-items:center;height:clamp(420px,52vw,560px);border-radius:15px;background:#dbe7f2;overflow:hidden}.chatCard img{width:100%;height:100%;object-fit:contain;border-radius:12px}
+.chatCard figcaption{padding:13px 4px 4px}.chatCard strong,.chatCard span{display:block;word-break:keep-all}.chatCard strong{font-size:15px;line-height:1.45}.chatCard span{margin-top:6px;color:var(--muted);font-size:12px;font-weight:800}
+.final{padding:clamp(72px,9vw,108px) 0;background:var(--blue-deep);color:#fff;text-align:center}.final h2{font-size:clamp(34px,5vw,56px);line-height:1.18}.final h2 span{display:block}.final .gift{color:rgba(255,255,255,.82)}
+.stickyCta{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.9);border-top:1px solid rgba(220,231,255,.9);backdrop-filter:blur(12px)}
+.stickyCta .cta{width:min(420px,100%);min-height:54px;margin:0}
+@media(max-width:980px){
+  .heroGrid,.split,.worryGrid,.reportInteractive{grid-template-columns:1fr}.heroGrid{gap:54px}.heroCopy{text-align:center}.heroCopy .chips{justify-content:center}.phoneShell{width:min(410px,100%);margin:auto}
+  .reportMap{min-height:360px}.proofGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  body{padding-bottom:76px}.wrap{padding:0 18px}.hero{padding:54px 0 66px}.hero h1{font-size:36px}.heroCopy>p{font-size:16px}.cta{width:100%;padding:0 18px}.chips{flex-wrap:nowrap;justify-content:flex-start!important;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+  .phoneShell{border-radius:27px;padding:9px}.reportMini{border-radius:20px;padding:21px 17px 18px}.miniTop h3{font-size:22px}.scoreRing{width:128px;margin:20px auto}.scoreRing strong{font-size:38px}.scoreRing span{margin-bottom:28px}
+  .section{padding:62px 0}.section h2,.sectionHead h2{font-size:31px}.sectionHead{margin-bottom:26px}.text,.sectionHead>p{font-size:15px}.painGrid{display:none}.worryScene h3{font-size:23px}.worryLead{font-size:14px}
+  .reportCardLarge{padding:21px}.reportCardLarge h3{font-size:27px}.positionPanel strong{font-size:46px}
+  .reportInteractive{gap:24px}.reportMap{position:relative;display:block;min-height:340px;overflow:visible;padding:0}.reportAxis{display:block;inset:40px 12px 30px;border-radius:50%;transform:rotate(-6deg)}.reportNode{position:absolute;inset:auto;width:calc(50% - 14px);min-height:100px;padding:13px;border-radius:14px}.nodeStrength{left:0;top:4px}.nodeStress{right:0;top:62px}.nodeCareer{left:6px;bottom:38px}.nodeCollab{right:5px;bottom:0}.reportNode:hover,.reportNode:focus-visible,.reportNode.isActive{transform:translateY(-4px) scale(1.015)}.reportNode b{font-size:15px}.reportNode small{font-size:11px}.reportDetail{min-height:0;padding:18px}.reportDetail h3{font-size:24px}.chart{height:120px}.detailBar{grid-template-columns:minmax(72px,.8fr) minmax(82px,1fr) 31px}
+  .proofGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--blue-line);border-radius:16px;overflow:hidden}.proof{min-height:184px;border:0;border-radius:0;box-shadow:none;padding:16px 14px}.proof:nth-child(odd){border-right:1px solid var(--blue-line)}.proof:nth-child(-n+2){border-bottom:1px solid var(--blue-line)}.proof b{font-size:31px;margin-top:18px}.proof small{font-size:11px}.proofIcon{width:30px;height:30px;border-radius:8px;font-size:11px}
+  .flow article{grid-template-columns:39px 1fr}.flow i{width:39px;height:39px}.flow div{padding:15px}.chatCard{flex-basis:min(84vw,340px)}.chatShot{height:430px}.chatCard strong{font-size:14px}.final h2{font-size:32px}
+}
+@media(max-width:360px){.hero h1{font-size:32px}.section h2,.sectionHead h2{font-size:28px}.miniMetric{grid-template-columns:minmax(0,1fr) 55px}.reportMap{min-height:318px}.reportAxis{inset:40px 8px 27px}.reportNode{width:calc(50% - 9px);min-height:94px;padding:11px}.reportNode b{font-size:13px}.proof small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cta,.reportNode{transition:none}}
+
+@property --ring{syntax:"<percentage>";inherits:false;initial-value:0%}
+.introHero{position:relative;overflow:hidden;background:#ecf8fc;border-bottom:1px solid #dcecf3}
+.introHero .heroGrid{grid-template-columns:minmax(0,1.04fr) minmax(380px,.96fr);position:relative;z-index:1}
+.introHero .heroCopy{animation:introRise .7s ease both}
+.heroEyebrow{margin:0 0 12px!important;color:#26354b!important;font-size:16px!important;line-height:1.5!important;font-weight:800!important}
+.introHero h1{font-size:clamp(42px,5.2vw,66px)}
+.introHero .eventBadge{margin:26px 0 0}
+.heroVisual{width:100%}
+.insightGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.insightTile{display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1;border:1px solid rgba(255,255,255,.92);border-radius:18px;background:#fff;box-shadow:0 18px 38px rgba(32,72,104,.1);overflow:hidden;animation:tileRise .58s ease both}
+.insightTile:nth-child(2){animation-delay:.07s}.insightTile:nth-child(3){animation-delay:.14s}.insightTile:nth-child(4){animation-delay:.21s}.insightTile:nth-child(5){animation-delay:.28s}.insightTile:nth-child(6){animation-delay:.35s}
+.insightTile img{display:block;width:78%;height:68%;object-fit:contain;animation:insightFloat 3.7s ease-in-out infinite alternate;will-change:transform}
+.insightTile:nth-child(2) img{animation-name:insightFloatReverse;animation-duration:4.3s;animation-delay:-1.2s}.insightTile:nth-child(3) img{animation-duration:3.2s;animation-delay:-2.1s}.insightTile:nth-child(4) img{animation-name:insightFloatReverse;animation-duration:4.8s;animation-delay:-.8s}.insightTile:nth-child(5) img{animation-duration:4.1s;animation-delay:-2.8s}.insightTile:nth-child(6) img{animation-name:insightFloatReverse;animation-duration:3.5s;animation-delay:-1.7s}
+.insightTile b{margin-top:10px;color:#40506a;font-size:12px;line-height:1.2}
+.metricPreview{background:#fff}
+.metricGrid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(360px,440px);gap:clamp(46px,8vw,96px);align-items:center}
+.metricCopy h2{margin:0;font-size:clamp(36px,4.7vw,54px);line-height:1.15;font-weight:900;word-break:keep-all;overflow-wrap:anywhere}
+.scoreRing{--ring:0%;background:conic-gradient(var(--blue) var(--ring),#e8eef8 0);transition:--ring 1.25s cubic-bezier(.2,.72,.2,1)}
+.phoneShell.isAnimated .scoreRing{--ring:78%}
+.metricValue span strong{font-size:inherit;font-weight:900}
+.miniMetric i:before{width:0;transition:width 1.1s cubic-bezier(.2,.72,.2,1)}
+.phoneShell.isAnimated .miniMetric i:before{width:var(--score)}
+.reports{padding:0;background:#f8faff}
+.reportStory{position:relative;height:270vh}
+.reportSticky{position:sticky;top:clamp(18px,5vh,52px);display:grid;grid-template-columns:minmax(280px,.72fr) minmax(380px,1fr);gap:clamp(32px,6vw,70px);align-items:center;align-content:center;min-height:calc(100vh - clamp(36px,10vh,104px));padding:30px 0}
+.storyIntro h2{margin:0;font-size:clamp(36px,4.7vw,54px);line-height:1.14;font-weight:900;word-break:keep-all;overflow-wrap:anywhere}
+.storyIntro>p{margin:20px 0 0;color:var(--muted);font-size:17px;line-height:1.7;font-weight:600;word-break:keep-all}
+.storyProgress{display:flex;align-items:center;gap:11px;margin-top:30px}
+.storyStep{display:grid;place-items:center;width:43px;height:43px;border:1px solid var(--blue-line);border-radius:50%;background:#fff;color:#7b8aa5;font-size:13px;font-weight:900;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.storyStep:focus-visible{outline:3px solid rgba(74,125,255,.25);outline-offset:3px}
+.storyStep.isActive{border-color:var(--blue);background:var(--blue);color:#fff;transform:scale(1.08)}
+.reportSticky .reportDetail{min-height:520px;transform:translateY(0);transition:opacity .18s ease,transform .24s ease}
+.reportDetail.isSwitching{opacity:.35;transform:translateY(10px)}
+.reportDetail.isChartActive .radarGrid{opacity:1;transform:scale(1)}
+.reportDetail.isChartActive .radarAxis{stroke-dashoffset:0}
+.reportDetail.isChartActive .radarArea{opacity:1;transform:scale(1)}
+.reportDetail.isChartActive .radarDot{opacity:1;transform:scale(1)}
+.reportDetail.isChartActive .radarLabel{opacity:1;transform:translateY(0)}
+.bubbleMap i{opacity:0;transform:scale(.2);transition:opacity .35s ease,transform .65s cubic-bezier(.2,.72,.2,1)}
+.bubbleMap i{width:var(--bubble-size)!important;height:var(--bubble-size)!important}
+.bubbleMap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;padding:16px 14px 12px}
+.bubblePoint{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:flex-end;gap:9px}
+.bubbleMap .bubblePoint i{position:static;inset:auto;border-radius:50%;background:rgba(74,125,255,.34);border:2px solid rgba(23,70,200,.28)}
+.bubblePoint span{color:var(--muted);font-size:11px;font-weight:900}
+.bubblePoint span{opacity:0;transform:translateY(5px);transition:opacity .3s ease .3s,transform .38s ease .3s}
+.bubblePoint:nth-child(2) i{transition-delay:.09s}.bubblePoint:nth-child(3) i{transition-delay:.18s}
+.bubblePoint:nth-child(2) span{transition-delay:.39s}.bubblePoint:nth-child(3) span{transition-delay:.48s}
+.bubbleMap i:nth-child(2){transition-delay:.09s}.bubbleMap i:nth-child(3){transition-delay:.18s}
+.reportDetail.isChartActive .bubbleMap i{opacity:1;transform:scale(1)}
+.reportDetail.isChartActive .bubblePoint span{opacity:1;transform:translateY(0)}
+.matrixChart span{opacity:0;transform:translateY(12px);transition:opacity .35s ease,transform .45s ease}
+.matrixChart span:nth-child(2){transition-delay:.07s}.matrixChart span:nth-child(3){transition-delay:.14s}.matrixChart span:nth-child(4){transition-delay:.21s}
+.reportDetail.isChartActive .matrixChart span{opacity:1;transform:translateY(0)}
+.barChart i{height:0;transition:height .7s cubic-bezier(.2,.72,.2,1)}
+.reportDetail.isChartActive .barChart i{height:var(--bar-value)}
+.detailBar em{width:0;transition:width .8s cubic-bezier(.2,.72,.2,1)}
+.reportDetail.isChartActive .detailBar em{width:var(--value)}
+.reportOutro{position:absolute;left:0;right:0;bottom:clamp(10px,2vh,22px);margin:0 auto;padding:0 20px;color:var(--ink);text-align:center;font-size:clamp(22px,3vw,32px);line-height:1.35;font-weight:900;word-break:keep-all;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .38s ease,transform .48s cubic-bezier(.2,.72,.2,1)}
+.reportSticky.isComplete .reportOutro{opacity:1;transform:translateY(0)}
+.scrollReveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .7s cubic-bezier(.2,.72,.2,1)}
+.mobileWorryItem.scrollReveal,.flow article.scrollReveal{transform:translateY(22px)}
+.scrollReveal.isVisible{opacity:1;transform:translateY(0)}
+@keyframes introRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tileRise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes insightFloat{0%{transform:translate3d(-2px,5px,0) rotate(-1.4deg)}100%{transform:translate3d(3px,-7px,0) rotate(1.4deg)}}
+@keyframes insightFloatReverse{0%{transform:translate3d(3px,4px,0) rotate(1.2deg)}100%{transform:translate3d(-3px,-6px,0) rotate(-1.2deg)}}
+
+@media(max-width:980px){
+  .introHero .heroGrid,.metricGrid,.reportSticky{grid-template-columns:1fr}
+  .introHero .heroCopy,.metricCopy{text-align:center}.heroEyebrow{font-size:15px!important}
+  .heroVisual{width:min(560px,100%);margin:auto}.insightGrid{gap:12px}
+  .metricGrid{gap:48px}.metricCopy{max-width:680px;margin:auto}.metricCopy .text{max-width:600px;margin-left:auto;margin-right:auto}
+  .reportStory{height:215vh}.reportSticky{min-height:calc(100vh - 40px);gap:22px;padding:20px 0;align-content:start}.storyIntro{text-align:center}.storyIntro>p{margin:13px auto 0;max-width:580px}.storyProgress{justify-content:center;margin-top:18px}.reportSticky .reportDetail{width:min(620px,100%);min-height:470px;margin:auto}
+}
+@media(max-width:640px){
+  .introHero{padding:48px 0 58px}.introHero .heroGrid{gap:36px}.introHero .heroCopy{text-align:left}.introHero h1{font-size:clamp(34px,10.2vw,42px);line-height:1.12}.heroEyebrow{font-size:14px!important}.introHero .heroCopy>p:not(.heroEyebrow){font-size:15px}.introHero .eventBadge{margin-top:20px}.introHero .chips{justify-content:flex-start!important}
+  .insightGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.insightTile{border-radius:13px}.insightTile img{width:82%;height:69%}.insightTile b{margin-top:7px;font-size:10px}
+  .metricPreview{padding:64px 0}.metricGrid{gap:34px}.metricCopy{text-align:left}.metricCopy h2{font-size:31px}.metricCopy .text{font-size:15px}
+  .reportCardLarge h3 span{font-size:24px;line-height:1.24;margin-top:5px}.positionPanel span{font-size:14px;line-height:1.45;word-break:keep-all}
+  .reportStory{height:190vh}.reportSticky{top:8px;min-height:calc(100vh - 16px);gap:12px;padding:12px 0;align-content:start;grid-template-rows:auto auto}.storyIntro{text-align:left}.storyIntro .kicker{margin-bottom:6px}.storyIntro h2{font-size:29px;line-height:1.14}.storyIntro>p{display:block;margin:11px 0 0;font-size:13px;line-height:1.55}.storyProgress{justify-content:flex-start;margin-top:13px}.storyStep{width:36px;height:36px;font-size:11px}.reportSticky .reportDetail{min-height:0;padding:18px;border-radius:18px}.reportDetail h3{margin-top:13px}.reportDetail>p{font-size:13px;line-height:1.55}.chart{height:126px;margin-top:14px}.detailBars{margin-top:13px;gap:8px}.reportOutro{bottom:74px;padding:0 14px;font-size:21px}
+}
+@media(max-width:360px){
+  .introHero h1{font-size:32px}.insightTile b{font-size:9px}.storyIntro h2{font-size:26px}.storyStep{width:33px;height:33px}.reportDetail h3{font-size:22px}.detailBar{grid-template-columns:minmax(64px,.8fr) minmax(72px,1fr) 28px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .introHero .heroCopy,.insightTile,.insightTile img{animation:none}.scrollReveal{opacity:1;transform:none}.scoreRing,.miniMetric i:before,.reportDetail,.radarGrid,.radarAxis,.radarArea,.radarDot,.radarLabel,.bubbleMap i,.bubblePoint span,.matrixChart span,.barChart i,.detailBar em,.storyStep,.reportOutro{transition:none}
+}
+</style>
+<link rel="stylesheet" href="/assets/pretendard.css">
+</head>
+<body>
+<main>
+  <section class="hero introHero">
+    <div class="wrap heroGrid">
+      <div class="heroCopy">
+        <p class="heroEyebrow">내가 몰랐던 나의 성향과 일하는 방식을 발견해 보세요</p>
+        <h1><span>위크메이트 직무분석지</span><br>내 일의 기준을 찾는<br>가장 확실한 준비</h1>
+        <p>강점, 스트레스 조건, 협업 방식, 직무 방향을<br>하나의 기준으로 정리합니다.</p>
+        <div class="eventBadge">30명 한정 무료 이벤트</div>
+        <div class="gift">신청 마감 시 이벤트는 별도 안내 없이 종료됩니다</div>
+        <div class="chips"><span>#직무분석지</span><span>#성향기반분석</span><span>#무료이벤트</span></div>
+      </div>
+      <div class="heroVisual" aria-label="직무분석지에서 확인할 수 있는 여섯 가지 요소">
+        <div class="insightGrid">
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-01.png" alt="" width="450" height="450" decoding="async"><b>직무 방향</b></div>
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-02.png" alt="" width="512" height="512" decoding="async"><b>본질 성향</b></div>
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-03.png" alt="" width="736" height="736" decoding="async"><b>나에게 대입</b></div>
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-04.png" alt="" width="572" height="749" decoding="async"><b>스트레스</b></div>
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-05.png" alt="" width="1024" height="1024" decoding="async"><b>행동 지표</b></div>
+          <div class="insightTile"><img src="/gamja/report/assets/hero-insight-06.png" alt="" width="512" height="512" decoding="async"><b>직무 연봉 측정</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section metricPreview">
+    <div class="wrap metricGrid">
+      <div class="metricCopy">
+        <div class="kicker">분석지 맛보기</div>
+        <h2>숫자와 그래프로 확인하는<br>나의 일하는 방식</h2>
+        <p class="text">막연하게 느껴졌던 나의 강점과 업무 조건을 비교할 수 있는 지표로 보여드립니다.</p>
+      </div>
+      <div class="phoneShell" aria-label="직무분석지 지표 예시">
+        <div class="phoneBar"></div>
+        <div class="reportMini">
+          <div class="miniTop"><p>CAREER-FIT REPORT · V1.1</p><h3>이*정 님의<br>일하는 방식 지표</h3></div>
+          <div class="scoreRing" data-score="78"><strong data-count="78">0</strong><span>직무 환경 적합도</span></div>
+          <div class="metricList">
+            <article class="miniMetric"><div><b>몰입 환경</b><small>목표와 역할이 분명할 때</small></div><div class="metricValue"><span><strong data-count="86">0</strong>점</span><em>높음</em></div><i data-score="86"></i></article>
+            <article class="miniMetric"><div><b>스트레스 회복</b><small>혼자 정리할 시간이 필요할 때</small></div><div class="metricValue"><span><strong data-count="72">0</strong>점</span><em>보통</em></div><i data-score="72"></i></article>
+            <article class="miniMetric"><div><b>협업 방식</b><small>기준을 정리하며 소통할 때</small></div><div class="metricValue"><span><strong data-count="81">0</strong>점</span><em>높음</em></div><i data-score="81"></i></article>
+            <article class="miniMetric"><div><b>직무 방향</b><small>기획 · 분석 · 운영 역할</small></div><div class="metricValue"><span><strong data-count="88">0</strong>점</span><em>추천</em></div><i data-score="88"></i></article>
+          </div>
+          <p class="miniNote">결과만 보여주지 않고, 강점이 살아나는 조건과 에너지가 빠지는 지점을 함께 정리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section worry">
+    <div class="wrap worryGrid">
+      <div>
+        <div class="kicker">문제 인식</div>
+        <h2>지금 고민이 어디에서<br>막히는지 먼저 짚습니다</h2>
+        <p class="text">공고를 더 보는 것보다 먼저 필요한 건, 내가 오래 버틸 수 있는 환경과 일하는 방식을 아는 것입니다.</p>
+        <div class="painGrid">
+          <div class="pain"><span>01</span><strong>내가 뭘 잘하는지 말하려면 막힌다</strong></div>
+          <div class="pain"><span>02</span><strong>하고 싶은 일과 잘 맞는 일이 자꾸 엇갈린다</strong></div>
+          <div class="pain"><span>03</span><strong>회사를 바꿔도 비슷한 이유로 다시 지친다</strong></div>
+        </div>
+      </div>
+      <div class="worryScene">
+        <h3>이런 고민을 해본 적이 있다면?</h3>
+        <p class="worryLead">직무분석지는 막연한 고민을 실제로 설명 가능한 기준으로 정리합니다.</p>
+        <div class="mobileWorryBoard">
+          <article class="mobileWorryItem"><div class="mobileWorryCheck">✓</div><div class="mobileWorryCopy"><span class="mobileWorryBadge">직무 선택 기준</span><strong>공고는 많이 보는데, 내 일이라는 확신이 없다</strong><p><span class="worryArrow">→</span><span>내가 끌리는 공고의 공통 기준을 정리합니다</span></p></div></article>
+          <article class="mobileWorryItem"><div class="mobileWorryCheck">✓</div><div class="mobileWorryCopy"><span class="mobileWorryBadge">강점 구분</span><strong>좋아하는 일과 잘하는 일을 구분하기 어렵다</strong><p><span class="worryArrow">→</span><span>흥미와 강점이 겹치는 지점을 분리해 봅니다</span></p></div></article>
+          <article class="mobileWorryItem"><div class="mobileWorryCheck">✓</div><div class="mobileWorryCopy"><span class="mobileWorryBadge">몰입 조건</span><strong>열심히는 하는데 오래 버티는 환경을 모르겠다</strong><p><span class="worryArrow">→</span><span>오래 일할 수 있는 환경 조건을 찾습니다</span></p></div></article>
+          <article class="mobileWorryItem"><div class="mobileWorryCheck">✓</div><div class="mobileWorryCopy"><span class="mobileWorryBadge">자기 언어화</span><strong>내 성향을 말로 설명해야 할 때마다 막힌다</strong><p><span class="worryArrow">→</span><span>면접과 자기소개에 쓸 수 있는 말로 바꿉니다</span></p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about">
+    <div class="wrap split">
+      <div>
+        <div class="kicker">직무분석지란?</div>
+        <h2>나의 일하는 방식을<br>직무 언어로 정리합니다</h2>
+        <p class="text">단순히 “당신은 이런 유형입니다”에서 끝내지 않고, 몰입 환경 · 스트레스 패턴 · 협업 스타일 · 직무 방향성을 데이터 흐름으로 보여주는 리포트입니다.</p>
+      </div>
+      <div class="reportCardLarge">
+        <h3>이*정 님의<span>고민은 많고, 행동력이 부족</span></h3>
+        <p>지금 당신은 조용히 파고들며 의미를 빚는 자리에 와 있습니다. 빠르게 보이는 결과보다 스스로 납득할 구조를 만드는 일이 어울립니다.</p>
+        <blockquote>이 리포트는 이*정 님의 직무 추천을 위해서 작성된 내용이며, 지금의 관심도와 발산하는 에너지의 방향을 파악하여 방향 설정에 도움을 드립니다.</blockquote>
+        <div class="positionPanel"><small>CURRENT POSITION</small><strong>Q2</strong><span>고민은 많고, 행동력이 부족</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reports">
+    <div class="wrap">
+      <div class="reportStory" id="reportStory">
+        <div class="reportSticky">
+          <div class="storyIntro">
+            <div class="kicker">분석지 미리보기</div>
+            <h2>나의 일하는 방식을<br>만드는 4가지 기준</h2>
+            <p>스크롤해서 직무분석지의 내용을<br>순차적으로 확인해보세요.</p>
+            <div class="storyProgress" aria-label="분석 항목 진행 상태">
+              <button class="storyStep isActive" type="button" data-report="strength" aria-label="강점 프로파일" aria-current="step">01</button>
+              <button class="storyStep" type="button" data-report="stress" aria-label="스트레스 패턴 맵">02</button>
+              <button class="storyStep" type="button" data-report="career" aria-label="커리어 방향 매트릭스">03</button>
+              <button class="storyStep" type="button" data-report="collab" aria-label="협업 스타일">04</button>
+            </div>
+          </div>
+          <article class="reportDetail" aria-live="polite">
+            <span class="tag" id="detailTag">01</span>
+            <h3 id="detailTitle">강점 프로파일</h3>
+            <span class="reportMeta" id="detailMeta">핵심 성향 축</span>
+            <div class="chart radarChart" id="detailChart"></div>
+            <p id="detailBody">빠른 의사결정보다 구조가 보일 때 몰입이 오래 이어집니다.</p>
+            <div class="detailBars" id="detailBars"></div>
+          </article>
+          <p class="reportOutro" aria-live="polite">직무분석지를 통해<br>더 구체적인 결과를 받아보세요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section proofSection">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div class="kicker">신뢰 근거</div>
+        <h2>분석 내용은<br>모두 해석해드립니다</h2>
+        <p>혼자서 어떻게 봐야할지 걱정하지 마세요, 도와드릴게요.</p>
+      </div>
+      <div class="proofGrid">
+        <article class="proof"><div class="proofIcon">01</div><b>30명</b><strong>무료 제공</strong><small>선착순 이벤트 대상자에게 직무분석지를 제공합니다.</small></article>
+        <article class="proof"><div class="proofIcon">02</div><b>7개 축</b><strong>입체 분석</strong><small>몰입 조건, 협업 방식, 스트레스 요인을 함께 봅니다.</small></article>
+        <article class="proof"><div class="proofIcon">03</div><b>28개</b><strong>행동 패턴</strong><small>반복되는 선택과 회피 이유를 행동 단위로 해석합니다.</small></article>
+        <article class="proof"><div class="proofIcon">04</div><b>3단계</b><strong>품질 검수</strong><small>응답 정합성, 해석 품질, 문장 흐름까지 반영합니다.</small></article>
+      </div>
+      <div class="flow">
+        <article><i>1</i><div><b>내 본질 성향</b><p>내가 반복해서 선택하는 방식과 놓치기 쉬운 기준을 정리합니다.</p></div></article>
+        <article><i>2</i><div><b>몰입하는 환경</b><p>성과가 잘 나오는 업무 조건, 역할 범위, 협업 밀도를 분석합니다.</p></div></article>
+        <article><i>3</i><div><b>지치는 트리거</b><p>왜 같은 상황에서 에너지가 빨리 소진되는지 패턴으로 보여줍니다.</p></div></article>
+        <article><i>4</i><div><b>적합 직무 힌트</b><p>성향과 강점을 기반으로 맞을 가능성이 높은 직무 환경을 제안합니다.</p></div></article>
+        <article><i>5</i><div><b>설명 가능한 나</b><p>면접, 자기소개, 커리어 전환에서 쓸 수 있는 언어로 바꿔줍니다.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="wrap">
+      <div class="sectionHead"><h2>먼저 경험한 참여자들의 이야기</h2><p>직무분석지를 경험한 참여자들이 남긴 실제 대화 후기입니다.</p></div>
+      <div class="chatSlider" aria-label="카카오톡 후기 이미지 슬라이드">
+        <figure class="chatCard"><div class="chatShot"><img src="/gamja/report/assets/v8-chat-1.jpg" alt="익명 처리된 카카오톡 후기 1"></div><figcaption><strong>“막연했던 고민이 기준으로 정리됐어요.”</strong><span>직무분석지 참여자 후기</span></figcaption></figure>
+        <figure class="chatCard"><div class="chatShot"><img src="/gamja/report/assets/v8-chat-2.jpg" alt="익명 처리된 카카오톡 후기 2"></div><figcaption><strong>“내 성향을 설명할 수 있는 문장이 생겼어요.”</strong><span>직무분석지 참여자 후기</span></figcaption></figure>
+        <figure class="chatCard"><div class="chatShot"><img src="/gamja/report/assets/v8-chat-3.jpg" alt="익명 처리된 카카오톡 후기 3"></div><figcaption><strong>“왜 비슷한 환경에서 지쳤는지 이해됐어요.”</strong><span>직무분석지 참여자 후기</span></figcaption></figure>
+        <figure class="chatCard"><div class="chatShot"><img src="/gamja/report/assets/v8-chat-4.jpg" alt="익명 처리된 카카오톡 후기 4"></div><figcaption><strong>“좋아하는 일과 잘 맞는 일을 구분하게 됐어요.”</strong><span>직무분석지 참여자 후기</span></figcaption></figure>
+        <figure class="chatCard"><div class="chatShot"><img src="/gamja/report/assets/v8-chat-5.jpg" alt="익명 처리된 카카오톡 후기 5"></div><figcaption><strong>“지원 방향을 다시 잡는 데 도움이 됐어요.”</strong><span>직무분석지 참여자 후기</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2><span>내 일의 방식이 궁금하다면</span><span>무료 직무분석지를 신청해보세요.</span></h2>
+      <div class="gift">신청 마감 시 별도 안내 없이 종료됩니다</div>
+    </div>
+  </section>
+</main>
+<div class="stickyCta"><a class="cta jsApply" data-cta-location="sticky" href="/gamja/apply">무료 직무분석지 신청하기</a></div>
+<script>
+(function(){
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var track=function(name,params){if(window.track)window.track(name,Object.assign({},params,{landing_slug:'gamja'}))};
+  var reportData={
+    strength:{tag:'01',title:'강점 프로파일',meta:'핵심 성향 축',body:'빠른 의사결정보다 구조가 보일 때 몰입이 오래 이어집니다.',chart:'radar',values:[['문제해결',88],['협업성',74],['안정성',81]]},
+    stress:{tag:'02',title:'스트레스 패턴 맵',meta:'낮음 - 높음',body:'역할과 기대치가 분명한 환경에서 힘이 안정적으로 납니다.',chart:'bubble',values:[['낮음',36],['중간',72],['높음',58]]},
+    career:{tag:'03',title:'커리어 방향 매트릭스',meta:'역할 성향',body:'성과보다 납득 가능한 흐름을 만들 때 강점이 또렷해집니다.',chart:'matrix',values:[['전문가',78],['기획/전략',86],['운영/프로세스',69]]},
+    collab:{tag:'04',title:'협업 스타일',meta:'팀 안에서의 반응',body:'감정보다 맥락과 기준을 정리하며 대화합니다.',chart:'bars',values:[['경청',82],['기준 정리',88],['역할 명확성',76]]}
+  };
+  var chartMarkup={
+    radar:'',
+    bubble:'<i></i><i></i><i></i><div class="chartScale"><span>낮음</span><span>중간</span><span>높음</span></div>',
+    matrix:'<span>전문가</span><span>관리자</span><span>기획/전략</span><span>운영/프로세스</span>',
+    bars:'<i></i><i></i><i></i>'
+  };
+  var reportKeys=['strength','stress','career','collab'];
+  var steps=document.querySelectorAll('.storyStep');
+  var reportStory=document.getElementById('reportStory');
+  var reportSticky=document.querySelector('.reportSticky');
+  var reportDetail=document.querySelector('.reportDetail');
+  var detailTag=document.getElementById('detailTag');
+  var detailTitle=document.getElementById('detailTitle');
+  var detailMeta=document.getElementById('detailMeta');
+  var detailChart=document.getElementById('detailChart');
+  var detailBody=document.getElementById('detailBody');
+  var detailBars=document.getElementById('detailBars');
+  var currentReport='';
+  var switchTimer=0;
+  var viewedReports={};
+
+  function countTo(element,target,duration){
+    if(!element)return;
+    if(reduceMotion){element.textContent=target;return}
+    var start=performance.now();
+    function frame(now){
+      var progress=Math.min(1,(now-start)/duration);
+      var eased=1-Math.pow(1-progress,3);
+      element.textContent=Math.round(target*eased);
+      if(progress<1)requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function chartContent(item){
+    if(item.chart==='radar'){
+      var cx=130,cy=82,maxRadius=55;
+      var angles=[-Math.PI/2,Math.PI/6,Math.PI*5/6];
+      function point(radius,index){
+        return (cx+Math.cos(angles[index])*radius).toFixed(1)+','+(cy+Math.sin(angles[index])*radius).toFixed(1);
+      }
+      function triangle(scale){return angles.map(function(_,index){return point(maxRadius*scale,index)}).join(' ')}
+      var resultPoints=item.values.map(function(row,index){return point(maxRadius*(row[1]/100),index)}).join(' ');
+      var dots=item.values.map(function(row,index){
+        var coords=point(maxRadius*(row[1]/100),index).split(',');
+        return '<circle class="radarDot" cx="'+coords[0]+'" cy="'+coords[1]+'" r="4"></circle>';
+      }).join('');
+      return '<svg class="radarSvg" viewBox="0 0 260 150" role="img" aria-label="문제해결, 협업성, 안정성 강점 균형">'
+        +'<polygon class="radarGrid radarGridOuter" points="'+triangle(1)+'"></polygon>'
+        +'<polygon class="radarGrid radarGridMid" points="'+triangle(.66)+'"></polygon>'
+        +'<polygon class="radarGrid radarGridInner" points="'+triangle(.33)+'"></polygon>'
+        +angles.map(function(_,index){return '<line class="radarAxis" x1="'+cx+'" y1="'+cy+'" x2="'+point(maxRadius,index).replace(',','" y2="')+'"></line>'}).join('')
+        +'<polygon class="radarArea" points="'+resultPoints+'"></polygon>'+dots
+        +'<text class="radarLabel" x="130" y="14" text-anchor="middle">문제해결</text>'
+        +'<text class="radarLabel" x="238" y="132" text-anchor="end">협업성</text>'
+        +'<text class="radarLabel" x="22" y="132" text-anchor="start">안정성</text>'
+        +'</svg>';
+    }
+    if(item.chart==='bubble'){
+      return item.values.map(function(row){
+        var size=Math.round(24+(row[1]*.52));
+        return '<div class="bubblePoint"><i style="--bubble-size:'+size+'px"></i><span>'+row[0]+'</span></div>';
+      }).join('');
+    }
+    if(item.chart==='bars'){
+      return item.values.map(function(row){return '<i style="--bar-value:'+row[1]+'%"></i>'}).join('');
+    }
+    return chartMarkup[item.chart];
+  }
+
+  function renderReport(key,shouldTrack){
+    if(key===currentReport)return;
+    var item=reportData[key]||reportData.strength;
+    currentReport=key;
+    clearTimeout(switchTimer);
+    reportDetail.classList.remove('isChartActive');
+    reportDetail.classList.add('isSwitching');
+    if(reportSticky)reportSticky.classList.toggle('isComplete',key==='collab');
+    steps.forEach(function(step){
+      var active=step.getAttribute('data-report')===key;
+      step.classList.toggle('isActive',active);
+      if(active)step.setAttribute('aria-current','step');else step.removeAttribute('aria-current');
+    });
+    switchTimer=setTimeout(function(){
+      detailTag.textContent=item.tag;detailTitle.textContent=item.title;detailMeta.textContent=item.meta;detailBody.textContent=item.body;
+      detailChart.className='chart '+(item.chart==='radar'?'radarChart':item.chart==='bubble'?'bubbleMap':item.chart==='matrix'?'matrixChart':'barChart');
+      detailChart.innerHTML=chartContent(item);
+      detailBars.innerHTML=item.values.map(function(row){return '<div class="detailBar"><span>'+row[0]+'</span><i><em style="--value:'+row[1]+'%"></em></i><strong data-count="'+row[1]+'">0</strong></div>'}).join('');
+      reportDetail.classList.remove('isSwitching');
+      requestAnimationFrame(function(){
+        reportDetail.classList.add('isChartActive');
+        detailBars.querySelectorAll('[data-count]').forEach(function(number){countTo(number,Number(number.getAttribute('data-count')),620)});
+      });
+    },reduceMotion?0:130);
+    if(shouldTrack){try{track('report_preview_select',{report_section:key})}catch(e){}}
+    if(!viewedReports[key]){viewedReports[key]=true;try{track('report_preview_view',{report_section:key})}catch(e){}}
+  }
+
+  function storyScrollTop(index){
+    if(!reportStory)return;
+    var storyTop=window.scrollY+reportStory.getBoundingClientRect().top;
+    var travel=Math.max(1,reportStory.offsetHeight-window.innerHeight);
+    window.scrollTo({top:storyTop+travel*((index+.08)/reportKeys.length),behavior:reduceMotion?'auto':'smooth'});
+  }
+  steps.forEach(function(step,index){
+    step.addEventListener('click',function(){renderReport(step.getAttribute('data-report'),true);storyScrollTop(index)});
+  });
+  renderReport('strength',false);
+
+  var scrollQueued=false;
+  function updateReportFromScroll(){
+    scrollQueued=false;
+    if(!reportStory)return;
+    var rect=reportStory.getBoundingClientRect();
+    var travel=Math.max(1,reportStory.offsetHeight-window.innerHeight);
+    var progress=Math.max(0,Math.min(.999,-rect.top/travel));
+    var index=Math.min(reportKeys.length-1,Math.floor(progress*reportKeys.length));
+    renderReport(reportKeys[index],false);
+  }
+  window.addEventListener('scroll',function(){if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateReportFromScroll)}},{passive:true});
+  window.addEventListener('resize',updateReportFromScroll);
+  updateReportFromScroll();
+
+  var phoneShell=document.querySelector('.phoneShell');
+  function activatePhone(){
+    if(!phoneShell||phoneShell.classList.contains('isAnimated'))return;
+    phoneShell.querySelectorAll('.miniMetric i[data-score]').forEach(function(bar){bar.style.setProperty('--score',bar.getAttribute('data-score')+'%')});
+    phoneShell.classList.add('isAnimated');
+    phoneShell.querySelectorAll('[data-count]').forEach(function(number){countTo(number,Number(number.getAttribute('data-count')),980)});
+  }
+  if('IntersectionObserver' in window){
+    var phoneObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){activatePhone();phoneObserver.disconnect()}})},{threshold:0,rootMargin:'0px 0px -33% 0px'});
+    var phoneTrigger=document.querySelector('.scoreRing');
+    if(phoneTrigger)phoneObserver.observe(phoneTrigger);
+  }else{activatePhone()}
+
+  var revealTargets=document.querySelectorAll('.metricCopy,.phoneShell,.worryGrid>div:first-child,.worryScene h3,.worryLead,.mobileWorryItem,.about .split>div:first-child .kicker,.about .split>div:first-child h2,.about .split>div:first-child .text,.reportCardLarge h3,.reportCardLarge>p,.reportCardLarge blockquote,.positionPanel,.proofSection .sectionHead,.proofGrid,.flow article,.testimonials .sectionHead,.chatSlider');
+  revealTargets.forEach(function(target){target.classList.add('scrollReveal')});
+  if('IntersectionObserver' in window&&!reduceMotion){
+    var revealObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('isVisible');revealObserver.unobserve(entry.target)}})},{threshold:.05,rootMargin:'0px 0px -33% 0px'});
+    revealTargets.forEach(function(target){revealObserver.observe(target)});
+  }else{revealTargets.forEach(function(target){target.classList.add('isVisible')})}
+
+  var finalCopy=document.querySelector('.final .wrap');
+  if(finalCopy){
+    finalCopy.classList.add('scrollReveal');
+    if('IntersectionObserver' in window&&!reduceMotion){
+      var finalObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('isVisible');finalObserver.disconnect()}})},{threshold:.05});
+      finalObserver.observe(finalCopy);
+    }else{finalCopy.classList.add('isVisible')}
+  }
+
+  var APPLY_URL='/gamja/apply';
+  var params=new URLSearchParams(location.search);if(!params.get('src'))params.set('src','gamja');var qs=[];
+  ['src','slug','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(key){var value=params.get(key);if(value)qs.push(key+'='+encodeURIComponent(value))});
+  var target=APPLY_URL+(qs.length?'?'+qs.join('&'):'');
+  document.querySelectorAll('.jsApply').forEach(function(link){link.href=target;link.addEventListener('click',function(){try{track('landing_cta_click',{cta_location:link.getAttribute('data-cta-location')||'other'})}catch(e){}})});
+})();
+</script>
+</body>
+</html>

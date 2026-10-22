@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>위크메이트 - 직무분석지 신청</title>
+<link rel="canonical" href="https://www.arunia.co.kr/gamja/apply">
+<style>
+@font-face{font-family:PretendardLocal;src:url('/assets/fonts/PretendardVariable.woff2') format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+  --bg:#fff;--paper:#f6f8ff;--ink:#101318;--muted:#586273;--line:#d7e3ff;
+  --orange:#3070fc;--orange2:#1a2db0;--shadow:0 18px 42px rgba(48,112,252,.13);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:PretendardLocal,system-ui,sans-serif}
+.wrap{width:min(640px,100%);margin:0 auto;padding:40px 20px 80px}
+.brand{text-align:center;font-size:15px;font-weight:900;letter-spacing:.08em;margin-bottom:34px}
+.brand:after{content:"";display:block;width:34px;height:3px;background:var(--orange);border-radius:99px;margin:9px auto 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(24px,5vw,40px);box-shadow:var(--shadow)}
+h1{font-size:clamp(24px,5.4vw,32px);line-height:1.3;margin:0 0 10px;font-weight:900;text-align:center;word-break:keep-all}
+h1 span{color:var(--orange)}
+.sub{text-align:center;color:var(--muted);font-weight:700;line-height:1.6;margin:0 0 30px;word-break:keep-all}
+.field{margin-bottom:18px}
+label{display:block;font-weight:800;font-size:15px;margin-bottom:8px}
+label em{font-style:normal;color:var(--orange)}
+input[type=text],input[type=tel],select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 16px;font:inherit;font-size:16px;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(48,112,252,.28);border-color:var(--orange)}
+textarea{min-height:96px;resize:vertical}
+.radio-row{display:grid;gap:10px}
+.radio-row label{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin:0;border:1px solid var(--line);border-radius:10px;background:#fff;padding:13px 14px;cursor:pointer}
+.radio-row input{accent-color:var(--orange)}
+.consulting{display:flex;align-items:flex-start;gap:12px;background:#f6f8ff;border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin:20px 0 12px}
+.consulting input{margin-top:4px;accent-color:var(--orange)}
+.consulting b{display:block;font-size:15px;margin-bottom:4px;color:var(--ink)}
+.consulting span{display:block;color:var(--muted);font-weight:700;font-size:13px;line-height:1.55;word-break:keep-all}
+.privacy{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);font-weight:700;line-height:1.5;margin:22px 0 24px}
+.privacy input{margin-top:2px;accent-color:var(--orange)}
+.submit{width:100%;border:0;border-radius:10px;background:linear-gradient(180deg,var(--orange),var(--orange2));color:#fff;font-size:19px;font-weight:900;padding:18px;cursor:pointer;box-shadow:0 14px 26px rgba(48,112,252,.24)}
+.submit:disabled{opacity:.6;cursor:default}
+.note{text-align:center;font-size:13px;color:var(--muted);font-weight:700;margin-top:14px}
+.hidden{display:none}
+.next-box{background:#f6f8ff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:8px}
+.next-box b{display:block;margin-bottom:10px;font-size:16px}
+.next-box p{margin:0 0 12px;color:var(--muted);font-weight:700;line-height:1.7;font-size:14px;word-break:keep-all}
+.next-box ul{margin:0;padding-left:18px;color:var(--muted);font-weight:700;line-height:1.8;font-size:14px}
+</style>
+<link rel="stylesheet" href="/assets/pretendard.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="brand">위크메이트 CAREER REPORT</div>
+
+  <section class="card" id="applyView">
+    <h1>직무분석지 <span>신청하기</span></h1>
+    <p class="sub">선착순 30명에게 제공되는 이벤트입니다.<br>신청 정보와 고민을 남기면 분석지 안내를 도와드릴게요.</p>
+    <form id="applyForm" data-application-mode="gamja" aria-busy="true" novalidate>
+      <fieldset id="applicationFields" disabled style="border:0;margin:0;padding:0;min-width:0">
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>웹사이트<input id="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field"><label for="f-name">이름 <em>*</em></label><input type="text" id="f-name" maxlength="40" placeholder="이름을 입력해주세요" autocomplete="name"></div>
+      <div class="field"><label for="f-phone">연락처 <em>*</em></label><input type="tel" id="f-phone" maxlength="20" placeholder="010-0000-0000" autocomplete="tel"></div>
+      <div class="field"><label for="f-age">출생연도 <em>*</em></label><input type="text" id="f-age" maxlength="4" inputmode="numeric" placeholder="예) 2001"></div>
+      <div class="field"><label for="f-location">거주지 <em>*</em></label><input type="text" id="f-location" maxlength="100" placeholder="예) 서울시 마포구"></div>
+      <div class="field"><label for="f-job">현재 상태 <em>*</em></label>
+        <select id="f-job">
+          <option value="">선택해주세요</option>
+          <option value="university_1_2">대학생 1~2학년</option>
+          <option value="university_3_4">대학생 3~4학년</option>
+          <option value="jobseeker">취업준비생</option>
+          <option value="employee">직장인</option>
+          <option value="freelancer">프리랜서 / 사업가</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-concern">지금 나의 고민 <em>*</em></label><textarea id="f-concern" maxlength="1500" placeholder="진로, 직무, 이직 등 지금 가장 큰 고민을 적어주세요"></textarea></div>
+      <div class="field"><label>안내 가능 시간 <em>*</em></label>
+        <div class="radio-row">
+          <label><input type="radio" name="calling" value="morning">오전 (10:00 - 12:00)</label>
+          <label><input type="radio" name="calling" value="afternoon">오후 (13:30 - 16:30)</label>
+          <label><input type="radio" name="calling" value="evening">저녁 (17:00 - 20:00)</label>
+        </div>
+      </div>
+      <label class="privacy"><input type="checkbox" id="f-privacy">개인정보 수집·이용에 동의합니다. 수집된 정보는 선정 안내 목적 외에 사용되지 않으며 안전하게 관리됩니다.</label>
+      <label class="consulting">
+        <input type="checkbox" id="f-consulting">
+        <span><b>컨설팅 신청도 함께 원해요</b>신청자 중 추첨을 통해 30명에게 1:1 컨설팅을 진행합니다. 당첨자에게만 개별 안내됩니다.</span>
+      </label>
+      </fieldset>
+      <p id="formStatus" role="status" aria-live="polite" style="line-height:1.6;color:#a73426">신청 연결 상태를 확인하고 있어요…</p>
+      <button id="readinessRetry" type="button" hidden>연결 다시 확인하기</button>
+      <button type="submit" class="submit" disabled>선착순 직무분석지 신청하기</button>
+      <div class="note">30명 한정 · 신청 마감 시 이벤트는 종료됩니다.</div>
+    </form>
+  </section>
+
+  <section class="card hidden" id="completionView" role="status" aria-live="polite" tabindex="-1">
+    <h1>신청이 <span>완료</span>되었습니다</h1>
+    <p class="sub">소중한 신청 감사합니다.</p>
+    <div class="next-box">
+      <b>앞으로의 안내</b>
+      <p>남겨주신 신청 정보와 고민을 확인한 뒤, 입력하신 연락처로 직무분석지 관련 안내를 도와드릴게요.</p>
+      <p>선정 및 안내 일정은 개별 연락을 통해 알려드립니다.</p>
+    </div>
+  </section>
+</main>
+
+<script src="/gamja/apply/app.js" defer></script>
+</body>
+</html>
