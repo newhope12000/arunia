@@ -7,7 +7,6 @@ import { renderNewsSection } from "./news-pages.mjs";
 import { PROGRAM_CATALOG } from "./program-data.mjs";
 import { renderProgramCards } from "./official-programs.mjs";
 import { renderNoticesSection, withNoticeStyles } from "./notice-pages.mjs";
-import { renderNoticePopup } from "./notice-popup.mjs";
 
 function closingCta() {
   return `<section class="cta-band"><div class="wrap cta-inner"><div><p class="eyebrow">나에게 맞는 시작</p><h2>읽어보고, 이야기하고,<br>한 번 해봐요.</h2><p>지금 필요한 경험부터 골라보세요.</p></div><div class="cta-options">${link("programs.html", "프로그램 둘러보기", "button button-light")}${link("pricing.html", "구독 플랜 비교하기", "text-link")}</div></div></section>`;
@@ -29,7 +28,5 @@ export function renderOfficialHome(newsRecords = NEWS) {
     opportunities: opportunities(),
     includeStories: false,
   });
-  return withNoticeStyles(renderPage(page, officialPageOptions))
-    .replace("</head>", '<link rel="stylesheet" href="/assets/renewal/notice-popup.css"><script type="module" src="/assets/renewal/notice-popup.js"></script></head>')
-    .replace("</body>", `${renderNoticePopup()}</body>`);
+  return withNoticeStyles(renderPage(page, officialPageOptions));
 }
